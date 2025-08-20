@@ -1,0 +1,51 @@
+<section class="departments-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">Academic Departments</h2>
+        <p class="section-subtitle">
+          Explore our departments and discover programs, courses, and career opportunities
+        </p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="departments-slider-container">
+          <button class="slider-arrow slider-arrow-left" (click)="slideLeft()" [disabled]="currentSlide === 0">
+            <i class="pi pi-chevron-left"></i>
+          </button>
+          
+          <div class="departments-slider" #sliderContainer>
+            <div class="departments-track" [style.transform]="'translateX(' + (-currentSlide * slideWidth) + 'px)'">
+              <div 
+                *ngFor="let department of departments; let i = index" 
+                class="department-card"
+                [style.background]="department.color"
+              >
+                <div class="department-icon">
+                  <i [class]="department.icon"></i>
+                </div>
+                <h3 class="department-title">{{ department.name }}</h3>
+               
+              </div>
+            </div>
+          </div>
+          
+          <button class="slider-arrow slider-arrow-right" (click)="slideRight()" [disabled]="currentSlide >= maxSlides">
+            <i class="pi pi-chevron-right"></i>
+          </button>
+        </div>
+        
+        <div class="slider-dots">
+          <span 
+            *ngFor="let dot of dotsArray; let i = index"
+            class="slider-dot"
+            [class.active]="i === currentSlide"
+            (click)="goToSlide(i)"
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

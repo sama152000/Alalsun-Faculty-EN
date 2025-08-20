@@ -1,0 +1,58 @@
+<section class="py-3 bg-light" id="postgraduate-section">
+  <div class="container">
+    <h2 class="section-title">Postgraduate Studies & Research</h2>
+    <p class="section-subtitle">Innovative academic programs that support creativity and scientific research in languages and translation.</p>
+    
+    <div class="row g-3 mb-3">
+      <div class="col-lg-4" *ngFor="let program of programs">
+        <div class="program-card h-100">
+          <div class="card-header bg-primary text-white">
+            <h4 class="mb-0 fw-bold">{{program.type}}</h4>
+          </div>
+          <div class="card-body">
+            <div class="program-list">
+              <div class="program-item" *ngFor="let course of program.courses">
+                <i class="pi pi-check-circle text-success me-2"></i>
+                <span>{{course}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row mb-3">
+      <div class="col-lg-6">
+        <div class="info-card p-3 bg-white rounded-3 shadow-sm">
+          <h4 class="text-primary mb-2">
+            <i class="pi pi-book me-2"></i>
+            Scientific Journal
+          </h4>
+          <p class="text-dark">
+            <strong>Al-Alsun Journal for Languages and Humanities</strong> – peer-reviewed, 
+            biannual publication (ranked 7/7 – July 2024).
+          </p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="info-card p-3 bg-white rounded-3 shadow-sm">
+          <h4 class="text-primary mb-2">
+            <i class="pi pi-building me-2"></i>
+            Centers & Units
+          </h4>
+          <ul class="list-unstyled mb-0">
+            <li><i class="pi pi-check text-success me-2"></i>Al-Alsun Language & Translation Center (est. 2017)</li>
+            <li><i class="pi pi-check text-success me-2"></i>Confucius Classroom (opened 2019)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="text-center">
+      <a href="/postgraduate" class="btn btn-primary-custom">
+        <i class="pi pi-graduation-cap me-2"></i>
+        Explore All Postgraduate Programs
+      </a>
+    </div>
+  </div>
+</section>

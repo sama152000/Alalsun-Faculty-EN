@@ -1,17 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonModule],
+  imports: [ButtonModule, RouterLink, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-load() {
-throw new Error('Method not implemented.');
-}
+
   protected title = 'University';
-loading: unknown;
 }

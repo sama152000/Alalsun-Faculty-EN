@@ -1,0 +1,31 @@
+<section class="stats-section py-3" id="quick-stats-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title text-white">Faculty Statistics</h2>
+        <p class="section-subtitle text-light">
+          Key numbers that reflect our academic excellence and community
+        </p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="stats-grid">
+          <div 
+            *ngFor="let stat of stats" 
+            class="stat-card"
+          >
+            <div class="stat-icon" [style.background]="stat.color">
+              <i [class]="stat.icon"></i>
+            </div>
+            <div class="stat-content">
+              <div class="stat-value">{{ stat.value }}</div>
+              <div class="stat-label">{{ stat.label }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

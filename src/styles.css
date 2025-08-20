@@ -1,1 +1,173 @@
-/* You can add global styles to this file, and also import other style files */
+/* Faculty of Al-Alsun Styles */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
+:root {
+  --primary-blue: #102039;
+  --secondary-blue: #102039;
+  --accent-gold: #d4af37;
+  --light-gold: #f4d03f;
+  --success: #28a745;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light-bg: #f8f9fa;
+  --white: #ffffff;
+  --dark-text: #2c3e50;
+  --gray-text: #6c757d;
+  --light-gray: #e9ecef;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--light-bg);
+  line-height: 1.6;
+  color: var(--dark-text);
+}
+
+/* Utility Classes */
+.text-primary { color: var(--primary-blue) !important; }
+.text-gold { color: var(--accent-gold) !important; }
+.bg-primary { background: var(--primary-blue) !important; }
+.bg-gradient-primary { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%) !important; }
+.bg-gradient-gold { background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%) !important; }
+
+/* Card Styles */
+.card-modern {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  background: var(--white);
+}
+
+.card-modern:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Button Styles */
+.btn-primary-custom {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  border: none;
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(30, 74, 140, 0.3);
+}
+
+.btn-primary-custom:hover {
+  background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 74, 140, 0.4);
+  color: white;
+}
+
+.btn-outline-primary-custom {
+  border: 2px solid var(--primary-blue);
+  color: var(--primary-blue);
+  background: transparent;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary-custom:hover {
+  background: var(--primary-blue);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Section Headers */
+.section-header {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  padding: 1.2rem 1.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  border-radius: 15px 15px 0 0;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 1.2rem;
+  color: var(--gray-text);
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+  
+  .btn-primary-custom,
+  .btn-outline-primary-custom {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* PrimeNG Overrides */
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  background: var(--primary-blue) !important;
+  border-color: var(--primary-blue) !important;
+}
+
+.p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+  box-shadow: 0 0 0 0.2rem rgba(30, 74, 140, 0.25) !important;
+}
+
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: var(--primary-blue) !important;
+}
+
+.p-button.p-button-primary {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%) !important;
+  border: none !important;
+}

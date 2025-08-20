@@ -1,0 +1,73 @@
+<section class="py-4 bg-light vision-mission-section">
+  <div class="container">
+    <h2 class="section-title">Vision, Mission & Objectives</h2>
+    
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <ul class="nav nav-tabs nav-justified custom-tabs mb-0" id="visionTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active fw-semibold" id="vision-tab" data-bs-toggle="tab" 
+                    data-bs-target="#vision" type="button" role="tab" aria-controls="vision" aria-selected="true">
+              <i class="pi pi-eye me-2"></i>Vision
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link fw-semibold" id="mission-tab" data-bs-toggle="tab" 
+                    data-bs-target="#mission" type="button" role="tab" aria-controls="mission" aria-selected="false">
+              <i class="pi pi-flag me-2"></i>Mission
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link fw-semibold" id="objectives-tab" data-bs-toggle="tab" 
+                    data-bs-target="#objectives" type="button" role="tab" aria-controls="objectives" aria-selected="false">
+              <i class="pi pi-star me-2"></i>Objectives
+            </button>
+          </li>
+        </ul>
+        
+        <div class="tab-content tab-content-custom" id="visionTabContent">
+          <div class="tab-pane fade show active" id="vision" role="tabpanel" aria-labelledby="vision-tab">
+            <div class="text-center">
+              <i class="pi pi-eye text-primary fs-3 mb-2"></i>
+              <h3 class="text-primary mb-3">Our Vision</h3>
+              <p class="lead text-dark lh-lg">
+                "The Faculty of Al-Alsun aspires to achieve excellence and leadership in the field of languages, 
+                aiming for academic distinction, cultural enrichment, and competitiveness both locally and internationally."
+              </p>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="mission" role="tabpanel" aria-labelledby="mission-tab">
+            <div class="text-center">
+              <i class="pi pi-flag text-primary fs-3 mb-2"></i>
+              <h3 class="text-primary mb-3">Our Mission</h3>
+              <div class="row">
+                <div class="col-lg-4 mb-2" *ngFor="let mission of missionPoints">
+                  <div class="mission-card h-100 p-3 bg-white rounded-3 shadow-sm">
+                    <i [class]="mission.icon + ' text-primary fs-4 mb-2'"></i>
+                    <p class="text-dark mb-0">{{mission.text}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tab-pane fade" id="objectives" role="tabpanel" aria-labelledby="objectives-tab">
+            <div class="text-center">
+              <i class="pi pi-star text-primary fs-3 mb-2"></i>
+              <h3 class="text-primary mb-3">Our Objectives</h3>
+              <div class="row">
+                <div class="col-lg-6 mb-2" *ngFor="let objective of objectives">
+                  <div class="objective-card d-flex align-items-start p-2 bg-white rounded-3 shadow-sm h-100">
+                    <i [class]="objective.icon + ' text-primary fs-4 me-2 mt-1'"></i>
+                    <p class="text-dark mb-0">{{objective.text}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

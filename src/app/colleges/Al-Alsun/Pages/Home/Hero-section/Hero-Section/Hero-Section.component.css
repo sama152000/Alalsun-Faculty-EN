@@ -1,0 +1,53 @@
+.hero-banner {
+  background: linear-gradient(135deg, #102039c0 0%, #102039 100%);
+  color: white;
+  position: relative;
+  padding: 0;
+  margin-bottom: 5rem;
+  overflow: hidden;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-start; 
+}
+
+.banner-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://images.pexels.com/photos/356065/pexels-photo-356065.jpeg') center/cover;
+  opacity: 0.15;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 0; /* أصغر */
+  text-align: center;
+  max-width: 700px;
+  margin: 0rem auto 0 auto; /* يخلي النص فوق */
+}
+
+.banner-title {
+  font-size: 2.2rem; /* أصغر */
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+
+.banner-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.banner-description {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.banner-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

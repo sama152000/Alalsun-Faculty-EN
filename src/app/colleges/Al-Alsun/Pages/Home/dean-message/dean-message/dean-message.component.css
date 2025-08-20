@@ -1,0 +1,79 @@
+  .dean-section {
+      padding: 3rem 0;
+      background: var(--light-bg);
+    }
+
+/* كارت العميد العائم */
+.dean-floating-card {
+  position: absolute;
+  bottom: -20px; /* يطفو فوق الهيرو */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border-radius: 0rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  padding: 1.5rem;
+  width: 85%;
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  z-index: 3;
+}
+
+.dean-photo-container {
+  flex: 0 0 auto;
+  margin-right: 1rem;
+}
+
+.dean-photo {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.dean-info {
+  flex: 1;
+}
+
+.dean-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 0.3rem;
+}
+
+.dean-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  margin-bottom: 0.2rem;
+}
+
+.dean-position {
+  font-size: 0.85rem;
+  color: var(--gray-text);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+}
+
+.dean-message {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--dark-text);
+  margin-bottom: 1rem;
+}
+
+/* موبايل */
+@media (max-width: 768px) {
+  .dean-floating-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .dean-photo {
+    margin-bottom: 1rem;
+  }
+}

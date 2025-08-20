@@ -1,0 +1,55 @@
+ <!-- <section class="activities-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="section-title">Student Activities & Campus Life</h2>
+            <p class="section-subtitle">
+              An engaging campus life with cultural, artistic, and sports activities, along with exchange programs 
+              such as the Confucius Classroom — enriching student experience and fostering cross-cultural dialogue.
+            </p>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-12">
+            <div class="card-modern">
+              <div class="section-header">
+                <i class="pi pi-users"></i>
+                Campus Life Gallery
+              </div>
+              
+              <div class="activities-carousel">
+                <p-carousel 
+                  [value]="activities" 
+                  [numVisible]="3" 
+                  [numScroll]="1"
+                  [responsiveOptions]="responsiveOptions"
+                  [circular]="true"
+                  [autoplayInterval]="4000"
+                >
+                  <ng-template pTemplate="item" let-activity>
+                    <div class="activity-card">
+                      <div class="activity-image-container">
+                        <img [src]="activity.image" [alt]="activity.title" class="activity-image">
+                        <div class="activity-overlay">
+                          <h4>{{ activity.title }}</h4>
+                        </div>
+                      </div>
+                      <div class="activity-content">
+                        <p>{{ activity.description }}</p>
+                      </div>
+                    </div>
+                  </ng-template>
+                </p-carousel>
+              </div>
+              
+              <div class="activities-actions">
+                <a href="/student-life" class="btn-outline-primary-custom">
+                  Discover Student Life <i class="pi pi-arrow-right ms-2"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->

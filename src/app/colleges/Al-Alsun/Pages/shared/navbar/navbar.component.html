@@ -1,0 +1,82 @@
+ <header class="top-header">
+      <div class="header-diagonal"></div>
+      <div class="container">
+        <div class="header-content">
+          <div class="row align-items-center">
+            <div class="col-lg-8 col-md-7">
+              <div class="logo-section">
+                <div class="faculty-logo">
+                  <!-- <i class="pi pi-book" style="color: #102039; font-size: 1.8rem;"></i> -->
+                   <img src="assets/logo.jpg" width="100%" alt="">
+                </div>
+                <div>
+                  <h1 class="main-title">Faculty of Al-Alsun</h1>
+                  <p class="subtitle">Luxor University</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5">
+              <div class="university-info">
+                <span class="university-text">Luxor University</span>
+                <div class="university-badge">
+                  <span>EST. 2019</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <div class="container">
+        <div class="navbar navbar-expand-lg">
+          <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav"
+            [attr.aria-expanded]="isNavbarCollapsed"
+            (click)="toggleNavbar()"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed" id="navbarNav">
+            <ul class="navbar-nav w-100 justify-content-start">
+              <li class="nav-item">
+                <a class="nav-link" href="/"><i class="pi pi-home me-2"></i>Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/about">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/departments">Departments</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/staff">Staff</a>
+              </li>
+              <li class="nav-item dropdown" [class.show]="isNewsDropdownOpen">
+                <a 
+                  class="nav-link dropdown-toggle" 
+                  href="#" 
+                  (click)="toggleNewsDropdown($event)"
+                  [attr.aria-expanded]="isNewsDropdownOpen"
+                >
+                  News
+                </a>
+                <ul class="dropdown-menu" [class.show]="isNewsDropdownOpen">
+                  <li><a class="dropdown-item" href="/news/students">Student News</a></li>
+                  <li><a class="dropdown-item" href="/news/postgraduate">Postgraduate News</a></li>
+                  <li><a class="dropdown-item" href="/news/faculty-board">Faculty Board News</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+ 

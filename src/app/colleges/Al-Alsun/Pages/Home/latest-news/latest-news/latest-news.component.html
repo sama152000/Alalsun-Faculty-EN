@@ -1,0 +1,136 @@
+<!-- HTML Template -->
+<div class="news-section">
+  <div class="container-fluid">
+    <div class="row g-4">
+      
+      <!-- Header Section -->
+      <div class="col-12">
+        <div class="section-header">
+          <div class="header-content">
+            <h2 class="section-title">
+              <i class="pi pi-megaphone me-3"></i>
+              Latest News & Announcements
+            </h2>
+            <p class="section-subtitle">
+              Stay up to date with the faculty's latest events: conferences, scholarships, and academic initiatives.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- News Content Section -->
+      <div class="col-lg-8 col-md-7">
+        <div class="news-card">
+          <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+              <h4 class="card-title mb-0">
+                <i class="pi pi-newspaper me-2"></i>
+                Latest Updates
+              </h4>
+              <span class="badge badge-primary">{{ newsItems.length }} Articles</span>
+            </div>
+          </div>
+          
+          <div class="news-content">
+            <div class="news-list">
+              <div class="news-item" *ngFor="let news of newsItems; let i = index">
+                <div class="news-item-content">
+                  <div class="news-image-container">
+                    <img [src]="news.image" [alt]="news.title" class="news-image" />
+                    <div class="image-overlay">
+                      <i class="pi pi-eye"></i>
+                    </div>
+                  </div>
+                  
+                  <div class="news-details">
+                    <div class="news-header">
+                      <span class="news-category">{{ news.category }}</span>
+                      <span class="news-priority" *ngIf="news.priority">
+                        <i class="pi pi-star-fill"></i>
+                      </span>
+                    </div>
+                    
+                    <h5 class="news-title">{{ news.title }}</h5>
+                    <p class="news-excerpt">{{ news.excerpt }}</p>
+                    
+                    <div class="news-meta">
+                      <div class="meta-info">
+                        <span class="news-date">
+                          <i class="pi pi-calendar me-1"></i>
+                          {{ news.date }}
+                        </span>
+                        <span class="news-author" *ngIf="news.author">
+                          <i class="pi pi-user me-1"></i>
+                          {{ news.author }}
+                        </span>
+                      </div>
+                      <a href="#" class="read-more">
+                        Read More
+                        <i class="pi pi-arrow-right ms-1"></i>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-footer">
+            <div class="text-center">
+              <button class="btn btn-outline-primary btn-load-more">
+                <i class="pi pi-plus me-2"></i>
+                More News
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real-time Clock Section -->
+      <div class="col-lg-4 col-md-5">
+        <div class="clock-card">
+          <div class="card-header">
+            <h4 class="card-title mb-0">
+              <i class="pi pi-clock me-2"></i>
+              Latest Updates
+            </h4>
+            <span class="status-indicator">
+              <span class="status-dot"></span>
+              Real-time
+            </span>
+          </div>
+          
+          <div class="clock-container">
+            <div class="clock-display">
+              <div class="clock-icon-wrapper">
+                <i class="pi pi-clock clock-icon"></i>
+                <div class="clock-info">
+                  <div class="clock-label">Current Time</div>
+                  <div class="clock-time">{{ currentTime | date:'medium' }}</div>
+                  <div class="clock-timezone">{{ timezone }}</div>
+                </div>
+              </div>
+              
+              <div class="quick-stats">
+                <div class="stat-item">
+                  <span class="stat-number">{{ totalNews }}</span>
+                  <span class="stat-label">Total News</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">{{ todayNews }}</span>
+                  <span class="stat-label">Today</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-number">{{ weeklyNews }}</span>
+                  <span class="stat-label">This Week</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+

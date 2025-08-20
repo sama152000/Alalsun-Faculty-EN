@@ -1,0 +1,259 @@
+.departments-section {
+  padding: 2rem 0;
+  background: white;
+  overflow: hidden;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  font-size: 1rem;
+  color: #7f8c8d;
+  margin-bottom: 0.5em;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.departments-slider-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.departments-slider {
+  overflow: hidden;
+  border-radius: 15px;
+  position: relative;
+}
+
+.departments-track {
+  display: flex;
+  transition: transform 0.4s ease-in-out;
+  gap: 20px;
+}
+
+.department-card {
+  color: white;
+  padding: 2rem 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  min-height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  flex: 0 0 200px;
+  width: 200px;
+}
+
+.department-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.department-card:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+
+.department-card:hover::before {
+  transform: translateX(100%);
+}
+
+.department-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.department-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  line-height: 1.3;
+}
+
+.department-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.3s ease;
+  border-radius: 15px;
+}
+
+.department-card:hover .department-overlay {
+  opacity: 1;
+}
+
+.department-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid white;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.department-link:hover {
+  background: white;
+  color: var(--primary-blue);
+  transform: scale(1.05);
+}
+
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.7);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.slider-arrow:hover {
+  background: rgba(0,0,0,0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.slider-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.slider-arrow-left {
+  left: 10px;
+}
+
+.slider-arrow-right {
+  right: 10px;
+}
+
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 2rem;
+}
+
+.slider-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #bdc3c7;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  background: #3498db;
+  transform: scale(1.2);
+}
+
+.slider-dot:hover {
+  background: #95a5a6;
+}
+
+@media (max-width: 1200px) {
+  .departments-slider-container {
+    padding: 0 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .departments-slider-container {
+    padding: 0 40px;
+  }
+  
+  .department-card {
+    flex: 0 0 200px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .departments-slider-container {
+    padding: 0 30px;
+  }
+  
+  .department-card {
+    flex: 0 0 220px;
+    width: 220px;
+    padding: 1.5rem 1rem;
+    min-height: 140px;
+  }
+  
+  .department-icon {
+    font-size: 2rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .department-title {
+    font-size: 1rem;
+  }
+  
+  .slider-arrow {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .departments-slider-container {
+    padding: 0 20px;
+  }
+  
+  .department-card {
+    flex: 0 0 260px;
+    width: 260px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+}
