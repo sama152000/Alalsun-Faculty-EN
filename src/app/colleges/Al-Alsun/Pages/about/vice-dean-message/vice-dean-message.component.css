@@ -1,0 +1,227 @@
+.vice-dean-section {
+  padding: 2rem 1rem; /* Reduced from 3rem 0, added 1rem horizontal for edge spacing */
+}
+
+.card-modern {
+  background: white;
+  border-radius: 10px; /* Reduced from 15px */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08); /* Adjusted from 0 8px 25px */
+  border: none;
+}
+
+.vice-dean-photo-section {
+  padding: 1.5rem; /* Reduced from 2rem */
+  text-align: center;
+ background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  height: 100%;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem; /* Reduced from 2rem */
+}
+
+.vice-dean-photo-container {
+  position: relative;
+}
+
+.vice-dean-photo {
+  width: 180px; /* Reduced from 220px */
+  height: 216px; /* Reduced from 260px */
+  object-fit: cover;
+  border-radius: 10px; /* Reduced from 15px */
+  border: 4px solid var(--primary-blue); /* Reduced from 5px */
+  box-shadow: 0 6px 20px rgba(16, 32, 57, 0.3); /* Adjusted shadow */
+  transition: all 0.3s ease;
+}
+
+.vice-dean-photo:hover {
+  transform: scale(1.02);
+}
+
+.vice-dean-title-card {
+    background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  padding: 1rem; /* Reduced from 1.5rem */
+  border-radius: 10px; /* Reduced from 15px */
+  border: 1px solid rgba(255,255,255,0.2);
+}
+
+.vice-dean-name {
+ color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 1.2rem; /* Reduced from 1.3rem */
+  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
+  line-height: 1.3;
+}
+
+.vice-dean-position {
+  color: rgba(255,255,255,0.9);
+  font-weight: 500;
+  font-size: 0.9rem; /* Reduced from 1rem */
+  margin: 0;
+  line-height: 1.4;
+}
+
+.faculty-name {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 0.8rem; /* Reduced from 0.9rem */
+  margin: 0;
+  line-height: 1.3;
+}
+
+.vice-dean-message-content {
+  padding: 2rem; /* Reduced from 3rem */
+  height: 100%;
+}
+
+.message-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem; /* Reduced from 1rem */
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+  padding-bottom: 0.8rem; /* Reduced from 1rem */
+  border-bottom: 2px solid var(--accent-gold);
+}
+
+.header-icon {
+  font-size: 1.5rem; /* Reduced from 1.8rem */
+  color: var(--accent-gold);
+}
+
+.message-title {
+  color: var(--primary-blue);
+  font-weight: 700;
+  font-size: 1.5rem; /* Reduced from 1.8rem */
+  margin: 0;
+}
+
+.message-body {
+  line-height: 1.6; /* Reduced from 1.8 */
+  font-size: 0.9rem; /* Reduced from 1rem */
+}
+
+.greeting {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  padding: 0.8rem 1rem; /* Reduced from 1.2rem 1.5rem */
+  border-radius: 8px; /* Reduced from 10px */
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+  text-align: center;
+}
+
+.message-content {
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+.message-paragraph {
+  margin-bottom: 1rem; /* Reduced from 1.2rem */
+  text-align: justify;
+  color: var(--dark-text);
+  line-height: 1.6; /* Reduced from 1.8 */
+}
+
+.closing {
+  background: rgba(212, 175, 55, 0.1);
+  padding: 1rem; /* Reduced from 1.5rem */
+  border-radius: 8px; /* Reduced from 10px */
+  text-align: center;
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+  border-left: 3px solid var(--accent-gold); /* Reduced from 4px */
+}
+
+.closing-line {
+  color: var(--primary-blue) !important;
+  font-weight: 500;
+  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
+}
+
+.closing-line:last-child {
+  margin-bottom: 0;
+}
+
+.signature {
+  background: var(--light-bg);
+  padding: 1rem; /* Reduced from 1.5rem */
+  border-radius: 8px; /* Reduced from 10px */
+  text-align: right;
+  border: 2px solid var(--primary-blue);
+}
+
+.signature-name {
+  color: var(--primary-blue) !important;
+  font-weight: 700;
+  font-size: 1rem; /* Reduced from 1.1rem */
+  margin-bottom: 0.2rem; /* Reduced from 0.3rem */
+}
+
+.signature-title {
+  color: var(--accent-gold) !important;
+  font-weight: 600;
+  font-size: 0.85rem; /* Reduced from 0.95rem */
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .vice-dean-photo-section {
+    padding: 1.5rem 0.8rem; /* Reduced from 2rem 1rem */
+  }
+  
+  .vice-dean-message-content {
+    padding: 1.5rem; /* Reduced from 2rem */
+  }
+}
+
+@media (max-width: 768px) {
+  .vice-dean-photo {
+    width: 160px; /* Reduced from 180px */
+    height: 192px; /* Reduced from 220px */
+  }
+  
+  .message-title {
+    font-size: 1.3rem; /* Reduced from 1.5rem */
+  }
+  
+  .vice-dean-message-content {
+    padding: 1.2rem; /* Reduced from 1.5rem */
+  }
+  
+  .message-body {
+    font-size: 0.85rem; /* Reduced from 0.95rem */
+  }
+
+  .greeting {
+    padding: 0.6rem 0.8rem; /* Reduced from 0.8rem 1rem */
+  }
+
+  .closing {
+    padding: 0.8rem; /* Reduced from 1rem */
+  }
+
+  .signature {
+    padding: 0.8rem; /* Reduced from 1rem */
+  }
+}
+
+@media (max-width: 576px) {
+  .vice-dean-name {
+    font-size: 1rem; /* Reduced from 1.1rem */
+  }
+  
+  .vice-dean-position {
+    font-size: 0.8rem; /* Reduced from 0.9rem */
+  }
+  
+  .faculty-name {
+    font-size: 0.75rem; /* Reduced from 0.8rem */
+  }
+
+  .vice-dean-photo {
+    width: 140px; /* Reduced from 160px */
+    height: 168px; /* Reduced from 192px */
+  }
+}

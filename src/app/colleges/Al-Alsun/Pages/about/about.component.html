@@ -1,0 +1,23 @@
+<app-navbar></app-navbar>
+
+<div class="about-page">
+      <app-page-header 
+        title="About the Faculty" 
+        [breadcrumbs]="breadcrumbs">
+      </app-page-header>
+      
+      <app-dean-full-message></app-dean-full-message>
+      
+      <app-vice-dean-message [viceDean]="viceDeanEducation"></app-vice-dean-message>
+      
+      <app-vice-dean-message [viceDean]="viceDeanCommunity"></app-vice-dean-message>
+      
+      <app-vice-dean-message [viceDean]="viceDeanPostgraduate"></app-vice-dean-message>
+      
+      <app-faculty-history></app-faculty-history>
+      
+      <app-vision-mission-simple></app-vision-mission-simple>
+      
+      <app-faculty-cta></app-faculty-cta>
+    </div>
+    <app-footer></app-footer>

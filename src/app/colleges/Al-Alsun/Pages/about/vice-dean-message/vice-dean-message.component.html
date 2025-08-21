@@ -1,0 +1,47 @@
+<section class="vice-dean-section">
+  <div class="card-modern">
+    <div class="row g-0">
+      <div class="col-lg-4 col-md-5">
+        <div class="vice-dean-photo-section">
+          <div class="vice-dean-photo-container">
+            <img 
+              [src]="viceDean.image" 
+              [alt]="viceDean.name" 
+              class="vice-dean-photo"
+            >
+          </div>
+          <div class="vice-dean-title-card">
+            <h3 class="vice-dean-name">{{ viceDean.name }}</h3>
+            <p class="vice-dean-position">{{ viceDean.position }}</p>
+            <p class="faculty-name">Faculty of Al-Alsun – Luxor University</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8 col-md-7">
+        <div class="vice-dean-message-content">
+          <div class="message-header">
+            <i class="pi pi-user-edit header-icon"></i>
+            <h2 class="message-title">{{ viceDean.title }}</h2>
+          </div>
+          
+          <div class="message-body">
+          
+            <div class="message-content">
+              <p *ngFor="let paragraph of viceDean.message" class="message-paragraph">
+                {{ paragraph }}
+              </p>
+            </div>
+            
+            <div class="closing" *ngIf="viceDean.closing && viceDean.closing.length > 0">
+              <p *ngFor="let closingLine of viceDean.closing" class="closing-line">
+                <em>{{ closingLine }}</em>
+              </p>
+            </div>
+            
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

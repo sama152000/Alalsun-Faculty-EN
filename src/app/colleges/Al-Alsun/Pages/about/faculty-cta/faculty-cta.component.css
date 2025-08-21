@@ -1,0 +1,150 @@
+.faculty-cta-section {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  position: relative;
+  padding: 2rem 0 3rem 0; /* Reduced top from 5rem, added 3rem bottom */
+  overflow: hidden;
+}
+
+.cta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;
+  opacity: 0.1;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px; /* Reduced from 100px */
+  height: 80px; /* Reduced from 100px */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  margin-bottom: 1rem; /* Reduced from 2rem */
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.cta-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.cta-icon i {
+  font-size: 2rem; /* Reduced from 3rem */
+  color: var(--accent-gold);
+}
+
+.cta-title {
+  font-size: 2rem; /* Reduced from 3rem */
+  font-weight: 700;
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3); /* Adjusted from 0 4px 8px */
+  line-height: 1.2;
+}
+
+.cta-message {
+  font-size: 1rem; /* Reduced from 1.3rem */
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  margin-bottom: 1.5rem; /* Reduced from 3rem */
+  line-height: 1.6;
+  font-style: italic;
+  position: relative;
+}
+
+.cta-message::before,
+.cta-message::after {
+  content: '"';
+  font-size: 1.5rem; /* Reduced from 2rem */
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem; /* Reduced from 1.5rem */
+  flex-wrap: wrap;
+}
+
+.btn-outline-light {
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  color: white;
+  background: transparent;
+  padding: 0.6rem 1.5rem; /* Reduced from 0.8rem 2rem */
+  border-radius: 20px; /* Reduced from 25px */
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-outline-light:hover {
+  background: white;
+  color: var(--primary-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3); /* Adjusted from 0 8px 25px */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faculty-cta-section {
+    padding: 1.5rem 0 2rem 0; /* Reduced top, adjusted bottom */
+  }
+  
+  .cta-title {
+    font-size: 1.8rem; /* Reduced from 2.2rem */
+  }
+  
+  .cta-message {
+    font-size: 0.9rem; /* Reduced from 1.1rem */
+    margin-bottom: 1.2rem; /* Reduced from 2.5rem */
+  }
+  
+  .cta-icon {
+    width: 60px; /* Reduced from 80px */
+    height: 60px; /* Reduced from 80px */
+    margin-bottom: 0.8rem; /* Reduced from 1.5rem */
+  }
+  
+  .cta-icon i {
+    font-size: 1.8rem; /* Reduced from 2.5rem */
+  }
+  
+  .cta-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem; /* Reduced from 1rem */
+  }
+}
+
+@media (max-width: 576px) {
+  .cta-title {
+    font-size: 1.5rem; /* Reduced from 1.8rem */
+  }
+  
+  .cta-message {
+    font-size: 0.8rem; /* Reduced from 1rem */
+  }
+  
+  .btn-primary-custom,
+  .btn-outline-light {
+    padding: 0.5rem 1.2rem; /* Reduced from 0.7rem 1.5rem */
+    font-size: 0.8rem; /* Reduced from 0.9rem */
+  }
+}

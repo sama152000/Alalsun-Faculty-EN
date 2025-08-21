@@ -1,0 +1,172 @@
+
+
+.vision-mission-simple-section {
+  padding: 0rem 0rem 3rem 0rem; /* Added padding-bottom: 3rem */
+  background: white;
+  margin-bottom: 3rem;
+
+
+}
+
+.section-title {
+  color: var(--primary-blue);
+  font-size: 2.5rem; /* Reduced from implied 2rem */
+  font-weight: 700;
+  margin-bottom: 0.3rem; /* Reduced from implied 0.5rem */
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.section-subtitle {
+  color: var(--gray-text);
+  font-size: 0.9rem; /* Reduced from implied 1rem */
+  line-height: 1.4; /* Reduced from implied 1.5 */
+  margin-bottom: 1rem; /* Reduced from implied 1.5rem */
+  font-weight: 400;
+  text-align: center;
+}
+
+.vision-card{
+    background: white;
+  border-radius: 10px; /* Reduced from 20px */
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Adjusted from 0 8px 30px */
+  transition: all 0.3s ease;
+  height: 100%;
+  margin-bottom: 0rem; /* Reduced from 2rem */
+}
+.mission-card {
+  background: white;
+  border-radius: 10px; /* Reduced from 20px */
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Adjusted from 0 8px 30px */
+  transition: all 0.3s ease;
+  height: 100%;
+  margin-bottom: 0rem; /* Reduced from 2rem */
+}
+
+.vision-card:hover,
+.mission-card:hover {
+  transform: translateY(-5px); /* Reduced from -8px */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Adjusted from 0 20px 50px */
+}
+
+.vision-card .card-header {
+  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  color: white;
+  padding: 1rem; /* Reduced from 2rem */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-card .card-header {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%);
+  color: var(--primary-blue);
+  padding: 1rem; /* Reduced from 2rem */
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  transform: scale(0);
+  transition: transform 0.6s ease;
+}
+
+.vision-card:hover .card-header::before,
+.mission-card:hover .card-header::before {
+  transform: scale(1);
+}
+
+.header-icon {
+  font-size: 2.5rem; /* Reduced from 3.5rem */
+  margin-bottom: 0.8rem; /* Reduced from 1rem */
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.vision-card .header-icon {
+  color: var(--accent-gold);
+}
+
+.mission-card .header-icon {
+  color: var(--primary-blue);
+}
+
+.card-header h3 {
+  font-size: 1.3rem; /* Reduced from 1.8rem */
+  font-weight: 700;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.card-content {
+  padding: 1.5rem; /* Reduced from 2.5rem */
+  text-align: center;
+}
+
+.card-content p {
+  color: var(--dark-text);
+  font-size: 1rem; /* Reduced from 1.1rem */
+  line-height: 1.6; /* Reduced from 1.8 */
+  margin: 0;
+  text-align: justify;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .vision-card,
+  .mission-card {
+    margin-bottom: 1.2rem; /* Reduced from 2rem */
+  }
+}
+
+@media (max-width: 768px) {
+  .card-header {
+    padding: 1.2rem !important; /* Reduced from 1.5rem */
+  }
+  
+  .header-icon {
+    font-size: 2rem; /* Reduced from 3rem */
+  }
+  
+  .card-header h3 {
+    font-size: 1.2rem; /* Reduced from 1.5rem */
+  }
+  
+  .card-content {
+    padding: 1.2rem; /* Reduced from 2rem */
+  }
+  
+  .card-content p {
+    font-size: 0.85rem; /* Reduced from 1rem */
+  }
+}
+
+@media (max-width: 576px) {
+  .card-header {
+    padding: 1rem !important; /* Reduced from 1.2rem */
+  }
+  
+  .header-icon {
+    font-size: 1.8rem; /* Reduced from 2.5rem */
+  }
+  
+  .card-header h3 {
+    font-size: 1.1rem; /* Reduced from 1.3rem */
+  }
+  
+  .card-content {
+    padding: 1rem; /* Reduced from 1.5rem */
+  }
+}

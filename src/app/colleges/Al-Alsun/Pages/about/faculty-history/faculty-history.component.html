@@ -1,0 +1,38 @@
+<section class="faculty-history-section py-2">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="section-title">History of the Faculty</h2>
+        <p class="section-subtitle">
+          A journey of academic excellence and continuous growth in language education
+        </p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-12">
+        <div class="timeline-container">
+          <div class="timeline">
+            <div 
+              *ngFor="let event of historyEvents; let i = index" 
+              class="timeline-item"
+              [class.timeline-item-left]="i % 2 === 0"
+              [class.timeline-item-right]="i % 2 === 1"
+            >
+              <div class="timeline-marker">
+                <i [class]="event.icon"></i>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-card">
+                  <div class="timeline-year">{{ event.year }}</div>
+                  <h3 class="timeline-title">{{ event.title }}</h3>
+                  <p class="timeline-description">{{ event.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

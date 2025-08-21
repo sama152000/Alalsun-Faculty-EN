@@ -8,6 +8,8 @@ import { PostgraduateComponent } from './postgraduate/postgraduate/postgraduate.
 import { StudentActivitiesComponent } from './student-activities/student-activities/student-activities.component';
 import { QuickStatsComponent } from './quick-stats/quick-stats/quick-stats.component';
 import { ContactLocationComponent } from './contact-location/contact-location/contact-location.component';
+import { NavbarComponent } from "../shared/navbar/navbar.component";
+import { FooterComponent } from "../shared/footer/footer.component";
 
 @Component({
   selector: 'app-Home',
@@ -21,8 +23,10 @@ import { ContactLocationComponent } from './contact-location/contact-location/co
     PostgraduateComponent,
     StudentActivitiesComponent,
     QuickStatsComponent,
-    ContactLocationComponent
-  ],
+    ContactLocationComponent,
+    NavbarComponent,
+    FooterComponent
+],
   styleUrls: ['./Home.component.css']
 })
 export class HomeComponent implements OnInit {

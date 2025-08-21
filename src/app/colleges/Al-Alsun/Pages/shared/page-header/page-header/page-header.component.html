@@ -1,0 +1,26 @@
+  <section class="page-header">
+      <div class="header-overlay"></div>
+      <div class="container">
+        <div class="header-content">
+          <h1 class="page-title">{{ title }}</h1>
+          <nav class="breadcrumb-nav" *ngIf="breadcrumbs && breadcrumbs.length > 0">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a routerLink="/alalsun-faculty" class="breadcrumb-link">
+                  <i class="pi pi-home"></i>
+                  Home
+                </a>
+              </li>
+              <li 
+                *ngFor="let crumb of breadcrumbs; let last = last" 
+                class="breadcrumb-item"
+                [class.active]="last"
+              >
+                <a *ngIf="!last && crumb.url" [routerLink]="crumb.url">{{ crumb.label }}</a>
+                <span *ngIf="last || !crumb.url">{{ crumb.label }}</span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </section>
