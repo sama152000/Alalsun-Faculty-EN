@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Department {
@@ -15,7 +15,14 @@ interface Department {
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.css']
 })
-export class DepartmentsComponent {
+export class DepartmentsComponent implements OnInit {
+  ngOnInit(): void {
+ setInterval(() => {
+      this.slideRight();
+    }, 1000);
+
+    throw new Error('Method not implemented.');
+  }
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
 
   departments: Department[] = [
@@ -111,19 +118,29 @@ export class DepartmentsComponent {
     this.dotsArray = Array(Math.max(1, this.maxSlides + 1)).fill(0).map((_, i) => i);
   }
 
-  slideLeft() {
-    if (this.currentSlide > 0) {
-      this.currentSlide--;
-    }
+ slideLeft() {
+  if (this.currentSlide > 0) {
+    this.currentSlide--;
+  } else {
+    this.currentSlide = this.maxSlides;
   }
+}
 
-  slideRight() {
-    if (this.currentSlide < this.maxSlides) {
-      this.currentSlide++;
-    }
+slideRight() {
+  if (this.currentSlide < this.maxSlides) {
+    this.currentSlide++;
+  } else {
+    this.currentSlide = 0;
   }
+}
+
 
   goToSlide(slideIndex: number) {
     this.currentSlide = Math.max(0, Math.min(slideIndex, this.maxSlides));
   }
+  
+
+
+
+
 }

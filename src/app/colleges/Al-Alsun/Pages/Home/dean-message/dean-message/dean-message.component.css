@@ -6,7 +6,7 @@
 /* كارت العميد العائم */
 .dean-floating-card {
   position: absolute;
-  bottom: -20px; /* يطفو فوق الهيرو */
+  bottom: -80px; /* يطفو فوق الهيرو */
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
@@ -40,14 +40,14 @@
 .dean-title {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--primary-blue);
+  color: var(--primary-color);
   margin-bottom: 0.3rem;
 }
 
 .dean-name {
   font-size: 1rem;
   font-weight: 600;
-  color: var(--accent-gold);
+  color: var(--darkred);
   margin-bottom: 0.2rem;
 }
 

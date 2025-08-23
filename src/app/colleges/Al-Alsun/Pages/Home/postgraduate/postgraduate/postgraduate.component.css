@@ -1,7 +1,10 @@
-#postgraduate-section{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+#postgraduate-section .container-fluid {
+  padding-left: var(--component-padding) !important;
+  padding-right: var(--component-padding) !important;
+margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
 }
+
 
 
 .section-title {
@@ -35,7 +38,7 @@
 }
 
 .card-header {
-  padding: 1rem; /* Reduced from 1.5rem, consistent internal padding */
+  padding: var(--standard-padding); /* Updated to use standard padding */
   border-bottom: none;
   background: var(--primary-blue); /* Assumed .bg-primary as --primary-blue */
 }
@@ -81,9 +84,9 @@
 }
 
 .btn-primary-custom {
-  background: var(--primary-blue);
+  background: var(--primary-color);
   color: white;
-  border: 1px solid var(--primary-blue);
+  border: 1px solid var(--primary-color);
   padding: 0.5rem 1.25rem; /* Reduced from implied larger padding */
   border-radius: 20px;
   font-weight: 600;
@@ -92,9 +95,9 @@
 }
 
 .btn-primary-custom:hover {
-  background: var(--accent-gold);
-  color: var(--primary-blue);
-  border-color: var(--accent-gold);
+  background: var(--white);
+  color: var(--primary-color);
+  border-color: var(--white);
   transform: translateY(-2px);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
 }

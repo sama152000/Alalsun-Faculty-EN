@@ -1,36 +1,4 @@
 <div class="department-details-container" *ngIf="department">
-  <!-- Hero Banner -->
-  <div class="hero-banner position-relative">
-    <div class="hero-overlay"></div>
-    <img [src]="department.image" 
-         [alt]="department.name" 
-         class="hero-image">
-    
-    <div class="hero-content">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="hero-text">
-              <div class="d-flex align-items-center mb-3">
-                <button class="btn btn-link text-white p-0 me-3" (click)="goBack()">
-                  <i class="pi pi-arrow-left me-2"></i>
-                  Back to Departments
-                </button>
-                <span class="badge bg-gradient-gold text-dark px-3 py-2">
-                  {{department.type | titlecase}} Program
-                </span>
-              </div>
-              <h1 class="hero-title">{{department.name}}</h1>
-              <p class="hero-subtitle">
-                One of the Departments of the Faculty of Al-Alsun – Luxor University
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Content -->
   <div class="container py-5">
     <div class="row">
@@ -100,7 +68,7 @@
                     <div class="col-md-6">
                       <div class="stat-card">
                         <div class="stat-icon">
-                          <i class="pi pi-calendar text-gold"></i>
+                          <i class="pi pi-calendar text-white"></i>
                         </div>
                         <div class="stat-content">
                           <h4>Established</h4>
@@ -111,7 +79,7 @@
                     <div class="col-md-6">
                       <div class="stat-card">
                         <div class="stat-icon">
-                          <i class="pi pi-book text-gold"></i>
+                          <i class="pi pi-book text-white"></i>
                         </div>
                         <div class="stat-content">
                           <h4>Programs</h4>
@@ -122,7 +90,7 @@
                     <div class="col-md-6">
                       <div class="stat-card">
                         <div class="stat-icon">
-                          <i class="pi pi-users text-gold"></i>
+                          <i class="pi pi-users text-white"></i>
                         </div>
                         <div class="stat-content">
                           <h4>Faculty Members</h4>
@@ -133,7 +101,7 @@
                     <div class="col-md-6">
                       <div class="stat-card">
                         <div class="stat-icon">
-                          <i class="pi pi-star text-gold"></i>
+                          <i class="pi pi-star text-white"></i>
                         </div>
                         <div class="stat-content">
                           <h4>Activities</h4>
@@ -146,9 +114,9 @@
               </div>
               
               <div class="col-lg-4">
-                <div class="card card-modern">
+                <div class="card card-modern h-90"> <!-- إزالة h-100 لجعل الكارد أقصر -->
                   <div class="card-header bg-primary text-white">
-                    <h5 class="card-title mb-0">
+                    <h5 class="card-title mb-0 quick-contact-title">
                       <i class="pi pi-phone me-2"></i>
                       Quick Contact
                     </h5>
@@ -234,7 +202,7 @@
                         <div class="faculty-info">
                           <h5 class="mb-1 text-primary">{{faculty.name}}</h5>
                           <p class="text-muted mb-1">{{faculty.title}}</p>
-                          <p class="text-gold mb-2"><small>{{faculty.specialization}}</small></p>
+                          <p class="text-primary mb-2"><small>{{faculty.specialization}}</small></p>
                           <a [href]="'mailto:' + faculty.email" class="btn btn-outline-primary-custom btn-sm">
                             <i class="pi pi-envelope me-1"></i>
                             Contact
@@ -282,15 +250,15 @@
             <div class="content-section">
               <h3 class="section-header">Contact Information</h3>
               
-              <div class="row">
+              <div class="row align-items-stretch">
                 <div class="col-lg-8">
-                  <div class="card card-modern">
+                  <div class="card card-modern h-100">
                     <div class="card-body p-4">
                       <div class="row g-4">
                         <div class="col-md-6">
                           <div class="contact-detail">
                             <div class="contact-icon">
-                              <i class="pi pi-envelope text-primary"></i>
+                              <i class="pi pi-envelope text-white"></i>
                             </div>
                             <div>
                               <h6>Department Email</h6>
@@ -304,7 +272,7 @@
                         <div class="col-md-6" *ngIf="department.contact.phone">
                           <div class="contact-detail">
                             <div class="contact-icon">
-                              <i class="pi pi-phone text-primary"></i>
+                              <i class="pi pi-phone text-white"></i>
                             </div>
                             <div>
                               <h6>Phone Number</h6>
@@ -316,7 +284,7 @@
                         <div class="col-md-6">
                           <div class="contact-detail">
                             <div class="contact-icon">
-                              <i class="pi pi-map-marker text-primary"></i>
+                              <i class="pi pi-map-marker text-white"></i>
                             </div>
                             <div>
                               <h6>Office Location</h6>
@@ -328,7 +296,7 @@
                         <div class="col-md-6">
                           <div class="contact-detail">
                             <div class="contact-icon">
-                              <i class="pi pi-user text-primary"></i>
+                              <i class="pi pi-user text-white"></i>
                             </div>
                             <div>
                               <h6>Head of Department</h6>
@@ -342,7 +310,7 @@
                 </div>
                 
                 <div class="col-lg-4">
-                  <div class="card card-modern bg-gradient-primary text-white">
+                  <div class="card card-modern bg-gradient-primary text-white h-100">
                     <div class="card-body text-center p-4">
                       <i class="pi pi-graduation-cap" style="font-size: 3rem; margin-bottom: 1rem;"></i>
                       <h5>Ready to Join Us?</h5>

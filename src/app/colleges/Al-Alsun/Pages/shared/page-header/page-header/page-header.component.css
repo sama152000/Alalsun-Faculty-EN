@@ -1,5 +1,5 @@
- .page-header {
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+.page-header {
+      background: var(--gradient-primary);
       color: white;
       position: relative;
       padding: 0;
@@ -40,11 +40,11 @@
       justify-content: center;
     }
 
-    .breadcrumb {
-      background: rgba(255,255,255,0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 25px;
-      padding: 0.8rem 2rem;
+.breadcrumb {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 0.8rem var(--standard-padding); /* Updated to use standard padding */
       margin: 0;
       display: flex;
       align-items: center;

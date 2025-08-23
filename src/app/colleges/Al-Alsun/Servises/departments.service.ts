@@ -11,11 +11,11 @@ export class DepartmentsService {
       id: '1',
       name: 'English Language Department',
       shortName: 'English Dept',
-      overview: 'The English Language Department offers comprehensive programs in literature, linguistics, and translation.',
+      overview: 'The English Language Department offers comprehensive programs in literature, linguistics, and translation. It was established in 2016 and aims to prepare graduates for the job market with strong language and research skills.',
       type: 'undergraduate',
       image: 'https://images.pexels.com/photos/267669/pexels-photo-267669.jpeg',
       icon: 'pi pi-book',
-      established: '1995',
+      established: '2016',
       programs: [
         {
           id: 'p1',
@@ -70,18 +70,25 @@ export class DepartmentsService {
       id: '2',
       name: 'Arabic Language Department',
       shortName: 'Arabic Dept',
-      overview: 'Specialized in Arabic linguistics, literature, and cultural studies for postgraduate students.',
-      type: 'postgraduate',
+      overview: 'Specialized in Arabic linguistics, literature, and cultural studies. The department also serves non-native speakers of Arabic.',
+      type: 'undergraduate',
       image: 'https://images.pexels.com/photos/3014019/pexels-photo-3014019.jpeg',
       icon: 'pi pi-book',
-      established: '2000',
+      established: '2016',
       programs: [
         {
           id: 'p3',
-          name: 'MA in Arabic Linguistics',
-          description: 'Advanced study of Arabic language structures and phonetics.',
+          name: 'BA in Arabic Literature',
+          description: 'Study Arabic literature, criticism, and linguistics.',
+          duration: '4 years',
+          degree: 'Bachelor'
+        },
+        {
+          id: 'p4',
+          name: 'Diploma in Arabic Linguistics',
+          description: 'Postgraduate study of Arabic language structures and phonetics.',
           duration: '2 years',
-          degree: 'Master'
+          degree: 'Diploma'
         }
       ],
       faculty: [
@@ -118,10 +125,10 @@ export class DepartmentsService {
       type: 'undergraduate',
       image: 'https://images.pexels.com/photos/3183183/pexels-photo-3183183.jpeg',
       icon: 'pi pi-book',
-      established: '1985',
+      established: '2016',
       programs: [
         {
-          id: 'p4',
+          id: 'p5',
           name: 'BA in French Language',
           description: 'Comprehensive study of French language and culture.',
           duration: '4 years',
@@ -152,6 +159,216 @@ export class DepartmentsService {
         headOfDepartment: 'Dr. Jean Dupont'
       },
       route: '/alalsun-faculty/departments/french'
+    },
+    {
+      id: '4',
+      name: 'German Language Department',
+      shortName: 'German Dept',
+      overview: 'The German Language Department provides students with language, literature, and translation skills, with a focus on German culture.',
+      type: 'undergraduate',
+      image: 'https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg',
+      icon: 'pi pi-book',
+      established: '2016',
+      programs: [
+        {
+          id: 'p6',
+          name: 'BA in German Studies',
+          description: 'Covers German language, literature, and translation studies.',
+          duration: '4 years',
+          degree: 'Bachelor'
+        }
+      ],
+      faculty: [
+        {
+          id: 'f5',
+          name: 'Dr. Hans Muller',
+          title: 'Lecturer',
+          specialization: 'German Linguistics',
+          email: 'hans.muller@luxor.edu'
+        }
+      ],
+      activities: [
+        {
+          id: 'a4',
+          title: 'German Cultural Day',
+          description: 'Annual celebration of German culture with workshops and performances.',
+          date: '2025-06-01'
+        }
+      ],
+      contact: {
+        email: 'german.dept@luxor.edu',
+        office: 'Building D, Room 201',
+        headOfDepartment: 'Dr. Hans Muller'
+      },
+      route: '/alalsun-faculty/departments/german'
+    },
+    {
+      id: '5',
+      name: 'Chinese Language Department',
+      shortName: 'Chinese Dept',
+      overview: 'Dedicated to teaching Chinese language and culture, with exchange opportunities via Confucius Classroom.',
+      type: 'undergraduate',
+      image: 'https://images.pexels.com/photos/1093720/pexels-photo-1093720.jpeg',
+      icon: 'pi pi-book',
+      established: '2019',
+      programs: [
+        {
+          id: 'p7',
+          name: 'BA in Chinese Language',
+          description: 'Comprehensive study of Chinese language, culture, and translation.',
+          duration: '4 years',
+          degree: 'Bachelor'
+        }
+      ],
+      faculty: [
+        {
+          id: 'f6',
+          name: 'Dr. Li Wei',
+          title: 'Lecturer',
+          specialization: 'Chinese Literature',
+          email: 'li.wei@luxor.edu'
+        }
+      ],
+      activities: [
+        {
+          id: 'a5',
+          title: 'Chinese Cultural Festival',
+          description: 'Showcasing Chinese arts, language activities, and calligraphy workshops.',
+          date: '2025-07-10'
+        }
+      ],
+      contact: {
+        email: 'chinese.dept@luxor.edu',
+        office: 'Building E, Room 305',
+        headOfDepartment: 'Dr. Li Wei'
+      },
+      route: '/alalsun-faculty/departments/chinese'
+    },
+    {
+      id: '6',
+      name: 'Italian Language Department',
+      shortName: 'Italian Dept',
+      overview: 'Focuses on Italian language and literature, equipping students with translation and cultural knowledge.',
+      type: 'undergraduate',
+      image: 'https://images.pexels.com/photos/532826/pexels-photo-532826.jpeg',
+      icon: 'pi pi-book',
+      established: '2016',
+      programs: [
+        {
+          id: 'p8',
+          name: 'BA in Italian Studies',
+          description: 'Covers Italian language, literature, and translation studies.',
+          duration: '4 years',
+          degree: 'Bachelor'
+        }
+      ],
+      faculty: [
+        {
+          id: 'f7',
+          name: 'Dr. Maria Rossi',
+          title: 'Assistant Professor',
+          specialization: 'Italian Literature',
+          email: 'maria.rossi@luxor.edu'
+        }
+      ],
+      activities: [
+        {
+          id: 'a6',
+          title: 'Italian Art & Culture Seminar',
+          description: 'An event to explore Italian art, culture, and language practice.',
+          date: '2025-08-15'
+        }
+      ],
+      contact: {
+        email: 'italian.dept@luxor.edu',
+        office: 'Building F, Room 104',
+        headOfDepartment: 'Dr. Maria Rossi'
+      },
+      route: '/alalsun-faculty/departments/italian'
+    },
+    {
+      id: '7',
+      name: 'Spanish Language Department',
+      shortName: 'Spanish Dept',
+      overview: 'Provides courses in Spanish language, literature, and Latin American culture.',
+      type: 'undergraduate',
+      image: 'https://images.pexels.com/photos/597909/pexels-photo-597909.jpeg',
+      icon: 'pi pi-book',
+      established: '2016',
+      programs: [
+        {
+          id: 'p9',
+          name: 'BA in Spanish Studies',
+          description: 'Comprehensive program covering Spanish and Latin American literature and culture.',
+          duration: '4 years',
+          degree: 'Bachelor'
+        }
+      ],
+      faculty: [
+        {
+          id: 'f8',
+          name: 'Dr. Carlos Gomez',
+          title: 'Associate Professor',
+          specialization: 'Spanish Literature',
+          email: 'carlos.gomez@luxor.edu'
+        }
+      ],
+      activities: [
+        {
+          id: 'a7',
+          title: 'Hispanic Culture Week',
+          description: 'Events focusing on Spanish and Latin American cultures.',
+          date: '2025-09-20'
+        }
+      ],
+      contact: {
+        email: 'spanish.dept@luxor.edu',
+        office: 'Building G, Room 207',
+        headOfDepartment: 'Dr. Carlos Gomez'
+      },
+      route: '/alalsun-faculty/departments/spanish'
+    },
+    {
+      id: '8',
+      name: 'Russian Language Department',
+      shortName: 'Russian Dept',
+      overview: 'Offers Russian language, literature, and cultural studies, with opportunities for translation practice.',
+      type: 'undergraduate',
+      image: 'https://images.pexels.com/photos/118458/pexels-photo-118458.jpeg',
+      icon: 'pi pi-book',
+      established: '2016',
+      programs: [
+        {
+          id: 'p10',
+          name: 'BA in Russian Studies',
+          description: 'Covers Russian language, literature, and translation skills.',
+          duration: '4 years',
+          degree: 'Bachelor'
+        }
+      ],
+      faculty: [
+        {
+          id: 'f9',
+          name: 'Dr. Ivan Petrov',
+          title: 'Professor',
+          specialization: 'Russian Linguistics',
+          email: 'ivan.petrov@luxor.edu'
+        }
+      ],
+      activities: [
+        {
+          id: 'a8',
+          title: 'Russian Literature Conference',
+          description: 'Conference on Russian literature and translation studies.',
+          date: '2025-10-05'
+        }
+      ],
+      contact: {
+        email: 'russian.dept@luxor.edu',
+        office: 'Building H, Room 108',
+        headOfDepartment: 'Dr. Ivan Petrov'
+      },
+      route: '/alalsun-faculty/departments/russian'
     }
   ];
 

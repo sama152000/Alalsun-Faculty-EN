@@ -1,6 +1,6 @@
 .news-section {
-  padding: 2rem 8rem; /* Reduced from 2rem 0, added 2rem left/right */
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  padding: var(--component-padding); 
+  background: var(--gradient-light);
   min-height: auto; 
   
   /* Changed from 100vh to adapt to content */
@@ -20,7 +20,7 @@
 }
 
 .section-title {
-  color: var(--primary-blue);
+  color: var(--primary-color);
   font-size: 1.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
@@ -70,7 +70,7 @@
 }
 
 .card-header {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  background: var(--gradient-light);
   border-bottom: 1px solid #e9ecef; /* Reduced from 2px */
   padding: 1rem 1.5rem; /* Reduced from 1.5rem 2rem */
 }
@@ -84,7 +84,7 @@
 }
 
 .badge-primary {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%);
+  background: var(--gradient-gold);
   color: var(--primary-blue);
   padding: 0.3rem 0.6rem; /* Reduced from 0.4rem 0.8rem */
   border-radius: 16px; /* Reduced from 20px */
@@ -93,7 +93,7 @@
 }
 
 .news-content {
-  max-height: 200px; /* Reduced from 600px to show ~1.5 news items */
+  max-height: 500px; /* Reduced from 600px to show ~1.5 news items */
   overflow-y: auto;
 }
 
@@ -112,7 +112,7 @@
 }
 
 .news-item:hover {
-  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  background: var(--gradient-light);
   transform: translateX(8px);
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
 }
@@ -176,7 +176,7 @@
 }
 
 .news-category {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%);
+  background: var(--gradient-gold);
   color: var(--primary-blue);
   padding: 0.25rem 0.6rem; /* Reduced from 0.3rem 0.8rem */
   border-radius: 12px; /* Reduced from 16px */

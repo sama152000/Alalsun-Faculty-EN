@@ -42,7 +42,7 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
+      background: var(--gradient-diagonal);
       color: white;
       padding: 2rem 1.5rem 1rem;
       transform: translateY(100%);

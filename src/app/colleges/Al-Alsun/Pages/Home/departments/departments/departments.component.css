@@ -1,21 +1,38 @@
 .departments-section {
   padding: 2rem 0;
-  background: white;
+  background: var(--gradient-primary); /* زي stats-section */
+  position: relative;
   overflow: hidden;
+}
+
+.departments-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('https://images.pexels.com/photos/207662/pexels-photo-207662.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;
+  opacity: 0.1; /* تقدرِ تزوديها لو عايزة الصورة تبان أكتر */
+}
+
+.departments-section .container-fluid {
+  position: relative;
+  z-index: 2; /* عشان المحتوى يبقى فوق الخلفية */
 }
 
 .section-title {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: var(--white);
   margin-bottom: 1rem;
 }
 
 .section-subtitle {
   text-align: center;
   font-size: 1rem;
-  color: #7f8c8d;
+  color: var(--white);
   margin-bottom: 0.5em;
   max-width: 600px;
   margin-left: auto;
@@ -24,7 +41,7 @@
 
 .departments-slider-container {
   position: relative;
-  max-width: 1200px;
+  max-width: 1700px;
   margin: 0 auto;
   padding: 0 60px;
 }
@@ -56,7 +73,7 @@
   justify-content: center;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   flex: 0 0 200px;
-  width: 200px;
+  width:25%;
 }
 
 .department-card::before {

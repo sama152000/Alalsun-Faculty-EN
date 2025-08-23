@@ -110,7 +110,7 @@ interface FooterSection {
   `,
   styles: [`
     .footer {
-      background: linear-gradient(135deg, #102039 0%, #102039 100%);
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-color) 100%);
       color: white;
     }
 

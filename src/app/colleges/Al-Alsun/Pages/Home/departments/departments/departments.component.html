@@ -1,5 +1,5 @@
 <section class="departments-section">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-12">
         <h2 class="section-title">Academic Departments</h2>
@@ -17,19 +17,20 @@
           </button>
           
           <div class="departments-slider" #sliderContainer>
-            <div class="departments-track" [style.transform]="'translateX(' + (-currentSlide * slideWidth) + 'px)'">
-              <div 
-                *ngFor="let department of departments; let i = index" 
-                class="department-card"
-                [style.background]="department.color"
-              >
-                <div class="department-icon">
-                  <i [class]="department.icon"></i>
-                </div>
-                <h3 class="department-title">{{ department.name }}</h3>
-               
-              </div>
-            </div>
+           <div class="departments-track" 
+     [style.transform]="'translateX(' + (-currentSlide * slideWidth) + 'px)'">
+  <div 
+    *ngFor="let department of departments.concat(departments)" 
+    class="department-card"
+    [style.background]="department.color"
+  >
+    <div class="department-icon">
+      <i [class]="department.icon"></i>
+    </div>
+    <h3 class="department-title">{{ department.name }}</h3>
+  </div>
+</div>
+
           </div>
           
           <button class="slider-arrow slider-arrow-right" (click)="slideRight()" [disabled]="currentSlide >= maxSlides">

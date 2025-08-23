@@ -1,5 +1,6 @@
 .vision-mission-section {
- 
+ padding-right: 4rem;
+ padding-left: 4rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
 }
@@ -30,14 +31,46 @@
   color: var(--primary-blue); /* Assumed --primary-color as --primary-blue (#1e3c72) */
   border-bottom: 2px solid var(--primary-blue); /* Reduced from 3px */
 }
-
 .tab-content-custom {
   background: white;
-  padding: 1.5rem; /* Reduced from 3rem */
-  border-radius: 0 0 10px 10px; /* Reduced from 12px */
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
-  min-height: 200px; /* Reduced from 300px */
+  padding: 1.5rem;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  align-items: center;
+  text-align: center;
+  /* 👇 هنا بيثبت الطول */
+  min-height: 300px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+/* لو عايزة المحتوى يفضل في النص دايمًا بدل فوق */
+.tab-content-custom.centered {
+  justify-content: center;
+}
+
+/* 📱 Responsive */
+@media (max-width: 992px) {
+  .tab-content-custom {
+    min-height: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tab-content-custom {
+    min-height: 300px;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .tab-content-custom {
+    min-height: 250px;
+    padding: 0.8rem;
+  }
+}
+
 
 .mission-card,
 .objective-card {
@@ -61,7 +94,7 @@
 
 .lead {
   font-size: 1rem; /* Reduced from 1.25rem (Bootstrap default) */
-  line-height: 1.5; /* Reduced from 1.7 (lh-lg) */
+  line-height: 2; /* Reduced from 1.7 (lh-lg) */
 }
 
 .tab-pane h3 {

@@ -1,3 +1,6 @@
+.container-fluid {
+  padding: var(--component-padding);
+}
 /* Department Cards */
 .department-card {
   cursor: pointer;

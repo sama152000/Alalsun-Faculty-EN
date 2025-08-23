@@ -1,33 +1,59 @@
+/* Hero Banner */
 .hero-banner {
-  background: linear-gradient(135deg, #102039c0 0%, #102039 100%);
+  background: var(--gradient-primary);
   color: white;
   position: relative;
   padding: 0;
   margin-bottom: 5rem;
   overflow: hidden;
-  min-height: 380px;
+  min-height: 700px; /* الارتفاع المحدث */
   display: flex;
-  align-items: flex-start; 
+  align-items: center;
 }
 
 .banner-overlay {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: url('https://images.pexels.com/photos/356065/pexels-photo-356065.jpeg') center/cover;
-  opacity: 0.15;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.carousel {
+  height: 100%;
+}
+
+.carousel-inner,
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-item {
+  background-size: cover;
+  background-position: center;
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(121deg, rgb(197 42 3 / 54%) 0%, #0c685c92 70%);
 }
 
 .banner-content {
   position: relative;
   z-index: 2;
-  padding: 2rem 0; /* أصغر */
+  padding: 2rem 0;
   text-align: center;
   max-width: 700px;
-  margin: 0rem auto 0 auto; /* يخلي النص فوق */
+  margin: 0 auto;
 }
 
 .banner-title {
-  font-size: 2.2rem; /* أصغر */
+  font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 1rem;
   text-shadow: 0 4px 8px rgba(0,0,0,0.3);
@@ -50,4 +76,198 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.btn-primary-custom {
+  background: var(#c42a03);
+  border: 2px solid var(#c42a03);
+  padding: 1rem 2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 50px;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+
+/* Carousel Indicators */
+.carousel-indicators {
+  bottom: 1.5rem;
+  margin-bottom: 0;
+  z-index: 2;
+}
+
+.carousel-indicators button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  margin: 0 0.3rem;
+  transition: all 0.3s ease;
+}
+
+.carousel-indicators .active {
+  background-color: var(--accent-gold);
+}
+
+/* Navigation Arrows */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+  opacity: 1;
+  background: var(--accent-gold);
+}
+
+.carousel-control-prev i,
+.carousel-control-next i {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.carousel-control-prev {
+  left: 1rem;
+}
+
+.carousel-control-next {
+  right: 1rem;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  text-align: center;
+  color: white;
+  z-index: 2;
+  animation: bounce 2s infinite;
+}
+
+.scroll-arrow {
+  width: 40px;
+  height: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.scroll-arrow:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.scroll-arrow i {
+  font-size: 1.2rem;
+}
+
+.scroll-text {
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-banner {
+    min-height: 400px;
+  }
+
+  .banner-title {
+    font-size: 1.8rem;
+  }
+
+  .banner-subtitle {
+    font-size: 1rem;
+  }
+
+  .banner-description {
+    font-size: 0.9rem;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 45px;
+    height: 45px;
+  }
+
+  .carousel-control-prev i,
+  .carousel-control-next i {
+    font-size: 1.2rem;
+  }
+
+  .scroll-indicator {
+    right: 1rem;
+  }
+
+  .btn-primary-custom {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .banner-title {
+    font-size: 1.75rem;
+  }
+
+  .banner-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .banner-description {
+    font-size: 0.85rem;
+  }
+
+  .btn-primary-custom {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel-indicators button {
+    width: 10px;
+    height: 10px;
+  }
 }

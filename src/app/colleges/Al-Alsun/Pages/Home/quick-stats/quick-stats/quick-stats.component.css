@@ -1,22 +1,15 @@
 .stats-section {
-  padding: 2rem 0; /* Reduced from 4rem 0 */
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  padding: 2rem 0;
+  background-color: var(--primary-color); /* أو var(--darkred) لو عندك متعرفه في :root */
   position: relative;
   overflow: hidden;
- 
 }
 
+/* هنلغي الخلفية اللي كانت بالصورة */
 .stats-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('https://images.pexels.com/photos/207662/pexels-photo-207662.jpeg?auto=compress&cs=tinysrgb&w=1200') center/cover;
-  opacity: 0.1;
-
+  content: none;
 }
+
 
 .stats-section .container {
   position: relative;

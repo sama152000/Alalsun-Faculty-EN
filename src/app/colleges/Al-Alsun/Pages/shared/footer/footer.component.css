@@ -1,0 +1,20 @@
+.footer-section {
+    background: var(--gradient-primary);
+    color: white;
+    padding: var(--component-padding);
+    text-align: center;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    color: var(--accent-gold);
+}
+
+.footer-bottom {
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

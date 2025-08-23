@@ -1,11 +1,45 @@
 /* Faculty of Al-Alsun Styles */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-
 :root {
-  --primary-blue: #102039;
-  --secondary-blue: #102039;
+  header .container {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+  max-width: 90% !important;
+}
+
+nav .container {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  max-width: 90% !important;
+}
+footer .container {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  padding-top: 0rem !important;
+  padding-bottom:0rem !important;
+  max-width: 90% !important;
+}
+
+component .container {
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+  padding-top: 0.8rem !important;
+  padding-bottom: 0.8rem !important;
+  max-width: 90% !important;
+}
+
+  --primary-color: #0c685c; /* استبدال --primary-blue */
+  --standard-padding: 1.3rem; 
+  --component-padding: 2rem 8rem !important;
+  /* Define a standard padding variable */
+  --secondary-color: #053b34; /* استبدال --secondary-blue */
   --accent-gold: #d4af37;
+  --darkred: #c42a03e3;
   --light-gold: #f4d03f;
   --success: #28a745;
   --warning: #ffc107;
@@ -15,6 +49,8 @@
   --dark-text: #2c3e50;
   --gray-text: #6c757d;
   --light-gray: #e9ecef;
+  --gradient-primary: linear-gradient(135deg, #0c685c 0%, #0c685c 100%);
+  --gradient-diagonal: linear-gradient(121deg, #c42a038a 0%, transparent 70%);
 }
 
 * {
@@ -31,10 +67,11 @@ body {
 }
 
 /* Utility Classes */
-.text-primary { color: var(--primary-blue) !important; }
+.text-primary { color: var(--primary-color) !important; }
 .text-gold { color: var(--accent-gold) !important; }
-.bg-primary { background: var(--primary-blue) !important; }
-.bg-gradient-primary { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%) !important; }
+.bg-primary { background: var(--primary-color) !important; }
+.bg-gradient-primary { background: var(--gradient-primary) !important; }
+.bg-gradient-diagonal { background: var(--gradient-diagonal) !important; }
 .bg-gradient-gold { background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%) !important; }
 
 /* Card Styles */
@@ -53,7 +90,7 @@ body {
 
 /* Button Styles */
 .btn-primary-custom {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  background-color: var(--darkred);
   border: none;
   color: white;
   padding: 0.8rem 2rem;
@@ -62,19 +99,19 @@ body {
   text-decoration: none;
   display: inline-block;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(30, 74, 140, 0.3);
+  box-shadow: 0 4px 15px rgba(12, 104, 92, 0.3); /* تحديث ظل اللون ليتناسب مع #0c685c */
 }
 
 .btn-primary-custom:hover {
-  background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--primary-blue) 100%);
+  background: var(--gradient-primary);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(30, 74, 140, 0.4);
+  box-shadow: 0 8px 25px rgba(12, 104, 92, 0.4);
   color: white;
 }
 
 .btn-outline-primary-custom {
-  border: 2px solid var(--primary-blue);
-  color: var(--primary-blue);
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
   background: transparent;
   padding: 0.8rem 2rem;
   border-radius: 25px;
@@ -83,14 +120,14 @@ body {
 }
 
 .btn-outline-primary-custom:hover {
-  background: var(--primary-blue);
+  background: var(--primary-color);
   color: white;
   transform: translateY(-2px);
 }
 
 /* Section Headers */
 .section-header {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  background: var(--gradient-primary);
   color: white;
   padding: 1.2rem 1.5rem;
   font-weight: 600;
@@ -105,7 +142,7 @@ body {
 .section-title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--primary-blue);
+  color: var(--primary-color);
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -155,19 +192,19 @@ body {
 
 /* PrimeNG Overrides */
 .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
-  background: var(--primary-blue) !important;
-  border-color: var(--primary-blue) !important;
+  background: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
 }
 
 .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
-  box-shadow: 0 0 0 0.2rem rgba(30, 74, 140, 0.25) !important;
+  box-shadow: 0 0 0 0.2rem rgba(12, 104, 92, 0.25) !important; /* تحديث ظل اللون */
 }
 
 .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
-  background-color: var(--primary-blue) !important;
+  background-color: var(--primary-color) !important;
 }
 
 .p-button.p-button-primary {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%) !important;
+  background: var(--gradient-primary) !important;
   border: none !important;
 }
