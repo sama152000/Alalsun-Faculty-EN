@@ -1,5 +1,5 @@
 .dean-full-message-section {
-  padding: 2rem 1rem; /* Reduced from 3rem 0, added 1rem horizontal for edge spacing */
+  padding: var(--component-padding); /* Reduced from 3rem 0, added 1rem horizontal for edge spacing */
   background: var(--light-bg);
 }
 
@@ -13,7 +13,7 @@
 .dean-photo-section {
   padding: 1.5rem; /* Reduced from 2rem */
   text-align: center;
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 100%);
   color: white;
     border-radius: 15px; /* Reduced from 20px */
   height: 100%;
@@ -50,7 +50,7 @@
 }
 
 .dean-name {
-  color: var(--accent-gold);
+  color: var(--white);
   font-weight: 700;
   font-size: 1.2rem; /* Reduced from 1.3rem */
   margin-bottom: 0.3rem; /* Reduced from 0.5rem */
@@ -76,16 +76,16 @@
   gap: 0.8rem; /* Reduced from 1rem */
   margin-bottom: 1.5rem; /* Reduced from 2rem */
   padding-bottom: 0.8rem; /* Reduced from 1rem */
-  border-bottom: 2px solid var(--accent-gold);
+  border-bottom: 2px solid var(--darkred);
 }
 
 .quote-icon {
   font-size: 1.5rem; /* Reduced from 2rem */
-  color: var(--accent-gold);
+  color: var(--darkred);
 }
 
 .message-title {
-  color: var(--primary-blue);
+  color: var(--primary-color);
   font-weight: 700;
   font-size: 1.5rem; /* Reduced from 2rem */
   margin: 0;
@@ -96,15 +96,6 @@
   font-size: 0.9rem; /* Reduced from 1rem */
 }
 
-.islamic-greeting {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%);
-  color: var(--primary-blue);
-  padding: 0.8rem 1rem; /* Reduced from 1rem 1.5rem */
-  border-radius: 8px; /* Reduced from 10px */
-  margin-bottom: 1rem; /* Reduced from 1.5rem */
-  text-align: center;
-  font-weight: 600;
-}
 
 .greeting {
   color: var(--dark-text);
@@ -126,7 +117,7 @@
 .highlight {
   background: rgba(212, 175, 55, 0.1);
   padding: 1rem; /* Reduced from 1.2rem */
-  border-left: 3px solid var(--accent-gold); /* Reduced from 4px */
+  border-left: 3px solid var(--darkred); /* Reduced from 4px */
   border-radius: 0 8px 8px 0; /* Reduced from 10px */
   font-style: italic;
   color: var(--primary-blue) !important;

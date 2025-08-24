@@ -1,227 +1,357 @@
+/* Vice Dean Section */
 .vice-dean-section {
-  padding: 2rem 1rem; /* Reduced from 3rem 0, added 1rem horizontal for edge spacing */
-}
-
-.card-modern {
-  background: white;
-  border-radius: 10px; /* Reduced from 15px */
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08); /* Adjusted from 0 8px 25px */
-  border: none;
-}
-
-.vice-dean-photo-section {
-  padding: 1.5rem; /* Reduced from 2rem */
-  text-align: center;
- background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-  color: white;
-  height: 100%;
-  border-radius: 14px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem; /* Reduced from 2rem */
-}
-
-.vice-dean-photo-container {
+  padding: var(--component-padding); /* Reduced from 3rem 0, added 1rem horizontal for edge spacing */
   position: relative;
 }
 
-.vice-dean-photo {
-  width: 180px; /* Reduced from 220px */
-  height: 216px; /* Reduced from 260px */
+.vice-dean-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.section-title {
+  font-size: 2.3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-align: center;
+  position: relative;
+}
+
+.section-subtitle {
+  font-size: 1.3rem;
+  color: var(--gray-text);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.title-divider {
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+  margin: 0 auto 0rem;
+  border-radius: 2px;
+  position: relative;
+}
+
+.title-divider::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--primary-color);
+  border-radius: 50%;
+}
+
+.vice-dean-slider {
+  position: relative;
+  min-height: 200px;
+
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.vice-dean-slider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--darkred), var(--darkred), var(--darkred));
+}
+
+.vice-dean-slide {
+  width: 100%;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vice-dean-image {
+  position: relative;
+  display: inline-block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.vice-dean-image img {
+  width: 140px;
+  height: 140px;
   object-fit: cover;
-  border-radius: 10px; /* Reduced from 15px */
-  border: 4px solid var(--primary-blue); /* Reduced from 5px */
-  box-shadow: 0 6px 20px rgba(16, 32, 57, 0.3); /* Adjusted shadow */
+  border: 5px solid white;
+  box-shadow: 0 15px 35px rgba(12, 104, 92, 0.2);
+  border-radius: 50%;
   transition: all 0.3s ease;
 }
 
-.vice-dean-photo:hover {
-  transform: scale(1.02);
+.vice-dean-image:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 20px 45px rgba(12, 104, 92, 0.3);
 }
 
-.vice-dean-title-card {
-    background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  padding: 1rem; /* Reduced from 1.5rem */
-  border-radius: 10px; /* Reduced from 15px */
-  border: 1px solid rgba(255,255,255,0.2);
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, transparent 0%, rgba(212, 175, 55, 0.1) 100%);
+  pointer-events: none;
 }
 
 .vice-dean-name {
- color: var(--accent-gold);
+  font-size: 1.6rem;
   font-weight: 700;
-  font-size: 1.2rem; /* Reduced from 1.3rem */
-  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
   line-height: 1.3;
 }
 
 .vice-dean-position {
-  color: rgba(255,255,255,0.9);
-  font-weight: 500;
-  font-size: 0.9rem; /* Reduced from 1rem */
-  margin: 0;
-  line-height: 1.4;
+  color: var(--darkred);
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
 }
 
 .faculty-name {
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 500;
-  font-size: 0.8rem; /* Reduced from 0.9rem */
-  margin: 0;
-  line-height: 1.3;
+  color: var(--gray-text);
+  font-size: 0.9rem;
+  margin-bottom: 0;
+  font-style: italic;
 }
 
-.vice-dean-message-content {
-  padding: 2rem; /* Reduced from 3rem */
+.vice-dean-content {
+  padding-left:2rem;
+  position: relative;
+}
+
+.quote-icon {
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.15;
+  margin-bottom: 0rem;
+  line-height: 1;
+}
+
+.vice-dean-text {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: var(--dark-text);
+  font-style: italic;
+  margin-bottom: 2.5rem;
+  border: none;
+  padding: 0;
+  position: relative;
+  font-weight: 400;
+}
+
+.vice-dean-text::before {
+  content: '';
+  position: absolute;
+  left: -2rem;
+  top: 0;
+  width: 4px;
   height: 100%;
+  background: linear-gradient(180deg, var(--darkred), transparent);
+  border-radius: 2px;
 }
 
-.message-header {
+.see-more-btn {
+  background: linear-gradient(135deg, var(--darkred), var(--darkred));
+  color: white;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.see-more-btn:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(12, 104, 92, 0.4);
+}
+
+.vice-dean-controls {
   display: flex;
   align-items: center;
-  gap: 0.8rem; /* Reduced from 1rem */
-  margin-bottom: 1.5rem; /* Reduced from 2rem */
-  padding-bottom: 0.8rem; /* Reduced from 1rem */
-  border-bottom: 2px solid var(--accent-gold);
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 0rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-.header-icon {
-  font-size: 1.5rem; /* Reduced from 1.8rem */
-  color: var(--accent-gold);
+.nav-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  background: white;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  box-shadow: 0 4px 15px rgba(12, 104, 92, 0.1);
 }
 
-.message-title {
-  color: var(--primary-blue);
-  font-weight: 700;
-  font-size: 1.5rem; /* Reduced from 1.8rem */
-  margin: 0;
-}
-
-.message-body {
-  line-height: 1.6; /* Reduced from 1.8 */
-  font-size: 0.9rem; /* Reduced from 1rem */
-}
-
-.greeting {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+.nav-btn:hover:not(:disabled) {
+  background: var(--primary-color);
   color: white;
-  padding: 0.8rem 1rem; /* Reduced from 1.2rem 1.5rem */
-  border-radius: 8px; /* Reduced from 10px */
-  margin-bottom: 1rem; /* Reduced from 1.5rem */
-  text-align: center;
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(12, 104, 92, 0.2);
 }
 
-.message-content {
-  margin-bottom: 1.5rem; /* Reduced from 2rem */
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-.message-paragraph {
-  margin-bottom: 1rem; /* Reduced from 1.2rem */
-  text-align: justify;
-  color: var(--dark-text);
-  line-height: 1.6; /* Reduced from 1.8 */
+.vice-dean-indicators {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
 }
 
-.closing {
-  background: rgba(212, 175, 55, 0.1);
-  padding: 1rem; /* Reduced from 1.5rem */
-  border-radius: 8px; /* Reduced from 10px */
-  text-align: center;
-  margin-bottom: 1.5rem; /* Reduced from 2rem */
-  border-left: 3px solid var(--accent-gold); /* Reduced from 4px */
+.indicator {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-color);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-.closing-line {
-  color: var(--primary-blue) !important;
-  font-weight: 500;
-  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
+.indicator:hover {
+  transform: scale(1.2);
+  border-color: var(--darkred);
 }
 
-.closing-line:last-child {
-  margin-bottom: 0;
+.indicator.active {
+  background: var(--primary-color);
+  transform: scale(1.4);
+  box-shadow: 0 0 0 3px rgba(12, 104, 92, 0.2);
 }
 
-.signature {
-  background: var(--light-bg);
-  padding: 1rem; /* Reduced from 1.5rem */
-  border-radius: 8px; /* Reduced from 10px */
-  text-align: right;
-  border: 2px solid var(--primary-blue);
-}
-
-.signature-name {
-  color: var(--primary-blue) !important;
-  font-weight: 700;
-  font-size: 1rem; /* Reduced from 1.1rem */
-  margin-bottom: 0.2rem; /* Reduced from 0.3rem */
-}
-
-.signature-title {
-  color: var(--accent-gold) !important;
-  font-weight: 600;
-  font-size: 0.85rem; /* Reduced from 0.95rem */
-  margin: 0;
+.indicator.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  background: white;
+  border-radius: 50%;
 }
 
 /* Responsive Design */
 @media (max-width: 992px) {
-  .vice-dean-photo-section {
-    padding: 1.5rem 0.8rem; /* Reduced from 2rem 1rem */
+  .vice-dean-slider {
+    padding: 2rem;
   }
   
-  .vice-dean-message-content {
-    padding: 1.5rem; /* Reduced from 2rem */
+  .vice-dean-content {
+    padding-left: 0;
+    margin-top: 2rem;
+  }
+  
+  .vice-dean-text::before {
+    display: none;
   }
 }
 
 @media (max-width: 768px) {
-  .vice-dean-photo {
-    width: 160px; /* Reduced from 180px */
-    height: 192px; /* Reduced from 220px */
+  .section-title {
+    font-size: 2.2rem;
   }
   
-  .message-title {
-    font-size: 1.3rem; /* Reduced from 1.5rem */
+  .vice-dean-image img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .vice-dean-name {
+    font-size: 1.4rem;
+  }
+
+  .vice-dean-text {
+    font-size: 1.1rem;
   }
   
-  .vice-dean-message-content {
-    padding: 1.2rem; /* Reduced from 1.5rem */
+  .vice-dean-slider {
+    padding: 1.5rem;
   }
   
-  .message-body {
-    font-size: 0.85rem; /* Reduced from 0.95rem */
-  }
-
-  .greeting {
-    padding: 0.6rem 0.8rem; /* Reduced from 0.8rem 1rem */
-  }
-
-  .closing {
-    padding: 0.8rem; /* Reduced from 1rem */
-  }
-
-  .signature {
-    padding: 0.8rem; /* Reduced from 1rem */
+  .nav-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 576px) {
-  .vice-dean-name {
-    font-size: 1rem; /* Reduced from 1.1rem */
-  }
-  
-  .vice-dean-position {
-    font-size: 0.8rem; /* Reduced from 0.9rem */
-  }
-  
-  .faculty-name {
-    font-size: 0.75rem; /* Reduced from 0.8rem */
+  .vice-dean-image img {
+    width: 100px;
+    height: 100px;
   }
 
-  .vice-dean-photo {
-    width: 140px; /* Reduced from 160px */
-    height: 168px; /* Reduced from 192px */
+  .vice-dean-name {
+    font-size: 1.2rem;
+  }
+
+  .vice-dean-position,
+  .faculty-name {
+    font-size: 0.9rem;
+  }
+
+  .vice-dean-text {
+    font-size: 1rem;
+  }
+  
+  .see-more-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .vice-dean-controls {
+    gap: 1rem;
+  }
+}
+
+/* Animation Classes */
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

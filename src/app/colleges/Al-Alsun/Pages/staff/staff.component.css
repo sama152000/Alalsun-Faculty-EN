@@ -1,0 +1,187 @@
+ .staff-page {
+      min-height: 100vh;
+    }
+
+    .filter-section {
+      padding: 2rem 0;
+      background: var(--light-bg);
+    }
+
+    .filter-content {
+      padding: 2rem;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray-text);
+      z-index: 2;
+    }
+
+    .search-input {
+      padding-left: 3rem;
+      border: 2px solid var(--light-gray);
+      border-radius: 25px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(12, 104, 92, 0.25);
+    }
+
+    .department-filter {
+      border: 2px solid var(--light-gray);
+      border-radius: 25px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .department-filter:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(12, 104, 92, 0.25);
+    }
+
+    .staff-grid-section {
+      padding: 3rem 0;
+      background: white;
+    }
+
+    .staff-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      margin-bottom: 2rem;
+      border: 1px solid var(--light-gray);
+    }
+
+    .staff-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    .staff-image-container {
+      position: relative;
+      overflow: hidden;
+      height: 280px;
+    }
+
+    .staff-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.3s ease;
+    }
+
+    .staff-card:hover .staff-image {
+      transform: scale(1.1);
+    }
+
+    .staff-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(12, 104, 92, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .staff-card:hover .staff-overlay {
+      opacity: 1;
+    }
+
+    .view-icon {
+      font-size: 3rem;
+      color: white;
+    }
+
+    .staff-info {
+      padding: 2rem;
+    }
+
+    .staff-name {
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .staff-position {
+      color: var(--accent-gold);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .staff-department,
+    .staff-contact,
+    .staff-specialization {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      color: var(--gray-text);
+    }
+
+    .staff-contact a {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .staff-contact a:hover {
+      color: var(--accent-gold);
+      text-decoration: underline;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--gray-text);
+    }
+
+    .no-results-icon {
+      font-size: 4rem;
+      color: var(--light-gray);
+      margin-bottom: 1rem;
+    }
+
+    .no-results h3 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .filter-content {
+        padding: 1.5rem;
+      }
+      
+      .filter-content .row {
+        gap: 1rem;
+      }
+      
+      .staff-info {
+        padding: 1.5rem;
+      }
+      
+      .staff-name {
+        font-size: 1.2rem;
+      }
+    }

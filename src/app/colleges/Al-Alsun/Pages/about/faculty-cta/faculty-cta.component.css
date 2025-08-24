@@ -1,5 +1,5 @@
 .faculty-cta-section {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-color) 100%);
   color: white;
   position: relative;
   padding: 2rem 0 3rem 0; /* Reduced top from 5rem, added 3rem bottom */
@@ -45,7 +45,7 @@
 
 .cta-icon i {
   font-size: 2rem; /* Reduced from 3rem */
-  color: var(--accent-gold);
+  color: var(--white);
 }
 
 .cta-title {
@@ -70,7 +70,7 @@
 .cta-message::after {
   content: '"';
   font-size: 1.5rem; /* Reduced from 2rem */
-  color: var(--accent-gold);
+  color: var(--white);
   font-weight: 700;
 }
 
@@ -96,7 +96,7 @@
 
 .btn-outline-light:hover {
   background: white;
-  color: var(--primary-blue);
+  color: var(--primary-color);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3); /* Adjusted from 0 8px 25px */
 }

@@ -89,20 +89,8 @@
               <li class="nav-item">
                 <a class="nav-link" routerLink="/alalsun-faculty/staff">Staff</a>
               </li>
-              <li class="nav-item dropdown" [class.show]="isNewsDropdownOpen">
-                <a 
-                  class="nav-link dropdown-toggle" 
-                  href="#" 
-                  (click)="toggleNewsDropdown($event)"
-                  [attr.aria-expanded]="isNewsDropdownOpen"
-                >
-                  News
-                </a>
-                <ul class="dropdown-menu" [class.show]="isNewsDropdownOpen">
-                  <li><a class="dropdown-item" routerLink="/news/students">Student News</a></li>
-                  <li><a class="dropdown-item" routerLink="/news/postgraduate">Postgraduate News</a></li>
-                  <li><a class="dropdown-item" routerLink="/news/faculty-board">Faculty Board News</a></li>
-                </ul>
+              <li class="nav-item">
+                <a class="nav-link" routerLink="/alalsun-faculty/news">News</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" routerLink="/alalsun-faculty/contact">Contact Us</a>

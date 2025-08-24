@@ -9,7 +9,7 @@
 }
 
 .section-title {
-  color: var(--primary-blue);
+  color: var(--primary-color);
   font-size: 2.5rem; /* Reduced from implied 2rem */
   font-weight: 700;
   margin-bottom: 0.3rem; /* Reduced from implied 0.5rem */
@@ -52,8 +52,8 @@
 }
 
 .vision-card .card-header {
-  background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
-  color: white;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
   padding: 1rem; /* Reduced from 2rem */
   text-align: center;
   position: relative;
@@ -61,8 +61,8 @@
 }
 
 .mission-card .card-header {
-  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--light-gold) 100%);
-  color: var(--primary-blue);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  color: var(--white);
   padding: 1rem; /* Reduced from 2rem */
   text-align: center;
   position: relative;
@@ -95,11 +95,11 @@
 }
 
 .vision-card .header-icon {
-  color: var(--accent-gold);
+  color: var(--white);
 }
 
 .mission-card .header-icon {
-  color: var(--primary-blue);
+  color: var(--white);
 }
 
 .card-header h3 {
