@@ -1,0 +1,60 @@
+<section class="hero-banner">
+  <div class="banner-overlay">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
+      <div class="carousel-inner">
+        <div *ngFor="let slide of slides; let i = index"
+             [ngClass]="{'carousel-item': true, 'active': i === 0}"
+             [style.background]="'url(' + slide.image + ') center/cover'">
+          <div class="carousel-overlay"></div>
+        </div>
+      </div>
+      <!-- Carousel Indicators -->
+      <div class="carousel-indicators">
+        <button *ngFor="let slide of slides; let i = index"
+                type="button"
+                data-bs-target="#heroCarousel"
+                [attr.data-bs-slide-to]="i"
+                [ngClass]="{'active': i === 0}"
+                [attr.aria-label]="'Slide ' + (i + 1)">
+        </button>
+      </div>
+      <!-- Navigation Arrows -->
+      <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <i class="pi pi-chevron-left"></i>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <i class="pi pi-chevron-right"></i>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="banner-content">
+      <h2 class="banner-title">
+        Faculty of Al-Alsun – Luxor University
+      </h2>
+      <p class="banner-subtitle">
+        Excellence and leadership in the study of languages…
+      </p>
+      <p class="banner-description">
+        A leading faculty in languages and translation, preparing qualified graduates 
+        for the labor market, while supporting scientific research and community service 
+        in line with Egypt Vision 2030.
+      </p>
+      <div class="banner-actions">
+        <a href="/alalsun-faculty/about" class="btn btn-primary btn-darkred">
+          About Us
+          <i class="pi pi-arrow-right ms-2"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator">
+    <div class="scroll-arrow">
+      <i class="pi pi-chevron-down"></i>
+    </div>
+    <p class="scroll-text">Scroll Down</p>
+  </div>
+</section>

@@ -1,0 +1,99 @@
+
+<div class="news-detail-page" *ngIf="newsItem">
+      <app-page-header 
+        [title]="newsItem.title" 
+        [breadcrumbs]="breadcrumbs">
+      </app-page-header>
+      
+      <section class="news-detail-section">
+        <div class="container">
+          <div class="card-modern">
+            <div class="news-header">
+              <div class="news-image-container">
+                <img [src]="newsItem.image" [alt]="newsItem.title" class="news-image">
+                <div class="news-overlay">
+                  <div class="news-meta-info">
+                    <div class="news-date">
+                      <i class="pi pi-calendar"></i>
+                      {{ formatDate(newsItem.date) }}
+                    </div>
+                    <div class="news-category">
+                      <i class="pi pi-tag"></i>
+                      {{ getCategoryLabel(newsItem.category) }}
+                    </div>
+                    <div class="news-author" *ngIf="newsItem.author">
+                      <i class="pi pi-user"></i>
+                      {{ newsItem.author }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="news-content">
+              <h1 class="news-title">{{ newsItem.title }}</h1>
+              
+              <div class="news-summary">
+                <p>{{ newsItem.summary }}</p>
+              </div>
+              
+              <div class="news-tags" *ngIf="newsItem.tags && newsItem.tags.length > 0">
+                <span *ngFor="let tag of newsItem.tags" class="news-tag">
+                  {{ tag }}
+                </span>
+              </div>
+              
+              <div class="news-article">
+                <div [innerHTML]="getFormattedContent()"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="navigation-section">
+            <button class="btn-outline-primary-custom" (click)="goBack()">
+              <i class="pi pi-arrow-left me-2"></i>
+              Back to News
+            </button>
+            
+            <div class="related-news" *ngIf="relatedNews.length > 0">
+              <h3>Related News</h3>
+              <div class="related-news-grid">
+                <div 
+                  *ngFor="let related of relatedNews" 
+                  class="related-news-card"
+                  (click)="viewRelatedNews(related.id)"
+                >
+                  <img [src]="related.image" [alt]="related.title" class="related-image">
+                  <div class="related-content">
+                    <h4>{{ related.title }}</h4>
+                    <p>{{ formatDate(related.date) }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <div class="news-detail-page" *ngIf="!newsItem && !loading">
+      <app-page-header 
+        title="News Article Not Found" 
+        [breadcrumbs]="breadcrumbs">
+      </app-page-header>
+      
+      <section class="error-section">
+        <div class="container">
+          <div class="error-content">
+            <i class="pi pi-exclamation-triangle error-icon"></i>
+            <h3>News Article Not Found</h3>
+            <p>The requested news article could not be found.</p>
+            <button class="btn-primary-custom" (click)="goBack()">
+              Return to News
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <app-footer></app-footer>

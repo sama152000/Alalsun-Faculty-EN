@@ -1,0 +1,68 @@
+<section class="vice-dean-section py-5">
+  <div class="container-fluid col-12">
+    <!-- Section Header -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h2 class="section-title fade-in-up">Messages from Our Vice Deans</h2>
+        <p class="section-subtitle fade-in-up">Insights and visions from our esteemed leadership</p>
+        <div class="title-divider"></div>
+      </div>
+    </div>
+
+    <!-- Vice Dean Slider -->
+    <div class="row">
+      <div class="col-12">
+        <div class="vice-dean-slider">
+          <!-- Single Active Slide -->
+          <div class="vice-dean-slide active" *ngIf="viceDeans.length > 0">
+            <div class="row align-items-center">
+              <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                <div class="vice-dean-image">
+                  <img [src]="viceDeans[currentViceDeanIndex].image" 
+                       [alt]="viceDeans[currentViceDeanIndex].name" 
+                       class="img-fluid rounded-circle">
+                  <div class="image-overlay"></div>
+                </div>
+                <div class="vice-dean-info mt-4">
+                  <h4 class="vice-dean-name">{{ viceDeans[currentViceDeanIndex].name }}</h4>
+                  <p class="vice-dean-position">{{ viceDeans[currentViceDeanIndex].position }}</p>
+                  <p class="faculty-name">Faculty of Al-Alsun – Luxor University</p>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="vice-dean-content">
+                  <div class="quote-icon">
+                    <i class="pi pi-quote-left"></i>
+                  </div>
+                  <blockquote class="vice-dean-text">
+                    {{ getPreviewText() }}
+                  </blockquote>
+                  <button class="btn btn-primary-gradient" (click)="viewFullMessage()">
+                    Read Full Message <i class="pi pi-arrow-right ms-2"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Controls -->
+          <div class="vice-dean-controls">
+            <button class="nav-btn prev-btn" (click)="prevViceDean()" [disabled]="viceDeans.length <= 1">
+              <i class="pi pi-chevron-left"></i>
+            </button>
+            <div class="vice-dean-indicators">
+              <button class="indicator" 
+                      *ngFor="let viceDean of viceDeans; let i = index"
+                      [class.active]="i === currentViceDeanIndex"
+                      (click)="goToViceDean(i)">
+              </button>
+            </div>
+            <button class="nav-btn next-btn" (click)="nextViceDean()" [disabled]="viceDeans.length <= 1">
+              <i class="pi pi-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,156 @@
+#postgraduate-section .container-fluid {
+  padding-left: var(--component-padding) !important;
+  padding-right: var(--component-padding) !important;
+margin-top: 3rem !important;
+  margin-bottom: 3rem !important;
+}
+
+
+
+.section-title {
+  color: var(--primary-color);
+  font-size: 2rem; /* Reduced from implied 2rem */
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.section-subtitle {
+  color: var(--gray-text);
+  font-size: 1rem; /* Reduced from implied 1rem */
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.program-card {
+  border: none;
+  border-radius: 10px; /* Reduced from 12px */
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1); /* Adjusted shadow */
+  transition: all 0.3s ease;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  padding: var(--standard-padding); /* Updated to use standard padding */
+  border-bottom: none;
+  background: var(--primary-blue); /* Assumed .bg-primary as --primary-blue */
+}
+
+.card-header h4 {
+  font-size: 1.2rem; /* Reduced from implied 1.5rem */
+}
+
+.card-body {
+  padding: 0.75rem; /* Added consistent internal padding */
+}
+
+.program-list {
+  padding: 0.5rem 0; /* Reduced from 1rem 0 */
+}
+
+.program-item {
+  padding: 0.3rem 0; /* Reduced from 0.5rem 0 */
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  font-size:1rem; /* Reduced from implied 1rem */
+}
+
+.info-card {
+  padding: 1.5rem; /* Reduced from 4rem */
+  transition: all 0.3s ease;
+  border: 1px solid #e9ecef; /* Assumed --border-color */
+}
+
+.info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+.info-card h4 {
+  font-size: 1.2rem; /* Reduced from implied 1.5rem */
+}
+
+.info-card p,
+.info-card ul li {
+  font-size:1rem; /* Reduced from implied 1rem */
+}
+
+.btn-primary-custom {
+  background: var(--primary-color);
+  color: white;
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem 1.25rem; /* Reduced from implied larger padding */
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1rem; /* Reduced from implied 1rem */
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background: var(--white);
+  color: var(--primary-color);
+  border-color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 1.3rem; /* Reduced from 1.5rem */
+  }
+
+  .section-subtitle {
+    font-size: 0.85rem; /* Reduced from 0.9rem */
+  }
+
+  .program-card {
+    border-radius: 8px; /* Reduced from 10px */
+  }
+
+  .card-header {
+    padding: 0.75rem; /* Reduced from 1rem */
+  }
+
+  .card-header h4 {
+    font-size: 1rem; /* Reduced from 1.2rem */
+  }
+
+  .card-body {
+    padding: 0.5rem; /* Reduced from 0.75rem */
+  }
+
+  .program-list {
+    padding: 0.3rem 0; /* Reduced from 0.5rem 0 */
+  }
+
+  .program-item {
+    font-size: 0.8rem; /* Reduced from 0.85rem */
+  }
+
+  .info-card {
+    padding: 1rem; /* Reduced from 1.5rem */
+  }
+
+  .info-card h4 {
+    font-size: 1rem; /* Reduced from 1.2rem */
+  }
+
+  .info-card p,
+  .info-card ul li {
+    font-size: 0.8rem; /* Reduced from 0.85rem */
+  }
+
+  .btn-primary-custom {
+    padding: 0.4rem 1rem; /* Reduced from 0.5rem 1.25rem */
+    font-size: 0.85rem; /* Reduced from 0.9rem */
+  }
+}

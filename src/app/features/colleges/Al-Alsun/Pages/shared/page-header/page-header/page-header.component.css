@@ -1,0 +1,110 @@
+.page-header {
+      background: var(--gradient-primary);
+      color: white;
+      position: relative;
+      padding: 0;
+      margin-bottom: 3rem;
+      overflow: hidden;
+      min-height: 300px;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('https://images.pexels.com/photos/12064/pexels-photo-12064.jpeg') center/cover;
+      opacity: 0.15;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 3rem 0;
+    }
+
+    .page-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      line-height: 1.2;
+    }
+
+    .breadcrumb-nav {
+      display: flex;
+      justify-content: center;
+    }
+
+.breadcrumb {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 0.8rem var(--standard-padding); /* Updated to use standard padding */
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .breadcrumb-item {
+      display: flex;
+      align-items: center;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item:not(:last-child)::after {
+      content: '/';
+      margin: 0 0.8rem;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .breadcrumb-item a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .breadcrumb-item a:hover {
+  color: var(--white);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--accent-gold);
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .page-title {
+        font-size: 2.2rem;
+      }
+      
+      .page-header {
+        min-height: 250px;
+      }
+      
+      .header-content {
+        padding: 2rem 0;
+      }
+
+      .breadcrumb {
+        padding: 0.6rem 1.5rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .page-title {
+        font-size: 1.8rem;
+      }
+    }
+  

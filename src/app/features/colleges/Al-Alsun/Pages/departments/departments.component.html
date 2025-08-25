@@ -1,0 +1,19 @@
+<div class="department-page">
+  <app-page-header 
+    title="Departments of the Faculty" 
+    [breadcrumbs]="breadcrumbs">
+  </app-page-header>
+</div>
+
+<app-departments-contant 
+  *ngIf="!selectedDepartment" 
+  (departmentSelected)="onDepartmentSelected($event)"
+></app-departments-contant>
+
+<app-department-details 
+  *ngIf="selectedDepartment" 
+  [department]="selectedDepartment" 
+  (backToList)="onBackToList()"
+></app-department-details>
+
+<app-footer></app-footer>

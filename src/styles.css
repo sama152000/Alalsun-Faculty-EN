@@ -146,6 +146,70 @@ body {
   margin-bottom: 1rem;
   text-align: center;
 }
+.btn-white-hover{
+ 
+  background: var(--primary-color);
+  color: white;
+  border: 1px solid var(--primary-color);
+  padding: 0.5rem 1.25rem; /* Reduced from implied larger padding */
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 1rem; /* Reduced from implied 1rem */
+  transition: all 0.3s ease;
+}
+
+.btn-white-hover:hover {
+  background: var(--white);
+  color: var(--primary-color);
+  border-color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary-gradient {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primary-gradient:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(12, 104, 92, 0.4);
+}
+.btn-darkred {
+   background: linear-gradient(135deg, var(--darkred), var(--darkred));
+
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+    color: white;
+
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-darkred:hover {
+    background: linear-gradient(135deg, var(--darkred), var(--darkred));
+  transform: translateY(-2px);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
 
 .section-subtitle {
   font-size: 1.2rem;
@@ -156,6 +220,8 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
+
 
 /* Animations */
 @keyframes fadeInUp {

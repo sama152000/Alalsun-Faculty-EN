@@ -1,0 +1,306 @@
+
+<div class="contact-page">
+  <app-page-header 
+    title="Contact Us" 
+    [breadcrumbs]="breadcrumbs">
+  </app-page-header>
+
+  <div class="container-fluid py-5">
+    <!-- Header Section -->
+    <div class="row mb-5">
+      <div class="col-12 text-center">
+        <h1 class="section-title fade-in-up">Contact Us</h1>
+        <p class="section-subtitle fade-in-up">
+          We are happy to respond to your inquiries and suggestions through the following channels.
+        </p>
+      </div>
+    </div>
+
+    <!-- Contact Information & Map Section -->
+    <div class="row g-4 mb-5" *ngIf="contactInfo">
+      <div class="col-lg-6">
+        <div class="card card-modern h-100">
+          <div class="section-header">
+            <i class="pi pi-map-marker me-2"></i>
+            Contact Information
+          </div>
+          <div class="card-body p-4">
+            <div class="contact-item mb-4">
+              <h6 class="contact-label">
+                <i class="pi pi-map-marker text-primary me-2"></i>
+                Address 
+              </h6>
+              <p class="contact-value">{{ contactInfo.address.english }}</p>
+            </div>
+            
+            <div class="contact-item mb-4">
+              <h6 class="contact-label">
+                <i class="pi pi-map-marker text-primary me-2"></i>
+                Address
+              </h6>
+              <p class="contact-value">{{ contactInfo.address.english }}</p>
+            </div>
+            
+            <div class="contact-item mb-4">
+              <h6 class="contact-label">
+                <i class="pi pi-phone text-primary me-2"></i>
+                Phone
+              </h6>
+              <p class="contact-value">
+                <a [href]="'tel:' + contactInfo.phone" class="contact-link">
+                  {{ contactInfo.phone }}
+                </a>
+              </p>
+            </div>
+            
+            <div class="contact-item mb-4">
+              <h6 class="contact-label">
+                <i class="pi pi-envelope text-primary me-2"></i>
+                Official Email
+              </h6>
+              <p class="contact-value">
+                <a [href]="'mailto:' + contactInfo.email" class="contact-link">
+                  {{ contactInfo.email }}
+                </a>
+              </p>
+            </div>
+            
+            <div class="contact-item mb-4">
+              <h6 class="contact-label">
+                <i class="pi pi-globe text-primary me-2"></i>
+                Website
+              </h6>
+              <p class="contact-value">
+                <a [href]="'https://' + contactInfo.website" target="_blank" class="contact-link">
+                  {{ contactInfo.website }}
+                </a>
+              </p>
+            </div>
+            
+            <div class="contact-item">
+              <h6 class="contact-label">
+                <i class="pi pi-facebook text-primary me-2"></i>
+                Facebook Page
+              </h6>
+              <p class="contact-value">
+                <a href="#" target="_blank" class="contact-link">
+                  {{ contactInfo.facebook }}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="card card-modern h-100">
+          <div class="section-header">
+            <i class="pi pi-map me-2"></i>
+            Our Location
+          </div>
+          <div class="map-container">
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.2130368798676!2d32.655939!3d25.6973696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x144915b6cd5958e3%3A0xd8298ac929cd3238!2z2YPZhNmK2Kkg2KfZhNij2YTYs9mGINis2KfZhdi52Kkg2KfZhNij2YLYtdix!5e0!3m2!1sar!2seg!4v1755716417964!5m2!1sar!2seg"
+    width="100%"
+    height="100%"
+    style="border:0;"
+    allowfullscreen=""
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form Section -->
+    <div class="row mb-5">
+      <div class="col-lg-8 mx-auto">
+        <div class="card card-modern">
+          <div class="section-header">
+            <i class="pi pi-send me-2"></i>
+            Send Us a Message
+          </div>
+          <div class="card-body p-4">
+            <!-- Success Message -->
+            <div class="alert alert-success d-flex align-items-center mb-4" 
+                 *ngIf="showSuccessMessage && submissionResult?.success">
+              <i class="pi pi-check-circle me-2"></i>
+              {{ submissionResult?.message }}
+            </div>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger d-flex align-items-center mb-4" 
+                 *ngIf="submissionResult && !submissionResult.success">
+              <i class="pi pi-exclamation-triangle me-2"></i>
+              {{ submissionResult.message }}
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-user me-1"></i>
+                    Full Name *
+                  </label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [class.is-invalid]="hasError('fullName')"
+                    [(ngModel)]="contactForm.fullName"
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    required>
+                  <div class="invalid-feedback" *ngIf="hasError('fullName')">
+                    {{ getError('fullName') }}
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-envelope me-1"></i>
+                    Email Address *
+                  </label>
+                  <input 
+                    type="email" 
+                    class="form-control"
+                    [class.is-invalid]="hasError('email')"
+                    [(ngModel)]="contactForm.email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required>
+                  <div class="invalid-feedback" *ngIf="hasError('email')">
+                    {{ getError('email') }}
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-tag me-1"></i>
+                    Subject *
+                  </label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [class.is-invalid]="hasError('subject')"
+                    [(ngModel)]="contactForm.subject"
+                    name="subject"
+                    placeholder="Enter message subject"
+                    required>
+                  <div class="invalid-feedback" *ngIf="hasError('subject')">
+                    {{ getError('subject') }}
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-comment me-1"></i>
+                    Message *
+                  </label>
+                  <textarea 
+                    class="form-control"
+                    [class.is-invalid]="hasError('message')"
+                    [(ngModel)]="contactForm.message"
+                    name="message"
+                    rows="6"
+                    placeholder="Enter your message here..."
+                    required></textarea>
+                  <div class="invalid-feedback" *ngIf="hasError('message')">
+                    {{ getError('message') }}
+                  </div>
+                </div>
+                
+                <div class="col-12 text-center">
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary-custom"
+                    [disabled]="isSubmitting">
+                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
+                    <i *ngIf="!isSubmitting" class="pi pi-send me-2"></i>
+                    {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direct Contact Sections -->
+    <div class="row mb-5" *ngIf="directContacts.length > 0">
+      <div class="col-12">
+        <h3 class="text-center text-primary mb-4">Direct Contact Departments</h3>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6" *ngFor="let contact of directContacts">
+            <div class="card card-modern h-100 text-center">
+              <div class="card-body p-4">
+                <div class="contact-icon mb-3">
+                  <i [class]="contact.icon + ' text-white'"></i>
+                </div>
+                <h5 class="card-title text-primary mb-3">{{ contact.department }}</h5>
+                <p class="card-text text-muted mb-3">{{ contact.description }}</p>
+                <a [href]="'mailto:' + contact.email" class="btn btn-outline-primary-custom">
+                  <i class="pi pi-envelope me-2"></i>
+                  Contact
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links Footer -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card card-modern bg-gradient-primary text-white">
+          <div class="card-body p-4 text-center">
+            <h4 class="mb-3">Quick Links</h4>
+            <div class="row g-3">
+              <div class="col-md-2">
+                <a routerLink="/alalsun-faculty" class="btn btn-white-hover">
+                  <i class="pi pi-home me-1"></i>
+                  Home
+                </a>
+              </div>
+              <div class="col-md-2">
+                <a routerLink="/alalsun-faculty/about" class="btn btn-white-hover">
+                  <i class="pi pi-info-circle me-1"></i>
+                  About
+                </a>
+              </div>
+              <div class="col-md-2">
+                <a routerLink="/alalsun-faculty/departments" class="btn btn-white-hover">
+                  <i class="pi pi-building me-1"></i>
+                  Departments
+                </a>
+              </div>
+              <div class="col-md-2">
+                <a routerLink="/alalsun-faculty/news" class="btn btn-white-hover">
+                  <i class="pi pi-newspaper me-1"></i>
+                  News
+                </a>
+              </div>
+              <div class="col-md-2">
+                <a routerLink="/alalsun-faculty/contact" class="btn btn-white-hover">
+                  <i class="pi pi-phone me-1"></i>
+                  Contact
+                </a>
+              </div>
+              <div class="col-md-2">
+                <a href="#" class="btn btn-white-hover">
+                  <i class="pi pi-facebook me-1"></i>
+                  Facebook
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
