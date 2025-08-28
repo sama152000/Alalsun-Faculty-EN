@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { PageHeaderComponent } from '../../shared/page-header/page-header/page-header.component';
-import { NewsService } from '../../../Servises/news.service';
+import { NewsService } from '../../../Services/news.service';
 import { NewsItem } from '../../../model/news.model';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { FooterComponent } from '../footer/footer.component';

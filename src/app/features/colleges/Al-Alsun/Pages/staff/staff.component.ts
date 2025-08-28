@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { PageHeaderComponent } from '../shared/page-header/page-header/page-header.component';
-import { StaffService } from '../../Servises/staff.service';
+import { StaffService } from '../../Services/staff.service';
 import { StaffMember, Department } from '../../model/staff.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';

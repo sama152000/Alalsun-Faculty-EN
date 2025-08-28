@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { PageHeaderComponent } from '../shared/page-header/page-header/page-header.component';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { ContactService } from '../../Servises/contact.service';
+import { ContactService } from '../../Services/contact.service';
 import { ContactInfo, ContactForm, DirectContact, ContactSubmissionResult } from '../../model/contact.model';
 
 @Component({

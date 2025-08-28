@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { PageHeaderComponent } from '../shared/page-header/page-header/page-header.component';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { NewsService } from '../../Servises/news.service';
+import { NewsService } from '../../Services/news.service';
 import { NewsItem, NewsCategory, NewsFilter } from '../../model/news.model';
 
 @Component({

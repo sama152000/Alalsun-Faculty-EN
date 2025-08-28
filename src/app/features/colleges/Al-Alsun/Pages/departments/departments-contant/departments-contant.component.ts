@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonModule, SlicePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { DepartmentsService } from '../../../Servises/departments.service';
+import { DepartmentsService } from '../../../Services/departments.service';
 import { Department } from '../../../model/department.model'; // Adjust path
 
 @Component({

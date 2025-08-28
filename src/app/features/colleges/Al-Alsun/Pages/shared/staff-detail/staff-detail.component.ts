@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PageHeaderComponent } from '../../shared/page-header/page-header/page-header.component';
-import { StaffService } from '../../../Servises/staff.service';
+import { StaffService } from '../../../Services/staff.service';
 import { StaffMember } from '../../../model/staff.model';
 import { FooterComponent } from '../footer/footer.component';
 import { NavbarComponent } from '../navbar/navbar.component';

@@ -1,0 +1,518 @@
+<!-- Page Header -->
+<app-page-header 
+  [title]="sector?.title || 'Sector'"
+  [breadcrumbs]="breadcrumbs">
+</app-page-header>
+
+<!-- Main Content -->
+<div class="sector-page" *ngIf="sector">
+  <div class="container-fluid" style="padding: var(--component-padding);">
+    
+    <!-- Sector Tabs -->
+    <div class="sector-tabs-container mb-4">
+      <ul class="nav nav-tabs sector-tabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" 
+                  [class.active]="activeTab === 'about'"
+                  (click)="setActiveTab('about')"
+                  type="button">
+            <i class="pi pi-info-circle me-2"></i>
+            About the Sector
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" 
+                  [class.active]="activeTab === 'departments'"
+                  (click)="setActiveTab('departments')"
+                  type="button">
+            <i class="pi pi-building me-2"></i>
+            Sector Departments
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" 
+                  [class.active]="activeTab === 'services'"
+                  (click)="setActiveTab('services')"
+                  type="button">
+            <i class="pi pi-cog me-2"></i>
+            Sector Services
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" 
+                  [class.active]="activeTab === 'news'"
+                  (click)="setActiveTab('news')"
+                  type="button">
+            <i class="pi pi-calendar me-2"></i>
+            News & Events
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" 
+                  [class.active]="activeTab === 'media'"
+                  (click)="setActiveTab('media')"
+                  type="button">
+            <i class="pi pi-images me-2"></i>
+            Media Gallery
+          </button>
+        </li>
+       
+      </ul>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3 mb-4">
+        <div class="sector-sidebar">
+          
+          <!-- About Tab Sidebar -->
+          <div *ngIf="activeTab === 'about'">
+            <div class="sidebar-section">
+              <h5 class="sidebar-title active">About {{sector.name}}</h5>
+            </div>
+            
+            <div class="sidebar-section">
+              <h6 class="sidebar-subtitle">Vice Dean</h6>
+              <div class="vice-dean-card">
+                <img [src]="sector.viceDean.photo" [alt]="sector.viceDean.name" class="vice-dean-photo">
+                <div class="vice-dean-info">
+                  <h6>{{sector.viceDean.name}}</h6>
+                  <p>{{sector.viceDean.title}}</p>
+                  <div class="contact-info">
+                    <small><i class="pi pi-envelope me-1"></i>{{sector.viceDean.email}}</small>
+                    <small><i class="pi pi-map-marker me-1"></i>{{sector.viceDean.office}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-section" *ngIf="sector.activities.length > 0">
+              <h6 class="sidebar-subtitle">Recent Activities</h6>
+              <div class="activity-list">
+                <div class="activity-item" *ngFor="let activity of sector.activities.slice(0, 3)">
+                  <div class="activity-date">{{activity.date | date:'MMM dd'}}</div>
+                  <div class="activity-content">
+                    <h6>{{activity.title}}</h6>
+                    <p>{{activity.description | slice:0:60}}...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-section" *ngIf="sector.achievements.length > 0">
+              <h6 class="sidebar-subtitle">Sector Achievements</h6>
+              <div class="achievement-list">
+                <div class="achievement-item" *ngFor="let achievement of sector.achievements.slice(0, 2)">
+                  <h6>{{achievement.title}}</h6>
+                  <p>{{achievement.description | slice:0:80}}...</p>
+                  <small class="text-muted">{{achievement.date | date:'MMM yyyy'}}</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Departments Tab Sidebar -->
+          <div *ngIf="activeTab === 'departments'">
+            <div class="sidebar-section">
+              <h6 class="sidebar-subtitle">Departments</h6>
+              <div class="department-list">
+                <button class="department-link" 
+                        *ngFor="let dept of sector.departments"
+                        [class.active]="selectedDepartment?.id === dept.id"
+                        (click)="selectDepartment(dept)">
+                  <i class="pi pi-building me-2"></i>
+                  {{dept.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Services Tab Sidebar -->
+          <div *ngIf="activeTab === 'services'">
+            <div class="sidebar-section">
+              <h6 class="sidebar-subtitle">Available Services</h6>
+              <div class="service-list">
+                <button class="service-link" 
+                        *ngFor="let service of sector.services"
+                        [class.active]="selectedService?.id === service.id"
+                        (click)="selectService(service)">
+                  <i class="pi pi-cog me-2"></i>
+                  {{service.name}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- News Tab Sidebar -->
+          <div *ngIf="activeTab === 'news'">
+            <div class="sidebar-section">
+              <h6 class="sidebar-subtitle">News Categories</h6>
+              <div class="category-list">
+                <button class="category-link" 
+                        [class.active]="selectedNewsCategory === 'all'"
+                        (click)="filterNewsByCategory('all')">
+                  All News
+                </button>
+                <button class="category-link" 
+                        *ngFor="let category of getNewsCategories()"
+                        [class.active]="selectedNewsCategory === category"
+                        (click)="filterNewsByCategory(category)">
+                  {{category}}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Media Tab Sidebar -->
+          <div *ngIf="activeTab === 'media'">
+            <div class="sidebar-section">
+              <h6 class="sidebar-subtitle">Media Types</h6>
+              <div class="media-type-list">
+                <button class="media-type-link" 
+                        [class.active]="selectedMediaType === 'all'"
+                        (click)="filterMediaByType('all')">
+                  <i class="pi pi-th-large me-2"></i>
+                  All Media
+                </button>
+                <button class="media-type-link" 
+                        [class.active]="selectedMediaType === 'photo'"
+                        (click)="filterMediaByType('photo')">
+                  <i class="pi pi-images me-2"></i>
+                  Photo Gallery
+                </button>
+                <button class="media-type-link" 
+                        [class.active]="selectedMediaType === 'video'"
+                        (click)="filterMediaByType('video')">
+                  <i class="pi pi-video me-2"></i>
+                  Video Gallery
+                </button>
+                <button class="media-type-link" 
+                        [class.active]="selectedMediaType === 'document'"
+                        (click)="filterMediaByType('document')">
+                  <i class="pi pi-file-pdf me-2"></i>
+                  Publications
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Main Content Area -->
+      <div class="col-lg-9">
+        <div class="main-content">
+
+          <!-- About Tab Content -->
+          <div *ngIf="activeTab === 'about'" class="tab-content-section">
+            <div class="content-header">
+              <h2 class="content-title">About the {{sector.name}} Sector</h2>
+              <p class="content-subtitle">Excellence in Education, Innovation, and Community Service</p>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="content-text">
+                  <p class="lead">{{sector.description}}</p>
+                  
+                  <div class="mission-vision-section mt-4">
+                    <h4 class="section-subtitle">Our Mission</h4>
+                    <p>To provide exceptional education and training in language studies, fostering cultural understanding and preparing students for global careers through innovative teaching methods and research excellence.</p>
+                    
+                    <h4 class="section-subtitle mt-4">Our Vision</h4>
+                    <p>To be a leading center of excellence in language education, recognized for producing globally competent graduates who contribute to cultural exchange and international cooperation.</p>
+                  </div>
+
+                  <div class="key-features-section mt-4">
+                    <h4 class="section-subtitle">Key Features</h4>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <ul class="feature-list">
+                          <li><i class="pi pi-check-circle text-success me-2"></i>Modern Language Laboratories</li>
+                          <li><i class="pi pi-check-circle text-success me-2"></i>International Exchange Programs</li>
+                          <li><i class="pi pi-check-circle text-success me-2"></i>Professional Translation Facilities</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <ul class="feature-list">
+                          <li><i class="pi pi-check-circle text-success me-2"></i>Cultural Immersion Activities</li>
+                          <li><i class="pi pi-check-circle text-success me-2"></i>Industry Partnerships</li>
+                          <li><i class="pi pi-check-circle text-success me-2"></i>Research Opportunities</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="sector-image">
+                  <img [src]="sector.image" [alt]="sector.name" class="img-fluid rounded shadow-lg">
+                  <div class="image-caption text-center mt-2">
+                    <small class="text-muted">The {{sector.name}} Sector Building - A Center of Excellence</small>
+                  </div>
+                </div>
+
+                <div class="quick-facts-card mt-4">
+                  <h5 class="card-title">Quick Facts</h5>
+                  <div class="fact-item">
+                    <i class="pi pi-calendar text-primary"></i>
+                    <span>Established: 1975</span>
+                  </div>
+                  <div class="fact-item">
+                    <i class="pi pi-users text-primary"></i>
+                    <span>Students: 1500+</span>
+                  </div>
+                  <div class="fact-item">
+                    <i class="pi pi-graduation-cap text-primary"></i>
+                    <span>Faculty: 85+</span>
+                  </div>
+                  <div class="fact-item">
+                    <i class="pi pi-globe text-primary"></i>
+                    <span>Languages: 12+</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Statistics Section -->
+            <div class="statistics-section mt-5">
+              <h4 class="section-subtitle mb-4">Sector Statistics</h4>
+              <div class="row">
+                <div class="col-md-3 mb-4" *ngFor="let stat of sector.statistics">
+                  <div class="stat-card">
+                    <div class="stat-icon">
+                      <i [class]="stat.icon"></i>
+                    </div>
+                    <div class="stat-content">
+                      <h3 class="stat-number">{{stat.value}}</h3>
+                      <p class="stat-label">{{stat.label}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Academic Programs Section -->
+            <div class="programs-section mt-5">
+              <h4 class="section-subtitle mb-4">Academic Programs</h4>
+              <div class="row">
+                <div class="col-md-4 mb-4">
+                  <div class="program-card">
+                    <div class="program-icon">
+                      <i class="pi pi-book text-primary"></i>
+                    </div>
+                    <h5>Undergraduate Programs</h5>
+                    <p>Bachelor's degrees in various language specializations with comprehensive curriculum and practical training.</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <div class="program-card">
+                    <div class="program-icon">
+                      <i class="pi pi-graduation-cap text-primary"></i>
+                    </div>
+                    <h5>Graduate Programs</h5>
+                    <p>Master's and PhD programs focusing on advanced linguistic studies and research methodologies.</p>
+                  </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                  <div class="program-card">
+                    <div class="program-icon">
+                      <i class="pi pi-certificate text-primary"></i>
+                    </div>
+                    <h5>Diploma Courses</h5>
+                    <p>Specialized diploma programs for professional development and language proficiency enhancement.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Departments Tab Content -->
+          <div *ngIf="activeTab === 'departments'" class="tab-content-section">
+            <div class="content-header">
+              <h2 class="content-title">Sector Departments</h2>
+            </div>
+
+            <div *ngIf="selectedDepartment; else departmentsList">
+              <div class="department-detail">
+                <h3>{{selectedDepartment.name}}</h3>
+                <p class="lead">{{selectedDepartment.overview}}</p>
+                
+                <h5 class="mt-4">Main Responsibilities</h5>
+                <ul class="responsibility-list">
+                  <li *ngFor="let responsibility of selectedDepartment.responsibilities">
+                    {{responsibility}}
+                  </li>
+                </ul>
+
+                <div class="contact-section mt-4">
+                  <h5>Contact Information</h5>
+                  <div class="contact-details">
+                    <p><i class="pi pi-envelope me-2"></i>{{selectedDepartment.contact.email}}</p>
+                    <p><i class="pi pi-map-marker me-2"></i>{{selectedDepartment.contact.office}}</p>
+                    <p *ngIf="selectedDepartment.contact.phone">
+                      <i class="pi pi-phone me-2"></i>{{selectedDepartment.contact.phone}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #departmentsList>
+              <div class="departments-grid">
+                <div class="row">
+                  <div class="col-md-6 mb-4" *ngFor="let department of sector.departments">
+                    <div class="department-card" (click)="selectDepartment(department)">
+                      <div class="card-body">
+                        <h5 class="card-title">{{department.name}}</h5>
+                        <p class="card-text">{{department.overview | slice:0:120}}...</p>
+                        <button class="btn btn-outline-primary-custom">
+                          <i class="pi pi-arrow-right me-2"></i>
+                          View Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- Services Tab Content -->
+          <div *ngIf="activeTab === 'services'" class="tab-content-section">
+            <div class="content-header">
+              <h2 class="content-title">Sector Services</h2>
+            </div>
+
+            <div *ngIf="selectedService; else servicesList">
+              <div class="service-detail">
+                <h3>{{selectedService.name}}</h3>
+                <p class="lead">{{selectedService.description}}</p>
+                
+                <h5 class="mt-4">Application Steps</h5>
+                <ol class="steps-list">
+                  <li *ngFor="let step of selectedService.steps">{{step}}</li>
+                </ol>
+
+                <h5 class="mt-4">Required Documents</h5>
+                <ul class="documents-list">
+                  <li *ngFor="let doc of selectedService.requiredDocuments">{{doc}}</li>
+                </ul>
+
+                <div *ngIf="selectedService.downloadableForms && selectedService.downloadableForms.length > 0" class="forms-section mt-4">
+                  <h5>Downloadable Forms</h5>
+                  <div class="forms-list">
+                    <button class="btn btn-outline-primary-custom me-2 mb-2" *ngFor="let form of selectedService.downloadableForms">
+                      <i class="pi pi-download me-2"></i>
+                      {{form}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <ng-template #servicesList>
+              <div class="services-grid">
+                <div class="row">
+                  <div class="col-md-6 mb-4" *ngFor="let service of sector.services">
+                    <div class="service-card" (click)="selectService(service)">
+                      <div class="card-body">
+                        <h5 class="card-title">{{service.name}}</h5>
+                        <p class="card-text">{{service.description | slice:0:120}}...</p>
+                        <button class="btn btn-outline-primary-custom">
+                          <i class="pi pi-arrow-right me-2"></i>
+                          View Details
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+
+          <!-- News Tab Content -->
+          <div *ngIf="activeTab === 'news'" class="tab-content-section">
+            <div class="content-header">
+              <h2 class="content-title">Latest News</h2>
+            </div>
+
+            <div class="news-grid">
+              <div class="row">
+                <div class="col-md-6 mb-4" *ngFor="let newsItem of getFilteredNews()">
+                  <div class="news-card">
+                    <div class="news-image">
+                      <img [src]="newsItem.image" [alt]="newsItem.title" class="img-fluid">
+                      <div class="news-category">{{newsItem.category}}</div>
+                    </div>
+                    <div class="card-body">
+                      <div class="news-date">{{newsItem.date | date:'MMM dd, yyyy'}}</div>
+                      <h5 class="card-title">{{newsItem.title}}</h5>
+                      <p class="card-text">{{newsItem.summary}}</p>
+                      <button class="btn btn-primary-custom">
+                        <i class="pi pi-arrow-right me-2"></i>
+                        Read More
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Media Tab Content -->
+          <div *ngIf="activeTab === 'media'" class="tab-content-section">
+            <div class="content-header">
+              <h2 class="content-title">Media Gallery</h2>
+            </div>
+
+            <div class="media-grid">
+              <div class="row">
+                <div class="col-md-4 mb-4" *ngFor="let mediaItem of getFilteredMedia()">
+                  <div class="media-card">
+                    <div class="media-content" [ngSwitch]="mediaItem.type">
+                      
+                      <!-- Photo -->
+                      <div *ngSwitchCase="'photo'" class="photo-content">
+                        <img [src]="mediaItem.url" [alt]="mediaItem.title" class="img-fluid">
+                        <div class="media-overlay">
+                          <i class="pi pi-eye"></i>
+                        </div>
+                      </div>
+
+                      <!-- Video -->
+                      <div *ngSwitchCase="'video'" class="video-content">
+                        <img [src]="mediaItem.thumbnail" [alt]="mediaItem.title" class="img-fluid">
+                        <div class="media-overlay">
+                          <i class="pi pi-play"></i>
+                        </div>
+                      </div>
+
+                      <!-- Document -->
+                      <div *ngSwitchCase="'document'" class="document-content">
+                        <div class="document-icon">
+                          <i class="pi pi-file-pdf"></i>
+                        </div>
+                        <div class="media-overlay">
+                          <i class="pi pi-download"></i>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="media-info">
+                      <h6>{{mediaItem.title}}</h6>
+                      <p>{{mediaItem.description | slice:0:60}}...</p>
+                      <small class="text-muted">{{mediaItem.date | date:'MMM dd, yyyy'}}</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

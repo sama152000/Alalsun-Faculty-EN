@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViceDeanService } from '../../../Servises/vice-dean.service.ts.service';
+import { ViceDeanService } from '../../../Services/vice-dean.service.ts.service';
 import { ViceDean } from '../../../model/vice-dean.model';
 
 @Component({

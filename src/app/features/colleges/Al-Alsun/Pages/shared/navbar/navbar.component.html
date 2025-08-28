@@ -1,40 +1,39 @@
- <header class="top-header">
-      <div class="header-diagonal"></div>
-      <div class="container">
-        <div class="header-content">
-          <div class="row align-items-center">
-            <div class="col-lg-8 col-md-7">
-              <div class="logo-section">
-                <div class="faculty-logo">
-                  <!-- <i class="pi pi-book" style="color: #102039; font-size: 1.8rem;"></i> -->
-                   <img src="assets/logo.jpg" width="100%" alt="">
-                </div>
-                <div>
-                  <h1 class="main-title">Faculty of Al-Alsun</h1>
-                  <p class="subtitle">Luxor University</p>
-                </div>
-              </div>
+<header class="top-header">
+  <div class="header-diagonal"></div>
+  <div class="container">
+    <div class="header-content">
+      <div class="row align-items-center">
+        <div class="col-lg-8 col-md-7">
+          <div class="logo-section">
+            <div class="faculty-logo">
+              <img src="assets/logo.jpg" width="100%" alt="">
             </div>
-            <div class="col-lg-4 col-md-5">
-              <div class="university-info">
-                <span class="university-text">Luxor University</span>
-                <div class="university-badge">
-                  <span>EST. 2019</span>
-                </div>
-              </div>
+            <div>
+              <h1 class="main-title">Faculty of Al-Alsun</h1>
+              <p class="subtitle">Luxor University</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-5">
+          <div class="university-info">
+            <span class="university-text">Luxor University</span>
+            <div class="university-badge">
+              <span>EST. 2019</span>
             </div>
           </div>
         </div>
       </div>
-    </header>
+    </div>
+  </div>
+</header>
 
-     <footer class="footer">
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-md-6">
-             <p class="copyright">
-           Faculty of Al-Alsun – Luxor University
+<footer class="footer">
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p class="copyright">
+            Faculty of Al-Alsun – Luxor University
           </p>
         </div>
         <div class="col-md-6">
@@ -55,49 +54,77 @@
               Visit University Website
             </a>
           </div>
-            </div>
-          </div>
         </div>
       </div>
-    </footer>
+    </div>
+  </div>
+</footer>
 
-    <!-- Navigation -->
-    <nav class="main-nav">
-      <div class="container ">
-        <div class="navbar navbar-expand-lg">
-          <button 
-            class="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav"
-            [attr.aria-expanded]="isNavbarCollapsed"
-            (click)="toggleNavbar()"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed" id="navbarNav">
-            <ul class="navbar-nav w-100 justify-content-start">
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/alalsun-faculty/home"><i class="pi pi-home me-2"></i>Home</a>
+<!-- Navigation -->
+<nav class="main-nav">
+  <div class="container">
+    <div class="navbar navbar-expand-lg">
+      <button 
+        class="navbar-toggler" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#navbarNav"
+        [attr.aria-expanded]="isNavbarCollapsed"
+        (click)="toggleNavbar()"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-start">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/alalsun-faculty/home"><i class="pi pi-home me-2"></i>Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/alalsun-faculty/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/alalsun-faculty/departments">Departments</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/alalsun-faculty/staff">Staff</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/alalsun-faculty/news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/alalsun-faculty/contact">Contact Us</a>
+          </li>
+          <li class="nav-item dropdown" [class.show]="isSectorsDropdownOpen">
+            <a class="nav-link dropdown-toggle" 
+               href="#" 
+               role="button" 
+               (click)="toggleSectorsDropdown($event)"
+               [attr.aria-expanded]="isSectorsDropdownOpen">
+              Sectors
+            </a>
+            <ul class="dropdown-menu" [class.show]="isSectorsDropdownOpen">
+              <li>
+                <a class="dropdown-item" routerLink="/alalsun-faculty/sectors/education-students" (click)="onSectorSelect()">
+                  <i class="pi pi-users me-2"></i>
+                  Education & Students Affairs
+                </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/alalsun-faculty/about">About</a>
+              <li>
+                <a class="dropdown-item" routerLink="/alalsun-faculty/sectors/postgraduate-research" (click)="onSectorSelect()">
+                  <i class="pi pi-graduation-cap me-2"></i>
+                  Postgraduate Studies & Research
+                </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/alalsun-faculty/departments">Departments</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/alalsun-faculty/staff">Staff</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/alalsun-faculty/news">News</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" routerLink="/alalsun-faculty/contact">Contact Us</a>
+              <li>
+                <a class="dropdown-item" routerLink="/alalsun-faculty/sectors/community-environmental" (click)="onSectorSelect()">
+                  <i class="pi pi-globe me-2"></i>
+                  Community Service & Environmental Development
+                </a>
               </li>
             </ul>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
-    </nav>
- 
+    </div>
+  </div>
+</nav>

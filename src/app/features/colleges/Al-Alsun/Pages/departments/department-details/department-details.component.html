@@ -1,4 +1,9 @@
 <div class="department-details-container" *ngIf="department">
+  <!-- Back Button -->
+  <div class="container py-3">
+    
+  </div>
+
   <!-- Main Content -->
   <div class="container py-5">
     <div class="row">
@@ -114,7 +119,7 @@
               </div>
               
               <div class="col-lg-4">
-                <div class="card card-modern h-90"> <!-- إزالة h-100 لجعل الكارد أقصر -->
+                <div class="card card-modern h-90">
                   <div class="card-header bg-primary text-white">
                     <h5 class="card-title mb-0 quick-contact-title">
                       <i class="pi pi-phone me-2"></i>
@@ -331,4 +336,9 @@
       </div>
     </div>
   </div>
+
+  <button class="btn btn-outline-primary-custom mb-4" (click)="goBack()">
+      <i class="pi pi-arrow-left me-2"></i>
+      Back to Departments
+    </button>
 </div>
