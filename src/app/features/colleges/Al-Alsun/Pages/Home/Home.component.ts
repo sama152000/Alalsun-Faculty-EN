@@ -24,7 +24,6 @@ import { FooterComponent } from "../shared/footer/footer.component";
     StudentActivitiesComponent,
     QuickStatsComponent,
     ContactLocationComponent,
-    NavbarComponent,
     FooterComponent
 ],
   styleUrls: ['./Home.component.css']

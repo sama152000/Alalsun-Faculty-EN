@@ -14,7 +14,6 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [
     CommonModule,
-    NavbarComponent,
     FooterComponent,
     PageHeaderComponent,
     FormsModule

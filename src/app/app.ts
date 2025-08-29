@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AlAlsunComponent } from './features/colleges/Al-Alsun/Al-Alsun.component';
+import { RouterModule } from "@angular/router";
 
 @Component({
   selector: 'app-root',
-  imports: [ButtonModule, RouterLink, RouterOutlet],
+  imports: [ButtonModule, RouterModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
 
-  protected title = 'University';
+  protected title = 'AL-ALSUN Faculty';
 }

@@ -12,7 +12,7 @@ import { NewsItem, NewsCategory, NewsFilter } from '../../model/news.model';
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PageHeaderComponent, NavbarComponent, FooterComponent],
+  imports: [CommonModule, FormsModule, RouterModule, PageHeaderComponent,  FooterComponent],
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })

@@ -6,7 +6,7 @@ import { PageHeaderComponent } from '../../shared/page-header/page-header/page-h
 @Component({
   selector: 'app-department-details',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent],
+  imports: [CommonModule],
   templateUrl: './department-details.component.html',
   styleUrls: ['./department-details.component.css']
 })

@@ -21,7 +21,6 @@ import { FooterComponent } from '../shared/footer/footer.component';
     FacultyHistoryComponent,
     VisionMissionSimpleComponent,
     FacultyCTAComponent,
-    NavbarComponent,
     FooterComponent
   ],
   templateUrl: './about.component.html',

@@ -51,6 +51,10 @@ component .container {
   --light-gray: #e9ecef;
   --gradient-primary: linear-gradient(135deg, #0c685c 0%, #0c685c 100%);
   --gradient-diagonal: linear-gradient(121deg, #c42a038a 0%, transparent 70%);
+  --medium-font: 1.8rem;
+  --title-font: 2.5rem;
+  --small-font: 1.2rem;
+  --tiny-font: 1rem;
 }
 
 * {

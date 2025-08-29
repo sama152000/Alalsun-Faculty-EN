@@ -17,7 +17,6 @@ import { SlicePipe } from '@angular/common';
     FormsModule,
     PageHeaderComponent,
     FooterComponent,
-    NavbarComponent,
     DepartmentDetailsComponent,
     SlicePipe
   ],

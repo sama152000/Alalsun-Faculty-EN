@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { PageHeaderComponent } from '../shared/page-header/page-header/page-header.component';
 import { SectorsService } from '../../Services/sectors.service';
 import { SectorData, SectorDepartment, SectorService, NewsItem, MediaItem } from '../../model/sector.model';
+import { FooterComponent } from "../shared/footer/footer.component";
 
 @Component({
   selector: 'app-sector-page',
   standalone: true,
-  imports: [CommonModule, PageHeaderComponent],
+  imports: [CommonModule, PageHeaderComponent, FooterComponent],
   templateUrl: './sector-page.component.html',
   styleUrls: ['./sector-page.component.css']
 })

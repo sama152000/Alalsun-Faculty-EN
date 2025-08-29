@@ -7,10 +7,9 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './Al-Alsun.component.html',
   styleUrls: ['./Al-Alsun.component.css'],
   imports: [
-    HomeComponent,
     NavbarComponent,
-    RouterOutlet
-  ]
+    RouterOutlet,
+]
 })
 export class AlAlsunComponent implements OnInit {
 

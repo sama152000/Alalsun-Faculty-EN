@@ -13,7 +13,6 @@ import { FooterComponent } from '../footer/footer.component';
   standalone: true,
   imports: [CommonModule,
      PageHeaderComponent,
-     NavbarComponent,
      FooterComponent
 
   ],

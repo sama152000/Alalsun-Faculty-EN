@@ -11,7 +11,7 @@ import { ContactInfo, ContactForm, DirectContact, ContactSubmissionResult } from
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PageHeaderComponent, NavbarComponent, FooterComponent],
+  imports: [CommonModule, FormsModule, RouterModule, PageHeaderComponent, FooterComponent],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })

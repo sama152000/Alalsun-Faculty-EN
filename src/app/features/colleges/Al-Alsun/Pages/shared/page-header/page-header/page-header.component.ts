@@ -7,7 +7,7 @@ import { HomeComponent } from '../../../Home/Home.component';
   selector: 'app-page-header',
   standalone: true,
   imports: [CommonModule, RouterModule,
-    HomeComponent
+    
   ],
   templateUrl: './page-header.component.html',
   styleUrls: ['./page-header.component.css']

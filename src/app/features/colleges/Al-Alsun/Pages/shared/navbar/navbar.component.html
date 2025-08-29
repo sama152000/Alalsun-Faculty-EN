@@ -77,22 +77,22 @@
       <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-start">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/alalsun-faculty/home"><i class="pi pi-home me-2"></i>Home</a>
+            <a class="nav-link" routerLink="home"><i class="pi pi-home me-2"></i>Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/alalsun-faculty/about">About</a>
+            <a class="nav-link" routerLink="about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/alalsun-faculty/departments">Departments</a>
+            <a class="nav-link" routerLink="departments">Departments</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/alalsun-faculty/staff">Staff</a>
+            <a class="nav-link" routerLink="staff">Staff</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/alalsun-faculty/news">News</a>
+            <a class="nav-link" routerLink="news">News</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/alalsun-faculty/contact">Contact Us</a>
+            <a class="nav-link" routerLink="contact">Contact Us</a>
           </li>
           <li class="nav-item dropdown" [class.show]="isSectorsDropdownOpen">
             <a class="nav-link dropdown-toggle" 
@@ -104,19 +104,19 @@
             </a>
             <ul class="dropdown-menu" [class.show]="isSectorsDropdownOpen">
               <li>
-                <a class="dropdown-item" routerLink="/alalsun-faculty/sectors/education-students" (click)="onSectorSelect()">
+                <a class="dropdown-item" routerLink="sectors/education-students" (click)="onSectorSelect()">
                   <i class="pi pi-users me-2"></i>
                   Education & Students Affairs
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/alalsun-faculty/sectors/postgraduate-research" (click)="onSectorSelect()">
+                <a class="dropdown-item" routerLink="sectors/postgraduate-research" (click)="onSectorSelect()">
                   <i class="pi pi-graduation-cap me-2"></i>
                   Postgraduate Studies & Research
                 </a>
               </li>
               <li>
-                <a class="dropdown-item" routerLink="/alalsun-faculty/sectors/community-environmental" (click)="onSectorSelect()">
+                <a class="dropdown-item" routerLink="sectors/community-environmental" (click)="onSectorSelect()">
                   <i class="pi pi-globe me-2"></i>
                   Community Service & Environmental Development
                 </a>
