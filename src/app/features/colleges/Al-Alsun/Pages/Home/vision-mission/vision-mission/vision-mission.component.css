@@ -1,36 +1,35 @@
 .vision-mission-section {
- padding-right: 4rem;
- padding-left: 4rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+  padding-right: 4rem;
+  padding-left: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .section-title {
   color: var(--primary-color);
-  font-size: 2rem; /* Reduced from implied 2rem */
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 1rem; 
-  
-  /* Reduced from implied 0.75rem */
+  margin-bottom: 1rem;
   text-align: center;
 }
 
 .custom-tabs .nav-link {
   border: none;
   background: transparent;
-  color: var(--gray-text); /* Assumed --text-light as --gray-text (#6c757d) */
-  padding: 0.8rem 1.5rem; /* Reduced from 1rem 2rem */
-  border-radius: 10px 10px 0 0; /* Reduced from 12px */
-  font-size: 0.9rem; /* Added for compactness */
+  color: var(--gray-text);
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px 10px 0 0;
+  font-size: 1.2rem;
   transition: all 0.3s ease;
 }
 
 .custom-tabs .nav-link.active,
 .custom-tabs .nav-link:hover {
   background: white;
-  color: var(--primary-blue); /* Assumed --primary-color as --primary-blue (#1e3c72) */
-  border-bottom: 2px solid var(--primary-blue); /* Reduced from 3px */
+  color: var(--primary-blue);
+  border-bottom: 2px solid var(--primary-blue);
 }
+
 .tab-content-custom {
   background: white;
   padding: 1.5rem;
@@ -38,14 +37,12 @@
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
   align-items: center;
   text-align: center;
-  /* 👇 هنا بيثبت الطول */
-  min-height: 300px; 
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* لو عايزة المحتوى يفضل في النص دايمًا بدل فوق */
 .tab-content-custom.centered {
   justify-content: center;
 }
@@ -71,76 +68,75 @@
   }
 }
 
-
 .mission-card,
 .objective-card {
   transition: all 0.3s ease;
-  border: 1px solid #e9ecef; /* Assumed --border-color as #e9ecef */
+  border: 1px solid #e9ecef;
 }
 
 .mission-card:hover,
 .objective-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important; /* Adjusted shadow */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15) !important;
 }
 
 .mission-card {
-  padding: 1.5rem; /* Reduced from 4rem */
+  padding: 1.5rem;
 }
 
 .objective-card {
-  padding: 1.2rem; /* Reduced from 3rem */
+  padding: 1.2rem;
 }
 
 .lead {
-  font-size: 1rem; /* Reduced from 1.25rem (Bootstrap default) */
-  line-height: 2; /* Reduced from 1.7 (lh-lg) */
+  font-size: 1rem;
+  line-height: 2;
 }
 
 .tab-pane h3 {
-  font-size: 1.2rem; /* Reduced from implied 1.5rem */
+  font-size: 1.2rem;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .section-title {
-    font-size: 1.3rem; /* Reduced from implied 1.5rem */
+    font-size: 1.3rem;
   }
 
   .custom-tabs .nav-link {
-    padding: 0.6rem 0.8rem; /* Reduced from 0.8rem 1rem */
-    font-size: 0.85rem; /* Reduced from 0.9rem */
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
   }
 
   .tab-content-custom {
-    padding: 1rem; /* Reduced from 2rem 1.5rem */
+    padding: 1rem;
   }
 
   .mission-card {
-    padding: 1rem; /* Reduced from 1.5rem */
+    padding: 1rem;
   }
 
   .objective-card {
-    padding: 0.8rem; /* Reduced from 1.2rem */
+    padding: 0.8rem;
   }
 
   .tab-pane .fs-3 {
-    font-size: 1.5rem !important; /* Reduced from display-4 (~3rem) */
+    font-size: 1.5rem !important;
   }
 
   .mission-card .fs-4 {
-    font-size: 1.2rem !important; /* Reduced from fs-2 (~2rem) */
+    font-size: 1.2rem !important;
   }
 
   .objective-card .fs-4 {
-    font-size: 1.1rem !important; /* Reduced from fs-3 (~1.5rem) */
+    font-size: 1.1rem !important;
   }
 
   .lead {
-    font-size: 0.9rem; /* Reduced from 1rem */
+    font-size: 0.9rem;
   }
 
   .tab-pane h3 {
-    font-size: 1rem; /* Reduced from 1.2rem */
+    font-size: 1rem;
   }
 }

@@ -1,6 +1,6 @@
 <section class="hero-banner">
   <div class="banner-overlay">
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false" (slide.bs.carousel)="onSlideChange($event)">
       <div class="carousel-inner">
         <div *ngFor="let slide of slides; let i = index"
              [ngClass]="{'carousel-item': true, 'active': i === 0}"
@@ -30,31 +30,32 @@
     </div>
   </div>
   <div class="container">
-    <div class="banner-content">
+    <div class="banner-content" [class.changing]="isContentChanging && !isFirstLoad">
       <h2 class="banner-title">
-        Faculty of Al-Alsun – Luxor University
+        {{getCurrentSlide()?.title}}
       </h2>
       <p class="banner-subtitle">
-        Excellence and leadership in the study of languages…
+        {{getCurrentSlide()?.subtitle}}
       </p>
-      <p class="banner-description">
-        A leading faculty in languages and translation, preparing qualified graduates 
-        for the labor market, while supporting scientific research and community service 
-        in line with Egypt Vision 2030.
+      <p class="banner-description" *ngIf="getCurrentSlide()?.description">
+        {{getCurrentSlide()?.description}}
       </p>
-      <div class="banner-actions">
-        <a href="/alalsun-faculty/about" class="btn btn-primary btn-darkred">
-          About Us
+      <div class="banner-actions" *ngIf="getCurrentSlide()?.showButton && !isContentChanging">
+        <a [routerLink]="getCurrentSlide()?.buttonLink || '/about'" class="btn btn-primary btn-darkred">
+          {{getCurrentSlide()?.buttonText || 'read more'}}
           <i class="pi pi-arrow-right ms-2"></i>
         </a>
       </div>
     </div>
   </div>
   <!-- Scroll Indicator -->
-  <div class="scroll-indicator">
+  <div class="scroll-indicator" (click)="scrollDown()">
     <div class="scroll-arrow">
       <i class="pi pi-chevron-down"></i>
     </div>
     <p class="scroll-text">Scroll Down</p>
   </div>
+
+  <!-- Scroll Up Indicator -->
+  
 </section>

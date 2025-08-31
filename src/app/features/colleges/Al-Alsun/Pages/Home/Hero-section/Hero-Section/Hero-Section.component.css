@@ -6,7 +6,7 @@
   padding: 0;
   margin-bottom: 5rem;
   overflow: hidden;
-  min-height: 700px; /* الارتفاع المحدث */
+  min-height: 700px;
   display: flex;
   align-items: center;
 }
@@ -40,35 +40,46 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(121deg, rgb(197 42 3 / 54%) 0%, #0c685c92 70%);
+  background: linear-gradient(121deg, rgba(197, 42, 3, 0.54) 0%, #0c685c92 70%);
 }
 
 .banner-content {
   position: relative;
-  z-index: 2;
-  padding: 2rem 0;
+  z-index: 3;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 10rem;
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.banner-content.changing {
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .banner-title {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
 }
 
 .banner-subtitle {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
 .banner-description {
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-bottom: 2rem;
-  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .banner-actions {
@@ -78,10 +89,10 @@
   flex-wrap: wrap;
 }
 
-.btn-primary-custom {
-  background: var(#c42a03);
-  border: 2px solid var(#c42a03);
-  padding: 1rem 2rem;
+.btn-darkred {
+  background: var(--primary-darkred, #c42a03);
+  border: 2px solid var(--primary-darkred, #c42a03);
+  padding: 0.9rem 1.8rem;
   font-size: 0.95rem;
   font-weight: 600;
   border-radius: 50px;
@@ -95,7 +106,10 @@
   letter-spacing: 1px;
 }
 
-
+.btn-darkred:hover {
+  background: var(--primary-darkred-hover, #a62302);
+  border-color: var(--primary-darkred-hover, #a62302);
+}
 
 /* Carousel Indicators */
 .carousel-indicators {
@@ -115,7 +129,7 @@
 }
 
 .carousel-indicators .active {
-  background-color: var(--accent-gold);
+  background-color: var(--accent-gold, #d4a017);
 }
 
 /* Navigation Arrows */
@@ -135,7 +149,7 @@
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
   opacity: 1;
-  background: var(--accent-gold);
+  background: var(--accent-gold, #d4a017);
 }
 
 .carousel-control-prev i,
@@ -161,6 +175,26 @@
   color: white;
   z-index: 2;
   animation: bounce 2s infinite;
+  cursor: pointer;
+}
+
+.scroll-up-indicator {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  text-align: center;
+  color: white;
+  z-index: 1000;
+  animation: bounce 2s infinite;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.scroll-up-indicator.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .scroll-arrow {
@@ -173,11 +207,14 @@
   justify-content: center;
   margin: 0 auto 0.5rem;
   transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.3);
 }
 
-.scroll-arrow:hover {
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
+.scroll-indicator:hover .scroll-arrow,
+.scroll-up-indicator:hover .scroll-arrow {
+  border-color: var(--accent-gold, #d4a017);
+  color: var(--accent-gold, #d4a017);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .scroll-arrow i {
@@ -236,7 +273,7 @@
     right: 1rem;
   }
 
-  .btn-primary-custom {
+  .btn-darkred {
     padding: 0.875rem 2rem;
     font-size: 1rem;
   }
@@ -255,7 +292,7 @@
     font-size: 0.85rem;
   }
 
-  .btn-primary-custom {
+  .btn-darkred {
     padding: 0.75rem 1.75rem;
     font-size: 0.95rem;
   }

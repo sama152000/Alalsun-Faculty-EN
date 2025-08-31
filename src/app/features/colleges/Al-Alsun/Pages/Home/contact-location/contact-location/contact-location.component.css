@@ -3,22 +3,7 @@
   background: var(--light-bg);
 }
 
-.section-title {
-  color: var(--primary-color);
-  font-size: 2rem; /* Reduced from implied 2rem */
-  font-weight: 700;
-  margin-bottom: 0.3rem; /* Reduced from 0.5rem */
-  text-align: center;
-}
 
-.section-subtitle {
-  color: var(--gray-text);
-  font-size: 1rem; /* Reduced from implied 1rem */
-  line-height: 1.4; /* Reduced from 1.5 */
-  margin-bottom: 0.8rem; /* Reduced from 1rem */
-  font-weight: 400;
-  text-align: center;
-}
 
 .card-modern {
   background: white;

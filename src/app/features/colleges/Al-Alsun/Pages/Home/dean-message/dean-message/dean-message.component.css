@@ -1,5 +1,5 @@
   .dean-section {
-      padding: 3rem 0;
+      padding: 1.5rem 0;
       background: var(--light-bg);
     }
 
@@ -14,7 +14,8 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   padding: 1.5rem;
   width: 85%;
-  max-width: 700px;
+  max-width: 900px;
+  height: 280px;
   display: flex;
   align-items: center;
   z-index: 3;
@@ -22,12 +23,12 @@
 
 .dean-photo-container {
   flex: 0 0 auto;
-  margin-right: 1rem;
+  margin-right: 3rem;
 }
 
 .dean-photo {
-  width: 120px;
-  height: 120px;
+  width: 150px;
+  height: 150px;
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
@@ -45,21 +46,21 @@
 }
 
 .dean-name {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--darkred);
   margin-bottom: 0.2rem;
 }
 
 .dean-position {
-  font-size: 0.85rem;
+  font-size: 1rem;
   color: var(--gray-text);
   font-style: italic;
   margin-bottom: 0.8rem;
 }
 
 .dean-message {
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--dark-text);
   margin-bottom: 1rem;

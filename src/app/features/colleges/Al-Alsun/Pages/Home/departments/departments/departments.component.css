@@ -21,7 +21,7 @@
   z-index: 2; /* عشان المحتوى يبقى فوق الخلفية */
 }
 
-.section-title {
+/* .section-title {
   text-align: center;
   font-size: 1.5rem;
   font-weight: 700;
@@ -37,7 +37,7 @@
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 .departments-slider-container {
   position: relative;

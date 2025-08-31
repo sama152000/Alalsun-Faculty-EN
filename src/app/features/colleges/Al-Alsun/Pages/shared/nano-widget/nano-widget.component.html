@@ -1,0 +1,22 @@
+<div class="nano-widget">
+  <div class="widget-container">
+    <div class="nav-items">
+      <div 
+        *ngFor="let item of navItems" 
+        class="nav-item"
+        [class.hovered]="hoveredItem === item.id"
+        (mouseenter)="onItemHover(item.id)"
+        (mouseleave)="onItemLeave()"
+        [routerLink]="item.route">
+        
+        <div class="nav-icon" [style.background-color]="item.color">
+          <i [class]="item.icon"></i>
+        </div>
+        
+        <div class="nav-label" [class.visible]="hoveredItem === item.id">
+          <span>{{ item.label }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,3 +1,15 @@
 <main>
   <router-outlet></router-outlet>
 </main>
+<app-nano-widget></app-nano-widget>
+<div 
+  *ngIf="showScrollButton" 
+  (click)="scrollToTop()" 
+  class="scroll-to-top-btn show">
+  
+  <div class="scroll-arrow">
+    <i class="pi pi-chevron-up"></i>
+  </div>
+  <p class="scroll-text">Top</p>
+</div>
+
