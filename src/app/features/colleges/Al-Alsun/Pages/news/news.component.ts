@@ -18,7 +18,7 @@ import { NewsItem, NewsCategory, NewsFilter } from '../../model/news.model';
 })
 export class NewsComponent implements OnInit {
   breadcrumbs = [
-    { label: 'News', url: 'alalsun-faculty/news' }
+    { label: 'News', url: '/news' }
   ];
 
   
@@ -81,6 +81,6 @@ export class NewsComponent implements OnInit {
   }
 
   viewNewsDetails(id: number) {
-    this.router.navigate(['alalsun-faculty/news', id]);
+    this.router.navigate(['/news', id]);
   }
 }

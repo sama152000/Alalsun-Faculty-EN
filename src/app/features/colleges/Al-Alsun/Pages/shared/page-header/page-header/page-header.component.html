@@ -16,7 +16,7 @@
                 class="breadcrumb-item"
                 [class.active]="last"
               >
-                <a *ngIf="!last && crumb.url" [routerLink]="crumb.url">{{ crumb.label }}</a>
+                <a *ngIf="!last && crumb.url" [routerLink]="crumb.url" routerLinkActive="active">{{ crumb.label }}</a>
                 <span *ngIf="last || !crumb.url">{{ crumb.label }}</span>
               </li>
             </ol>

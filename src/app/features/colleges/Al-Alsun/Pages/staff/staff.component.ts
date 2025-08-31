@@ -23,7 +23,7 @@ import { FormsModule } from '@angular/forms';
 export class StaffComponent implements OnInit {
 
   breadcrumbs = [
-    { label: 'Staff', url: '/alalsun-faculty/staff' }
+    { label: 'Staff', url: '/staff' }
   ];
 
   allStaff: StaffMember[] = [];
@@ -34,7 +34,8 @@ export class StaffComponent implements OnInit {
 
   constructor(
     private staffService: StaffService,
-    private router: Router   // ✅ هنا الحقن الصح
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -72,6 +73,6 @@ export class StaffComponent implements OnInit {
   }
 
   viewStaffDetails(id: number) {
-    this.router.navigate(['/alalsun-faculty/staff', id]);   
+    this.router.navigate(['staff', id]);   
   }
 }

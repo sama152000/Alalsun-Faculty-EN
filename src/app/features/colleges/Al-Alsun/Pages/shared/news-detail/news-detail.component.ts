@@ -24,7 +24,7 @@ export class NewsDetailComponent implements OnInit {
   relatedNews: NewsItem[] = [];
   loading = true;
   breadcrumbs: Array<{label: string, url?: string}> = [
-    { label: 'News', url: '/alalsun-faculty/news' }
+    { label: 'News', url: '/news' }
   ];
 
   constructor(
@@ -92,10 +92,10 @@ export class NewsDetailComponent implements OnInit {
   }
 
   viewRelatedNews(id: number) {
-    this.router.navigate(['/alalsun-faculty/news', id]);
+    this.router.navigate(['/news', id]);
   }
 
   goBack() {
-    this.router.navigate(['/alalsun-faculty/news']);
+    this.router.navigate(['/news']);
   }
 }

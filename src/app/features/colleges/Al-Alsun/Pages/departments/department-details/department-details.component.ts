@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges } from
 import { CommonModule } from '@angular/common';
 import { Department } from '../../../model/department.model';
 import { PageHeaderComponent } from '../../shared/page-header/page-header/page-header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-department-details',
@@ -21,7 +22,7 @@ export class DepartmentDetailsComponent implements OnChanges {
     if (changes['department'] && changes['department'].currentValue) {
       this.activeTab = 'overview';
       this.breadcrumbs = [
-        { label: 'Departments', url: '/alalsun-faculty/departments' },
+        { label: 'Departments', url: '/departments' },
         { label: this.department!.name }
       ];
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -32,7 +33,9 @@ export class DepartmentDetailsComponent implements OnChanges {
     this.activeTab = tab;
   }
 
+  constructor(private router: Router) {}
+
   goBack(): void {
-    this.backToList.emit();
+    this.router.navigate(['/departments']);
   }
 }

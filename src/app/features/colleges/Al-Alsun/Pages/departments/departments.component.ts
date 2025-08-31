@@ -35,7 +35,7 @@ export class DepartmentsComponent implements OnInit {
 
   // Breadcrumbs default to the departments list
   breadcrumbs: Array<{ label: string, url?: string }> = [
-    { label: 'Departments', url: '/alalsun-faculty/departments' }
+    { label: 'Departments', url: '/departments' }
   ];
 
   constructor(private departmentsService: DepartmentsService) {}
@@ -110,7 +110,7 @@ export class DepartmentsComponent implements OnInit {
     this.selectedDepartment = department;
     // Update breadcrumbs to include department name
     this.breadcrumbs = [
-      { label: 'Departments', url: '/alalsun-faculty/departments' },
+      { label: 'Departments', url: '/departments' },
       { label: department.name }
     ];
   }
@@ -119,7 +119,7 @@ export class DepartmentsComponent implements OnInit {
     this.selectedDepartment = null;
     // Reset breadcrumbs to default
     this.breadcrumbs = [
-      { label: 'Departments', url: '/alalsun-faculty/departments' }
+      { label: 'Departments', url: '/departments' }
     ];
   }
 
