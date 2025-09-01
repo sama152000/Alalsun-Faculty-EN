@@ -18,14 +18,15 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'about', component: AboutComponent },
       { path: 'departments', component: DepartmentsComponent },
+      { path: 'departments/:id', component: DepartmentsComponent }, 
       { path: 'staff', component: StaffComponent },
       { path: 'staff/:id', component: StaffDetailComponent },
       { path: 'contact', component: ContactComponent },
       { path: 'news', component: NewsComponent },
       { path: 'news/:id', component: NewsDetailComponent },
       { path: 'sectors/:id', component: SectorPageComponent },
-      { path: '', redirectTo: 'home', pathMatch: 'full' } 
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: '' } 
+  { path: '**', redirectTo: '' }
 ];

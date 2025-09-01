@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PageHeaderComponent } from '../shared/page-header/page-header/page-header.component';
 import { FooterComponent } from '../shared/footer/footer.component';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { DepartmentDetailsComponent } from './department-details/department-details.component';
 import { Department } from '../../model/department.model';
 import { DepartmentsService } from '../../Services/departments.service';
 import { SlicePipe } from '@angular/common';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-departments',
@@ -18,7 +18,8 @@ import { SlicePipe } from '@angular/common';
     PageHeaderComponent,
     FooterComponent,
     DepartmentDetailsComponent,
-    SlicePipe
+    SlicePipe,
+    RouterLink
   ],
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.css']
@@ -27,6 +28,8 @@ export class DepartmentsComponent implements OnInit {
   allDepartments: Department[] = [];
   filteredDepartments: Department[] = [];
   selectedDepartment: Department | null = null;
+  sidebarCollapsed: boolean = true;
+  isMobile: boolean = window.innerWidth <= 991;
 
   // Filter properties
   selectedType: string = '';
@@ -38,10 +41,34 @@ export class DepartmentsComponent implements OnInit {
     { label: 'Departments', url: '/departments' }
   ];
 
-  constructor(private departmentsService: DepartmentsService) {}
+  constructor(
+    private departmentsService: DepartmentsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.loadDepartments();
+    // Check for department ID in route
+    this.route.paramMap.subscribe(params => {
+      const deptId = params.get('id');
+      if (deptId) {
+        this.departmentsService.getAllDepartments().subscribe(departments => {
+          const department = departments.find(d => d.id === deptId);
+          if (department) {
+            this.selectDepartment(department);
+          }
+        });
+      }
+    });
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.isMobile = window.innerWidth <= 991;
+    if (!this.isMobile) {
+      this.sidebarCollapsed = false;
+    }
   }
 
   loadDepartments(): void {
@@ -78,6 +105,7 @@ export class DepartmentsComponent implements OnInit {
       const query = this.searchQuery.toLowerCase().trim();
       filtered = filtered.filter(dept =>
         dept.name.toLowerCase().includes(query) ||
+        dept.shortName.toLowerCase().includes(query) ||
         dept.overview.toLowerCase().includes(query) ||
         dept.programs.some(program => 
           program.name.toLowerCase().includes(query) ||
@@ -113,6 +141,8 @@ export class DepartmentsComponent implements OnInit {
       { label: 'Departments', url: '/departments' },
       { label: department.name }
     ];
+    // Navigate to department details
+    this.router.navigate(['/departments', department.id]);
   }
 
   onBackToList(): void {
@@ -121,6 +151,11 @@ export class DepartmentsComponent implements OnInit {
     this.breadcrumbs = [
       { label: 'Departments', url: '/departments' }
     ];
+    this.router.navigate(['/departments']);
+  }
+
+  toggleSidebar(): void {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
   getUndergraduateCount(): number {

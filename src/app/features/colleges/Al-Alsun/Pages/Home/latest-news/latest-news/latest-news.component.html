@@ -1,17 +1,16 @@
-<!-- HTML Template -->
 <div class="news-section">
   <div class="container-fluid">
     <div class="row g-4">
       
-   <div class="row">
-          <div class="col-12">
-            <h2 class="section-title"> <i class="pi pi-megaphone me-3"></i>
-              Latest News & Announcements</h2>
-            <p class="section-subtitle">
-              Stay up to date with the faculty's latest events: conferences, scholarships, and academic initiatives.
-            </p>
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <h2 class="section-title"> <i class="pi pi-megaphone me-3"></i>
+            Latest News & Announcements</h2>
+          <p class="section-subtitle">
+            Stay up to date with the faculty's latest events: conferences, scholarships, and academic initiatives.
+          </p>
         </div>
+      </div>
 
       <!-- News Content Section -->
       <div class="col-lg-8 col-md-7">
@@ -81,46 +80,18 @@
         </div>
       </div>
 
-      <!-- Real-time Clock Section -->
+      <!-- Video Introduction Section -->
       <div class="col-lg-4 col-md-5">
         <div class="clock-card">
           <div class="card-header">
             <h4 class="card-title mb-0">
-              <i class="pi pi-clock me-2"></i>
-              Latest Updates
+              <i class="pi pi-video me-2"></i>
+              Video Introduction
             </h4>
-            <span class="status-indicator">
-              <span class="status-dot"></span>
-              Real-time
-            </span>
           </div>
           
           <div class="clock-container">
-            <div class="clock-display">
-              <div class="clock-icon-wrapper">
-                <i class="pi pi-clock clock-icon"></i>
-                <div class="clock-info">
-                  <div class="clock-label">Current Time</div>
-                  <div class="clock-time">{{ currentTime | date:'medium' }}</div>
-                  <div class="clock-timezone">{{ timezone }}</div>
-                </div>
-              </div>
-              
-              <div class="quick-stats">
-                <div class="stat-item">
-                  <span class="stat-number">{{ totalNews }}</span>
-                  <span class="stat-label">Total News</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-number">{{ todayNews }}</span>
-                  <span class="stat-label">Today</span>
-                </div>
-                <div class="stat-item">
-                  <span class="stat-number">{{ weeklyNews }}</span>
-                  <span class="stat-label">This Week</span>
-                </div>
-              </div>
-            </div>
+            <iframe class="video-iframe" src="https://www.youtube.com/embed/h9jWu98KpGA?si=kuBXUsfzfaBto0vn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
       </div>
@@ -128,4 +99,3 @@
     </div>
   </div>
 </div>
-

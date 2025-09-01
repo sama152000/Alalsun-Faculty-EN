@@ -1,6 +1,6 @@
 .nano-widget {
   position: fixed;
-  left: 20px;
+  left: -20px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1000;
@@ -38,24 +38,23 @@
 .nav-icon {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 0 50% 50% 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 1.2rem;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   flex-shrink: 0;
 }
 
 .nav-item:hover .nav-icon {
   transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  /* Removed box-shadow to eliminate blur/shadow */
 }
 
 .nav-label {
-  background: rgba(12, 104, 92, 0.95);
+  background: rgb(12, 104, 92); /* Changed to solid color to avoid blur from opacity */
   color: white;
   padding: 12px 20px;
   border-radius: 15px;
@@ -67,7 +66,6 @@
   transform: translateX(-20px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
@@ -81,7 +79,7 @@
   height: 0;
   border-top: 8px solid transparent;
   border-bottom: 8px solid transparent;
-  border-right: 8px solid rgba(12, 104, 92, 0.95);
+  border-right: 8px solid rgb(12, 104, 92); /* Match the solid background */
 }
 
 .nav-label.visible {

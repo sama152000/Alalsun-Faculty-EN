@@ -1,6 +1,6 @@
 <section class="hero-banner">
   <div class="banner-overlay">
-    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000" data-bs-pause="false" (slide.bs.carousel)="onSlideChange($event)">
+    <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" data-bs-pause="false" (slide.bs.carousel)="onSlideChange($event)">
       <div class="carousel-inner">
         <div *ngFor="let slide of slides; let i = index"
              [ngClass]="{'carousel-item': true, 'active': i === 0}"
@@ -15,8 +15,7 @@
                 data-bs-target="#heroCarousel"
                 [attr.data-bs-slide-to]="i"
                 [ngClass]="{'active': i === 0}"
-                [attr.aria-label]="'Slide ' + (i + 1)">
-        </button>
+                [attr.aria-label]="'Slide ' + (i + 1)"></button>
       </div>
       <!-- Navigation Arrows -->
       <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">

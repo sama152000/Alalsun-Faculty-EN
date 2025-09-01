@@ -1,65 +1,104 @@
+<app-page-header 
+  title="Faculty Members & Staff" 
+  [breadcrumbs]="breadcrumbs">
+</app-page-header>
 
+<div class="staff-page">
+  <div class="container-fluid">
+    <!-- Sidebar Toggle Button for Mobile -->
+    <div class="d-lg-none mb-3">
+      <button class="btn btn-primary-gradient" (click)="toggleSidebar()">
+        <i class="pi pi-bars me-2"></i>
+        {{ sidebarCollapsed ? 'Show Positions' : 'Hide Positions' }}
+      </button>
+    </div>
 
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3 col-md-4" [ngClass]="{'d-none': sidebarCollapsed && isMobile}">
+        <div class="sidebar card card-modern">
+          <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Positions</h5>
+          </div>
+          <div class="card-body p-0">
+            <ul class="nav flex-column">
+              <li class="nav-item" *ngFor="let position of positions; trackBy: trackByPosition">
+                <a class="nav-link" 
+                   [routerLink]="['/staff']"
+                   [queryParams]="{ position: position.value }"
+                   [class.active]="selectedPosition === position.value"
+                   (click)="filterByPosition(position.value)">
+                  <i [class]="position.icon" class="me-2"></i>
+                  {{ position.label }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-
- <div class="staff-page">
-      <app-page-header 
-        title="Faculty Members & Staff" 
-        [breadcrumbs]="breadcrumbs">
-      </app-page-header>
-      
-      <!-- Filter Section -->
-      <section class="filter-section">
-        <div class="container">
-          <div class="card-modern">
-            <div class="section-header">
-              <i class="pi pi-filter"></i>
-              Search & Filter
-            </div>
-            <div class="filter-content">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="search-box">
-                    <i class="pi pi-search search-icon"></i>
-                    <input 
-                      type="text" 
-                      class="form-control search-input" 
-                      placeholder="Search by name, position, or department..."
-                      [(ngModel)]="searchQuery"
-                      (input)="onSearch()"
-                    >
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <select 
-                    class="form-select department-filter" 
-                    [(ngModel)]="selectedDepartment"
-                    (change)="onDepartmentChange()"
-                  >
+      <!-- Main Content -->
+      <div class="col-lg-9 col-md-8">
+        <!-- Filter Section -->
+        <section class="filter-section">
+          <div class="card card-modern">
+            <div class="card-body p-4">
+              <div class="row g-3 align-items-center">
+                <!-- Department Filter -->
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold text-primary">Department</label>
+                  <select class="form-select" [(ngModel)]="selectedDepartment" (change)="applyFilters()">
                     <option value="">All Departments</option>
                     <option *ngFor="let dept of departments" [value]="dept.id">
                       {{ dept.name }}
                     </option>
                   </select>
                 </div>
+                
+                <!-- Position Filter -->
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold text-primary">Position</label>
+                  <select class="form-select" [(ngModel)]="selectedPosition" (change)="applyFilters()">
+                    <option value="">All Positions</option>
+                    <option *ngFor="let pos of positions" [value]="pos.value">
+                      {{ pos.label }}
+                    </option>
+                  </select>
+                </div>
+                
+                <!-- Quick Search -->
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold text-primary">Quick Search</label>
+                  <div class="position-relative">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      placeholder="Search by name, position, or department..."
+                      [(ngModel)]="searchQuery"
+                      (input)="applyFilters()">
+                    <i class="pi pi-search position-absolute" 
+                       style="right: 15px; top: 50%; transform: translateY(-50%); color: #6c757d;"></i>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Clear Filters Button -->
+              <div class="row mt-3" *ngIf="hasActiveFilters()">
+                <div class="col-12 text-center">
+                  <button class="btn btn-outline-secondary" (click)="clearFilters()">
+                    <i class="pi pi-times me-2"></i>
+                    Clear All Filters
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Staff Grid -->
-      <section class="staff-grid-section">
-        <div class="container">
-          <div class="row">
-            <div class="col-12" *ngIf="filteredStaff.length === 0">
-              <div class="no-results">
-                <i class="pi pi-search no-results-icon"></i>
-                <h3>No Results Found</h3>
-                <p>Try adjusting your search criteria or filters.</p>
-              </div>
-            </div>
-            <div class="col-lg-4 col-md-6" *ngFor="let member of filteredStaff">
+        <!-- Staff Grid -->
+        <section class="staff-grid-section">
+          <div class="row" *ngIf="filteredStaff.length > 0; else noResults">
+            <div class="col-lg-4 col-md-6 mb-4" *ngFor="let member of filteredStaff; trackBy: trackByStaffId">
               <div class="staff-card" (click)="viewStaffDetails(member.id)">
                 <div class="staff-image-container">
                   <img [src]="member.image" [alt]="member.name" class="staff-image">
@@ -86,9 +125,23 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
-    </div>
 
+          <!-- No Results Template -->
+          <ng-template #noResults>
+            <div class="no-results text-center py-5">
+              <i class="pi pi-search no-results-icon"></i>
+              <h3>No Results Found</h3>
+              <p>Try adjusting your search criteria or filters.</p>
+              <button class="btn btn-outline-primary-custom" (click)="clearFilters()">
+                <i class="pi pi-refresh me-2"></i>
+                Clear All Filters
+              </button>
+            </div>
+          </ng-template>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
 
 <app-footer></app-footer>

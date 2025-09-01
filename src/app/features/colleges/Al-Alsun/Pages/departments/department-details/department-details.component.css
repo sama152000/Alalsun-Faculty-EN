@@ -1,3 +1,68 @@
+/* Department Details Container */
+.department-details-container {
+  min-height: 100vh;
+  padding: 2rem 0;
+  background: var(--light-bg);
+}
+
+/* Sidebar Styles */
+.sidebar-column {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.department-sidebar {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-color));
+  color: white;
+}
+
+.sidebar-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sidebar-body {
+  padding: 1rem 0;
+}
+
+.sidebar-body .nav-link {
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--gray-text);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-body .nav-link:hover,
+.sidebar-body .nav-link.active {
+  background: rgba(12, 104, 92, 0.1);
+  color: var(--accent-gold);
+}
+
+.sidebar-body .nav-link i {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  opacity: 0.8;
+}
+
 /* Custom Tabs */
 .nav-tabs-container {
   border-bottom: 1px solid #dee2e6;
@@ -245,6 +310,12 @@
 }
 
 /* Responsive Design */
+@media (max-width: 991px) {
+  .sidebar {
+    margin-bottom: 1.5rem;
+  }
+}
+
 @media (max-width: 768px) {
   .section-header {
     font-size: 1.5rem;

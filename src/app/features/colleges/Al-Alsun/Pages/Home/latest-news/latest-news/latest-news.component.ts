@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 interface NewsItem {
   id: number;
@@ -15,7 +15,7 @@ interface NewsItem {
 @Component({
   selector: 'app-latest-news',
   standalone: true,
-  imports: [CommonModule, DatePipe],
+  imports: [CommonModule],
   templateUrl: './latest-news.component.html',
   styleUrls: ['./latest-news.component.css']
 })

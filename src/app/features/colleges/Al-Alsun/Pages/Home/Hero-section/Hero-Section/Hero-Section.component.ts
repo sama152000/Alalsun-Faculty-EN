@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { HeroSlide } from '../../../../model/hero-slide.model';
@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './Hero-Section.component.html',
   styleUrls: ['./Hero-Section.component.css']
 })
-export class HeroComponent {
+export class HeroComponent implements AfterViewInit {
   slides: HeroSlide[] = [];
   currentSlideIndex: number = 0;
   showScrollUp: boolean = false;
@@ -23,11 +23,17 @@ export class HeroComponent {
   constructor(private heroService: HeroService) {
     this.heroService.getSlides().subscribe(slides => {
       this.slides = slides;
-      // Initialize with a small delay to ensure proper first render
-      setTimeout(() => {
-        this.isFirstLoad = false;
-      }, 100);
     });
+  }
+
+  ngAfterViewInit() {
+    // Initialize carousel index after view is rendered
+    setTimeout(() => {
+      const activeSlide = document.querySelector('.carousel-item.active');
+      const slides = Array.from(document.querySelectorAll('.carousel-item'));
+      this.currentSlideIndex = slides.indexOf(activeSlide as Element);
+      this.isFirstLoad = false;
+    }, 0); // Run in next tick to ensure DOM is ready
   }
 
   @HostListener('window:scroll', [])
@@ -37,27 +43,22 @@ export class HeroComponent {
   }
 
   onSlideChange(event: any): void {
-    if (this.isFirstLoad) {
-      // Skip animation on first load
-      const activeSlide = document.querySelector('.carousel-item.active');
-      const slides = Array.from(document.querySelectorAll('.carousel-item'));
-      this.currentSlideIndex = slides.indexOf(activeSlide as Element);
-      return;
-    }
-
-    // Start the content change animation
     this.isContentChanging = true;
 
-    // Wait for the fade out animation to complete
-    setTimeout(() => {
-      // Get the new slide index from the bootstrap carousel event
-      const activeSlide = document.querySelector('.carousel-item.active');
-      const slides = Array.from(document.querySelectorAll('.carousel-item'));
-      this.currentSlideIndex = slides.indexOf(activeSlide as Element);
-      
-      // Start the fade in animation
+    // Update slide index immediately
+    const activeSlide = document.querySelector('.carousel-item.active');
+    const slides = Array.from(document.querySelectorAll('.carousel-item'));
+    const newIndex = slides.indexOf(activeSlide as Element);
+
+    // Only update if index changes to avoid redundant updates
+    if (newIndex !== this.currentSlideIndex) {
+      setTimeout(() => {
+        this.currentSlideIndex = newIndex;
+        this.isContentChanging = false;
+      }, 300); // Reduced to match a faster transition
+    } else {
       this.isContentChanging = false;
-    }, 500); // This should match the CSS transition duration
+    }
   }
 
   getCurrentSlide(): HeroSlide {

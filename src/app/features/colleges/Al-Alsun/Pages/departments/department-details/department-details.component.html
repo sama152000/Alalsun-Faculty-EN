@@ -1,13 +1,47 @@
 <div class="department-details-container" *ngIf="department">
-  <!-- Back Button -->
-  <div class="container py-3">
-    
-  </div>
+  <div class="container-fluid">
+    <div class="row gx-4">
+      <!-- Sidebar -->
+      <div class="col-lg-3 col-md-4 sidebar-column">
+        <!-- Sidebar Toggle Button for Mobile -->
+        <div class="d-lg-none mb-3">
+          <button class="btn btn-primary-gradient w-100" (click)="toggleSidebar()">
+            <i class="pi pi-bars me-2"></i>
+            {{ sidebarCollapsed ? 'Show Departments' : 'Hide Departments' }}
+          </button>
+        </div>
 
-  <!-- Main Content -->
-  <div class="container py-5">
-    <div class="row">
-      <div class="col-12">
+        <div class="department-sidebar" [ngClass]="{'d-none d-lg-block': sidebarCollapsed && isMobile}">
+          <div class="sidebar-card">
+            <div class="sidebar-header">
+              <h5 class="sidebar-title mb-0">Departments</h5>
+            </div>
+            <div class="sidebar-body">
+              <ul class="nav flex-column">
+                <li class="nav-item" *ngFor="let dept of departments; trackBy: trackByDepartmentId">
+                  <a class="nav-link"
+                     [routerLink]="['/departments', dept.id]"
+                     [class.active]="department?.id === dept.id">
+                    <i [class]="dept.icon" class="me-2"></i>
+                    {{ dept.shortName }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div [ngClass]="{'col-lg-9 col-md-8': true}">
+        <!-- Back Button -->
+        <!-- <div class="py-3">
+          <button class="btn btn-outline-primary-custom mb-4" (click)="goBack()">
+            <i class="pi pi-arrow-left me-2"></i>
+            Back to Departments
+          </button>
+        </div> -->
+
         <!-- Department Navigation Tabs -->
         <div class="nav-tabs-container">
           <ul class="nav nav-tabs custom-tabs" role="tablist">
@@ -336,9 +370,4 @@
       </div>
     </div>
   </div>
-
-  <button class="btn btn-outline-primary-custom mb-4" (click)="goBack()">
-      <i class="pi pi-arrow-left me-2"></i>
-      Back to Departments
-    </button>
 </div>

@@ -1,9 +1,73 @@
-/* Department Page */
 .department-page {
   min-height: 100vh;
   padding: var(--component-padding);
   background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
   margin-bottom: 0;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  position: sticky;
+  top: 20px;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  max-height: calc(100vh - 40px); /* Subtract top offset */
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.sidebar .card-header {
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: var(--white);
+}
+
+.sidebar .card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sidebar .nav-link {
+  padding: 1rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background: rgba(12, 104, 92, 0.1);
+  color: var(--accent-gold);
+}
+
+.sidebar .nav-link i {
+  font-size: 1.1rem;
+}
+
+/* Custom Scrollbar Styles */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
 }
 
 /* Page Header (Moved to page-header.component.css, retained for context) */
@@ -406,6 +470,16 @@
 }
 
 /* Responsive Design Enhancement */
+@media (max-width: 991px) {
+  .sidebar {
+    position: relative;
+    top: 0;
+    margin-bottom: 1.5rem;
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
 @media (max-width: 768px) {
   .container-fluid {
     padding: 1rem;
