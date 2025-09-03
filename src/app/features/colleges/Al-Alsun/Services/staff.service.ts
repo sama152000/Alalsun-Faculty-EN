@@ -150,4 +150,31 @@ export class StaffService {
       member.position.toLowerCase().includes(searchTerm)
     );
   }
+
+  addStaff(staff: StaffMember): void {
+    this.staffMembers.push({
+      ...staff,
+      education: staff.education || [],
+      experience: staff.experience || [],
+      researchInterests: staff.researchInterests || [],
+      publications: staff.publications || []
+    });
+  }
+
+  updateStaff(id: number, updatedStaff: StaffMember): void {
+    const index = this.staffMembers.findIndex(member => member.id === id);
+    if (index !== -1) {
+      this.staffMembers[index] = {
+        ...updatedStaff,
+        education: updatedStaff.education || [],
+        experience: updatedStaff.experience || [],
+        researchInterests: updatedStaff.researchInterests || [],
+        publications: updatedStaff.publications || []
+      };
+    }
+  }
+
+  deleteStaff(id: number): void {
+    this.staffMembers = this.staffMembers.filter(member => member.id !== id);
+  }
 }

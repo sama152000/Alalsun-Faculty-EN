@@ -1,0 +1,54 @@
+<div class="dashboard-container">
+  <!-- Dashboard Header -->
+  <header class="dashboard-header">
+    <div class="container-fluid">
+      <div class="header-content">
+        <div class="dashboard-logo">
+          <i class="pi pi-cog"></i>
+          <h1>Faculty Dashboard</h1>
+        </div>
+        <div class="header-actions">
+          <a routerLink="/" class="btn-outline-primary-custom">
+            <i class="pi pi-home"></i>
+            View Site
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Dashboard Content -->
+  <main class="dashboard-main">
+    <div class="container-fluid">
+      <div class="dashboard-tabs">
+        <nav class="dashboard-nav">
+          <ul>
+            <li><a routerLink="overview" routerLinkActive="active"><i class="pi pi-chart-line"></i> Overview</a></li>
+            <li class="nav-item has-submenu">
+              <a [class.active]="isPagesActive()" (click)="toggleSubmenu('pages')"><i class="pi pi-folder"></i> Pages</a>
+              <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'pages'}">
+                <li><a routerLink="departments" routerLinkActive="active"><i class="pi pi-building"></i> Departments</a></li>
+                <li><a routerLink="sectors" routerLinkActive="active"><i class="pi pi-sitemap"></i> Sectors</a></li>
+                <li><a routerLink="staff" routerLinkActive="active"><i class="pi pi-users"></i> Staff</a></li>
+                <li><a routerLink="about" routerLinkActive="active"><i class="pi pi-info-circle"></i> About Us</a></li>
+              </ul>
+            </li>
+            <li class="nav-item has-submenu">
+              <a [class.active]="isPostsActive()" (click)="toggleSubmenu('posts')"><i class="pi pi-megaphone"></i> Posts</a>
+              <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'posts'}">
+                <li><a routerLink="posts/news" routerLinkActive="active"><i class="pi pi-megaphone"></i> News</a></li>
+              </ul>
+            </li>
+            <li><a routerLink="custom-pages" routerLinkActive="active"><i class="pi pi-file"></i> Custom Pages</a></li>
+            <li><a routerLink="media" routerLinkActive="active"><i class="pi pi-images"></i> Media</a></li>
+            <li><a routerLink="menus" routerLinkActive="active"><i class="pi pi-bars"></i> Menus</a></li>
+            <li><a routerLink="settings" routerLinkActive="active"><i class="pi pi-cog"></i> Settings</a></li>
+          </ul>
+        </nav>
+        <section class="dashboard-content">
+          <router-outlet></router-outlet>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>

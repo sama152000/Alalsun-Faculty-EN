@@ -375,4 +375,40 @@ export class DepartmentsService {
   getAllDepartments(): Observable<Department[]> {
     return of(this.mockDepartments);
   }
+
+  getDepartmentById(id: string): Observable<Department | undefined> {
+    const department = this.mockDepartments.find(d => d.id === id);
+    return of(department);
+  }
+
+  addDepartment(department: Omit<Department, 'id'>): Observable<Department> {
+    const newDepartment: Department = {
+      ...department,
+      id: crypto.randomUUID()
+    };
+    this.mockDepartments.push(newDepartment);
+    return of(newDepartment);
+  }
+
+  updateDepartment(id: string, department: Partial<Department>): Observable<Department> {
+    const index = this.mockDepartments.findIndex(d => d.id === id);
+    if (index !== -1) {
+      this.mockDepartments[index] = {
+        ...this.mockDepartments[index],
+        ...department,
+        id // Ensure ID doesn't change
+      };
+      return of(this.mockDepartments[index]);
+    }
+    throw new Error('Department not found');
+  }
+
+  deleteDepartment(id: string): Observable<void> {
+    const index = this.mockDepartments.findIndex(d => d.id === id);
+    if (index !== -1) {
+      this.mockDepartments.splice(index, 1);
+      return of(void 0);
+    }
+    throw new Error('Department not found');
+  }
 }

@@ -46,3 +46,13 @@ export interface Contact {
   headOfDepartment: string;
 }
 
+
+
+interface FacultyMember {
+  id: string;
+  name: string;
+  title: string;
+  email: string;
+  specialization: string;
+  imageUrl: string;
+}

@@ -1,0 +1,55 @@
+ <div class="p-4">
+      <h2 class="text-2xl font-bold mb-4">Sectors Management</h2>
+      <p-toast></p-toast>
+      <div class="flex justify-between mb-4">
+        <div class="flex gap-2">
+          <input
+            pInputText
+            [(ngModel)]="searchQuery"
+            (input)="onSearch()"
+            placeholder="Search sectors..."
+            class="p-2 border rounded"
+          />
+        </div>
+        <button
+          pButton
+          label="Add Sector"
+          icon="pi pi-plus"
+          class="p-button-success"
+          (click)="onAddSector()"
+        ></button>
+      </div>
+      <p-table [value]="filteredSectors" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Vice Dean</th>
+            <th>Actions</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-sector>
+          <tr>
+            <td>{{ sector.id }}</td>
+            <td>{{ sector.name }}</td>
+            <td>{{ sector.title }}</td>
+            <td>{{ sector.viceDean.name }}</td>
+            <td>
+              <button
+                pButton
+                icon="pi pi-pencil"
+                class="p-button-text p-button-warning mr-2"
+                (click)="onEditSector(sector.id)"
+              ></button>
+              <button
+                pButton
+                icon="pi pi-trash"
+                class="p-button-text p-button-danger"
+                (click)="onDeleteSector(sector.id)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>

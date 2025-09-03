@@ -1,0 +1,14 @@
+ :host {
+      display: block;
+      padding: 1rem;
+    }
+    .card {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .p-button-success {
+      background-color: var(--success-color, #28a745);
+    }
+    .p-button-secondary {
+      background-color: var(--secondary-color, #6c757d);
+    }

@@ -1,0 +1,17 @@
+ :host {
+      display: block;
+      padding: 1rem;
+    }
+    .p-button-success {
+      background-color: var(--success-color, #28a745);
+    }
+    .p-button-warning {
+      background-color: var(--warning-color, #ffc107);
+    }
+    .p-button-danger {
+      background-color: var(--danger-color, #dc3545);
+    }
+    .p-table {
+      background-color: var(--surface-color, #ffffff);
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }

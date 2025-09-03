@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { SectorData } from '../model/sector.model';
+import { SectorData, ViceDeanInfo, SectorDepartment, SectorService, NewsItem, MediaItem, SectorStatistic, ActivityItem, Achievement } from '../model/sector.model';
 
 @Injectable({
   providedIn: 'root'
@@ -457,7 +457,6 @@ export class SectorsService {
         }
       ]
     },
-    // Additional sectors with expanded content...
     {
       id: 'postgraduate-research',
       name: 'Postgraduate Studies & Research',
@@ -854,22 +853,6 @@ export class SectorsService {
           date: '2024-11-12',
           image: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg',
           category: 'Health & Wellness'
-        },
-          {
-          id: 'comm-news-2',
-          title: 'Mobile Medical Outreach Program Reaches 15,000 Community Members',
-          summary: 'Comprehensive healthcare initiative providing free medical services, health screenings, and wellness education to underserved rural communities.',
-          date: '2024-11-12',
-          image: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg',
-          category: 'Health & Wellness'
-        },
-          {
-          id: 'comm-news-2',
-          title: 'Mobile Medical Outreach Program Reaches 15,000 Community Members',
-          summary: 'Comprehensive healthcare initiative providing free medical services, health screenings, and wellness education to underserved rural communities.',
-          date: '2024-11-12',
-          image: 'https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg',
-          category: 'Health & Wellness'
         }
       ],
       media: [
@@ -921,5 +904,41 @@ export class SectorsService {
   getSectorById(id: string): Observable<SectorData | undefined> {
     const sector = this.sectors.find(s => s.id === id);
     return of(sector);
+  }
+
+  addSector(sector: SectorData): Observable<void> {
+    this.sectors.push({
+      ...sector,
+      departments: sector.departments || [],
+      services: sector.services || [],
+      news: sector.news || [],
+      media: sector.media || [],
+      statistics: sector.statistics || [],
+      activities: sector.activities || [],
+      achievements: sector.achievements || []
+    });
+    return of(void 0);
+  }
+
+  updateSector(id: string, updatedSector: SectorData): Observable<void> {
+    const index = this.sectors.findIndex(s => s.id === id);
+    if (index !== -1) {
+      this.sectors[index] = {
+        ...updatedSector,
+        departments: updatedSector.departments || [],
+        services: updatedSector.services || [],
+        news: updatedSector.news || [],
+        media: updatedSector.media || [],
+        statistics: updatedSector.statistics || [],
+        activities: updatedSector.activities || [],
+        achievements: updatedSector.achievements || []
+      };
+    }
+    return of();
+  }
+
+  deleteSector(id: string): Observable<void> {
+    this.sectors = this.sectors.filter(s => s.id !== id);
+    return of();
   }
 }
