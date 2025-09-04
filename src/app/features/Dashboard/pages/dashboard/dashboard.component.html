@@ -30,7 +30,16 @@
                 <li><a routerLink="departments" routerLinkActive="active"><i class="pi pi-building"></i> Departments</a></li>
                 <li><a routerLink="sectors" routerLinkActive="active"><i class="pi pi-sitemap"></i> Sectors</a></li>
                 <li><a routerLink="staff" routerLinkActive="active"><i class="pi pi-users"></i> Staff</a></li>
-                <li><a routerLink="about" routerLinkActive="active"><i class="pi pi-info-circle"></i> About Us</a></li>
+                <li class="nav-item has-submenu">
+                  <a routerLink="about" routerLinkActive="active"><i class="pi pi-info-circle"></i> About Us</a>
+                  <ul class="submenu nested-submenu expanded">
+                    <li><a routerLink="about/vice-deans" routerLinkActive="active"><i class="pi pi-info-circle"></i> vice-deans</a></li>
+                    <li><a routerLink="about/dean" routerLinkActive="active"><i class="pi pi-info-circle"></i> dean</a></li>
+                               
+
+                  </ul>
+                </li>
+
               </ul>
             </li>
             <li class="nav-item has-submenu">

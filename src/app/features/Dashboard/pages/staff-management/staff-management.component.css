@@ -258,3 +258,74 @@
     flex-direction: column;
   }
 }
+
+/* Button Styles */
+.btn-primary-custom {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary-custom:hover {
+  background: var(--darkred);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary-custom i {
+  font-size: 1.1rem;
+}
+
+.department-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--gray-50, #f9fafb);
+  border-top: 1px solid var(--gray-100);
+}
+
+.btn-edit, .btn-delete {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex: 1;
+  justify-content: center;
+  border: none;
+}
+
+.btn-edit {
+  background: var(--blue-50, #eff6ff);
+  color: var(--primary-color);
+}
+
+.btn-edit:hover {
+  background: var(--blue-100, #dbeafe);
+}
+
+.btn-delete {
+  background: var(--red-50, #fef2f2);
+  color: var(--darkred);
+}
+
+.btn-delete:hover {
+  background: var(--red-100, #fee2e2);
+}
+
+.btn-edit i, .btn-delete i {
+  font-size: 1rem;
+}

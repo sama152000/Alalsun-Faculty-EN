@@ -1,42 +1,66 @@
-import { Component } from '@angular/core';
+// src/app/components/navbar/navbar.component.ts
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NavbarService } from '../../../Services/navbar.service';
+import { FacultyInfo, NavbarItem, Footer } from '../../../model/navbar.model';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
+  facultyInfo: FacultyInfo | null = null;
+  navbarItems: NavbarItem[] = [];
+  footer: Footer | null = null;
   isNavbarCollapsed = true;
-  isNewsDropdownOpen = false;
+  isDropdownOpen: { [key: string]: boolean } = {};
   isSectorsDropdownOpen = false;
+
+  constructor(private NavbarService: NavbarService) {}
+
+  ngOnInit(): void {
+    this.NavbarService.getLayoutData().subscribe((data) => {
+      this.facultyInfo = data.facultyInfo;
+      this.navbarItems = data.navbarItems;
+      this.footer = data.footer;
+      // تهيئة حالة القوائم المنسدلة
+      this.navbarItems.forEach((item) => {
+        if (item.children) {
+          this.isDropdownOpen[item.label] = false;
+        }
+      });
+    });
+  }
 
   toggleNavbar() {
     this.isNavbarCollapsed = !this.isNavbarCollapsed;
   }
 
-  selectTab(tab: string) {
-    this.isNewsDropdownOpen = false; // Close news dropdown
-    this.isSectorsDropdownOpen = false; // Close sectors dropdown
-    // Add navigation logic here, e.g., using Router
+  toggleDropdown(label: string, event: Event) {
+    event.preventDefault();
+    this.isDropdownOpen[label] = !this.isDropdownOpen[label];
+    // إغلاق القوائم المنسدلة الأخرى
+    Object.keys(this.isDropdownOpen).forEach((key) => {
+      if (key !== label) {
+        this.isDropdownOpen[key] = false;
+      }
+    });
   }
 
-  toggleNewsDropdown(event: Event) {
-    event.preventDefault();
-    this.isNewsDropdownOpen = !this.isNewsDropdownOpen;
-    this.isSectorsDropdownOpen = false; // Close sectors dropdown if news is opened
+  onDropdownSelect(label: string) {
+    this.isDropdownOpen[label] = false; // إغلاق القائمة المنسدلة عند اختيار عنصر
   }
 
   toggleSectorsDropdown(event: Event) {
     event.preventDefault();
     this.isSectorsDropdownOpen = !this.isSectorsDropdownOpen;
-    this.isNewsDropdownOpen = false; // Close news dropdown if sectors is opened
   }
 
   onSectorSelect() {
-    this.isSectorsDropdownOpen = false; // Close the sectors dropdown when an item is selected
+    this.isSectorsDropdownOpen = false;
   }
 }

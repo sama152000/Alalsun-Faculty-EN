@@ -26,6 +26,16 @@ import { AddStaffComponent } from './features/Dashboard/pages/dashboard/add-staf
 import { EditStaffComponent } from './features/Dashboard/pages/dashboard/edit-staff/edit-staff.component';
 import { AddSectorComponent } from './features/Dashboard/pages/dashboard/add-sector/add-sector.component';
 import { EditSectorComponent } from './features/Dashboard/pages/dashboard/edit-sector/edit-sector.component';
+import { ViceDeansManagementComponent } from './features/Dashboard/pages/dashboard/vice-deans-management/vice-deans-management.component';
+import { AddViceDeanComponent } from './features/Dashboard/pages/dashboard/add-vice-dean/add-vice-dean.component';
+import { EditViceDeanComponent } from './features/Dashboard/pages/dashboard/edit-vice-dean/edit-vice-dean.component';
+import { EditDeanComponent } from './features/Dashboard/pages/dashboard/edit-dean/edit-dean.component';
+import { DeanManagementComponent } from './features/Dashboard/pages/dashboard/dean-management/dean-management.component';
+import { AddDeanComponent } from './features/Dashboard/pages/dashboard/add-dean/add-dean.component';
+import { AddHistoryEventComponent } from './features/Dashboard/pages/dashboard/add-history-event/add-history-event.component';
+import { EditHistoryEventComponent } from './features/Dashboard/pages/dashboard/edit-history-event/edit-history-event.component';
+import { EditVisionMissionComponent } from './features/Dashboard/pages/dashboard/edit-vision-mission/edit-vision-mission.component';
+import { AddVisionMissionComponent } from './features/Dashboard/pages/dashboard/add-vision-mission/add-vision-mission.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +70,16 @@ export const routes: Routes = [
       { path: 'sectors/add', component: AddSectorComponent },
       { path: 'sectors/edit/:id', component: EditSectorComponent },
       { path: 'about', component: AboutManagementComponent },
+      { path: 'about/dean', component: DeanManagementComponent },
+       { path: 'about/dean/edit', component: EditDeanComponent },
+         { path: 'about/dean/add', component: AddDeanComponent },
+      { path: 'about/vice-deans', component: ViceDeansManagementComponent },
+{ path: 'about/vice-deans/add', component: AddViceDeanComponent },
+{ path: 'about/vice-deans/edit/:id', component: EditViceDeanComponent },
+  { path: 'about/history/add', component: AddHistoryEventComponent },
+  { path: 'about/history/edit/:id', component: EditHistoryEventComponent },
+  { path: 'about/vision-mission/add', component: AddVisionMissionComponent },
+  { path: 'about/vision-mission/edit/:id', component: EditVisionMissionComponent },
       { path: 'news', component: NewsManagementComponent },
       { path: 'media', component: MediaManagementComponent },
       { path: 'menus', component: MenuManagementComponent },

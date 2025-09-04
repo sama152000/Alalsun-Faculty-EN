@@ -125,7 +125,7 @@
 }
 
 .submenu.expanded {
-  max-height: 200px; /* Adjust based on content */
+  max-height: 400px; /* Adjust based on content */
 }
 
 .submenu li {
@@ -146,6 +146,16 @@
   background-color: rgba(12, 104, 92, 0.1);
   color: var(--primary-color);
   border-left-color: var(--accent-gold);
+}
+
+/* Nested Submenu Styles */
+.nested-submenu {
+  max-height: none;
+  overflow: visible;
+}
+
+.nested-submenu a {
+  padding-left: 4.5rem;
 }
 
 .dashboard-content {
@@ -205,7 +215,7 @@
   }
 
   .submenu.expanded {
-    max-height: 200px;
+    max-height: 400px;
   }
 
   .submenu a {

@@ -23,6 +23,16 @@
     "strictTemplates": true
   },
   "files": [],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "out",
+    "public",
+    "tailwind.config.js",
+    "webpack.config.js",
+    "*.config.js",
+    "*.config.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.app.json"

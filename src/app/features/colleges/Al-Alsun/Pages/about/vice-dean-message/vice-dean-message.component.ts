@@ -1,7 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ViceDeanService } from '../../../Services/vice-dean.service.ts.service';
-import { ViceDean } from '../../../model/vice-dean.model';
+import { Subject, takeUntil } from 'rxjs';
+
+import { AboutService } from '../../../Services/about.service';
+import { DeanInfo, ViceDean } from '../../../model/about.model';
 
 @Component({
   selector: 'app-vice-dean-message',
@@ -11,11 +13,14 @@ import { ViceDean } from '../../../model/vice-dean.model';
   styleUrls: ['./vice-dean-message.component.css']
 })
 export class ViceDeanMessageComponent implements OnInit, OnDestroy {
+  private destroy$ = new Subject<void>();
+  
   viceDeans: ViceDean[] = [];
   currentViceDeanIndex = 0;
   autoplayInterval: any;
+  loading: boolean = true;
 
-  constructor(private viceDeanService: ViceDeanService) {}
+  constructor(private aboutService: AboutService) {}
 
   ngOnInit() {
     this.loadViceDeans();
@@ -23,21 +28,28 @@ export class ViceDeanMessageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+    
     if (this.autoplayInterval) {
       clearInterval(this.autoplayInterval);
     }
   }
 
-  loadViceDeans() {
-    this.viceDeanService.getAllViceDeans().subscribe({
-      next: (viceDeans) => {
-        this.viceDeans = viceDeans;
-        console.log('Vice Deans loaded:', viceDeans.length);
-      },
-      error: (error) => {
-        console.error('Error loading vice deans:', error);
-      }
-    });
+  private loadViceDeans() {
+    this.aboutService.getAllViceDeans()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (viceDeans) => {
+          this.viceDeans = viceDeans;
+          this.loading = false;
+          console.log('Vice Deans loaded:', viceDeans.length);
+        },
+        error: (error) => {
+          console.error('Error loading vice deans:', error);
+          this.loading = false;
+        }
+      });
   }
 
   startAutoplay() {
@@ -97,7 +109,6 @@ export class ViceDeanMessageComponent implements OnInit, OnDestroy {
   viewFullMessage() {
     if (this.viceDeans.length > 0) {
       const currentViceDean = this.viceDeans[this.currentViceDeanIndex];
-      // Navigate to detail page - you'll need to implement routing
       console.log('Navigate to vice dean detail:', currentViceDean.id);
       // Example: this.router.navigate(['/vice-dean', currentViceDean.id]);
     }

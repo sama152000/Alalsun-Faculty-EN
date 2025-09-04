@@ -1,22 +1,22 @@
-<section class="dean-full-message-section">
+<section class="dean-full-message-section" *ngIf="deanInfo">
   <div class="card-modern">
     <div class="row g-0">
       <div class="col-lg-3 col-md-4">
         <div class="dean-photo-section">
           <div class="dean-photo-container">
             <img 
-              src="assets/Picture1.jpg" 
-              alt="Prof. Mahmoud El-Nouby Ahmed Suleiman" 
+              [src]="deanInfo.photo" 
+              [alt]="deanInfo.name" 
               class="dean-photo"
             >
           </div>
           <div class="dean-title-card">
-            <h3 class="dean-name">Prof. Mahmoud El-Nouby Ahmed Suleiman</h3>
-            <p class="dean-position">Dean of the Faculty of Al-Alsun – Luxor University</p>
+            <h3 class="dean-name">{{deanInfo.name}}</h3>
+            <p class="dean-position">{{deanInfo.position}}</p>
           </div>
         </div>
       </div>
-      <div class="col-lg-9 col-md-7">
+      <div class="col-lg-9 col-md-8">
         <div class="dean-message-content">
           <div class="message-header">
             <i class="pi pi-quote-left quote-icon"></i>
@@ -24,58 +24,31 @@
           </div>
           
           <div class="message-body">
-
             <p class="greeting">
-              Dear students, esteemed faculty members, teaching assistants, administrative staff of the faculty, 
-              and visitors to the official website of the Faculty of Al-Alsun, Luxor University.
+              {{deanInfo.greeting}}
               <span>
-              <strong  class="welcome">Welcome to you all.</strong>
-
+                <strong class="welcome">Welcome to you all.</strong>
               </span>
             </p>
             
-            
-            <p>
-              The Faculty of Al-Alsun at Luxor University was established by Prime Ministerial Decree No. 2693 of 2016, 
-              issued on 14 Muharram 1438 AH, corresponding to 15 October 2016.
-            </p>
-            
-            <p>
-              The Faculty of Al-Alsun stands as a distinguished academic institution in the field of languages and translation. 
-              It continues the legacy of Egypt's pioneers in translation, serving as a bridge between cultures and a vital tool 
-              for transferring knowledge and sciences from around the world. The faculty comprises eight academic departments: 
-              Arabic Language (with two tracks, Arabic for native speakers and Arabic for non-native speakers), English, French, 
-              German, Italian, Spanish, Russian, and Chinese.
-            </p>
+            <div class="message-paragraphs">
+              <p *ngFor="let paragraph of deanInfo.message">
+                {{paragraph}}
+              </p>
+            </div>
             
             <p class="highlight">
-              We believe that languages are not merely tools for communication but gateways to understanding other civilizations 
-              and essential instruments for fostering intercultural dialogue and human connection.
-            </p>
-            
-            <p>
-              In alignment with Egypt's Vision 2030, the Faculty is committed to providing high-quality academic education based 
-              on modern curricula and innovative teaching methods. Our goal is to graduate qualified professionals equipped with 
-              the linguistic and academic skills necessary to meet the demands of both local and international labor markets. 
-              The Faculty also seeks to promote scientific research and offer advanced postgraduate programs that encourage 
-              creativity and innovation in the fields of languages and translation.
-            </p>
-            
-            <p>
-              We strive to foster a comprehensive learning environment by supporting student activities, enhancing academic 
-              partnerships with local and international universities and research institutions, and offering practical training 
-              opportunities that empower our students to gain real-world experience and succeed in their professional lives.
+              {{deanInfo.highlight}}
             </p>
             
             <p class="call-to-action">
-              I call upon all of you, students, faculty, and staff—to actively contribute to the development of the Faculty, 
-              and to work together in fulfilling its mission of serving society and advancing the standards of education and 
-              scientific research.
+              {{deanInfo.callToAction}}
             </p>
             
             <div class="closing">
-              <p><em>May Allah guide us all to success and bless our pursuit of knowledge.</em></p>
-              <p><em>Peace and blessings be upon you.</em></p>
+              <p *ngFor="let closingLine of deanInfo.closing">
+                <em>{{closingLine}}</em>
+              </p>
             </div>
           </div>
         </div>
@@ -83,3 +56,10 @@
     </div>
   </div>
 </section>
+
+<div *ngIf="loading" class="loading-container">
+  <div class="loading-spinner">
+    <i class="pi pi-spin pi-spinner"></i>
+    <p>Loading Dean's Message...</p>
+  </div>
+</div>

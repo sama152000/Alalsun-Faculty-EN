@@ -9,7 +9,7 @@ import { Department } from '../../../colleges/Al-Alsun/model/department.model';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './departments-management.component.html',
-  styleUrls: ['./departments-management.component.css', './_button-styles.css']
+  styleUrls: ['./departments-management.component.css']
 })
 export class DepartmentsManagementComponent implements OnInit {
   departments: Department[] = [];

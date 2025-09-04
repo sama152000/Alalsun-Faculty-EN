@@ -1,0 +1,71 @@
+<section class="dashboard-content">
+  <div class="management-header">
+    <h2>Add New History Event</h2>
+  </div>
+  <form [formGroup]="historyEventForm" (ngSubmit)="saveHistoryEvent()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Title *</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          formControlName="title"
+          placeholder="Enter event title"
+        >
+      </div>
+      <div class="form-group">
+        <label>Date *</label>
+        <input 
+          type="date" 
+          class="form-control" 
+          formControlName="date"
+        >
+      </div>
+      <div class="form-group full-width">
+        <label>Description *</label>
+        <textarea 
+          class="form-control" 
+          formControlName="description"
+          rows="5"
+          placeholder="Enter event description"
+        ></textarea>
+      </div>
+      <div class="form-group full-width">
+        <label>Image URL</label>
+        <input 
+          type="url" 
+          class="form-control" 
+          formControlName="image"
+          placeholder="Enter image URL"
+        >
+      </div>
+    </div>
+    <div class="dialog-actions">
+      <button 
+        type="button"
+        class="btn-outline-primary-custom"
+        [routerLink]="['/dashboard/about']"
+      >
+        Cancel
+      </button>
+      <button 
+        type="submit"
+        class="btn-primary-custom"
+        [disabled]="historyEventForm.invalid"
+      >
+        Create Event
+      </button>
+    </div>
+  </form>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
+  </div>
+</section>

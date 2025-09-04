@@ -1,0 +1,204 @@
+<section class="dashboard-content">
+  <div class="management-header">
+    <h2>Add New Dean</h2>
+  </div>
+  <form [formGroup]="deanForm" (ngSubmit)="saveDean()">
+    <div class="tabs">
+      <div class="tab-headers">
+        <button type="button" class="tab-header" [class.active]="activeTab === 'basic'" (click)="activeTab = 'basic'">
+          <i class="pi pi-info-circle"></i> Basic Info
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'message'" (click)="activeTab = 'message'">
+          <i class="pi pi-book"></i> Message
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'closing'" (click)="activeTab = 'closing'">
+          <i class="pi pi-comment"></i> Closing
+        </button>
+      </div>
+
+      <!-- Basic Info Tab -->
+      <div class="tab-content" [class.active]="activeTab === 'basic'">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>ID *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="id"
+              placeholder="Enter dean ID"
+            >
+          </div>
+          <div class="form-group">
+            <label>Name *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="name"
+              placeholder="Enter name"
+            >
+          </div>
+          <div class="form-group">
+            <label>Position *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="position"
+              placeholder="Enter position"
+            >
+          </div>
+          <div class="form-group">
+            <label>Photo URL</label>
+            <input 
+              type="url" 
+              class="form-control" 
+              formControlName="photo"
+              placeholder="Enter photo URL"
+            >
+          </div>
+          <div class="form-group full-width">
+            <label>Greeting *</label>
+            <textarea 
+              class="form-control" 
+              formControlName="greeting"
+              rows="4"
+              placeholder="Enter greeting"
+            ></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Highlight *</label>
+            <textarea 
+              class="form-control" 
+              formControlName="highlight"
+              rows="3"
+              placeholder="Enter highlight"
+            ></textarea>
+          </div>
+          <div class="form-group full-width">
+            <label>Call to Action *</label>
+            <textarea 
+              class="form-control" 
+              formControlName="callToAction"
+              rows="3"
+              placeholder="Enter call to action"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message Tab -->
+      <div class="tab-content" [class.active]="activeTab === 'message'">
+        <div class="section-header">
+          <h4>Message</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addMessage()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Message Paragraph
+          </button>
+        </div>
+        <div formArrayName="message">
+          <div 
+            *ngFor="let msg of messageArray.controls; let i = index"
+            class="experience-item"
+          >
+            <div class="item-header">
+              <h5>Paragraph {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeMessage(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Paragraph Text *</label>
+                <textarea 
+                  class="form-control" 
+                  [formControlName]="i"
+                  rows="4"
+                  placeholder="Enter message paragraph"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Closing Tab -->
+      <div class="tab-content" [class.active]="activeTab === 'closing'">
+        <div class="section-header">
+          <h4>Closing Statements</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addClosing()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Closing Statement
+          </button>
+        </div>
+        <div formArrayName="closing">
+          <div 
+            *ngFor="let closing of closingArray.controls; let i = index"
+            class="experience-item"
+          >
+            <div class="item-header">
+              <h5>Statement {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeClosing(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label>Statement Text *</label>
+                <textarea 
+                  class="form-control" 
+                  [formControlName]="i"
+                  rows="3"
+                  placeholder="Enter closing statement"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="dialog-actions">
+        <button 
+          type="button"
+          class="btn-outline-primary-custom"
+          [routerLink]="['/dashboard/about/dean']"
+        >
+          Cancel
+        </button>
+        <button 
+          type="submit"
+          class="btn-primary-custom"
+          [disabled]="deanForm.invalid"
+        >
+          Create Dean
+        </button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<!-- Toast Messages -->
+<div class="toast-container" *ngIf="showToast">
+  <div class="toast" [class]="toastClass">
+    <div class="toast-content">
+      <i [class]="toastIcon"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
+    <button type="button" class="toast-close" (click)="hideToast()">×</button>
+  </div>
+</div>

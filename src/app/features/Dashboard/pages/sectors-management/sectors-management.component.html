@@ -1,55 +1,87 @@
- <div class="p-4">
-      <h2 class="text-2xl font-bold mb-4">Sectors Management</h2>
-      <p-toast></p-toast>
-      <div class="flex justify-between mb-4">
-        <div class="flex gap-2">
-          <input
-            pInputText
-            [(ngModel)]="searchQuery"
-            (input)="onSearch()"
-            placeholder="Search sectors..."
-            class="p-2 border rounded"
-          />
+<div class="staff-management">
+  <div class="management-header">
+    <h2>Sectors Management</h2>
+    <button 
+      class="btn-primary-custom"
+      [routerLink]="['/dashboard/sectors/add']"
+    >
+      <i class="pi pi-plus"></i>
+      Add New Sector
+    </button>
+  </div>
+
+  <div class="staff-list">
+    <div class="staff-card" *ngFor="let sector of sectors">
+      <div class="staff-info">
+        <img [src]="sector.image" [alt]="sector.name" class="staff-image">
+        <div class="staff-details">
+          <h3>{{ sector.name }}</h3>
+          <p class="staff-position">{{ sector.title }}</p>
+          <p class="staff-department">{{ sector.description | slice:0:100 }}...</p>
+          <div class="staff-meta">
+            <span class="meta-item">
+              <i class="pi pi-envelope"></i>
+              {{ sector.viceDean.email }}
+            </span>
+          </div>
         </div>
-        <button
-          pButton
-          label="Add Sector"
-          icon="pi pi-plus"
-          class="p-button-success"
-          (click)="onAddSector()"
-        ></button>
       </div>
-      <p-table [value]="filteredSectors" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Title</th>
-            <th>Vice Dean</th>
-            <th>Actions</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-sector>
-          <tr>
-            <td>{{ sector.id }}</td>
-            <td>{{ sector.name }}</td>
-            <td>{{ sector.title }}</td>
-            <td>{{ sector.viceDean.name }}</td>
-            <td>
-              <button
-                pButton
-                icon="pi pi-pencil"
-                class="p-button-text p-button-warning mr-2"
-                (click)="onEditSector(sector.id)"
-              ></button>
-              <button
-                pButton
-                icon="pi pi-trash"
-                class="p-button-text p-button-danger"
-                (click)="onDeleteSector(sector.id)"
-              ></button>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+      <div class="staff-actions">
+        <button 
+          class="btn-edit"
+          [routerLink]="['/dashboard/sectors/edit', sector.id]"
+        >
+          <i class="pi pi-pencil"></i>
+          Edit
+        </button>
+        <button 
+          class="btn-delete"
+          (click)="confirmDelete(sector.id)"
+        >
+          <i class="pi pi-trash"></i>
+          Delete
+        </button>
+      </div>
     </div>
+  </div>
+
+  <!-- Confirmation Dialog -->
+  <div class="dialog-overlay" *ngIf="showConfirmDialog" [class.show]="showConfirmDialog">
+    <div class="dialog confirmation-dialog">
+      <div class="dialog-header">
+        <h3>Confirm Delete</h3>
+        <button type="button" class="close-button" (click)="closeConfirmDialog()">×</button>
+      </div>
+      <div class="dialog-content">
+        <p>Are you sure you want to delete this sector?</p>
+      </div>
+      <div class="dialog-actions">
+        <button 
+          type="button"
+          class="btn-outline-primary-custom"
+          (click)="closeConfirmDialog()"
+        >
+          Cancel
+        </button>
+        <button 
+          type="button"
+          class="btn-primary-custom"
+          (click)="deleteSector()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
+  </div>
+</div>

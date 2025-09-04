@@ -6,19 +6,19 @@
         <div class="col-lg-8 col-md-7">
           <div class="logo-section">
             <div class="faculty-logo">
-              <img src="assets/logo.jpg" width="100%" alt="">
+              <img [src]="facultyInfo?.logoUrl" width="100%" [alt]="facultyInfo?.name">
             </div>
             <div>
-              <h1 class="main-title">Faculty of Al-Alsun</h1>
-              <p class="subtitle">Luxor University</p>
+              <h1 class="main-title">{{ facultyInfo?.name }}</h1>
+              <p class="subtitle">{{ facultyInfo?.subtitle }}</p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-5">
           <div class="university-info">
-            <span class="university-text">Luxor University</span>
+            <span class="university-text">{{ facultyInfo?.universityName }}</span>
             <div class="university-badge">
-              <span>EST. 2019</span>
+              <span>EST. {{ facultyInfo?.established }}</span>
             </div>
           </div>
         </div>
@@ -76,52 +76,33 @@
       </button>
       <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-start">
-          <li class="nav-item">
-            <a class="nav-link" routerLink="home" routerLinkActive="active"><i class="pi pi-home me-2" ></i>Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="about" routerLinkActive="active">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="departments" routerLinkActive="active">Departments</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="staff" routerLinkActive="active">Staff</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="news" routerLinkActive="active">News</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" routerLink="contact" routerLinkActive="active">Contact Us</a>
-          </li>
-          <li class="nav-item dropdown" [class.show]="isSectorsDropdownOpen">
-            <a class="nav-link dropdown-toggle" 
-               href="#" 
-               role="button" 
-               (click)="toggleSectorsDropdown($event)"
-               [attr.aria-expanded]="isSectorsDropdownOpen">
-              Sectors
-            </a>
-            <ul class="dropdown-menu" [class.show]="isSectorsDropdownOpen">
-              <li>
-                <a class="dropdown-item" routerLink="sectors/education-students" (click)="onSectorSelect()">
-                  <i class="pi pi-users me-2"></i>
-                  Education & Students Affairs
+          <li class="nav-item" *ngFor="let item of navbarItems">
+            <ng-container *ngIf="!item.children || item.children.length === 0">
+              <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
+                <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
+                {{ item.label }}
+              </a>
+            </ng-container>
+            <ng-container *ngIf="item.children && item.children.length > 0">
+              <li class="nav-item dropdown" [class.show]="isDropdownOpen[item.label]">
+                <a class="nav-link dropdown-toggle" 
+                   href="#" 
+                   role="button" 
+                   (click)="toggleDropdown(item.label, $event)"
+                   [attr.aria-expanded]="isDropdownOpen[item.label]">
+                  <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
+                  {{ item.label }}
                 </a>
+                <ul class="dropdown-menu" [class.show]="isDropdownOpen[item.label]">
+                  <li *ngFor="let child of item.children">
+                    <a class="dropdown-item" [routerLink]="child.route" (click)="onDropdownSelect(item.label)">
+                      <i *ngIf="child.icon" [class]="child.icon + ' me-2'"></i>
+                      {{ child.label }}
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <a class="dropdown-item" routerLink="sectors/postgraduate-research" (click)="onSectorSelect()">
-                  <i class="pi pi-graduation-cap me-2"></i>
-                  Postgraduate Studies & Research
-                </a>
-              </li>
-              <li>
-                <a class="dropdown-item" routerLink="sectors/community-environmental" (click)="onSectorSelect()">
-                  <i class="pi pi-globe me-2"></i>
-                  Community Service & Environmental Development
-                </a>
-              </li>
-            </ul>
+            </ng-container>
           </li>
         </ul>
       </div>

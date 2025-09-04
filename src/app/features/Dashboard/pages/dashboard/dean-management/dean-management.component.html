@@ -1,0 +1,57 @@
+<div class="staff-management">
+  <div class="management-header">
+    <h2>Dean Management</h2>
+    <button 
+      class="btn-primary-custom"
+      [routerLink]="['/dashboard/about/dean/add']"
+    >
+      <i class="pi pi-plus"></i>
+      Add New Dean
+    </button>
+  </div>
+
+  <div class="staff-list">
+    <div class="staff-card" *ngIf="dean">
+      <div class="staff-info">
+        <img [src]="dean.photo" [alt]="dean.name" class="staff-image">
+        <div class="staff-details">
+          <h3>{{ dean.name }}</h3>
+          <p class="staff-position">{{ dean.position }}</p>
+          <div class="staff-meta">
+            <span class="meta-item">
+              <i class="pi pi-comment"></i>
+              {{ dean.greeting | slice:0:50 }}...
+            </span>
+            <span class="meta-item">
+              <i class="pi pi-star"></i>
+              {{ dean.highlight | slice:0:50 }}...
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="staff-actions">
+        <button 
+          class="btn-edit"
+          [routerLink]="['/dashboard/about/dean/edit']"
+        >
+          <i class="pi pi-pencil"></i>
+          Edit
+        </button>
+      </div>
+    </div>
+    <div *ngIf="!dean" class="no-data">
+      <p>No Dean Information Available</p>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
+  </div>
+</div>

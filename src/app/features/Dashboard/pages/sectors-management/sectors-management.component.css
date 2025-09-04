@@ -1,17 +1,331 @@
- :host {
-      display: block;
-      padding: 1rem;
-    }
-    .p-button-success {
-      background-color: var(--success-color, #28a745);
-    }
-    .p-button-warning {
-      background-color: var(--warning-color, #ffc107);
-    }
-    .p-button-danger {
-      background-color: var(--danger-color, #dc3545);
-    }
-    .p-table {
-      background-color: var(--surface-color, #ffffff);
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+.staff-management {
+  padding: 2rem;
+}
+
+.management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.management-header h2 {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+/* Staff Cards */
+.staff-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.staff-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.staff-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.staff-info {
+  padding: 1.5rem;
+}
+
+.staff-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.staff-details h3 {
+  color: var(--primary-color);
+  margin: 1rem 0;
+  font-size: 1.4rem;
+}
+
+.staff-position, .staff-department {
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.staff-meta {
+  display: flex;
+  gap: 1rem;
+  color: var(--secondary-color);
+  font-size: 0.9rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.staff-actions {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Dialog Styles */
+.dialog-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-overlay.show {
+  display: flex;
+}
+
+.dialog {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.dialog-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dialog-content {
+  padding: 1.5rem;
+}
+
+.dialog-actions {
+  padding: 1.5rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+/* Buttons */
+.btn-primary-custom {
+  background: var(--primary-color);
+  color: white;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-custom:hover {
+  background: var(--primary-color-dark);
+}
+
+.btn-outline-primary-custom {
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  background: transparent;
+  border-radius: 6px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary-custom:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-edit {
+  color: var(--primary-color);
+  background: rgba(var(--primary-color-rgb), 0.1);
+}
+
+.btn-edit:hover {
+  background: rgba(var(--primary-color-rgb), 0.2);
+}
+
+.btn-delete {
+  color: var(--error-color);
+  background: rgba(var(--error-color-rgb), 0.1);
+}
+
+.btn-delete:hover {
+  background: rgba(var(--error-color-rgb), 0.2);
+}
+
+/* Toast Messages */
+.toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  background: white;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.toast-success {
+  border-left: 4px solid var(--success-color);
+}
+
+.toast-error {
+  border-left: 4px solid var(--error-color);
+}
+
+.toast-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.toast i {
+  font-size: 1.25rem;
+}
+
+.toast-success i {
+  color: var(--success-color);
+}
+
+.toast-error i {
+  color: var(--error-color);
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--gray-text);
+  cursor: pointer;
+  padding: 0.25rem;
+}
+
+.toast-close:hover {
+  color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .staff-list {
+    grid-template-columns: 1fr;
+  }
+
+  .staff-actions {
+    flex-direction: column;
+  }
+}
+
+/* Button Styles */
+.btn-primary-custom {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary-custom:hover {
+  background: var(--darkred);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary-custom i {
+  font-size: 1.1rem;
+}
+
+.department-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: var(--gray-50, #f9fafb);
+  border-top: 1px solid var(--gray-100);
+}
+
+.btn-edit, .btn-delete {
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  flex: 1;
+  justify-content: center;
+  border: none;
+}
+
+.btn-edit {
+  background: var(--blue-50, #eff6ff);
+  color: var(--primary-color);
+}
+
+.btn-edit:hover {
+  background: var(--blue-100, #dbeafe);
+}
+
+.btn-delete {
+  background: var(--red-50, #fef2f2);
+  color: var(--darkred);
+}
+
+.btn-delete:hover {
+  background: var(--red-100, #fee2e2);
+}
+
+.btn-edit i, .btn-delete i {
+  font-size: 1rem;
+}
