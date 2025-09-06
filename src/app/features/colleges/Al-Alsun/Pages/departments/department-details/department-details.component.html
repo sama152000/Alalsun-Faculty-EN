@@ -21,7 +21,7 @@
                 <li class="nav-item" *ngFor="let dept of departments; trackBy: trackByDepartmentId">
                   <a class="nav-link"
                      [routerLink]="['/departments', dept.id]"
-                     [class.active]="department?.id === dept.id">
+                     [class.active]="department.id === dept.id">
                     <i [class]="dept.icon" class="me-2"></i>
                     {{ dept.shortName }}
                   </a>

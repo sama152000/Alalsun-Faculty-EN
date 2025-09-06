@@ -70,7 +70,7 @@ export class StaffDetailComponent implements OnInit {
     this.router.navigate(['/staff']);
   }
 
-  trackByPosition(index: number, position: { value: string; label: string; icon: string }): string {
-    return position.value;
+  trackByPosition(index: number, pos: { value: string; label: string; icon: string }): string {
+    return pos.value;
   }
 }

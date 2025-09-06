@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Department {
@@ -15,14 +15,7 @@ interface Department {
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.css']
 })
-export class DepartmentsComponent implements OnInit {
-  ngOnInit(): void {
- setInterval(() => {
-      this.slideRight();
-    }, 1000);
-
-    throw new Error('Method not implemented.');
-  }
+export class DepartmentsComponent implements OnInit, AfterViewInit {
   @ViewChild('sliderContainer') sliderContainer!: ElementRef;
 
   departments: Department[] = [
@@ -82,9 +75,31 @@ export class DepartmentsComponent implements OnInit {
   dotsArray: number[] = [];
   cardsPerView = 4;
 
+  private slideIntervalId: any;
+
+  constructor(private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    // Removed setInterval to prevent ExpressionChangedAfterItHasBeenCheckedError
+  }
+
   ngAfterViewInit() {
-    this.calculateSlider();
-    this.updateDotsArray();
+    setTimeout(() => {
+      this.calculateSlider();
+      this.updateDotsArray();
+    }, 0);
+
+    // If auto sliding is needed, use this with ChangeDetectorRef to avoid ExpressionChangedAfterItHasBeenCheckedError
+    this.slideIntervalId = setInterval(() => {
+      this.slideRight();
+      this.cdr.detectChanges();
+    }, 1000);
+  }
+
+  ngOnDestroy() {
+    if (this.slideIntervalId) {
+      clearInterval(this.slideIntervalId);
+    }
   }
 
   @HostListener('window:resize')
@@ -118,29 +133,23 @@ export class DepartmentsComponent implements OnInit {
     this.dotsArray = Array(Math.max(1, this.maxSlides + 1)).fill(0).map((_, i) => i);
   }
 
- slideLeft() {
-  if (this.currentSlide > 0) {
-    this.currentSlide--;
-  } else {
-    this.currentSlide = this.maxSlides;
+  slideLeft() {
+    if (this.currentSlide > 0) {
+      this.currentSlide--;
+    } else {
+      this.currentSlide = this.maxSlides;
+    }
   }
-}
 
-slideRight() {
-  if (this.currentSlide < this.maxSlides) {
-    this.currentSlide++;
-  } else {
-    this.currentSlide = 0;
+  slideRight() {
+    if (this.currentSlide < this.maxSlides) {
+      this.currentSlide++;
+    } else {
+      this.currentSlide = 0;
+    }
   }
-}
-
 
   goToSlide(slideIndex: number) {
     this.currentSlide = Math.max(0, Math.min(slideIndex, this.maxSlides));
   }
-  
-
-
-
-
 }

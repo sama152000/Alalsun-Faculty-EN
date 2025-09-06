@@ -31,17 +31,17 @@
   <div class="container">
     <div class="banner-content" [class.changing]="isContentChanging && !isFirstLoad">
       <h2 class="banner-title">
-        {{getCurrentSlide()?.title}}
+        {{getCurrentSlide().title}}
       </h2>
       <p class="banner-subtitle">
-        {{getCurrentSlide()?.subtitle}}
+        {{getCurrentSlide().subtitle}}
       </p>
-      <p class="banner-description" *ngIf="getCurrentSlide()?.description">
-        {{getCurrentSlide()?.description}}
+      <p class="banner-description" *ngIf="getCurrentSlide().description">
+        {{getCurrentSlide().description}}
       </p>
       <div class="banner-actions" *ngIf="getCurrentSlide()?.showButton && !isContentChanging">
-        <a [routerLink]="getCurrentSlide()?.buttonLink || '/about'" class="btn btn-primary btn-darkred">
-          {{getCurrentSlide()?.buttonText || 'read more'}}
+        <a [routerLink]="getCurrentSlide().buttonLink || '/about'" class="btn btn-primary btn-darkred">
+          {{getCurrentSlide().buttonText || 'read more'}}
           <i class="pi pi-arrow-right ms-2"></i>
         </a>
       </div>

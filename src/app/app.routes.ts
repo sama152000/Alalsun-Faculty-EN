@@ -18,7 +18,7 @@ import { AboutManagementComponent } from './features/Dashboard/pages/dashboard/a
 import { SectorsManagementComponent } from './features/Dashboard/pages/sectors-management/sectors-management.component';
 import { StaffManagementComponent } from './features/Dashboard/pages/staff-management/staff-management.component';
 import { DepartmentsManagementComponent } from './features/Dashboard/pages/departments-management/departments-management.component';
-import { NewsManagementComponent } from './features/Dashboard/pages/news-management/news-management.component';
+// import { NewsManagementComponent } from './features/Dashboard/pages/news-management/news-management.component';
 import { PagesManagementComponent } from './features/Dashboard/pages/pages-management/pages-management.component';
 import { AddDepartmentComponent } from './features/Dashboard/pages/dashboard/AddDepartmentComponent/AddDepartmentComponent.component';
 import { EditDepartmentComponent } from './features/Dashboard/pages/dashboard/edit-department/edit-department.component';
@@ -80,7 +80,7 @@ export const routes: Routes = [
   { path: 'about/history/edit/:id', component: EditHistoryEventComponent },
   { path: 'about/vision-mission/add', component: AddVisionMissionComponent },
   { path: 'about/vision-mission/edit/:id', component: EditVisionMissionComponent },
-      { path: 'news', component: NewsManagementComponent },
+      // { path: 'news', component: NewsManagementComponent },
       { path: 'media', component: MediaManagementComponent },
       { path: 'menus', component: MenuManagementComponent },
       { path: 'pages', component: PagesManagementComponent },

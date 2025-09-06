@@ -19,9 +19,9 @@
                 <div class="social-media">
                   <h4>Follow Us</h4>
                   <div class="social-links">
-                    <a *ngFor="let link of footerData.socialLinks" [href]="link.url" [aria-label]="link.platform">
-                      <i [class]="link.icon"></i>
-                    </a>
+<a *ngFor="let link of footerData.socialLinks" [href]="link.url" [attr.aria-label]="link.platform">
+  <i [class]="link.icon"></i>
+</a>
                   </div>
                 </div>
               </div>

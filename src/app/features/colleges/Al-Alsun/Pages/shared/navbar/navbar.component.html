@@ -6,19 +6,19 @@
         <div class="col-lg-8 col-md-7">
           <div class="logo-section">
             <div class="faculty-logo">
-              <img [src]="facultyInfo?.logoUrl" width="100%" [alt]="facultyInfo?.name">
+              <img [src]="facultyInfo?.logoUrl || ''" width="100%" [alt]="facultyInfo?.name || 'Faculty Logo'">
             </div>
             <div>
-              <h1 class="main-title">{{ facultyInfo?.name }}</h1>
-              <p class="subtitle">{{ facultyInfo?.subtitle }}</p>
+              <h1 class="main-title">{{ facultyInfo?.name || 'Faculty of Al-Alsun' }}</h1>
+              <p class="subtitle">{{ facultyInfo?.subtitle || '' }}</p>
             </div>
           </div>
         </div>
         <div class="col-lg-4 col-md-5">
           <div class="university-info">
-            <span class="university-text">{{ facultyInfo?.universityName }}</span>
+            <span class="university-text">{{ facultyInfo?.universityName || 'Luxor University' }}</span>
             <div class="university-badge">
-              <span>EST. {{ facultyInfo?.established }}</span>
+              <span>EST. {{ facultyInfo?.established || '2016' }}</span>
             </div>
           </div>
         </div>
@@ -26,6 +26,8 @@
     </div>
   </div>
 </header>
+
+
 
 <footer class="footer">
   <div class="footer-bottom">

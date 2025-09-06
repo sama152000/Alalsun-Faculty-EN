@@ -22,13 +22,13 @@
           </div>
           <div class="card-body p-0">
             <ul class="nav flex-column">
-              <li class="nav-item" *ngFor="let position of positions; trackBy: trackByPosition">
-                <a class="nav-link" 
+              <li class="nav-item" *ngFor="let pos of positions; trackBy: trackByPosition">
+                <a class="nav-link"
                    [routerLink]="['/staff']"
-                   [queryParams]="{ position: position.value }"
-                   [class.active]="staffMember?.position === position.value">
-                  <i [class]="position.icon" class="me-2"></i>
-                  {{ position.label }}
+                   [queryParams]="{ position: pos.value }"
+                   [class.active]="staffMember.position === pos.value">
+                  <i [class]="pos.icon" class="me-2"></i>
+                  {{ pos.label }}
                 </a>
               </li>
             </ul>

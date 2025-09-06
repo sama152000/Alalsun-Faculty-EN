@@ -6,7 +6,7 @@ import { NanoWidgetComponent  } from './features/colleges/Al-Alsun/Pages/shared/
 
 @Component({
   selector: 'app-root',
-  imports: [ButtonModule, CommonModule, RouterModule, NanoWidgetComponent],
+  imports: [ButtonModule, CommonModule, RouterModule, ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
