@@ -1,0 +1,663 @@
+<section class="dashboard-content">
+  <div class="management-header">
+    <h2>Add New Menu</h2>
+  </div>
+  <form [formGroup]="menuForm" (ngSubmit)="saveMenu()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Name *</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          formControlName="name"
+          placeholder="Enter menu name"
+        >
+      </div>
+      <div class="form-group">
+        <label>Type *</label>
+        <select class="form-control" formControlName="type">
+          <option value="">Select Type</option>
+          <option *ngFor="let type of menuTypes" [value]="type">{{ type | titlecase }}</option>
+        </select>
+      </div>
+      <div class="form-group" *ngIf="menuForm.get('type')?.value === 'header'">
+        <label>Header Type *</label>
+        <select class="form-control" formControlName="headerType">
+          <option value="">Select Header Type</option>
+          <option *ngFor="let hType of headerTypes" [value]="hType">{{ hType | titlecase }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Active</label>
+        <input 
+          type="checkbox" 
+          formControlName="isActive"
+        >
+      </div>
+
+      <!-- TopNav Fields -->
+      <ng-container *ngIf="menuForm.get('type')?.value === 'header' && menuForm.get('headerType')?.value === 'top_nav'">
+        <div class="form-group full-width">
+          <h4>Faculty Info</h4>
+        </div>
+        <div class="form-group">
+          <label>Logo URL</label>
+          <input 
+            type="url" 
+            class="form-control" 
+            formControlName="facultyInfo.logoUrl"
+            placeholder="Enter logo URL"
+          >
+        </div>
+        <div class="form-group">
+          <label>Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="facultyInfo.name"
+            placeholder="Enter faculty name"
+          >
+        </div>
+        <div class="form-group">
+          <label>Subtitle</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="facultyInfo.subtitle"
+            placeholder="Enter subtitle"
+          >
+        </div>
+        <div class="form-group">
+          <label>University Name</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="facultyInfo.universityName"
+            placeholder="Enter university name"
+          >
+        </div>
+        <div class="form-group">
+          <label>Established</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="facultyInfo.established"
+            placeholder="Enter established year"
+          >
+        </div>
+      </ng-container>
+
+      <!-- MainNav Fields -->
+      <ng-container *ngIf="menuForm.get('type')?.value === 'header' && menuForm.get('headerType')?.value === 'main_nav'">
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Navbar Items</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addNavbarItem()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Navbar Item
+            </button>
+          </div>
+          <div formArrayName="navbarItems">
+            <div *ngFor="let item of navbarItemsArray.controls; let i = index" [formGroupName]="i" class="navbar-item">
+              <div class="item-header">
+                <h5>Item {{ i + 1 }}</h5>
+                <button 
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeNavbarItem(i)"
+                >
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+              <div class="form-group">
+                <label>Label *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="label"
+                  placeholder="Enter label"
+                >
+              </div>
+              <div class="form-group">
+                <label>Icon</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="icon"
+                  placeholder="Enter icon class (e.g., pi pi-home)"
+                >
+              </div>
+              <div class="form-group">
+                <label>Route</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="route"
+                  placeholder="Enter route"
+                >
+              </div>
+              <div class="form-group full-width">
+                <div class="section-header">
+                  <h5>Children</h5>
+                  <button
+                    type="button"
+                    class="btn-add-item"
+                    (click)="addNavbarChild(i)"
+                  >
+                    <i class="pi pi-plus"></i>
+                    Add Child
+                  </button>
+                </div>
+                <div [formArrayName]="'children'">
+                  <div *ngFor="let child of $any(item.get('children')).controls; let j = index" [formGroupName]="j" class="child-item">
+                    <div class="item-header">
+                      <h5>Child {{ j + 1 }}</h5>
+                      <button
+                        type="button"
+                        class="btn-remove"
+                        (click)="removeNavbarChild(i, j)"
+                      >
+                        <i class="pi pi-trash"></i>
+                      </button>
+                    </div>
+                    <div class="form-group">
+                      <label>Label *</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="label"
+                        placeholder="Enter child label"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label>Icon</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="icon"
+                        placeholder="Enter icon class"
+                      >
+                    </div>
+                    <div class="form-group">
+                      <label>Route</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        formControlName="route"
+                        placeholder="Enter child route"
+                      >
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+      <!-- Submenu Fields -->
+      <ng-container *ngIf="menuForm.get('type')?.value === 'header' && menuForm.get('headerType')?.value === 'submenu'">
+        <div class="form-group full-width">
+          <h4>Submenu</h4>
+        </div>
+        <div class="form-group">
+          <label>Copyright</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="submenu.copyright"
+            placeholder="Enter copyright text"
+          >
+        </div>
+        <div class="form-group full-width">
+          <h4>Contact Methods</h4>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="submenu.contactMethods.phone"
+            placeholder="Enter phone number"
+          >
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            formControlName="submenu.contactMethods.email"
+            placeholder="Enter email"
+          >
+        </div>
+        <div class="form-group">
+          <label>University Website</label>
+          <input 
+            type="url" 
+            class="form-control" 
+            formControlName="submenu.contactMethods.universityWebsite"
+            placeholder="Enter university website"
+          >
+        </div>
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Languages</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addSubmenuLanguage()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Language
+            </button>
+          </div>
+          <div formArrayName="submenu.contactMethods.languages">
+            <div *ngFor="let lang of submenuLanguagesArray.controls; let i = index" [formGroupName]="i" class="language-item">
+              <div class="item-header">
+                <h5>Language {{ i + 1 }}</h5>
+                <button 
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeSubmenuLanguage(i)"
+                >
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+              <div class="form-group">
+                <label>Value *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="value"
+                  placeholder="Enter language value (e.g., en)"
+                >
+              </div>
+              <div class="form-group">
+                <label>Label *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="label"
+                  placeholder="Enter language label (e.g., English)"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Footer Fields -->
+      <ng-container *ngIf="menuForm.get('type')?.value === 'footer'">
+        <div class="form-group">
+          <label>Logo Icon</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="footerData.logoIcon"
+            placeholder="Enter logo icon (e.g., pi pi-book)"
+          >
+        </div>
+        <div class="form-group">
+          <label>Title</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="footerData.title"
+            placeholder="Enter footer title"
+          >
+        </div>
+        <div class="form-group">
+          <label>Subtitle</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="footerData.subtitle"
+            placeholder="Enter subtitle"
+          >
+        </div>
+        <div class="form-group">
+          <label>Tagline</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="footerData.tagline"
+            placeholder="Enter tagline"
+          >
+        </div>
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Social Links</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addFooterSocialLink()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Social Link
+            </button>
+          </div>
+          <div formArrayName="footerData.socialLinks">
+            <div *ngFor="let link of footerSocialLinksArray.controls; let i = index" [formGroupName]="i" class="social-link-item">
+              <div class="item-header">
+                <h5>Social Link {{ i + 1 }}</h5>
+                <button 
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeFooterSocialLink(i)"
+                >
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+              <div class="form-group">
+                <label>Platform *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="platform"
+                  placeholder="Enter platform"
+                >
+              </div>
+              <div class="form-group">
+                <label>URL *</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  formControlName="url"
+                  placeholder="Enter URL"
+                >
+              </div>
+              <div class="form-group">
+                <label>Icon *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="icon"
+                  placeholder="Enter icon class (e.g., pi pi-facebook)"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Quick Links</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addFooterQuickLink()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Quick Link
+            </button>
+          </div>
+          <div formGroupName="footerData">
+            <div class="form-group">
+              <label>Title</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                formControlName="quickLinks.title"
+                placeholder="Enter quick links title"
+              >
+            </div>
+            <div formArrayName="quickLinks.links">
+              <div *ngFor="let link of footerQuickLinksArray.controls; let i = index" [formGroupName]="i" class="link-item">
+                <div class="item-header">
+                  <h5>Link {{ i + 1 }}</h5>
+                  <button 
+                    type="button"
+                    class="btn-remove"
+                    (click)="removeFooterQuickLink(i)"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+                <div class="form-group">
+                  <label>Title *</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="title"
+                    placeholder="Enter link title"
+                  >
+                </div>
+                <div class="form-group">
+                  <label>URL *</label>
+                  <input 
+                    type="url" 
+                    class="form-control" 
+                    formControlName="url"
+                    placeholder="Enter link URL"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Academic Links</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addFooterAcademicLink()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Academic Link
+            </button>
+          </div>
+          <div formGroupName="footerData">
+            <div class="form-group">
+              <label>Title</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                formControlName="academicLinks.title"
+                placeholder="Enter academic links title"
+              >
+            </div>
+            <div formArrayName="academicLinks.links">
+              <div *ngFor="let link of footerAcademicLinksArray.controls; let i = index" [formGroupName]="i" class="link-item">
+                <div class="item-header">
+                  <h5>Link {{ i + 1 }}</h5>
+                  <button 
+                    type="button"
+                    class="btn-remove"
+                    (click)="removeFooterAcademicLink(i)"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+                <div class="form-group">
+                  <label>Title *</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="title"
+                    placeholder="Enter link title"
+                  >
+                </div>
+                <div class="form-group">
+                  <label>URL *</label>
+                  <input 
+                    type="url" 
+                    class="form-control" 
+                    formControlName="url"
+                    placeholder="Enter link URL"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Resource Links</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addFooterResourceLink()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Resource Link
+            </button>
+          </div>
+          <div formGroupName="footerData">
+            <div class="form-group">
+              <label>Title</label>
+              <input 
+                type="text" 
+                class="form-control" 
+                formControlName="resourceLinks.title"
+                placeholder="Enter resource links title"
+              >
+            </div>
+            <div formArrayName="resourceLinks.links">
+              <div *ngFor="let link of footerResourceLinksArray.controls; let i = index" [formGroupName]="i" class="link-item">
+                <div class="item-header">
+                  <h5>Link {{ i + 1 }}</h5>
+                  <button 
+                    type="button"
+                    class="btn-remove"
+                    (click)="removeFooterResourceLink(i)"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+                <div class="form-group">
+                  <label>Title *</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    formControlName="title"
+                    placeholder="Enter link title"
+                  >
+                </div>
+                <div class="form-group">
+                  <label>URL *</label>
+                  <input 
+                    type="url" 
+                    class="form-control" 
+                    formControlName="url"
+                    placeholder="Enter link URL"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Copyright</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="footerData.copyright"
+            placeholder="Enter copyright text"
+          >
+        </div>
+        <div class="form-group full-width">
+          <h4>Contact Methods</h4>
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="footerData.contactMethods.phone"
+            placeholder="Enter phone number"
+          >
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input 
+            type="email" 
+            class="form-control" 
+            formControlName="footerData.contactMethods.email"
+            placeholder="Enter email"
+          >
+        </div>
+        <div class="form-group">
+          <label>University Website</label>
+          <input 
+            type="url" 
+            class="form-control" 
+            formControlName="footerData.contactMethods.universityWebsite"
+            placeholder="Enter university website"
+          >
+        </div>
+        <div class="form-group full-width">
+          <div class="section-header">
+            <h4>Languages</h4>
+            <button 
+              type="button"
+              class="btn-add-item"
+              (click)="addFooterContactLanguage()"
+            >
+              <i class="pi pi-plus"></i>
+              Add Language
+            </button>
+          </div>
+          <div formArrayName="footerData.contactMethods.languages">
+            <div *ngFor="let lang of footerContactLanguagesArray.controls; let i = index" [formGroupName]="i" class="language-item">
+              <div class="item-header">
+                <h5>Language {{ i + 1 }}</h5>
+                <button 
+                  type="button"
+                  class="btn-remove"
+                  (click)="removeFooterContactLanguage(i)"
+                >
+                  <i class="pi pi-trash"></i>
+                </button>
+              </div>
+              <div class="form-group">
+                <label>Value *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="value"
+                  placeholder="Enter language value (e.g., en)"
+                >
+              </div>
+              <div class="form-group">
+                <label>Label *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="label"
+                  placeholder="Enter language label (e.g., English)"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="dialog-actions">
+      <button 
+        type="button"
+        class="btn-outline-primary-custom"
+        [routerLink]="['/dashboard/menus']"
+      >
+        Cancel
+      </button>
+      <button 
+        type="submit"
+        class="btn-primary-custom"
+        [disabled]="menuForm.invalid"
+      >
+        Create Menu
+      </button>
+    </div>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
+  </div>

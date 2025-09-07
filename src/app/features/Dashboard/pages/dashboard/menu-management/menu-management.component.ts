@@ -1,158 +1,88 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
+import { MenuService}from '../../../../colleges/Al-Alsun/Services/menu.service';
+import {  MenuItem, MenuType, HeaderType } from '../../../../colleges/Al-Alsun/model/menu.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-menu-management',
   standalone: true,
-  template: `
-    <div class="menu-management">
-      <h2>Menu Management</h2>
-      <div class="menu-editor">
-        <div class="menu-section">
-          <h3>Main Navigation</h3>
-          <ul class="menu-items">
-            <li class="menu-item">
-              <i class="pi pi-home"></i>
-              <span>Home</span>
-              <div class="menu-actions">
-                <button class="btn-edit">Edit</button>
-                <button class="btn-delete">Delete</button>
-              </div>
-            </li>
-            <li class="menu-item">
-              <i class="pi pi-info-circle"></i>
-              <span>About</span>
-              <div class="menu-actions">
-                <button class="btn-edit">Edit</button>
-                <button class="btn-delete">Delete</button>
-              </div>
-            </li>
-            <li class="menu-item">
-              <i class="pi pi-building"></i>
-              <span>Departments</span>
-              <div class="menu-actions">
-                <button class="btn-edit">Edit</button>
-                <button class="btn-delete">Delete</button>
-              </div>
-            </li>
-            <li class="menu-item">
-              <i class="pi pi-users"></i>
-              <span>Staff</span>
-              <div class="menu-actions">
-                <button class="btn-edit">Edit</button>
-                <button class="btn-delete">Delete</button>
-              </div>
-            </li>
-            <li class="menu-item">
-              <i class="pi pi-phone"></i>
-              <span>Contact</span>
-              <div class="menu-actions">
-                <button class="btn-edit">Edit</button>
-                <button class="btn-delete">Delete</button>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="add-menu-item">
-          <button class="btn-add">Add New Menu Item</button>
-        </div>
-      </div>
-    </div>
-  `,
-  styles: [`
-    .menu-management {
-      padding: 2rem;
-    }
-
-    h2 {
-      color: var(--primary-color);
-      margin-bottom: 2rem;
-      font-size: 2rem;
-    }
-
-    .menu-editor {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      padding: 2rem;
-    }
-
-    .menu-section h3 {
-      color: var(--primary-color);
-      margin-bottom: 1.5rem;
-      font-size: 1.3rem;
-    }
-
-    .menu-items {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem;
-      border: 1px solid #eee;
-      border-radius: 5px;
-      margin-bottom: 0.5rem;
-      background: #f8f9fa;
-    }
-
-    .menu-item i {
-      color: var(--primary-color);
-      font-size: 1.2rem;
-    }
-
-    .menu-item span {
-      flex: 1;
-      font-weight: 500;
-    }
-
-    .menu-actions {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .btn-edit, .btn-delete {
-      padding: 0.25rem 0.75rem;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .btn-edit {
-      background: var(--primary-color);
-      color: white;
-    }
-
-    .btn-delete {
-      background: #dc3545;
-      color: white;
-    }
-
-    .add-menu-item {
-      margin-top: 2rem;
-      text-align: center;
-    }
-
-    .btn-add {
-      background: var(--accent-gold);
-      color: white;
-      border: none;
-      padding: 0.75rem 2rem;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .btn-add:hover {
-      background: var(--primary-color);
-    }
-  `]
+  imports: [CommonModule, RouterModule],
+  templateUrl: './menu-management.component.html',
+  styleUrls: ['./menu-management.component.css']
 })
-export class MenuManagementComponent {
+export class MenuManagementComponent implements OnInit {
+  menus: MenuItem[] = [];
+  showConfirmDialog = false;
+  deleteId: number | null = null;
+  showToast = false;
+  toastMessage = '';
+  toastClass = '';
+  toastIcon = '';
 
+  constructor(
+    private menuService: MenuService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.loadMenus();
+  }
+
+  loadMenus() {
+    this.menuService.getAllMenus().subscribe(menus => {
+      this.menus = menus;
+    });
+  }
+
+  setActive(id: number, type: MenuType, headerType?: HeaderType) {
+    this.menuService.setActiveMenu(id, type, headerType).subscribe(() => {
+      this.showSuccessToast(`${type === MenuType.HEADER ? 'Header' : 'Footer'} set as active`);
+      this.loadMenus();
+    });
+  }
+
+  confirmDelete(id: number) {
+    this.deleteId = id;
+    this.showConfirmDialog = true;
+  }
+
+  closeConfirmDialog() {
+    this.showConfirmDialog = false;
+    this.deleteId = null;
+  }
+
+  deleteMenu() {
+    if (this.deleteId !== null) {
+      this.menuService.deleteMenu(this.deleteId).subscribe(() => {
+        this.showSuccessToast('Menu deleted successfully');
+        this.loadMenus();
+        this.closeConfirmDialog();
+      });
+    }
+  }
+
+  showSuccessToast(message: string) {
+    this.showToast = true;
+    this.toastClass = 'toast-success';
+    this.toastIcon = 'pi pi-check';
+    this.toastMessage = message;
+    setTimeout(() => this.hideToast(), 3000);
+  }
+
+  showErrorToast(message: string) {
+    this.showToast = true;
+    this.toastClass = 'toast-error';
+    this.toastIcon = 'pi pi-times';
+    this.toastMessage = message;
+    setTimeout(() => this.hideToast(), 3000);
+  }
+
+  hideToast() {
+    this.showToast = false;
+    this.toastMessage = '';
+    this.toastClass = '';
+    this.toastIcon = '';
+  }
 }

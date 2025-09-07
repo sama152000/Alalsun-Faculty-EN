@@ -27,7 +27,6 @@ export class SectorsService {
           overview: 'The Student Enrollment & Academic Registration Department serves as the primary gateway for students entering our academic community. We manage comprehensive enrollment processes, academic registration systems, and maintain detailed student records throughout their academic journey.',
           responsibilities: [
             'Processing and reviewing new student applications with comprehensive evaluation criteria',
-            'Managing course registration systems and academic scheduling coordination',
 
           ],
           contact: {
@@ -42,7 +41,6 @@ export class SectorsService {
           overview: 'Our Examination Management & Academic Assessment Department ensures academic integrity and excellence through comprehensive examination processes, fair assessment procedures, and transparent result management systems.',
           responsibilities: [
             'Developing and implementing comprehensive examination schedules and protocols',
-            'Supervising examination procedures and maintaining academic integrity standards',
           
           
           ],
@@ -58,7 +56,6 @@ export class SectorsService {
           overview: 'The Student Life & Extracurricular Activities Department enriches the university experience by providing diverse opportunities for personal development, cultural engagement, and community building through comprehensive programming.',
           responsibilities: [
             'Organizing comprehensive cultural events, festivals, and artistic performances',
-            'Managing student clubs, societies, and special interest organizations',
         
            
           ],
@@ -105,21 +102,18 @@ export class SectorsService {
           description: 'Our streamlined enrollment process ensures a smooth transition into university life with personalized support and comprehensive guidance throughout the admission journey.',
           steps: [
             'Complete the online application form with detailed academic and personal information',
-            'Upload all required documents including transcripts, certificates, and supporting materials',
-            'Pay application processing fees through secure online payment systems',
+         
            
           ],
           requiredDocuments: [
             'Official high school diploma or equivalent certification (original and certified copies)',
-            'National identification card or passport (certified copies)',
             
             'Portfolio or creative work samples for applicable programs'
           ],
           downloadableForms: [
             'Student Application Form (PDF)',
           
-            'Housing Application Form (PDF)',
-            'International Student Supplemental Form (PDF)'
+    
           ]
         },
         {
@@ -128,19 +122,14 @@ export class SectorsService {
           description: 'Comprehensive certification services providing official academic documents, student identification, and verification services for domestic and international use.',
           steps: [
             'Submit detailed request form specifying document type and intended use',
-            'Collect completed documents from designated office or arrange secure delivery'
           ],
           requiredDocuments: [
             'Current student identification card or alumni verification',
-            'Official fee payment receipts with transaction verification',
-           
-            'Power of attorney documentation if requesting on behalf of others'
+       
           ],
           downloadableForms: [
             'Certificate Request Form (PDF)',
-            
-            'Duplicate Diploma Application (PDF)'
-          ]
+                    ]
         },
         {
           id: 'comprehensive-housing',
@@ -148,18 +137,13 @@ export class SectorsService {
           description: 'Full-service residential programs providing safe, comfortable, and academically supportive living environments with comprehensive amenities and community programming.',
           steps: [
             'Complete housing application during initial registration or early application period',
-          
-            'Participate in floor meetings and community building activities'
-          ],
+                    ],
           requiredDocuments: [
             'Completed housing application with detailed preferences and requirements',         
-            'Special accommodation requests with supporting medical documentation if applicable'
           ],
           downloadableForms: [
             'Housing Application Form (PDF)',
-         
-            'Special Accommodations Request Form (PDF)'
-          ]
+                   ]
         },
         {
           id: 'career-development',
@@ -172,11 +156,9 @@ export class SectorsService {
           ],
           requiredDocuments: [
             'Updated academic transcripts and course completion certificates',
-            'Career objectives statement and professional goals essay'
           ],
           downloadableForms: [
             'Career Services Registration Form (PDF)',
-            'Alumni Career Network Registration (PDF)'
           ]
         },
         {
@@ -185,17 +167,13 @@ export class SectorsService {
           description: 'Global education opportunities through international partnerships, exchange programs, and study abroad initiatives with comprehensive support services.',
           steps: [
             'Attend international programs information sessions and cultural orientation',
-            'Begin international academic experience with ongoing support services'
           ],
           requiredDocuments: [
             'Valid passport with appropriate visa documentation',
-            'Cultural adaptation and safety agreement forms'
           ],
           downloadableForms: [
             'International Exchange Application (PDF)',
-           
-            'International Emergency Contact Form (PDF)'
-          ]
+                     ]
         }
       ],
       news: [
@@ -215,22 +193,7 @@ export class SectorsService {
           image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
           category: 'Cultural Events'
         },
-        {
-          id: 'news-3',
-          title: 'Fall Semester 2024 Final Examination Schedule Released with Digital Innovations',
-          summary: 'Comprehensive examination schedule published with new digital proctoring options, accessibility accommodations, and real-time result tracking systems.',
-          date: '2024-11-20',
-          image: 'https://images.pexels.com/photos/159844/cellular-education-classroom-159844.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-          category: 'Examination News'
-        },
-        {
-          id: 'news-4',
-          title: 'Mental Health Awareness Campaign Launches Campus-Wide Support Services',
-          summary: 'Comprehensive mental health initiative introduces 24/7 counseling hotline, peer support networks, and wellness programming for student mental health.',
-          date: '2024-10-05',
-          image: 'https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-          category: 'Student Wellness'
-        },
+  
       
       ],
       media: [
@@ -251,22 +214,7 @@ export class SectorsService {
           description: 'Highlights from the annual cultural festival showcasing international performances, art exhibitions, and community celebrations',
           date: '2024-10-15'
         },
-        {
-          id: 'media-3',
-          title: 'Comprehensive Student Handbook 2024-2025',
-          type: 'document',
-          url: '/assets/documents/student-handbook-2024.pdf',
-          description: 'Complete guide covering academic policies, campus resources, student services, and university life information',
-          date: '2024-08-01'
-        },
-        {
-          id: 'media-4',
-          title: 'Campus Innovation Showcase: Student Projects Exhibition',
-          type: 'photo',
-          url: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg',
-          description: 'Photo documentation of student innovation projects, research presentations, and entrepreneurial ventures',
-          date: '2024-11-10'
-        },
+     
       
       ],
       statistics: [
@@ -296,30 +244,7 @@ export class SectorsService {
           type: 'International Program',
           image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg'
         },
-        {
-          id: 'activity-3',
-          title: 'Student Leadership Development Summit',
-          description: 'Comprehensive leadership training program with workshops on communication, project management, and team building',
-          date: '2024-04-18',
-          type: 'Professional Development',
-          image: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg'
-        },
-        {
-          id: 'activity-4',
-          title: 'Community Service and Volunteer Fair',
-          description: 'Connecting students with local and international volunteer opportunities and community service projects',
-          date: '2024-06-12',
-          type: 'Community Engagement',
-          image: 'https://images.pexels.com/photos/3768114/pexels-photo-3768114.jpeg'
-        },
-        {
-          id: 'activity-5',
-          title: 'Technology and Innovation Hackathon',
-          description: '48-hour innovation challenge focusing on sustainable technology solutions and social impact projects',
-          date: '2024-07-22',
-          type: 'Innovation Challenge',
-          image: 'https://images.pexels.com/photos/1454360/pexels-photo-1454360.jpeg'
-        }
+    
       ],
       achievements: [
         {
@@ -329,20 +254,7 @@ export class SectorsService {
           date: '2024-06-10',
           image: 'https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg'
         },
-        {
-          id: 'achievement-2',
-          title: 'International Education Partnership Recognition',
-          description: 'Awarded for successful international collaboration and cultural exchange program development',
-          date: '2024-08-22',
-          image: 'https://images.pexels.com/photos/1181406/pexels-photo-1181406.jpeg'
-        },
-        {
-          id: 'achievement-3',
-          title: 'Digital Innovation in Education Award',
-          description: 'Recognized for implementing cutting-edge educational technology and digital learning platforms',
-          date: '2024-09-15',
-          image: 'https://images.pexels.com/photos/3183197/pexels-photo-3183197.jpeg'
-        }
+   
       ]
     },
     {
@@ -426,21 +338,14 @@ export class SectorsService {
           description: 'Streamlined admission process for Master\'s and PhD programs with personalized academic counseling, research area matching, and comprehensive support throughout the application journey.',
           steps: [
             'Complete comprehensive online application with detailed academic and research background',
-            
-            'Finalize research supervision arrangements and academic planning consultations'
-          ],
+                      ],
           requiredDocuments: [
             'Official Bachelor\'s degree certificate with minimum GPA requirements (for Master\'s)',
-            'Official Master\'s degree certificate with thesis documentation (for PhD)',
-          
-            'Official translations of all non-English documents by certified translation services'
+ 
           ],
           downloadableForms: [
             'Graduate Application Form (PDF)',
-            'Research Proposal Template (PDF)',
-            'Recommendation Letter Form (PDF)',
-            'Financial Support Declaration (PDF)',
-            'International Student Supplemental Form (PDF)'
+  
           ]
         },
         {
@@ -449,26 +354,15 @@ export class SectorsService {
           description: 'End-to-end support for thesis and dissertation completion including writing assistance, formatting guidance, defense preparation, and publication support.',
           steps: [
             'Register thesis or dissertation topic with departmental approval and committee formation',
-            'Submit regular progress reports and participate in milestone reviews',
-            'Receive writing and research methodology support through workshops and individual consultations',
-            'Complete comprehensive examination and proposal defense requirements',
-            'Submit draft chapters for review and receive detailed feedback from advisory committee',
-            'Prepare final thesis or dissertation with professional formatting and citation standards',
-            'Schedule and prepare for final defense with presentation skills training',
-            'Complete post-defense revisions and final submission for degree conferral'
+    
           ],
           requiredDocuments: [
             'Approved thesis or dissertation proposal with committee signatures',
-            'Regular progress reports and milestone completion certificates',
-            'IRB approval documentation for research involving human subjects',
-            'Completed thesis or dissertation following institutional formatting guidelines',
-            'Committee recommendation letters and defense evaluation forms'
+       
           ],
           downloadableForms: [
             'Thesis Registration Form (PDF)',
-            'Progress Report Template (PDF)',
-            'Defense Scheduling Form (PDF)',
-            'Final Submission Checklist (PDF)'
+     
           ]
         }
       ],

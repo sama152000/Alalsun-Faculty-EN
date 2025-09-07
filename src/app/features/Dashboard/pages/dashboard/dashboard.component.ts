@@ -20,9 +20,9 @@ export class DashboardComponent {
     ).subscribe((event: NavigationEnd) => {
       const url = event.urlAfterRedirects;
       // Check if the current route is under 'pages', 'posts', or 'about'
-      if (url.includes('/dashboard/pages')) {
+      if (url.includes('/dashboard/departments') || url.includes('/dashboard/sectors') || url.includes('/dashboard/staff')) {
         this.activeSubmenu = 'pages';
-      } else if (url.includes('/dashboard/posts')) {
+      } else if (url.includes('/dashboard/news')) {
         this.activeSubmenu = 'posts';
       } else if (url.includes('/dashboard/about')) {
         this.activeSubmenu = 'about';
@@ -37,10 +37,10 @@ export class DashboardComponent {
   }
 
   isPagesActive(): boolean {
-    return this.router.url.includes('/dashboard/pages') || this.router.url.includes('/dashboard/about');
+    return this.router.url.includes('/dashboard') || this.router.url.includes('/dashboard/about');
   }
 
   isPostsActive(): boolean {
-    return this.router.url.includes('/dashboard/posts');
+    return this.router.url.includes('/dashboard/news');
   }
 }

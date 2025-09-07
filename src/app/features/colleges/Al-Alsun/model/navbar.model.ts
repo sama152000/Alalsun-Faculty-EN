@@ -1,4 +1,3 @@
-// src/app/models/layout.model.ts
 export interface FacultyInfo {
   logoUrl: string; // e.g., "assets/logo.jpg"
   name: string; // e.g., "Faculty of Al-Alsun"
@@ -14,16 +13,6 @@ export interface NavbarItem {
   children?: NavbarItem[];
 }
 
-export interface FooterLink {
-  title: string;
-  url: string;
-}
-
-export interface FooterSection {
-  title: string;
-  links: FooterLink[];
-}
-
 export interface ContactInfo {
   phone: string;
   email: string;
@@ -31,15 +20,7 @@ export interface ContactInfo {
   languages: { value: string; label: string }[];
 }
 
-export interface Footer {
-  logoIcon: string;
-  title: string;
-  subtitle: string;
-  tagline: string;
-  socialLinks: { platform: string; url: string; icon: string }[];
-  quickLinks: FooterSection;
-  academicLinks: FooterSection;
-  resourceLinks: FooterSection;
+export interface Submenu {
   copyright: string;
   contactMethods: ContactInfo;
 }
@@ -47,5 +28,5 @@ export interface Footer {
 export interface LayoutData {
   facultyInfo: FacultyInfo;
   navbarItems: NavbarItem[];
-  footer: Footer;
+  submenu: Submenu | null; // تغيير من footer إلى submenu
 }

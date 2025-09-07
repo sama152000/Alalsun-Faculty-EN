@@ -167,21 +167,33 @@
   .nav-link {
     border-left: none;
     border-bottom: 1px solid rgba(255,255,255,0.1);
+    align-items: center;
+    
   }
 }
 
-.footer {
+
+.submenu {
   background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-color) 100%);
   color: white;
+  /* شيل أي padding هنا */
+  padding-left: 0;
+  padding-right: 0;
 }
 
-.footer-logo-section {
+.submenu .container-fluid {
+  padding-left: 7.5rem; /* نفس الـ container اللي فوق */
+  padding-right: 7.5rem;
+}
+
+
+.submenu-bottom {
   display: flex;
   align-items: center;
-  gap: 1rem;
+ 
 }
 
-.footer-logo {
+.submenu-logo {
   background: rgba(255,255,255,0.2);
   padding: 0.8rem;
   border-radius: 50%;
@@ -192,31 +204,31 @@
   justify-content: center;
 }
 
-.footer-logo i {
+.submenu-logo i {
   font-size: 1.5rem;
   color: var(--white);
 }
 
-.footer-logo-section h3 {
+.submenu-logo-section h3 {
   color: white;
   font-size: 1.4rem;
   font-weight: 700;
   margin-bottom: 0.2rem;
 }
 
-.footer-logo-section p {
+.submenu-logo-section p {
   color: rgba(255,255,255,0.8);
   margin-bottom: 0.2rem;
   font-size: 0.95rem;
 }
 
-.footer-tagline {
+.submenu-tagline {
   color: var(--white) !important;
   font-style: italic;
   font-size: 0.9rem !important;
 }
 
-.footer-section h4 {
+.submenu-section h4 {
   color: var(--white);
   font-size: 1.2rem;
   font-weight: 600;
@@ -225,7 +237,7 @@
   padding-bottom: 0.5rem;
 }
 
-.footer-section h4::after {
+.submenu-section h4::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -234,17 +246,17 @@
   height: 2px;
 }
 
-.footer-links {
+.submenu-links {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footer-links li {
+.submenu-links li {
   margin-bottom: 0.8rem;
 }
 
-.footer-links a {
+.submenu-links a {
   color: rgba(255,255,255,0.8);
   text-decoration: none;
   font-size: 0.95rem;
@@ -253,7 +265,7 @@
   padding-left: 1rem;
 }
 
-.footer-links a::before {
+.submenu-links a::before {
   content: '→';
   position: absolute;
   left: 0;
@@ -262,11 +274,11 @@
   transform: translateX(-5px);
 }
 
-.footer-links a:hover {
+.submenu-links a:hover {
   transform: translateX(5px);
 }
 
-.footer-links a:hover::before {
+.submenu-links a:hover::before {
   opacity: 1;
   transform: translateX(0);
 }
@@ -302,7 +314,7 @@
   font-size: 1.2rem;
 }
 
-.footer-bottom {
+.submenu-bottom {
   background: rgba(0,0,0,0.2);
   padding: 0.5rem 0;
   border-top: 1px solid rgba(255,255,255,0.1);

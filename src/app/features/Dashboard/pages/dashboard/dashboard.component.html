@@ -45,7 +45,7 @@
             <li class="nav-item has-submenu">
               <a [class.active]="isPostsActive()" (click)="toggleSubmenu('posts')"><i class="pi pi-megaphone"></i> Posts</a>
               <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'posts'}">
-                <li><a routerLink="posts/news" routerLinkActive="active"><i class="pi pi-megaphone"></i> News</a></li>
+                <li><a routerLink="news" routerLinkActive="active"><i class="pi pi-megaphone"></i> News</a></li>
               </ul>
             </li>
             <li><a routerLink="custom-pages" routerLinkActive="active"><i class="pi pi-file"></i> Custom Pages</a></li>

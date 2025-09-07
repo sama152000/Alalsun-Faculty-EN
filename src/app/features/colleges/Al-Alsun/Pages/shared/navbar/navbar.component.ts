@@ -1,9 +1,8 @@
-// src/app/components/navbar/navbar.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NavbarService } from '../../../Services/navbar.service';
-import { FacultyInfo, NavbarItem, Footer } from '../../../model/navbar.model';
+import { LayoutService } from '../../../Services/navbar.service';
+import { FacultyInfo, NavbarItem, Submenu } from '../../..//model/navbar.model';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,18 +15,18 @@ import { FormsModule } from '@angular/forms';
 export class NavbarComponent implements OnInit {
   facultyInfo: FacultyInfo | null = null;
   navbarItems: NavbarItem[] = [];
-  footer: Footer | null = null;
+  submenu: Submenu | null = null;
   isNavbarCollapsed = true;
   isDropdownOpen: { [key: string]: boolean } = {};
   isSectorsDropdownOpen = false;
 
-  constructor(private NavbarService: NavbarService) {}
+  constructor(private layoutService: LayoutService) {}
 
   ngOnInit(): void {
-    this.NavbarService.getLayoutData().subscribe((data) => {
+    this.layoutService.getLayoutData().subscribe((data) => {
       this.facultyInfo = data.facultyInfo;
       this.navbarItems = data.navbarItems;
-      this.footer = data.footer;
+      this.submenu = data.submenu; // تحميل بيانات submenu
       // تهيئة حالة القوائم المنسدلة
       this.navbarItems.forEach((item) => {
         if (item.children) {
@@ -44,7 +43,6 @@ export class NavbarComponent implements OnInit {
   toggleDropdown(label: string, event: Event) {
     event.preventDefault();
     this.isDropdownOpen[label] = !this.isDropdownOpen[label];
-    // إغلاق القوائم المنسدلة الأخرى
     Object.keys(this.isDropdownOpen).forEach((key) => {
       if (key !== label) {
         this.isDropdownOpen[key] = false;
@@ -53,7 +51,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onDropdownSelect(label: string) {
-    this.isDropdownOpen[label] = false; // إغلاق القائمة المنسدلة عند اختيار عنصر
+    this.isDropdownOpen[label] = false;
   }
 
   toggleSectorsDropdown(event: Event) {

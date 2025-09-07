@@ -27,32 +27,29 @@
   </div>
 </header>
 
-
-
-<footer class="footer">
-  <div class="footer-bottom">
-    <div class="container">
+<div class="submenu "  *ngIf="submenu">
+  <div class="submenu-bottom">
+    <div class="container-fluid mb-12">
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="copyright">
-            Faculty of Al-Alsun – Luxor University
+            {{ submenu.copyright }}
           </p>
         </div>
         <div class="col-md-6">
           <div class="contact-methods">
-            <a href="tel:+20952356555" class="contact-method">
+            <a [href]="'tel:' + submenu.contactMethods.phone" class="contact-method">
               <i class="pi pi-phone"></i>
-              (+20) 095-2356555
+              {{ submenu.contactMethods.phone }}
             </a>
-            <a href="mailto:info@alsun.luxor.edu.eg" class="contact-method">
+            <a [href]="'mailto:' + submenu.contactMethods.email" class="contact-method">
               <i class="pi pi-envelope"></i>
               Contact
             </a>
             <select class="language-switcher">
-              <option value="en">English</option>
-              <option value="ar">العربية</option>
+              <option *ngFor="let lang of submenu.contactMethods.languages" [value]="lang.value">{{ lang.label }}</option>
             </select>
-            <a href="https://luxor.edu.eg" class="contact-method university-website-btn">
+            <a [href]="submenu.contactMethods.universityWebsite" class="contact-method university-website-btn">
               Visit University Website
             </a>
           </div>
@@ -60,7 +57,7 @@
       </div>
     </div>
   </div>
-</footer>
+</div>
 
 <!-- Navigation -->
 <nav class="main-nav">
@@ -78,7 +75,7 @@
       </button>
       <div class="collapse navbar-collapse" [class.show]="!isNavbarCollapsed" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-start">
-          <li class="nav-item" *ngFor="let item of navbarItems">
+          <li class="nav-item" *ngFor="let item of navbarItems" [class.dropdown]="item.children && item.children.length > 0" [class.show]="isDropdownOpen[item.label]">
             <ng-container *ngIf="!item.children || item.children.length === 0">
               <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
                 <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
@@ -86,24 +83,22 @@
               </a>
             </ng-container>
             <ng-container *ngIf="item.children && item.children.length > 0">
-              <li class="nav-item dropdown" [class.show]="isDropdownOpen[item.label]">
-                <a class="nav-link dropdown-toggle" 
-                   href="#" 
-                   role="button" 
-                   (click)="toggleDropdown(item.label, $event)"
-                   [attr.aria-expanded]="isDropdownOpen[item.label]">
-                  <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
-                  {{ item.label }}
-                </a>
-                <ul class="dropdown-menu" [class.show]="isDropdownOpen[item.label]">
-                  <li *ngFor="let child of item.children">
-                    <a class="dropdown-item" [routerLink]="child.route" (click)="onDropdownSelect(item.label)">
-                      <i *ngIf="child.icon" [class]="child.icon + ' me-2'"></i>
-                      {{ child.label }}
-                    </a>
-                  </li>
-                </ul>
-              </li>
+              <a class="nav-link dropdown-toggle"
+                 href="#"
+                 role="button"
+                 (click)="toggleDropdown(item.label, $event)"
+                 [attr.aria-expanded]="isDropdownOpen[item.label]">
+                <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
+                {{ item.label }}
+              </a>
+              <ul class="dropdown-menu" [class.show]="isDropdownOpen[item.label]">
+                <li *ngFor="let child of item.children">
+                  <a class="dropdown-item" [routerLink]="child.route" (click)="onDropdownSelect(item.label)">
+                    <i *ngIf="child.icon" [class]="child.icon + ' me-2'"></i>
+                    {{ child.label }}
+                  </a>
+                </li>
+              </ul>
             </ng-container>
           </li>
         </ul>
@@ -111,3 +106,4 @@
     </div>
   </div>
 </nav>
+

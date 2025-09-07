@@ -48,7 +48,7 @@ export class NewsService {
     },
     {
       id: 3,
-      title: 'Student Exchange Program ',
+      title: 'Student Exchange Program',
       summary: 'Applications are now open for the international student exchange program for the 2025-2026 academic year.',
       content: `The Faculty of Al-Alsun is pleased to announce that applications for the international student exchange program are now open.
 
@@ -65,7 +65,6 @@ export class NewsService {
       author: 'International Programs Office',
       tags: ['exchange', 'international', 'scholarship', 'application']
     },
-
     // Postgraduate News
     {
       id: 4,
@@ -124,7 +123,6 @@ export class NewsService {
       author: 'Graduate Studies Committee',
       tags: ['phd', 'translation', 'program', 'research']
     },
-
     // Board & Administration News
     {
       id: 7,
@@ -239,5 +237,21 @@ export class NewsService {
     return this.newsItems
       .sort((a, b) => b.date.getTime() - a.date.getTime())
       .slice(0, limit);
+  }
+
+  addNews(newNews: NewsItem): void {
+    newNews.id = this.newsItems.length ? Math.max(...this.newsItems.map(item => item.id)) + 1 : 1;
+    this.newsItems.push(newNews);
+  }
+
+  updateNews(updatedNews: NewsItem): void {
+    const index = this.newsItems.findIndex(item => item.id === updatedNews.id);
+    if (index !== -1) {
+      this.newsItems[index] = updatedNews;
+    }
+  }
+
+  deleteNews(id: number): void {
+    this.newsItems = this.newsItems.filter(item => item.id !== id);
   }
 }

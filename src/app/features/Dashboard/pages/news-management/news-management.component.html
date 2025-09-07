@@ -1,3 +1,124 @@
-<p>
-  news-management works!
-</p>
+<div class="news-management">
+  <div class="management-header">
+    <h2>News Management</h2>
+    <button class="btn-primary-custom" [routerLink]="['/dashboard/news/add']">
+      <i class="pi pi-plus"></i> Add New News
+    </button>
+  </div>
+
+  <!-- Filter Section -->
+  <div class="filter-section">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Category</label>
+        <select class="form-control" [(ngModel)]="filter.category">
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category | titlecase }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Year</label>
+        <select class="form-control" [(ngModel)]="filter.year">
+          <option value="">All Years</option>
+          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Month</label>
+        <select class="form-control" [(ngModel)]="filter.month">
+          <option value="">All Months</option>
+          <option *ngFor="let month of months" [value]="month.value">{{ month.label }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Keyword</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          [(ngModel)]="filter.keyword"
+          placeholder="Enter keyword"
+        >
+      </div>
+      <div class="filter-actions">
+        <button class="btn-primary-custom" (click)="applyFilter()">
+          Apply Filter
+        </button>
+        <button class="btn-outline-primary-custom" (click)="resetFilter()">
+          Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- News List -->
+  <div class="news-list">
+    <div class="news-card" *ngFor="let news of newsItems">
+      <div class="news-info">
+        <img [src]="news.image" [alt]="news.title" class="news-image">
+        <div class="news-details">
+          <h3>{{ news.title }}</h3>
+          <p class="news-category">{{ news.category | titlecase }}</p>
+          <p class="news-date">{{ news.date | date:'mediumDate' }}</p>
+          <p class="news-summary">{{ news.summary | slice:0:50 }}...</p>
+          <div class="news-meta">
+            <span class="meta-item" *ngIf="news.author">
+              <i class="pi pi-user"></i>
+              {{ news.author }}
+            </span>
+            <span class="meta-item" *ngIf="news.tags && news.tags.length">
+              <i class="pi pi-tags"></i>
+              {{ news.tags.join(', ') }}
+            </span>
+            <span class="meta-item" *ngIf="news.featured">
+              <i class="pi pi-star"></i>
+              Featured
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="news-actions">
+        <button class="btn-edit" [routerLink]="['/dashboard/news/edit', news.id]">
+          <i class="pi pi-pencil"></i> Edit
+        </button>
+        <button class="btn-delete" (click)="confirmDelete(news.id)">
+          <i class="pi pi-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+    <div *ngIf="newsItems.length === 0" class="no-data">
+      <p>No News Available</p>
+    </div>
+  </div>
+
+  <!-- Confirmation Dialog -->
+  <div class="dialog-overlay" *ngIf="showConfirmDialog" [class.show]="showConfirmDialog">
+    <div class="dialog confirmation-dialog">
+      <div class="dialog-header">
+        <h3>Confirm Delete</h3>
+        <button type="button" class="close-button" (click)="closeConfirmDialog()">×</button>
+      </div>
+      <div class="dialog-content">
+        <p>Are you sure you want to delete this news item?</p>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="btn-outline-primary-custom" (click)="closeConfirmDialog()">
+          Cancel
+        </button>
+        <button type="button" class="btn-primary-custom" (click)="deleteNews()">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
+  </div>
+</div>

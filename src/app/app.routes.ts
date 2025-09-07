@@ -36,6 +36,10 @@ import { AddHistoryEventComponent } from './features/Dashboard/pages/dashboard/a
 import { EditHistoryEventComponent } from './features/Dashboard/pages/dashboard/edit-history-event/edit-history-event.component';
 import { EditVisionMissionComponent } from './features/Dashboard/pages/dashboard/edit-vision-mission/edit-vision-mission.component';
 import { AddVisionMissionComponent } from './features/Dashboard/pages/dashboard/add-vision-mission/add-vision-mission.component';
+import { NewsManagementComponent } from './features/Dashboard/pages/news-management/news-management.component';
+import { AddNewsComponent } from './features/Dashboard/pages/dashboard/add-news/add-news.component';
+import { EditNewsComponent } from './features/Dashboard/pages/dashboard/edit-news/edit-news.component';
+import { AddMenuComponent } from './features/Dashboard/pages/dashboard/add-menu/add-menu.component';
 
 export const routes: Routes = [
   {
@@ -80,9 +84,13 @@ export const routes: Routes = [
   { path: 'about/history/edit/:id', component: EditHistoryEventComponent },
   { path: 'about/vision-mission/add', component: AddVisionMissionComponent },
   { path: 'about/vision-mission/edit/:id', component: EditVisionMissionComponent },
-      // { path: 'news', component: NewsManagementComponent },
-      { path: 'media', component: MediaManagementComponent },
+  { path: 'news', component: NewsManagementComponent },
+  { path: 'news/add', component: AddNewsComponent },
+  { path: 'news/edit/:id', component: EditNewsComponent }   ,
+     { path: 'media', component: MediaManagementComponent },
       { path: 'menus', component: MenuManagementComponent },
+      { path: 'menus/add', component: AddMenuComponent },
+      { path: 'menus/edit/:id', component: EditDeanComponent },
       { path: 'pages', component: PagesManagementComponent },
       { path: 'settings', component: SettingsManagementComponent },
       { path: '', redirectTo: 'overview', pathMatch: 'full' }

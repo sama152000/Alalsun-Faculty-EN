@@ -1,0 +1,142 @@
+<section class="dashboard-content">
+  <div class="management-header">
+    <h2>Add New News</h2>
+  </div>
+  <form [formGroup]="newsForm" (ngSubmit)="saveNews()">
+    <div class="form-grid">
+      <div class="form-group">
+        <label>Title *</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          formControlName="title"
+          placeholder="Enter news title"
+        >
+      </div>
+      <div class="form-group">
+        <label>Category *</label>
+        <select class="form-control" formControlName="category">
+          <option value="">Select Category</option>
+          <option *ngFor="let category of categories" [value]="category">{{ category | titlecase }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Date *</label>
+        <input 
+          type="date" 
+          class="form-control" 
+          formControlName="date"
+        >
+      </div>
+      <div class="form-group">
+        <label>Author</label>
+        <input 
+          type="text" 
+          class="form-control" 
+          formControlName="author"
+          placeholder="Enter author name"
+        >
+      </div>
+      <div class="form-group full-width">
+        <label>Summary *</label>
+        <textarea 
+          class="form-control" 
+          formControlName="summary"
+          rows="3"
+          placeholder="Enter news summary"
+        ></textarea>
+      </div>
+      <div class="form-group full-width">
+        <label>Content *</label>
+        <textarea 
+          class="form-control" 
+          formControlName="content"
+          rows="6"
+          placeholder="Enter news content"
+        ></textarea>
+      </div>
+      <div class="form-group full-width">
+        <label>Image URL</label>
+        <input 
+          type="url" 
+          class="form-control" 
+          formControlName="image"
+          placeholder="Enter image URL"
+        >
+      </div>
+      <div class="form-group full-width">
+        <label>Tags</label>
+        <div class="section-header">
+          <h4>Tags</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addTag()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Tag
+          </button>
+        </div>
+        <div formArrayName="tags">
+          <div 
+            *ngFor="let tag of tagsArray.controls; let i = index"
+            class="tag-item"
+          >
+            <div class="item-header">
+              <h5>Tag {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeTag(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-group full-width">
+              <input 
+                type="text" 
+                class="form-control" 
+                [formControlName]="i"
+                placeholder="Enter tag"
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Featured</label>
+        <input 
+          type="checkbox" 
+          formControlName="featured"
+        >
+      </div>
+    </div>
+    <div class="dialog-actions">
+      <button 
+        type="button"
+        class="btn-outline-primary-custom"
+        [routerLink]="['/dashboard/news']"
+      >
+        Cancel
+      </button>
+      <button 
+        type="submit"
+        class="btn-primary-custom"
+        [disabled]="newsForm.invalid"
+      >
+        Create News
+      </button>
+    </div>
+  </form>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
+  </div>
+</section>

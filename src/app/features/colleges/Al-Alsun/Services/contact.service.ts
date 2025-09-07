@@ -9,7 +9,6 @@ export class ContactService {
 
   private contactInfo: ContactInfo = {
     address: {
-      arabic: 'الأقصر – شرق السكة الحديد، شارع جامع عبد الكريم – بجوار الإدارة التعليمية.',
       english: 'Luxor – East of the Railway, Gamal Abdel Karim Street – next to the Educational Administration.'
     },
     phone: '(+20) 095-2356555',

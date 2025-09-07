@@ -1,6 +1,5 @@
 export interface ContactInfo {
   address: {
-    arabic: string;
     english: string;
   };
   phone: string;
