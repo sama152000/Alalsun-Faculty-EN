@@ -1,4 +1,4 @@
-.add-menu-container {
+.edit-menu-container {
   padding: 2rem;
   background: var(--light-bg);
   min-height: 100vh;
@@ -369,7 +369,7 @@
 }
 
 @media (max-width: 768px) {
-  .add-menu-container {
+  .edit-menu-container {
     padding: 1rem;
   }
 

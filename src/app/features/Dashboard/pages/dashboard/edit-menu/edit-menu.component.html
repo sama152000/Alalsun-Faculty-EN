@@ -1,6 +1,6 @@
-<div class="add-menu-container">
+<div class="edit-menu-container">
   <div class="management-header">
-    <h2>Create New Menu</h2>
+    <h2>Edit Menu</h2>
     <div class="header-actions">
       <button type="button" class="btn-outline-secondary" [routerLink]="['/dashboard/menus']">
         <i class="pi pi-arrow-left"></i> Back to Menus
@@ -8,7 +8,7 @@
     </div>
   </div>
 
-  <form [formGroup]="menuForm" (ngSubmit)="saveMenu()" class="menu-form">
+  <form [formGroup]="menuForm" (ngSubmit)="updateMenu()" class="menu-form">
     <div class="form-card">
       <h3>Basic Information</h3>
       <div class="form-grid">
@@ -291,7 +291,7 @@
               <i class="pi pi-plus"></i> Add Language
             </button>
           </div>
-          <div formArrayName="contactMethods.languages">
+          <div formArrayName="languages">
             <div *ngFor="let lang of submenuLanguagesArray.controls; let i = index" [formGroupName]="i" class="language-item">
               <div class="item-header">
                 <h5>Language {{ i + 1 }}</h5>
@@ -482,6 +482,187 @@
             </div>
           </div>
         </div>
+
+        <!-- Academic Links -->
+        <div class="links-section">
+          <div class="section-header">
+            <h4>Academic Links</h4>
+            <button type="button" class="btn-add-item" (click)="addFooterAcademicLink()">
+              <i class="pi pi-plus"></i> Add Academic Link
+            </button>
+          </div>
+          <div formGroupName="academicLinks">
+            <div class="form-group">
+              <label for="academicLinksTitle">Section Title</label>
+              <input 
+                id="academicLinksTitle"
+                type="text" 
+                class="form-control" 
+                formControlName="title"
+                placeholder="Academic Links"
+              >
+            </div>
+            <div formArrayName="links">
+              <div *ngFor="let link of footerAcademicLinksArray.controls; let i = index" [formGroupName]="i" class="link-item">
+                <div class="item-header">
+                  <h5>Link {{ i + 1 }}</h5>
+                  <button type="button" class="btn-remove" (click)="removeFooterAcademicLink(i)">
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>Title *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      formControlName="title"
+                      placeholder="Academic Programs"
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label>URL *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      formControlName="url"
+                      placeholder="/programs"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resource Links -->
+        <div class="links-section">
+          <div class="section-header">
+            <h4>Resource Links</h4>
+            <button type="button" class="btn-add-item" (click)="addFooterResourceLink()">
+              <i class="pi pi-plus"></i> Add Resource Link
+            </button>
+          </div>
+          <div formGroupName="resourceLinks">
+            <div class="form-group">
+              <label for="resourceLinksTitle">Section Title</label>
+              <input 
+                id="resourceLinksTitle"
+                type="text" 
+                class="form-control" 
+                formControlName="title"
+                placeholder="Resource Links"
+              >
+            </div>
+            <div formArrayName="links">
+              <div *ngFor="let link of footerResourceLinksArray.controls; let i = index" [formGroupName]="i" class="link-item">
+                <div class="item-header">
+                  <h5>Link {{ i + 1 }}</h5>
+                  <button type="button" class="btn-remove" (click)="removeFooterResourceLink(i)">
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>Title *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      formControlName="title"
+                      placeholder="Library"
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label>URL *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      formControlName="url"
+                      placeholder="/library"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Methods -->
+        <div class="links-section">
+          <h4>Contact Methods</h4>
+          <div formGroupName="contactMethods" class="form-grid">
+            <div class="form-group">
+              <label for="footerPhone">Phone</label>
+              <input 
+                id="footerPhone"
+                type="tel" 
+                class="form-control" 
+                formControlName="phone"
+                placeholder="+20 95 237 1000"
+              >
+            </div>
+            <div class="form-group">
+              <label for="footerEmail">Email</label>
+              <input 
+                id="footerEmail"
+                type="email" 
+                class="form-control" 
+                formControlName="email"
+                placeholder="info@faculty.edu"
+              >
+            </div>
+            <div class="form-group">
+              <label for="footerUniversityWebsite">University Website</label>
+              <input 
+                id="footerUniversityWebsite"
+                type="url" 
+                class="form-control" 
+                formControlName="universityWebsite"
+                placeholder="https://university.edu"
+              >
+            </div>
+          </div>
+
+          <!-- Contact Languages -->
+          <div class="languages-section">
+            <div class="section-header">
+              <h4>Languages</h4>
+              <button type="button" class="btn-add-item" (click)="addFooterContactLanguage()">
+                <i class="pi pi-plus"></i> Add Language
+              </button>
+            </div>
+            <div formArrayName="languages">
+              <div *ngFor="let lang of footerContactLanguagesArray.controls; let i = index" [formGroupName]="i" class="language-item">
+                <div class="item-header">
+                  <h5>Language {{ i + 1 }}</h5>
+                  <button type="button" class="btn-remove" (click)="removeFooterContactLanguage(i)">
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label>Value *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      formControlName="value"
+                      placeholder="en"
+                    >
+                  </div>
+                  <div class="form-group">
+                    <label>Label *</label>
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      formControlName="label"
+                      placeholder="English"
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -491,7 +672,7 @@
         <i class="pi pi-times"></i> Cancel
       </button>
       <button type="submit" class="btn-primary-custom" [disabled]="menuForm.invalid">
-        <i class="pi pi-check"></i> Create Menu
+        <i class="pi pi-check"></i> Update Menu
       </button>
     </div>
   </form>

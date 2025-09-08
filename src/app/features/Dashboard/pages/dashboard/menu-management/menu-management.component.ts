@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { MenuService}from '../../../../colleges/Al-Alsun/Services/menu.service';
-import {  MenuItem, MenuType, HeaderType } from '../../../../colleges/Al-Alsun/model/menu.model';
-import { Observable } from 'rxjs';
+import { MenuService } from '../../../../colleges/Al-Alsun/Services/menu.service';
+import { MenuItem, MenuType, HeaderType } from '../../../../colleges/Al-Alsun/model/menu.model';
+import { FilterPipe } from "../../../../../core/pipes/filter.pipe";
 
 @Component({
   selector: 'app-menu-management',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FilterPipe],
   templateUrl: './menu-management.component.html',
   styleUrls: ['./menu-management.component.css']
 })
@@ -61,6 +61,13 @@ export class MenuManagementComponent implements OnInit {
         this.closeConfirmDialog();
       });
     }
+  }
+
+  getMenuTypeDisplay(menu: MenuItem): string {
+    if (menu.type === MenuType.HEADER && menu.headerType) {
+      return `${menu.type.toUpperCase()} (${menu.headerType.replace('_', ' ').toUpperCase()})`;
+    }
+    return menu.type.toUpperCase();
   }
 
   showSuccessToast(message: string) {

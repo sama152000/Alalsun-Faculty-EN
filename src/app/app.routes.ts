@@ -40,6 +40,7 @@ import { NewsManagementComponent } from './features/Dashboard/pages/news-managem
 import { AddNewsComponent } from './features/Dashboard/pages/dashboard/add-news/add-news.component';
 import { EditNewsComponent } from './features/Dashboard/pages/dashboard/edit-news/edit-news.component';
 import { AddMenuComponent } from './features/Dashboard/pages/dashboard/add-menu/add-menu.component';
+import { EditMenuComponent } from './features/Dashboard/pages/dashboard/edit-menu/edit-menu.component';
 
 export const routes: Routes = [
   {
@@ -90,7 +91,7 @@ export const routes: Routes = [
      { path: 'media', component: MediaManagementComponent },
       { path: 'menus', component: MenuManagementComponent },
       { path: 'menus/add', component: AddMenuComponent },
-      { path: 'menus/edit/:id', component: EditDeanComponent },
+      { path: 'menus/edit/:id', component: EditMenuComponent },
       { path: 'pages', component: PagesManagementComponent },
       { path: 'settings', component: SettingsManagementComponent },
       { path: '', redirectTo: 'overview', pathMatch: 'full' }

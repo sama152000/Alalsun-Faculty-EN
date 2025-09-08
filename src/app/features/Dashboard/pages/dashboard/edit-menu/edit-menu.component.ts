@@ -1,25 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { MenuService } from '../../../../colleges/Al-Alsun/Services/menu.service';
-import { MenuItem, MenuType, HeaderType } from '../../../../colleges/Al-Alsun/model/menu.model';
-
-interface NavbarItem {
-  label: string;
-  icon?: string;
-  route?: string;
-  children?: { label: string; icon?: string; route?: string }[];
-}
+import { MenuItem, MenuType, HeaderType, NavbarItem, HeaderData, FooterData } from '../../../../colleges/Al-Alsun/model/menu.model';
 
 @Component({
-  selector: 'app-add-menu',
+  selector: 'app-edit-menu',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './add-menu.component.html',
-  styleUrls: ['./add-menu.component.css']
+  templateUrl: './edit-menu.component.html',
+  styleUrls: ['./edit-menu.component.css']
 })
-export class AddMenuComponent implements OnInit {
+export class EditMenuComponent implements OnInit {
   menuForm: FormGroup;
   menuTypes = Object.values(MenuType);
   headerTypes = Object.values(HeaderType);
@@ -27,17 +20,21 @@ export class AddMenuComponent implements OnInit {
   toastMessage = '';
   toastClass = '';
   toastIcon = '';
+  menuId: number;
 
   constructor(
     private fb: FormBuilder,
     private menuService: MenuService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
+    this.menuId = +this.route.snapshot.paramMap.get('id')!;
     this.menuForm = this.createForm();
   }
 
   ngOnInit() {
     this.setupFormValidation();
+    this.loadMenuData();
   }
 
   private createForm(): FormGroup {
@@ -104,6 +101,45 @@ export class AddMenuComponent implements OnInit {
     });
   }
 
+  private loadMenuData() {
+    this.menuService.getMenuById(this.menuId).subscribe(menu => {
+      if (!menu) {
+        this.showErrorToast('Menu not found');
+        return;
+      }
+
+      this.menuForm.patchValue({
+        name: menu.name,
+        type: menu.type,
+        headerType: menu.headerType || '',
+        isActive: menu.isActive
+      });
+
+      if (menu.type === MenuType.HEADER) {
+        const headerData = menu.data as HeaderData;
+        if (menu.headerType === HeaderType.TOP_NAV) {
+          this.menuForm.get('facultyInfo')?.patchValue(headerData.facultyInfo || {});
+        } else if (menu.headerType === HeaderType.MAIN_NAV) {
+          this.setNavbarItems(headerData.navbarItems || []);
+        } else if (menu.headerType === HeaderType.SUBMENU) {
+          this.menuForm.get('submenu')?.patchValue(headerData.submenu || {});
+          this.setSubmenuLanguages(headerData.submenu?.contactMethods?.languages || []);
+        }
+      } else {
+        const footerData = menu.data as FooterData;
+        this.menuForm.get('footerData')?.patchValue(footerData);
+        this.setFooterSocialLinks(footerData.socialLinks || []);
+        this.setFooterQuickLinks(footerData.quickLinks?.links || []);
+        this.setFooterAcademicLinks(footerData.academicLinks?.links || []);
+        this.setFooterResourceLinks(footerData.resourceLinks?.links || []);
+        this.setFooterContactLanguages(footerData.contactMethods?.languages || []);
+      }
+    }, error => {
+      this.showErrorToast('Failed to load menu data');
+      console.error('Error loading menu:', error);
+    });
+  }
+
   // Form Array Getters
   get navbarItemsArray() { return this.menuForm.get('navbarItems') as FormArray; }
   get submenuLanguagesArray() { return this.menuForm.get('submenu.contactMethods.languages') as FormArray; }
@@ -114,6 +150,27 @@ export class AddMenuComponent implements OnInit {
   get footerContactLanguagesArray() { return this.menuForm.get('footerData.contactMethods.languages') as FormArray; }
 
   // Navbar Items Management
+  private setNavbarItems(items: NavbarItem[]) {
+    const navbarItemsArray = this.navbarItemsArray;
+    navbarItemsArray.clear();
+    items.forEach(item => {
+      const childrenArray = this.fb.array([]);
+      item.children?.forEach(child => {
+        childrenArray.push(this.fb.group({
+          label: [child.label, Validators.required],
+          icon: [child.icon],
+          route: [child.route]
+        }) as any);
+      });
+      navbarItemsArray.push(this.fb.group({
+        label: [item.label, Validators.required],
+        icon: [item.icon],
+        route: [item.route],
+        children: childrenArray
+      }));
+    });
+  }
+
   addNavbarItem() {
     this.navbarItemsArray.push(this.fb.group({
       label: ['', Validators.required],
@@ -146,6 +203,17 @@ export class AddMenuComponent implements OnInit {
   }
 
   // Language Management
+  private setSubmenuLanguages(languages: any[]) {
+    const languagesArray = this.submenuLanguagesArray;
+    languagesArray.clear();
+    languages.forEach(lang => {
+      languagesArray.push(this.fb.group({
+        value: [lang.value, Validators.required],
+        label: [lang.label, Validators.required]
+      }));
+    });
+  }
+
   addSubmenuLanguage() {
     this.submenuLanguagesArray.push(this.fb.group({
       value: ['', Validators.required],
@@ -158,6 +226,62 @@ export class AddMenuComponent implements OnInit {
   }
 
   // Footer Management
+  private setFooterSocialLinks(links: any[]) {
+    const socialLinksArray = this.footerSocialLinksArray;
+    socialLinksArray.clear();
+    links.forEach(link => {
+      socialLinksArray.push(this.fb.group({
+        platform: [link.platform, Validators.required],
+        url: [link.url, Validators.required],
+        icon: [link.icon, Validators.required]
+      }));
+    });
+  }
+
+  private setFooterQuickLinks(links: any[]) {
+    const quickLinksArray = this.footerQuickLinksArray;
+    quickLinksArray.clear();
+    links.forEach(link => {
+      quickLinksArray.push(this.fb.group({
+        title: [link.title, Validators.required],
+        url: [link.url, Validators.required]
+      }));
+    });
+  }
+
+  private setFooterAcademicLinks(links: any[]) {
+    const academicLinksArray = this.footerAcademicLinksArray;
+    academicLinksArray.clear();
+    links.forEach(link => {
+      academicLinksArray.push(this.fb.group({
+        title: [link.title, Validators.required],
+        url: [link.url, Validators.required]
+      }));
+    });
+  }
+
+  private setFooterResourceLinks(links: any[]) {
+    const resourceLinksArray = this.footerResourceLinksArray;
+    resourceLinksArray.clear();
+    links.forEach(link => {
+      resourceLinksArray.push(this.fb.group({
+        title: [link.title, Validators.required],
+        url: [link.url, Validators.required]
+      }));
+    });
+  }
+
+  private setFooterContactLanguages(languages: any[]) {
+    const languagesArray = this.footerContactLanguagesArray;
+    languagesArray.clear();
+    languages.forEach(lang => {
+      languagesArray.push(this.fb.group({
+        value: [lang.value, Validators.required],
+        label: [lang.label, Validators.required]
+      }));
+    });
+  }
+
   addFooterSocialLink() {
     this.footerSocialLinksArray.push(this.fb.group({
       platform: ['', Validators.required],
@@ -215,11 +339,11 @@ export class AddMenuComponent implements OnInit {
   }
 
   // Form Submission
-  saveMenu() {
+  updateMenu() {
     if (this.menuForm.valid) {
       const formValue = this.menuForm.value;
       const menu: MenuItem = {
-        id: 0,
+        id: this.menuId,
         name: formValue.name,
         type: formValue.type,
         headerType: formValue.type === MenuType.HEADER ? formValue.headerType : undefined,
@@ -227,11 +351,14 @@ export class AddMenuComponent implements OnInit {
         data: this.buildMenuData(formValue)
       };
 
-      this.menuService.addMenu(menu).subscribe(() => {
-        this.showSuccessToast('Menu created successfully');
+      this.menuService.updateMenu(menu).subscribe(() => {
+        this.showSuccessToast('Menu updated successfully');
         setTimeout(() => {
           this.router.navigate(['/dashboard/menus']);
         }, 2000);
+      }, error => {
+        this.showErrorToast('Failed to update menu');
+        console.error('Error updating menu:', error);
       });
     } else {
       this.showErrorToast('Please fill all required fields');
@@ -245,14 +372,21 @@ export class AddMenuComponent implements OnInit {
         case HeaderType.TOP_NAV:
           return { facultyInfo: formValue.facultyInfo };
         case HeaderType.MAIN_NAV:
-          return { navbarItems: formValue.navbarItems };
+          return { navbarItems: this.navbarItemsArray.value };
         case HeaderType.SUBMENU:
-          return { submenu: formValue.submenu };
+          return { submenu: { ...formValue.submenu, contactMethods: { ...formValue.submenu.contactMethods, languages: this.submenuLanguagesArray.value } } };
         default:
           return {};
       }
     } else {
-      return formValue.footerData;
+      return {
+        ...formValue.footerData,
+        socialLinks: this.footerSocialLinksArray.value,
+        quickLinks: { ...formValue.footerData.quickLinks, links: this.footerQuickLinksArray.value },
+        academicLinks: { ...formValue.footerData.academicLinks, links: this.footerAcademicLinksArray.value },
+        resourceLinks: { ...formValue.footerData.resourceLinks, links: this.footerResourceLinksArray.value },
+        contactMethods: { ...formValue.footerData.contactMethods, languages: this.footerContactLanguagesArray.value }
+      };
     }
   }
 
