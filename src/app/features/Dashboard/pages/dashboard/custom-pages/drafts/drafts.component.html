@@ -1,0 +1,72 @@
+ <div class="drafts-container">
+      <div class="drafts-header">
+        <h2>Draft Pages</h2>
+        <p>Pages created but not yet published</p>
+      </div>
+
+      <div class="drafts-content">
+        <div *ngIf="draftPages.length === 0" class="no-drafts">
+          <i class="pi pi-file-o no-drafts-icon"></i>
+          <h3>No Draft Pages</h3>
+          <p>You haven't created any draft pages yet.</p>
+          <button 
+            class="btn-primary-custom"
+            (click)="createNewPage()"
+          >
+            <i class="pi pi-plus"></i>
+            Create New Page
+          </button>
+        </div>
+
+        <div *ngIf="draftPages.length > 0" class="drafts-list">
+          <div *ngFor="let page of draftPages" class="draft-card">
+            <div class="draft-info">
+              <div class="draft-icon">
+                <i [class]="getTemplateIcon(page.template)"></i>
+              </div>
+              <div class="draft-details">
+                <h3>{{ page.title }}</h3>
+                <p class="draft-route">{{ page.route }}</p>
+                <p class="draft-template">Template: {{ getTemplateName(page.template) }}</p>
+                <div class="draft-meta">
+                  <span class="draft-date">
+                    <i class="pi pi-calendar"></i>
+                    Created: {{ formatDate(page.createdAt) }}
+                  </span>
+                  <span class="draft-status">
+                    <i class="pi pi-clock"></i>
+                    Draft
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="draft-actions">
+              <button 
+                class="btn-view"
+                (click)="previewPage(page)"
+                title="Preview Page"
+              >
+                <i class="pi pi-eye"></i>
+                Preview
+              </button>
+              <button 
+                class="btn-publish"
+                (click)="publishPage(page.id)"
+                title="Publish Page"
+              >
+                <i class="pi pi-check"></i>
+                Publish
+              </button>
+              <button 
+                class="btn-delete"
+                (click)="deletePage(page.id)"
+                title="Delete Page"
+              >
+                <i class="pi pi-trash"></i>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

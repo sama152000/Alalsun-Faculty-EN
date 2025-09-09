@@ -1,0 +1,32 @@
+ <div class="custom-pages-container">
+      <div class="page-header">
+        <h2>Custom Pages</h2>
+        <p>Create custom pages using professional templates</p>
+      </div>
+
+      <div class="templates-section">
+        <h3>Choose a Template</h3>
+        <div class="templates-grid">
+          <div 
+            *ngFor="let template of templates" 
+            class="template-card"
+            (click)="selectTemplate(template.id)"
+          >
+            <div class="template-preview">
+              <img [src]="template.preview" [alt]="template.name" class="preview-image">
+              <div class="template-overlay">
+                <i [class]="template.icon" class="template-icon"></i>
+              </div>
+            </div>
+            <div class="template-info">
+              <h4>{{ template.name }}</h4>
+              <p>{{ template.description }}</p>
+              <button class="btn-primary-custom">
+                <i class="pi pi-plus"></i>
+                Use Template
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

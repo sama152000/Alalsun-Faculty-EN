@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FooterService } from '../../../Services/footer.service';
-import { Footer } from '../../../model/footer.model';
+import { MenuService } from '../../../Services/menu.service';
+import { FooterData } from '../../../model/menu.model';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { RouterModule } from '@angular/router';
@@ -19,13 +19,15 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  footerData: Footer | undefined;
+  footerData: FooterData | undefined;
 
-  constructor(private footerService: FooterService) {}
+  constructor(private menuService: MenuService) {}
 
   ngOnInit(): void {
-    this.footerService.getFooterData().subscribe(data => {
-      this.footerData = data;
+    this.menuService.getActiveFooter().subscribe(menu => {
+      if (menu && menu.data) {
+        this.footerData = menu.data as FooterData;
+      }
     });
   }
 }

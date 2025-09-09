@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { StaffService } from '../../../colleges/Al-Alsun/Services/staff.service';
-import { StaffMember } from '../../../colleges/Al-Alsun/model/staff.model';
+import { StaffService } from '../../../../colleges/Al-Alsun/Services/staff.service';
+import { StaffMember } from '../../../../colleges/Al-Alsun/model/staff.model';
 
 @Component({
   selector: 'app-staff-management',

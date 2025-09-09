@@ -1,0 +1,73 @@
+<div class="custom-page-container">
+  <div *ngIf="pageData" class="page-content">
+    <app-page-header 
+      [title]="pageData.title"
+      [breadcrumbs]="[{label: pageData.title}]">
+    </app-page-header>
+
+    <div class="content-section">
+      <!-- Title & Text Template -->
+      <div *ngIf="pageData.template === 'title-text'" class="template-title-text">
+        <div class="container">
+          <div class="content-section">
+            <h2 class="section-title">{{ pageData.content.title }}</h2>
+            <div class="text-content">
+              <p>{{ pageData.content.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image, Title & Text Template -->
+      <div *ngIf="pageData.template === 'image-title-text'" class="template-image-title-text">
+        <div class="container">
+          <div class="content-section">
+            <div class="row align-items-center">
+              <div class="col-lg-6">
+                <div class="image-container">
+                  <img [src]="pageData.content.image" [alt]="pageData.content.title" class="content-image">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="text-container">
+                  <h2 class="section-title">{{ pageData.content.title }}</h2>
+                  <div class="text-content">
+                    <p>{{ pageData.content.text }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards Template -->
+      <div *ngIf="pageData.template === 'cards'" class="template-cards">
+        <div class="container">
+          <div class="content-section">
+            <h2 class="section-title">{{ pageData.content.title }}</h2>
+            <div class="cards-grid">
+              <div *ngFor="let card of pageData.content.cards" class="content-card">
+                <div class="card-image" *ngIf="card.image">
+                  <img [src]="card.image" [alt]="card.title" class="card-img">
+                </div>
+                <div class="card-content">
+                  <h3 class="card-title">{{ card.title }}</h3>
+                  <p class="card-description">{{ card.description }}</p>
+                  <a *ngIf="card.link" [href]="card.link" class="card-link">
+                    Learn More <i class="pi pi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!pageData" class="no-content">
+    <h2>Page Not Found</h2>
+    <p>The requested page is not available or not published.</p>
+  </div>
+</div>

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { NewsService } from '../../../colleges/Al-Alsun/Services/news.service';
-import { NewsItem, NewsCategory, NewsFilter } from '../../../colleges/Al-Alsun/model/news.model';
+import { NewsService } from '../../../../colleges/Al-Alsun/Services/news.service';
+import { NewsItem, NewsCategory, NewsFilter } from '../../../../colleges/Al-Alsun/model/news.model';
 
 @Component({
   selector: 'app-news-management',

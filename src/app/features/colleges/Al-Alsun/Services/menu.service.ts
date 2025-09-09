@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { MenuItem, MenuType, HeaderType, HeaderData, FooterData } from '../model/menu.model';
+import { Observable, of, combineLatest, BehaviorSubject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { MenuItem, MenuType, HeaderType, HeaderData, FooterData, NavbarItem } from '../model/menu.model';
+import { CustomPageService } from './custom-page.service';
+import { CustomPage } from '../model/custom-page.model';
 
 @Injectable({
   providedIn: 'root'
@@ -127,6 +130,8 @@ export class MenuService {
     }
   ];
 
+  constructor(private customPageService: CustomPageService) {}
+
   getAllMenus(): Observable<MenuItem[]> {
     return of(this.menus);
   }
@@ -164,7 +169,44 @@ export class MenuService {
   }
 
   getActiveHeader(headerType: HeaderType): Observable<MenuItem | undefined> {
+    if (headerType === HeaderType.MAIN_NAV) {
+      return combineLatest([
+        of(this.menus.find(menu => menu.type === MenuType.HEADER && menu.headerType === headerType && menu.isActive)),
+        this.customPageService.getPublishedPages()
+      ]).pipe(
+        map(([menu, publishedPages]) => {
+          if (!menu || !menu.data) return menu;
+
+          const customPageItems: NavbarItem[] = publishedPages
+            .slice(0, 7) // Limit to 7 pages
+            .map(page => ({
+              label: page.title,
+              route: `/pages/${page.route}`
+            }));
+
+          const moreDropdown: NavbarItem = {
+            label: 'More+',
+            children: customPageItems
+          };
+
+          const updatedMenu: MenuItem = {
+            ...menu,
+            data: {
+              ...menu.data,
+              navbarItems: [...((menu.data as HeaderData).navbarItems || []), moreDropdown]
+            }
+          };
+
+          return updatedMenu;
+        })
+      );
+    }
     return of(this.menus.find(menu => menu.type === MenuType.HEADER && menu.headerType === headerType && menu.isActive));
+  }
+
+  refreshMenu() {
+    // This method can be called to force menu refresh
+    // The navbar component will automatically update due to the observable
   }
 
   getActiveFooter(): Observable<MenuItem | undefined> {

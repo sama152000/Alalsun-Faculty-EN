@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
-import { DepartmentsService } from '../../../colleges/Al-Alsun/Services/departments.service';
-import { Department } from '../../../colleges/Al-Alsun/model/department.model';
+import { SectorsService } from '../../../../colleges/Al-Alsun/Services/sectors.service'; // غير المسار لو مختلف
+import { SectorData } from '../../../../colleges/Al-Alsun/model/sector.model';
 
 @Component({
-  selector: 'app-departments-management',
+  selector: 'app-sectors-management',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './departments-management.component.html',
-  styleUrls: ['./departments-management.component.css']
+  templateUrl: './sectors-management.component.html',
+  styleUrls: ['./sectors-management.component.css']
 })
-export class DepartmentsManagementComponent implements OnInit {
-  departments: Department[] = [];
+export class SectorsManagementComponent implements OnInit {
+  sectors: SectorData[] = [];
   showConfirmDialog = false;
   showToast = false;
   toastMessage = '';
@@ -21,17 +21,17 @@ export class DepartmentsManagementComponent implements OnInit {
   deleteId: string | null = null;
 
   constructor(
-    private departmentService: DepartmentsService,
+    private sectorsService: SectorsService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.loadDepartments();
+    this.loadSectors();
   }
 
-  loadDepartments() {
-    this.departmentService.getAllDepartments().subscribe(departments => {
-      this.departments = departments;
+  loadSectors() {
+    this.sectorsService.getAllSectors().subscribe(sectors => {
+      this.sectors = sectors;
     });
   }
 
@@ -45,14 +45,14 @@ export class DepartmentsManagementComponent implements OnInit {
     this.deleteId = null;
   }
 
-  deleteDepartment() {
+  deleteSector() {
     if (this.deleteId) {
-      this.departmentService.deleteDepartment(this.deleteId).subscribe(() => {
+      this.sectorsService.deleteSector(this.deleteId).subscribe(() => {
         this.showToast = true;
         this.toastClass = 'toast-success';
         this.toastIcon = 'pi pi-check';
-        this.toastMessage = 'Department deleted successfully';
-        this.loadDepartments();
+        this.toastMessage = 'Sector deleted successfully';
+        this.loadSectors();
         this.closeConfirmDialog();
         setTimeout(() => this.hideToast(), 3000);
       });

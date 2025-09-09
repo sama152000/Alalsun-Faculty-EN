@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LayoutService } from '../../../Services/navbar.service';
-import { FacultyInfo, NavbarItem, Submenu } from '../../..//model/navbar.model';
+import { MenuService } from '../../../Services/menu.service';
+import { FacultyInfo, NavbarItem, Submenu, HeaderType } from '../../../model/menu.model';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,19 +20,34 @@ export class NavbarComponent implements OnInit {
   isDropdownOpen: { [key: string]: boolean } = {};
   isSectorsDropdownOpen = false;
 
-  constructor(private layoutService: LayoutService) {}
+  constructor(private menuService: MenuService) {}
 
   ngOnInit(): void {
-    this.layoutService.getLayoutData().subscribe((data) => {
-      this.facultyInfo = data.facultyInfo;
-      this.navbarItems = data.navbarItems;
-      this.submenu = data.submenu; // تحميل بيانات submenu
-      // تهيئة حالة القوائم المنسدلة
-      this.navbarItems.forEach((item) => {
-        if (item.children) {
-          this.isDropdownOpen[item.label] = false;
-        }
-      });
+    // Fetch TOP_NAV
+    this.menuService.getActiveHeader(HeaderType.TOP_NAV).subscribe((menu) => {
+      if (menu && menu.data) {
+        this.facultyInfo = (menu.data as any).facultyInfo;
+      }
+    });
+
+    // Fetch MAIN_NAV with custom pages in More+ dropdown
+    this.menuService.getActiveHeader(HeaderType.MAIN_NAV).subscribe((menu) => {
+      if (menu && menu.data) {
+        this.navbarItems = (menu.data as any).navbarItems || [];
+        // Initialize dropdown states
+        this.navbarItems.forEach((item) => {
+          if (item.children) {
+            this.isDropdownOpen[item.label] = false;
+          }
+        });
+      }
+    });
+
+    // Fetch SUBMENU
+    this.menuService.getActiveHeader(HeaderType.SUBMENU).subscribe((menu) => {
+      if (menu && menu.data) {
+        this.submenu = (menu.data as any).submenu;
+      }
     });
   }
 
