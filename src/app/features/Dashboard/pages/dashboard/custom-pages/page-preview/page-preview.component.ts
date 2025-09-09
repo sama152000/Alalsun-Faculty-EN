@@ -50,6 +50,7 @@ export class PagePreviewComponent implements OnInit {
       (error) => {
         console.error('Error saving page to drafts:', error);
       }
+      
     );
   }
 }
