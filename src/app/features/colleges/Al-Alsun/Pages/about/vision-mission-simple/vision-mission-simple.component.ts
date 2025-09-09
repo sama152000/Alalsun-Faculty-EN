@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Subject, takeUntil } from 'rxjs';
-
+import { FormsModule } from '@angular/forms';
 import { AboutService } from '../../../Services/about.service';
 import { VisionMission } from '../../../model/about.model';
 

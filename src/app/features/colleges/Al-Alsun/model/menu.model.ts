@@ -18,13 +18,7 @@ export enum HeaderType {
   MAIN_NAV = 'main_nav'
 }
 
-export interface FacultyInfo {
-  logoUrl: string;
-  name: string;
-  subtitle: string;
-  universityName: string;
-  established: string;
-}
+import { FacultyInfo } from './faculty-info.model';
 
 export interface NavbarItem {
   label: string;
@@ -46,7 +40,6 @@ export interface Submenu {
 }
 
 export interface HeaderData {
-  facultyInfo?: FacultyInfo; // For TopNav
   navbarItems?: NavbarItem[]; // For MainNav
   submenu?: Submenu; // For Submenu
 }

@@ -4,6 +4,8 @@ import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { MenuService } from '../../../../colleges/Al-Alsun/Services/menu.service';
 import { MenuItem, MenuType, HeaderType, NavbarItem, HeaderData, FooterData } from '../../../../colleges/Al-Alsun/model/menu.model';
+import { FacultyInfoService } from '../../../../colleges/Al-Alsun/Services/faculty-info.service';
+import { FacultyInfo } from '../../../../colleges/Al-Alsun/model/faculty-info.model';
 
 @Component({
   selector: 'app-edit-menu',
@@ -43,13 +45,6 @@ export class EditMenuComponent implements OnInit {
       type: ['', Validators.required],
       headerType: [''],
       isActive: [false],
-      facultyInfo: this.fb.group({
-        logoUrl: [''],
-        name: [''],
-        subtitle: [''],
-        universityName: [''],
-        established: ['']
-      }),
       navbarItems: this.fb.array([]),
       submenu: this.fb.group({
         copyright: [''],
@@ -117,9 +112,7 @@ export class EditMenuComponent implements OnInit {
 
       if (menu.type === MenuType.HEADER) {
         const headerData = menu.data as HeaderData;
-        if (menu.headerType === HeaderType.TOP_NAV) {
-          this.menuForm.get('facultyInfo')?.patchValue(headerData.facultyInfo || {});
-        } else if (menu.headerType === HeaderType.MAIN_NAV) {
+        if (menu.headerType === HeaderType.MAIN_NAV) {
           this.setNavbarItems(headerData.navbarItems || []);
         } else if (menu.headerType === HeaderType.SUBMENU) {
           this.menuForm.get('submenu')?.patchValue(headerData.submenu || {});

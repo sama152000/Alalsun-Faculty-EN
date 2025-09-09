@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MenuService } from '../../../Services/menu.service';
-import { FacultyInfo, NavbarItem, Submenu, HeaderType } from '../../../model/menu.model';
+import { FacultyInfoService } from '../../../Services/faculty-info.service';
+import { NavbarItem, Submenu, HeaderType } from '../../../model/menu.model';
+import { FacultyInfo } from '../../../model/faculty-info.model';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,13 +22,28 @@ export class NavbarComponent implements OnInit {
   isDropdownOpen: { [key: string]: boolean } = {};
   isSectorsDropdownOpen = false;
 
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService, private facultyInfoService: FacultyInfoService) {}
 
   ngOnInit(): void {
-    // Fetch TOP_NAV
-    this.menuService.getActiveHeader(HeaderType.TOP_NAV).subscribe((menu) => {
-      if (menu && menu.data) {
-        this.facultyInfo = (menu.data as any).facultyInfo;
+    // Fetch faculty info from FacultyInfoService
+    this.facultyInfoService.getFacultyInfo().subscribe((info) => {
+      this.facultyInfo = info;
+    });
+
+    // Fetch all contacts and try to set logo based on data
+    this.facultyInfoService.getAllContacts().subscribe({
+      next: (contacts) => {
+        if (contacts.length > 0) {
+          // افتراض إن اللوجو مرتبط بـ id الأول أو تحتاج تضيف منطق لاختيار اللوجو
+          const defaultContact = contacts[0]; // خذ أول عنصر كمثال
+          if (this.facultyInfo) {
+            // غيّر المسار لو عندك منطق معين (مثل إضافة id للوجو)
+            this.facultyInfo.logoUrl = `assets/logos/${defaultContact.id}.jpg` || 'assets/logo.jpg';
+          }
+        }
+      },
+      error: (err) => {
+        console.error('Failed to load contacts:', err);
       }
     });
 
@@ -34,7 +51,6 @@ export class NavbarComponent implements OnInit {
     this.menuService.getActiveHeader(HeaderType.MAIN_NAV).subscribe((menu) => {
       if (menu && menu.data) {
         this.navbarItems = (menu.data as any).navbarItems || [];
-        // Initialize dropdown states
         this.navbarItems.forEach((item) => {
           if (item.children) {
             this.isDropdownOpen[item.label] = false;
@@ -43,7 +59,6 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    // Fetch SUBMENU
     this.menuService.getActiveHeader(HeaderType.SUBMENU).subscribe((menu) => {
       if (menu && menu.data) {
         this.submenu = (menu.data as any).submenu;

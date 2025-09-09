@@ -41,15 +41,7 @@ export class MenuService {
       type: MenuType.HEADER,
       headerType: HeaderType.TOP_NAV,
       isActive: true,
-      data: {
-        facultyInfo: {
-          logoUrl: 'assets/logo.jpg',
-          name: 'Faculty of Al-Alsun',
-          subtitle: 'Luxor University',
-          universityName: 'Luxor University',
-          established: 'EST. 2019'
-        }
-      }
+      data: {}
     },
     {
       id: 3,
