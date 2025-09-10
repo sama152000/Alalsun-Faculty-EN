@@ -1,101 +1,66 @@
 <div class="menu-management">
-  <div class="management-header">
-    <h2>Menu Management</h2>
+  <div class="menu-header">
+    <div class="header-content">
+      <h2>Menu Management</h2>
+      <p>Manage your website's menus</p>
+    </div>
     <button class="btn-primary-custom" [routerLink]="['/dashboard/menus/add']">
       <i class="pi pi-plus"></i> Add New Menu
     </button>
   </div>
 
-  <div class="menu-categories">
-    <div class="category-section">
-      <h3>Header Menus</h3>
-      <div class="menu-list">
-        <div class="menu-card" *ngFor="let menu of menus | filter: 'header'">
-          <div class="menu-info">
-            <h4>{{ menu.name }}</h4>
-            <p class="menu-type">{{ getMenuTypeDisplay(menu) }}</p>
-            <div class="menu-status" [class.active]="menu.isActive">
-              <i class="pi" [class.pi-check-circle]="menu.isActive" [class.pi-circle]="!menu.isActive"></i>
-              {{ menu.isActive ? 'Active' : 'Inactive' }}
-            </div>
-          </div>
-          <div class="menu-actions">
-            <button 
-              class="btn-set-active" 
-              *ngIf="!menu.isActive"
-              (click)="setActive(menu.id, menu.type, menu.headerType)"
-              title="Set as Active"
-            >
-              <i class="pi pi-check-circle"></i>
-            </button>
-            <button 
-              class="btn-edit"
-              [routerLink]="['/dashboard/menus/edit', menu.id]"
-              title="Edit Menu"
-            >
-              <i class="pi pi-pencil"></i>
-            </button>
-            <button 
-              class="btn-delete"
-              (click)="confirmDelete(menu.id)"
-              title="Delete Menu"
-            >
-              <i class="pi pi-trash"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="category-section">
-      <h3>Footer Menus</h3>
-      <div class="menu-list">
-        <div class="menu-card" *ngFor="let menu of menus | filter: 'footer'">
-          <div class="menu-info">
-            <h4>{{ menu.name }}</h4>
-            <p class="menu-type">{{ getMenuTypeDisplay(menu) }}</p>
-            <div class="menu-status" [class.active]="menu.isActive">
-              <i class="pi" [class.pi-check-circle]="menu.isActive" [class.pi-circle]="!menu.isActive"></i>
-              {{ menu.isActive ? 'Active' : 'Inactive' }}
-            </div>
-          </div>
-          <div class="menu-actions">
-            <button 
-              class="btn-set-active" 
-              *ngIf="!menu.isActive"
-              (click)="setActive(menu.id, menu.type, menu.headerType)"
-              title="Set as Active"
-            >
-              <i class="pi pi-check-circle"></i>
-            </button>
-            <button 
-              class="btn-edit"
-              [routerLink]="['/dashboard/menus/edit', menu.id]"
-              title="Edit Menu"
-            >
-              <i class="pi pi-pencil"></i>
-            </button>
-            <button 
-              class="btn-delete"
-              (click)="confirmDelete(menu.id)"
-              title="Delete Menu"
-            >
-              <i class="pi pi-trash"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div *ngIf="menus.length === 0" class="no-data">
-    <div class="no-data-content">
-      <i class="pi pi-inbox no-data-icon"></i>
+  <div class="menu-content">
+    <div *ngIf="menus.length === 0" class="no-menus">
+      <i class="pi pi-inbox no-menus-icon"></i>
       <h3>No Menus Available</h3>
-      <p>Create your first menu to get started</p>
+      <p>Create your first menu to get started.</p>
       <button class="btn-primary-custom" [routerLink]="['/dashboard/menus/add']">
-        <i class="pi pi-plus"></i> Create Menu
+        <i class="pi pi-plus"></i> Create New Menu
       </button>
+    </div>
+
+    <div *ngIf="menus.length > 0" class="menu-list">
+      <div *ngFor="let menu of menus" class="menu-card">
+        <div class="menu-info">
+          <div class="menu-icon">
+            <i class="pi pi-list"></i>
+          </div>
+          <div class="menu-details">
+            <h3>{{ menu.name }}</h3>
+            <p class="menu-type">{{ getMenuTypeDisplay(menu) }}</p>
+            <div class="menu-meta">
+              <span class="menu-status" [class.active]="menu.isActive">
+                <i class="pi" [class.pi-check-circle]="menu.isActive" [class.pi-circle]="!menu.isActive"></i>
+                {{ menu.isActive ? 'Active' : 'Inactive' }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="menu-actions">
+          <button 
+            class="btn-set-active" 
+            *ngIf="!menu.isActive"
+            (click)="setActive(menu.id, menu.type, menu.headerType)"
+            title="Set as Active"
+          >
+            <i class="pi pi-check-circle"></i> Set Active
+          </button>
+          <button 
+            class="btn-edit"
+            [routerLink]="['/dashboard/menus/edit', menu.id]"
+            title="Edit Menu"
+          >
+            <i class="pi pi-pencil"></i> Edit
+          </button>
+          <button 
+            class="btn-delete"
+            (click)="confirmDelete(menu.id)"
+            title="Delete Menu"
+          >
+            <i class="pi pi-trash"></i> Delete
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 

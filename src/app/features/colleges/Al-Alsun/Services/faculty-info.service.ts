@@ -16,12 +16,34 @@ export class FacultyInfoService {
     established: 'EST. 2019'
   };
 
-  private apiUrl = environment.apiUrl + 'contacts';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   getFacultyInfo(): Observable<FacultyInfo> {
-    return of(this.facultyInfo);
+    // Try to fetch logos from backend first
+    return this.http.get<any>(`${this.apiUrl}logos/getall`, {
+      headers: { 'Accept-Language': 'any', 'Content-Type': 'application/json' }
+    }).pipe(
+      map(res => {
+        if (res.success && res.data && res.data.length > 0) {
+          const firstLogo = res.data[0];
+          return {
+            logoUrl: firstLogo.logoPath ? `${this.apiUrl}${firstLogo.logoPath}` : this.facultyInfo.logoUrl,
+            name: this.facultyInfo.name,
+            subtitle: this.facultyInfo.subtitle,
+            universityName: this.facultyInfo.universityName,
+            established: this.facultyInfo.established
+          };
+        } else {
+          return this.facultyInfo;
+        }
+      }),
+      catchError(error => {
+        console.log('Backend logos not available, using default:', error);
+        return of(this.facultyInfo);
+      })
+    );
   }
 
   getAllContacts(): Observable<any[]> {

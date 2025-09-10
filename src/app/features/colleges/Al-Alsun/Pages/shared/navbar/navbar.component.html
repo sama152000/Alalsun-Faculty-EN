@@ -78,7 +78,6 @@
           <li class="nav-item" *ngFor="let item of navbarItems" [class.dropdown]="item.children && item.children.length > 0" [class.show]="isDropdownOpen[item.label]">
             <ng-container *ngIf="!item.children || item.children.length === 0">
               <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
-                <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
                 {{ item.label }}
               </a>
             </ng-container>
@@ -88,13 +87,11 @@
                  role="button"
                  (click)="toggleDropdown(item.label, $event)"
                  [attr.aria-expanded]="isDropdownOpen[item.label]">
-                <i *ngIf="item.icon" [class]="item.icon + ' me-2'"></i>
                 {{ item.label }}
               </a>
               <ul class="dropdown-menu" [class.show]="isDropdownOpen[item.label]">
                 <li *ngFor="let child of item.children">
                   <a class="dropdown-item" [routerLink]="child.route" (click)="onDropdownSelect(item.label)">
-                    <i *ngIf="child.icon" [class]="child.icon + ' me-2'"></i>
                     {{ child.label }}
                   </a>
                 </li>

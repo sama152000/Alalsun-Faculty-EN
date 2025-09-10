@@ -3,35 +3,40 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { MenuService } from '../../../../colleges/Al-Alsun/Services/menu.service';
-import { MenuItem, MenuType, HeaderType } from '../../../../colleges/Al-Alsun/model/menu.model';
-
-interface NavbarItem {
-  label: string;
-  icon?: string;
-  route?: string;
-  children?: { label: string; icon?: string; route?: string }[];
-}
+import { MessageService } from 'primeng/api';
+import { MenuItem, MenuType, HeaderType, NavbarItem, SocialMediaIcon } from '../../../../colleges/Al-Alsun/model/menu.model';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-add-menu',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ToastModule],
   templateUrl: './add-menu.component.html',
-  styleUrls: ['./add-menu.component.css']
+  styleUrls: ['./add-menu.component.css'],
+  providers: [MessageService]
 })
 export class AddMenuComponent implements OnInit {
   menuForm: FormGroup;
   menuTypes = Object.values(MenuType);
   headerTypes = Object.values(HeaderType);
-  showToast = false;
-  toastMessage = '';
-  toastClass = '';
-  toastIcon = '';
+  socialIcons: SocialMediaIcon[] = [
+    { label: 'Facebook', value: 'pi pi-facebook', color: '#1877f2' },
+    { label: 'Twitter', value: 'pi pi-twitter', color: '#1da1f2' },
+    { label: 'Instagram', value: 'pi pi-instagram', color: '#e4405f' },
+    { label: 'LinkedIn', value: 'pi pi-linkedin', color: '#0077b5' },
+    { label: 'YouTube', value: 'pi pi-youtube', color: '#ff0000' },
+    { label: 'WhatsApp', value: 'pi pi-whatsapp', color: '#25d366' },
+    { label: 'Telegram', value: 'pi pi-telegram', color: '#0088cc' },
+    { label: 'Email', value: 'pi pi-envelope', color: '#6c757d' },
+    { label: 'Phone', value: 'pi pi-phone', color: '#28a745' },
+    { label: 'Website', value: 'pi pi-globe', color: '#17a2b8' }
+  ];
 
   constructor(
     private fb: FormBuilder,
     private menuService: MenuService,
-    private router: Router
+    private router: Router,
+    private messageService: MessageService
   ) {
     this.menuForm = this.createForm();
   }
@@ -40,6 +45,7 @@ export class AddMenuComponent implements OnInit {
     this.setupFormValidation();
   }
 
+  // Initialize the reactive form
   private createForm(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required],
@@ -47,7 +53,6 @@ export class AddMenuComponent implements OnInit {
       headerType: [''],
       isActive: [false],
       facultyInfo: this.fb.group({
-        logoUrl: [''],
         name: [''],
         subtitle: [''],
         universityName: [''],
@@ -64,7 +69,6 @@ export class AddMenuComponent implements OnInit {
         })
       }),
       footerData: this.fb.group({
-        logoIcon: [''],
         title: [''],
         subtitle: [''],
         tagline: [''],
@@ -92,6 +96,7 @@ export class AddMenuComponent implements OnInit {
     });
   }
 
+  // Set up dynamic validation for headerType based on menu type
   private setupFormValidation() {
     this.menuForm.get('type')?.valueChanges.subscribe(type => {
       const headerTypeControl = this.menuForm.get('headerType');
@@ -114,13 +119,16 @@ export class AddMenuComponent implements OnInit {
   get footerContactLanguagesArray() { return this.menuForm.get('footerData.contactMethods.languages') as FormArray; }
 
   // Navbar Items Management
-  addNavbarItem() {
-    this.navbarItemsArray.push(this.fb.group({
+  addNavbarItem(parentIndex?: number) {
+    const itemGroup = this.fb.group({
       label: ['', Validators.required],
-      icon: [''],
       route: [''],
+      target: [''],
+      parentId: [null],
       children: this.fb.array([])
-    }));
+    });
+
+    this.navbarItemsArray.push(itemGroup);
   }
 
   removeNavbarItem(index: number) {
@@ -131,8 +139,8 @@ export class AddMenuComponent implements OnInit {
     const childrenArray = this.navbarItemsArray.at(index).get('children') as FormArray;
     childrenArray.push(this.fb.group({
       label: ['', Validators.required],
-      icon: [''],
-      route: ['']
+      route: [''],
+      target: ['']
     }));
   }
 
@@ -162,7 +170,8 @@ export class AddMenuComponent implements OnInit {
     this.footerSocialLinksArray.push(this.fb.group({
       platform: ['', Validators.required],
       url: ['', Validators.required],
-      icon: ['', Validators.required]
+      icon: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -173,7 +182,8 @@ export class AddMenuComponent implements OnInit {
   addFooterQuickLink() {
     this.footerQuickLinksArray.push(this.fb.group({
       title: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -184,7 +194,8 @@ export class AddMenuComponent implements OnInit {
   addFooterAcademicLink() {
     this.footerAcademicLinksArray.push(this.fb.group({
       title: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -195,7 +206,8 @@ export class AddMenuComponent implements OnInit {
   addFooterResourceLink() {
     this.footerResourceLinksArray.push(this.fb.group({
       title: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -227,18 +239,39 @@ export class AddMenuComponent implements OnInit {
         data: this.buildMenuData(formValue)
       };
 
-      this.menuService.addMenu(menu).subscribe(() => {
-        this.showSuccessToast('Menu created successfully');
-        setTimeout(() => {
-          this.router.navigate(['/dashboard/menus']);
-        }, 2000);
+      this.menuService.addMenu(menu).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Menu created successfully',
+            life: 3000
+          });
+          setTimeout(() => {
+            this.router.navigate(['/dashboard/menus']);
+          }, 2000);
+        },
+        error: () => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to create menu. Please try again.',
+            life: 3000
+          });
+        }
       });
     } else {
-      this.showErrorToast('Please fill all required fields');
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Please fill in all required fields',
+        life: 3000
+      });
       this.markFormGroupTouched(this.menuForm);
     }
   }
 
+  // Build menu data based on form values
   private buildMenuData(formValue: any) {
     if (formValue.type === MenuType.HEADER) {
       switch (formValue.headerType) {
@@ -256,6 +289,7 @@ export class AddMenuComponent implements OnInit {
     }
   }
 
+  // Mark all form fields as touched for validation
   private markFormGroupTouched(formGroup: FormGroup | FormArray) {
     Object.values(formGroup.controls).forEach(control => {
       if (control instanceof FormControl) {
@@ -266,43 +300,20 @@ export class AddMenuComponent implements OnInit {
     });
   }
 
-  // Utility Methods
+  // Validate form fields
   isFieldInvalid(fieldName: string): boolean {
     const field = this.menuForm.get(fieldName);
     return !!(field && field.invalid && (field.dirty || field.touched));
   }
 
+  // Get field-specific error messages
   getFieldError(fieldName: string): string {
     const field = this.menuForm.get(fieldName);
     if (field?.errors) {
-      if (field.errors['required']) return `${fieldName} is required`;
-      if (field.errors['email']) return 'Please enter a valid email';
+      if (field.errors['required']) return 'This field is required';
+      if (field.errors['email']) return 'Please enter a valid email address';
       if (field.errors['url']) return 'Please enter a valid URL';
     }
     return '';
-  }
-
-  // Toast Methods
-  showSuccessToast(message: string) {
-    this.showToast = true;
-    this.toastClass = 'toast-success';
-    this.toastIcon = 'pi pi-check';
-    this.toastMessage = message;
-    setTimeout(() => this.hideToast(), 3000);
-  }
-
-  showErrorToast(message: string) {
-    this.showToast = true;
-    this.toastClass = 'toast-error';
-    this.toastIcon = 'pi pi-times';
-    this.toastMessage = message;
-    setTimeout(() => this.hideToast(), 3000);
-  }
-
-  hideToast() {
-    this.showToast = false;
-    this.toastMessage = '';
-    this.toastClass = '';
-    this.toastIcon = '';
   }
 }

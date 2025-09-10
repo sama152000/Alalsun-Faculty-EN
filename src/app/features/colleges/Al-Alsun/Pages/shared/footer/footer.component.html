@@ -7,7 +7,7 @@
               <div class="footer-section">
                 <div class="footer-logo-section">
                   <div class="footer-logo">
-                    <i [class]="footerData.logoIcon"></i>
+                    <img [src]="logoUrl" width="200%" [alt]="footerData?.title || 'Faculty Logo'" *ngIf="logoUrl">
                   </div>
                   <div>
                     <h3>{{ footerData.title }}</h3>

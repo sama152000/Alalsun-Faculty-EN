@@ -1,40 +1,57 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router, ActivatedRoute } from '@angular/router';
-import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators, FormControl } from '@angular/forms';
 import { MenuService } from '../../../../colleges/Al-Alsun/Services/menu.service';
-import { MenuItem, MenuType, HeaderType, NavbarItem, HeaderData, FooterData } from '../../../../colleges/Al-Alsun/model/menu.model';
-import { FacultyInfoService } from '../../../../colleges/Al-Alsun/Services/faculty-info.service';
-import { FacultyInfo } from '../../../../colleges/Al-Alsun/model/faculty-info.model';
+import { MenuItem, MenuType, HeaderType, NavbarItem, HeaderData, FooterData, SocialMediaIcon } from '../../../../colleges/Al-Alsun/model/menu.model';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-edit-menu',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule, ButtonModule, ToastModule],
   templateUrl: './edit-menu.component.html',
-  styleUrls: ['./edit-menu.component.css']
+  styleUrls: ['./edit-menu.component.css'],
+  providers: [MessageService]
 })
 export class EditMenuComponent implements OnInit {
   menuForm: FormGroup;
   menuTypes = Object.values(MenuType);
   headerTypes = Object.values(HeaderType);
+  socialIcons: SocialMediaIcon[] = [
+    { label: 'Facebook', value: 'pi pi-facebook', color: '#1877f2' },
+    { label: 'Twitter', value: 'pi pi-twitter', color: '#1da1f2' },
+    { label: 'Instagram', value: 'pi pi-instagram', color: '#e4405f' },
+    { label: 'LinkedIn', value: 'pi pi-linkedin', color: '#0077b5' },
+    { label: 'YouTube', value: 'pi pi-youtube', color: '#ff0000' },
+    { label: 'WhatsApp', value: 'pi pi-whatsapp', color: '#25d366' },
+    { label: 'Telegram', value: 'pi pi-telegram', color: '#0088cc' },
+    { label: 'Email', value: 'pi pi-envelope', color: '#6c757d' },
+    { label: 'Phone', value: 'pi pi-phone', color: '#28a745' },
+    { label: 'Website', value: 'pi pi-globe', color: '#17a2b8' }
+  ];
   showToast = false;
   toastMessage = '';
   toastClass = '';
   toastIcon = '';
   menuId: number;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
     private menuService: MenuService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private messageService: MessageService
   ) {
     this.menuId = +this.route.snapshot.paramMap.get('id')!;
     this.menuForm = this.createForm();
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.setupFormValidation();
     this.loadMenuData();
   }
@@ -45,40 +62,45 @@ export class EditMenuComponent implements OnInit {
       type: ['', Validators.required],
       headerType: [''],
       isActive: [false],
-      navbarItems: this.fb.array([]),
+      facultyInfo: this.fb.group({
+        name: [''],
+        subtitle: [''],
+        universityName: [''],
+        established: ['']
+      }),
+      navbarItems: this.fb.array<FormGroup>([]),
       submenu: this.fb.group({
         copyright: [''],
         contactMethods: this.fb.group({
           phone: [''],
           email: [''],
           universityWebsite: [''],
-          languages: this.fb.array([])
+          languages: this.fb.array<FormGroup>([])
         })
       }),
       footerData: this.fb.group({
-        logoIcon: [''],
         title: [''],
         subtitle: [''],
         tagline: [''],
-        socialLinks: this.fb.array([]),
+        socialLinks: this.fb.array<FormGroup>([]),
         quickLinks: this.fb.group({
           title: [''],
-          links: this.fb.array([])
+          links: this.fb.array<FormGroup>([])
         }),
         academicLinks: this.fb.group({
           title: [''],
-          links: this.fb.array([])
+          links: this.fb.array<FormGroup>([])
         }),
         resourceLinks: this.fb.group({
           title: [''],
-          links: this.fb.array([])
+          links: this.fb.array<FormGroup>([])
         }),
         copyright: [''],
         contactMethods: this.fb.group({
           phone: [''],
           email: [''],
           universityWebsite: [''],
-          languages: this.fb.array([])
+          languages: this.fb.array<FormGroup>([])
         })
       })
     });
@@ -98,8 +120,13 @@ export class EditMenuComponent implements OnInit {
 
   private loadMenuData() {
     this.menuService.getMenuById(this.menuId).subscribe(menu => {
+      this.isLoading = false;
       if (!menu) {
         this.showErrorToast('Menu not found');
+        return;
+      }
+      if (!menu.data) {
+        this.showErrorToast('Menu data is not available');
         return;
       }
 
@@ -112,7 +139,9 @@ export class EditMenuComponent implements OnInit {
 
       if (menu.type === MenuType.HEADER) {
         const headerData = menu.data as HeaderData;
-        if (menu.headerType === HeaderType.MAIN_NAV) {
+        if (menu.headerType === HeaderType.TOP_NAV) {
+          this.menuForm.get('facultyInfo')?.patchValue(headerData.facultyInfo || {});
+        } else if (menu.headerType === HeaderType.MAIN_NAV) {
           this.setNavbarItems(headerData.navbarItems || []);
         } else if (menu.headerType === HeaderType.SUBMENU) {
           this.menuForm.get('submenu')?.patchValue(headerData.submenu || {});
@@ -128,6 +157,7 @@ export class EditMenuComponent implements OnInit {
         this.setFooterContactLanguages(footerData.contactMethods?.languages || []);
       }
     }, error => {
+      this.isLoading = false;
       this.showErrorToast('Failed to load menu data');
       console.error('Error loading menu:', error);
     });
@@ -147,18 +177,19 @@ export class EditMenuComponent implements OnInit {
     const navbarItemsArray = this.navbarItemsArray;
     navbarItemsArray.clear();
     items.forEach(item => {
-      const childrenArray = this.fb.array([]);
+      const childrenArray = this.fb.array<FormGroup>([]);
       item.children?.forEach(child => {
         childrenArray.push(this.fb.group({
           label: [child.label, Validators.required],
-          icon: [child.icon],
-          route: [child.route]
-        }) as any);
+          route: [child.route],
+          target: [child.target]
+        }));
       });
       navbarItemsArray.push(this.fb.group({
         label: [item.label, Validators.required],
-        icon: [item.icon],
         route: [item.route],
+        target: [item.target],
+        parentId: [item.parentId],
         children: childrenArray
       }));
     });
@@ -167,8 +198,9 @@ export class EditMenuComponent implements OnInit {
   addNavbarItem() {
     this.navbarItemsArray.push(this.fb.group({
       label: ['', Validators.required],
-      icon: [''],
       route: [''],
+      target: [''],
+      parentId: [null],
       children: this.fb.array([])
     }));
   }
@@ -181,8 +213,8 @@ export class EditMenuComponent implements OnInit {
     const childrenArray = this.navbarItemsArray.at(index).get('children') as FormArray;
     childrenArray.push(this.fb.group({
       label: ['', Validators.required],
-      icon: [''],
-      route: ['']
+      route: [''],
+      target: ['']
     }));
   }
 
@@ -226,7 +258,8 @@ export class EditMenuComponent implements OnInit {
       socialLinksArray.push(this.fb.group({
         platform: [link.platform, Validators.required],
         url: [link.url, Validators.required],
-        icon: [link.icon, Validators.required]
+        icon: [link.icon, Validators.required],
+        target: [link.target]
       }));
     });
   }
@@ -237,7 +270,8 @@ export class EditMenuComponent implements OnInit {
     links.forEach(link => {
       quickLinksArray.push(this.fb.group({
         title: [link.title, Validators.required],
-        url: [link.url, Validators.required]
+        url: [link.url, Validators.required],
+        target: [link.target]
       }));
     });
   }
@@ -248,7 +282,8 @@ export class EditMenuComponent implements OnInit {
     links.forEach(link => {
       academicLinksArray.push(this.fb.group({
         title: [link.title, Validators.required],
-        url: [link.url, Validators.required]
+        url: [link.url, Validators.required],
+        target: [link.target]
       }));
     });
   }
@@ -259,7 +294,8 @@ export class EditMenuComponent implements OnInit {
     links.forEach(link => {
       resourceLinksArray.push(this.fb.group({
         title: [link.title, Validators.required],
-        url: [link.url, Validators.required]
+        url: [link.url, Validators.required],
+        target: [link.target]
       }));
     });
   }
@@ -279,7 +315,8 @@ export class EditMenuComponent implements OnInit {
     this.footerSocialLinksArray.push(this.fb.group({
       platform: ['', Validators.required],
       url: ['', Validators.required],
-      icon: ['', Validators.required]
+      icon: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -290,7 +327,8 @@ export class EditMenuComponent implements OnInit {
   addFooterQuickLink() {
     this.footerQuickLinksArray.push(this.fb.group({
       title: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -301,7 +339,8 @@ export class EditMenuComponent implements OnInit {
   addFooterAcademicLink() {
     this.footerAcademicLinksArray.push(this.fb.group({
       title: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -312,7 +351,8 @@ export class EditMenuComponent implements OnInit {
   addFooterResourceLink() {
     this.footerResourceLinksArray.push(this.fb.group({
       title: ['', Validators.required],
-      url: ['', Validators.required]
+      url: ['', Validators.required],
+      target: ['']
     }));
   }
 
@@ -365,21 +405,14 @@ export class EditMenuComponent implements OnInit {
         case HeaderType.TOP_NAV:
           return { facultyInfo: formValue.facultyInfo };
         case HeaderType.MAIN_NAV:
-          return { navbarItems: this.navbarItemsArray.value };
+          return { navbarItems: formValue.navbarItems };
         case HeaderType.SUBMENU:
-          return { submenu: { ...formValue.submenu, contactMethods: { ...formValue.submenu.contactMethods, languages: this.submenuLanguagesArray.value } } };
+          return { submenu: formValue.submenu };
         default:
           return {};
       }
     } else {
-      return {
-        ...formValue.footerData,
-        socialLinks: this.footerSocialLinksArray.value,
-        quickLinks: { ...formValue.footerData.quickLinks, links: this.footerQuickLinksArray.value },
-        academicLinks: { ...formValue.footerData.academicLinks, links: this.footerAcademicLinksArray.value },
-        resourceLinks: { ...formValue.footerData.resourceLinks, links: this.footerResourceLinksArray.value },
-        contactMethods: { ...formValue.footerData.contactMethods, languages: this.footerContactLanguagesArray.value }
-      };
+      return formValue.footerData;
     }
   }
 
@@ -402,7 +435,7 @@ export class EditMenuComponent implements OnInit {
   getFieldError(fieldName: string): string {
     const field = this.menuForm.get(fieldName);
     if (field?.errors) {
-      if (field.errors['required']) return `${fieldName} is required`;
+      if (field.errors['required']) return 'This field is required';
       if (field.errors['email']) return 'Please enter a valid email';
       if (field.errors['url']) return 'Please enter a valid URL';
     }
@@ -411,25 +444,10 @@ export class EditMenuComponent implements OnInit {
 
   // Toast Methods
   showSuccessToast(message: string) {
-    this.showToast = true;
-    this.toastClass = 'toast-success';
-    this.toastIcon = 'pi pi-check';
-    this.toastMessage = message;
-    setTimeout(() => this.hideToast(), 3000);
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: message });
   }
 
   showErrorToast(message: string) {
-    this.showToast = true;
-    this.toastClass = 'toast-error';
-    this.toastIcon = 'pi pi-times';
-    this.toastMessage = message;
-    setTimeout(() => this.hideToast(), 3000);
-  }
-
-  hideToast() {
-    this.showToast = false;
-    this.toastMessage = '';
-    this.toastClass = '';
-    this.toastIcon = '';
+    this.messageService.add({ severity: 'error', summary: 'Error', detail: message });
   }
 }

@@ -3,15 +3,17 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PageHeaderComponent } from '../shared/page-header/page-header/page-header.component';
-import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { FooterComponent } from '../shared/footer/footer.component';
 import { ContactService } from '../../Services/contact.service';
-import { ContactInfo, ContactForm, DirectContact, ContactSubmissionResult } from '../../model/contact.model';
+import { ContactInfo, ContactForm, DirectContact, ContactSubmissionResult, ContactMethod, CampusInfo, CampusFeature } from '../../model/contact.model';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { SafePipe } from '../../../../../core/pipes/safe.pipe';
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, PageHeaderComponent, FooterComponent],
+  imports: [CommonModule, FormsModule, RouterModule, PageHeaderComponent, FooterComponent, CardModule, ButtonModule, SafePipe],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
@@ -22,7 +24,11 @@ export class ContactComponent implements OnInit {
 
   contactInfo: ContactInfo | null = null;
   directContacts: DirectContact[] = [];
-  
+  contactMethods: ContactMethod[] = [];
+  campusInfo: CampusInfo | null = null;
+  campusFeatures: CampusFeature[] = [];
+  mapUrl: string = '';
+
   contactForm: ContactForm = {
     fullName: '',
     email: '',
@@ -40,6 +46,10 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
     this.loadContactInfo();
     this.loadDirectContacts();
+    this.loadContactMethods();
+    this.loadCampusInfo();
+    this.loadCampusFeatures();
+    this.loadMapUrl();
   }
 
   loadContactInfo() {
@@ -62,6 +72,55 @@ export class ContactComponent implements OnInit {
         console.error('Error loading direct contacts:', error);
       }
     });
+  }
+  
+  loadContactMethods() {
+    this.contactService.getContactMethods().subscribe({
+      next: (methods) => {
+        this.contactMethods = methods;
+      },
+      error: (error) => {
+        console.error('Error loading contact methods:', error);
+      }
+    });
+  }
+
+  loadCampusInfo() {
+    this.contactService.getCampusInfo().subscribe({
+      next: (info) => {
+        this.campusInfo = info;
+      },
+      error: (error) => {
+        console.error('Error loading campus info:', error);
+      }
+    });
+  }
+
+  loadCampusFeatures() {
+    this.contactService.getCampusFeatures().subscribe({
+      next: (features) => {
+        this.campusFeatures = features;
+      },
+      error: (error) => {
+        console.error('Error loading campus features:', error);
+      }
+    });
+  }
+
+  loadMapUrl() {
+    this.mapUrl = this.contactService.getMapUrl();
+  }
+
+  openGoogleMaps() {
+    const lat = this.campusInfo?.location.lat;
+    const lng = this.campusInfo?.location.lng;
+    window.open(`https://www.google.com/maps?q=${lat},${lng}`, '_blank');
+  }
+
+  getDirections() {
+    const lat = this.campusInfo?.location.lat;
+    const lng = this.campusInfo?.location.lng;
+    window.open(`https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`, '_blank');
   }
 
   onSubmit() {
@@ -116,11 +175,5 @@ export class ContactComponent implements OnInit {
 
   getError(field: string): string {
     return this.formErrors[field] || '';
-  }
-
-  getMapUrl(): string {
-    if (!this.contactInfo) return '';
-    const { lat, lng } = this.contactInfo.location;
-    return `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.123456789!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sLuxor%20University!5e0!3m2!1sen!2seg!4v1234567890`;
   }
 }

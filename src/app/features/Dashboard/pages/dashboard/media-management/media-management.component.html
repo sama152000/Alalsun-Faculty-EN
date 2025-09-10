@@ -1,0 +1,150 @@
+  <div class="admin-page">
+      <div class="admin-header">
+        <h1 class="page-title">Media Management</h1>
+        <div class="header-actions">
+          <input type="file" #fileInput (change)="onFileSelected($event)" 
+                 accept="image/*,video/*,.pdf" multiple style="display: none;">
+          <button class="btn btn-primary-gradient" (click)="fileInput.click()">
+            <i class="pi pi-upload me-2"></i>
+            Upload Media
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter and View Options -->
+      <div class="content-card mb-4">
+        <div class="card-body p-3">
+          <div class="row align-items-center">
+            <div class="col-md-4">
+              <select class="form-select" [(ngModel)]="selectedFolder" (change)="filterByFolder()">
+                <option value="">All Folders</option>
+                <option *ngFor="let folder of folders" [value]="folder.name.toLowerCase()">
+                  {{ folder.name }} ({{ folder.itemCount }})
+                </option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select class="form-select" [(ngModel)]="selectedType" (change)="filterByType()">
+                <option value="">All Types</option>
+                <option value="image">Images</option>
+                <option value="video">Videos</option>
+                <option value="pdf">Documents</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <div class="view-toggle">
+                <button class="btn btn-outline-secondary btn-sm" 
+                        [class.active]="viewMode === 'grid'"
+                        (click)="viewMode = 'grid'">
+                  <i class="pi pi-th"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" 
+                        [class.active]="viewMode === 'list'"
+                        (click)="viewMode = 'list'">
+                  <i class="pi pi-list"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media Gallery -->
+      <div class="content-card">
+        <div class="card-header">
+          <h3>Media Gallery</h3>
+          <span class="badge bg-primary">{{ filteredMedia.length }} Items</span>
+        </div>
+
+        <!-- Grid View -->
+        <div class="media-grid" *ngIf="viewMode === 'grid'">
+          <div class="media-item" *ngFor="let item of filteredMedia">
+            <div class="media-card">
+              <div class="media-preview">
+                <img *ngIf="item.type === 'image'" [src]="item.url" [alt]="item.name" class="media-image">
+                <div *ngIf="item.type === 'video'" class="video-preview">
+                  <img [src]="item.thumbnail || 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg'" 
+                       [alt]="item.name" class="media-image">
+                  <div class="video-overlay">
+                    <i class="pi pi-play"></i>
+                  </div>
+                </div>
+                <div *ngIf="item.type === 'pdf'" class="pdf-preview">
+                  <i class="pi pi-file-pdf"></i>
+                  <span>PDF</span>
+                </div>
+                <div class="media-actions">
+                  <button class="action-btn view-btn" (click)="viewMedia(item)">
+                    <i class="pi pi-eye"></i>
+                  </button>
+                  <button class="action-btn edit-btn" (click)="editMedia(item)">
+                    <i class="pi pi-pencil"></i>
+                  </button>
+                  <button class="action-btn delete-btn" (click)="deleteMedia(item.id)">
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="media-info">
+                <h4 class="media-name">{{ item.name }}</h4>
+                <div class="media-meta">
+                  <span class="media-size">{{ formatFileSize(item.size) }}</span>
+                  <span class="media-date">{{ item.uploadDate | date:'short' }}</span>
+                </div>
+                <div class="media-tags" *ngIf="item.tags && item.tags.length > 0">
+                  <span *ngFor="let tag of item.tags.slice(0, 2)" class="tag">{{ tag }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- List View -->
+        <div class="media-list" *ngIf="viewMode === 'list'">
+          <div class="list-header">
+            <div class="col-name">Name</div>
+            <div class="col-type">Type</div>
+            <div class="col-size">Size</div>
+            <div class="col-date">Date</div>
+            <div class="col-actions">Actions</div>
+          </div>
+          <div class="list-item" *ngFor="let item of filteredMedia">
+            <div class="col-name">
+              <div class="item-preview">
+                <i [class]="getTypeIcon(item.type)"></i>
+                <span>{{ item.name }}</span>
+              </div>
+            </div>
+            <div class="col-type">
+              <span class="type-badge" [class]="'type-' + item.type">{{ item.type }}</span>
+            </div>
+            <div class="col-size">{{ formatFileSize(item.size) }}</div>
+            <div class="col-date">{{ item.uploadDate | date:'short' }}</div>
+            <div class="col-actions">
+              <button class="btn btn-outline-primary btn-sm" (click)="viewMedia(item)">
+                <i class="pi pi-eye"></i>
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" (click)="editMedia(item)">
+                <i class="pi pi-pencil"></i>
+              </button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteMedia(item.id)">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Progress -->
+      <div class="upload-progress" *ngIf="isUploading">
+        <div class="progress-card">
+          <div class="progress-header">
+            <h4>Uploading Files...</h4>
+            <span>{{ uploadProgress }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+          </div>
+        </div>
+      </div>
+    </div>

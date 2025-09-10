@@ -1,0 +1,215 @@
+ <div class="admin-page">
+      <div class="admin-header">
+        <h1 class="page-title">Hero Section Management</h1>
+        <button class="btn btn-primary-gradient" (click)="openAddForm()">
+          <i class="pi pi-plus me-2"></i>
+          Add New Slide
+        </button>
+      </div>
+
+      <!-- Hero Settings -->
+      <div class="content-card mb-4" *ngIf="heroSettings">
+        <div class="card-header">
+          <h3>Hero Settings</h3>
+          <button class="btn btn-outline-light btn-sm" (click)="saveSettings()">
+            <i class="pi pi-save me-2"></i>
+            Save Settings
+          </button>
+        </div>
+        <div class="settings-content">
+          <div class="row g-4">
+            <div class="col-md-3">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" 
+                       [(ngModel)]="heroSettings.autoPlay" id="autoPlay">
+                <label class="form-check-label" for="autoPlay">
+                  Auto Play Slides
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Auto Play Interval (ms)</label>
+              <input type="number" class="form-control" 
+                     [(ngModel)]="heroSettings.autoPlayInterval"
+                     [disabled]="!heroSettings.autoPlay">
+            </div>
+            <div class="col-md-3">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" 
+                       [(ngModel)]="heroSettings.showIndicators" id="showIndicators">
+                <label class="form-check-label" for="showIndicators">
+                  Show Indicators
+                </label>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" 
+                       [(ngModel)]="heroSettings.showNavigation" id="showNavigation">
+                <label class="form-check-label" for="showNavigation">
+                  Show Navigation
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slides List -->
+      <div class="content-card" *ngIf="!showForm">
+        <div class="card-header">
+          <h3>Hero Slides</h3>
+          <span class="badge bg-primary">{{ slides.length }} Slides</span>
+        </div>
+        
+        <div class="slides-list">
+          <div class="slide-item" *ngFor="let slide of slides; let i = index">
+            <div class="slide-preview">
+              <img [src]="slide.image" [alt]="slide.alt" class="slide-thumb">
+              <div class="slide-overlay">
+                <div class="slide-order">{{ slide.order }}</div>
+                <div class="slide-status" [class]="slide.isActive ? 'active' : 'inactive'">
+                  {{ slide.isActive ? 'Active' : 'Inactive' }}
+                </div>
+              </div>
+            </div>
+            <div class="slide-info">
+              <h4>{{ slide.title }}</h4>
+              <p>{{ slide.subtitle }}</p>
+              <div class="slide-meta">
+                <span class="slide-button-status">
+                  <i [class]="slide.showButton ? 'pi pi-check text-success' : 'pi pi-times text-danger'"></i>
+                  {{ slide.showButton ? 'Has Button' : 'No Button' }}
+                </span>
+              </div>
+            </div>
+            <div class="slide-actions">
+              <button class="btn btn-outline-secondary btn-sm" (click)="moveSlide(i, 'up')" [disabled]="i === 0">
+                <i class="pi pi-arrow-up"></i>
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" (click)="moveSlide(i, 'down')" [disabled]="i === slides.length - 1">
+                <i class="pi pi-arrow-down"></i>
+              </button>
+              <button class="btn btn-outline-primary btn-sm" (click)="editSlide(slide)">
+                <i class="pi pi-pencil"></i>
+                Edit
+              </button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteSlide(slide.id)">
+                <i class="pi pi-trash"></i>
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add/Edit Form -->
+      <div class="content-card" *ngIf="showForm">
+        <div class="card-header">
+          <h3>{{ isEditing ? 'Edit' : 'Add New' }} Hero Slide</h3>
+          <button class="btn btn-outline-light" (click)="cancelForm()">
+            <i class="pi pi-times me-2"></i>
+            Cancel
+          </button>
+        </div>
+
+        <form (ngSubmit)="saveSlide()" #slideForm="ngForm">
+          <div class="form-content">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <label class="form-label">Slide Title *</label>
+                <input type="text" class="form-control" [(ngModel)]="currentSlide.title" 
+                       name="title" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Subtitle *</label>
+                <input type="text" class="form-control" [(ngModel)]="currentSlide.subtitle" 
+                       name="subtitle" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" rows="3" [(ngModel)]="currentSlide.description" 
+                          name="description"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Image URL *</label>
+                <input type="url" class="form-control" [(ngModel)]="currentSlide.image" 
+                       name="image" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Alt Text *</label>
+                <input type="text" class="form-control" [(ngModel)]="currentSlide.alt" 
+                       name="alt" required>
+              </div>
+              <div class="col-md-4">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" 
+                         [(ngModel)]="currentSlide.showButton" name="showButton" id="showButton">
+                  <label class="form-check-label" for="showButton">
+                    Show Action Button
+                  </label>
+                </div>
+              </div>
+              <div class="col-md-4" *ngIf="currentSlide.showButton">
+                <label class="form-label">Button Text</label>
+                <input type="text" class="form-control" [(ngModel)]="currentSlide.buttonText" 
+                       name="buttonText">
+              </div>
+              <div class="col-md-4" *ngIf="currentSlide.showButton">
+                <label class="form-label">Button Link</label>
+                <input type="text" class="form-control" [(ngModel)]="currentSlide.buttonLink" 
+                       name="buttonLink">
+              </div>
+              <div class="col-md-6">
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" 
+                         [(ngModel)]="currentSlide.isActive" name="isActive" id="isActive">
+                  <label class="form-check-label" for="isActive">
+                    Active Slide
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary-gradient" [disabled]="!slideForm.valid">
+              <i class="pi pi-save me-2"></i>
+              {{ isEditing ? 'Update' : 'Create' }} Slide
+            </button>
+            <button type="button" class="btn btn-outline-secondary" (click)="cancelForm()">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Preview Section -->
+      <div class="content-card" *ngIf="!showForm">
+        <div class="card-header">
+          <h3>Hero Preview</h3>
+          <button class="btn btn-outline-light btn-sm" (click)="refreshPreview()">
+            <i class="pi pi-refresh me-2"></i>
+            Refresh Preview
+          </button>
+        </div>
+        <div class="hero-preview">
+          <div class="preview-slide" *ngFor="let slide of slides.slice(0, 1)">
+            <div class="preview-image">
+              <img [src]="slide.image" [alt]="slide.alt">
+              <div class="preview-overlay">
+                <div class="preview-content">
+                  <h1>{{ slide.title }}</h1>
+                  <h2>{{ slide.subtitle }}</h2>
+                  <p *ngIf="slide.description">{{ slide.description }}</p>
+                  <button *ngIf="slide.showButton" class="btn btn-primary-custom">
+                    {{ slide.buttonText || 'Learn More' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

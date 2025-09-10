@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
-import { ContactInfo, ContactForm, DirectContact, ContactSubmissionResult } from '../model/contact.model';
+import { ContactInfo, ContactForm, DirectContact, ContactSubmissionResult, ContactMethod, CampusInfo, CampusFeature } from '../model/contact.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,29 +22,70 @@ export class ContactService {
   };
 
   private directContacts: DirectContact[] = [
+  ];
+
+  private contactMethods: ContactMethod[] = [
     {
-      department: 'Student Affairs',
-      email: 'student.affairs@luxor.edu.eg',
-      description: 'Academic registration, student services, and general inquiries',
-      icon: 'pi pi-users'
+      icon: 'pi pi-phone',
+      title: 'Phone',
+      primary: '(+20) 095-2356555',
+      secondary: 'Available during official working hours',
+      color: 'var(--primary-color)'
     },
     {
-      department: 'Postgraduate Studies',
-      email: 'postgraduate@luxor.edu.eg',
-      description: 'Master\'s and Ph.D. programs, research supervision',
-      icon: 'pi pi-graduation-cap'
+      icon: 'pi pi-envelope',
+      title: 'Email',
+      primary: 'alsun@luxor.edu.eg',
+      secondary: 'We respond within 24 hours',
+      color: 'var(--primary-color)'
     },
     {
-      department: 'Community Service',
-      email: 'community@luxor.edu.eg',
-      description: 'Community outreach programs and partnerships',
-      icon: 'pi pi-heart'
+      icon: 'pi pi-map-marker',
+      title: 'Address',
+      primary: 'Luxor – East of the Railway, Gamal Abdel Karim Street – next to the Educational Administration.',
+      secondary: 'Luxor University, Faculty of Al-Alsun',
+      color: 'var(--primary-color)'
     },
     {
-      department: 'Feedback & Suggestions',
-      email: 'feedback@luxor.edu.eg',
-      description: 'Your feedback helps us improve our services',
-      icon: 'pi pi-comment'
+      icon: 'pi pi-facebook',
+      title: 'Facebook',
+      primary: 'Faculty of Al-Alsun – Luxor University',
+      secondary: 'Official Facebook Page',
+      color: 'var(--primary-color)'
+    }
+  ];
+
+  private campusInfo: CampusInfo = {
+    name: 'Faculty of Al-Alsun – Luxor University',
+    address: 'Luxor – East of the Railway, Gamal Abdel Karim Street – next to the Educational Administration.',
+    location: {
+      lat: 25.687243,
+      lng: 32.639637
+    },
+    phone: '(+20) 095-2356555',
+    email: 'alsun@luxor.edu.eg'
+  };
+
+  private campusFeatures: CampusFeature[] = [
+    {
+      icon: 'pi pi-building',
+      title: 'Modern Facilities',
+      description: 'Equipped classrooms and language labs for students'
+    },
+    {
+      icon: 'pi pi-users',
+      title: 'Student Services',
+      description: 'Support for students across different departments'
+    },
+    {
+      icon: 'pi pi-book',
+      title: 'Library',
+      description: 'Access to references and academic resources'
+    },
+    {
+      icon: 'pi pi-globe',
+      title: 'Research & Community',
+      description: 'Active participation in research and community service'
     }
   ];
 
@@ -56,8 +97,19 @@ export class ContactService {
     return of(this.directContacts);
   }
 
+  getContactMethods(): Observable<ContactMethod[]> {
+    return of(this.contactMethods);
+  }
+
+  getCampusInfo(): Observable<CampusInfo> {
+    return of(this.campusInfo);
+  }
+
+  getCampusFeatures(): Observable<CampusFeature[]> {
+    return of(this.campusFeatures);
+  }
+
   submitContactForm(form: ContactForm): Observable<ContactSubmissionResult> {
-    // Simulate API call with delay
     return of({
       success: true,
       message: 'Your message has been sent successfully. We will get back to you soon.'
@@ -89,5 +141,11 @@ export class ContactService {
   private isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  }
+
+  getMapUrl(): string {
+    const lat = this.contactInfo.location.lat;
+    const lng = this.contactInfo.location.lng;
+    return `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3542.123456789!2d${lng}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sLuxor%20University!5e0!3m2!1sen!2seg!4v1697051234567`;
   }
 }

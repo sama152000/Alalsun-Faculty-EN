@@ -18,7 +18,7 @@ export class MenuService {
       isActive: true,
       data: {
         navbarItems: [
-          { label: 'Home', icon: 'pi pi-home me-2', route: '/home' },
+          { label: 'Home', route: '/home' },
           { label: 'About', route: '/about' },
           { label: 'Departments', route: '/departments' },
           { label: 'Staff', route: '/staff' },
@@ -27,9 +27,9 @@ export class MenuService {
           {
             label: 'Sectors',
             children: [
-              { label: 'Education & Students Affairs', icon: 'pi pi-users me-2', route: '/sectors/education-students' },
-              { label: 'Postgraduate Studies & Research', icon: 'pi pi-graduation-cap me-2', route: '/sectors/postgraduate-research' },
-              { label: 'Community Service & Environmental Development', icon: 'pi pi-globe me-2', route: '/sectors/community-environmental' },
+              { label: 'Education & Students Affairs',  route: '/sectors/education-students' },
+              { label: 'Postgraduate Studies & Research',  route: '/sectors/postgraduate-research' },
+              { label: 'Community Service & Environmental Development', route: '/sectors/community-environmental' },
             ]
           }
         ]
@@ -70,7 +70,6 @@ export class MenuService {
       type: MenuType.FOOTER,
       isActive: true,
       data: {
-        logoIcon: 'pi pi-book',
         title: 'Faculty of Al-Alsun',
         subtitle: 'Luxor University',
         tagline: 'Excellence in languages and translation education',

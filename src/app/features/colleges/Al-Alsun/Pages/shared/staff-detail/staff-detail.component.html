@@ -5,69 +5,37 @@
   </app-page-header>
 
   <div class="container-fluid py-12">
-    <!-- Sidebar Toggle Button for Mobile -->
-    <div class="d-lg-none mb-3">
-      <button class="btn btn-primary-gradient" (click)="toggleSidebar()">
-        <i class="pi pi-bars me-2"></i>
-        {{ sidebarCollapsed ? 'Show Positions' : 'Hide Positions' }}
-      </button>
-    </div>
-
-    <div class="row">
-      <!-- Sidebar -->
-      <div class="col-lg-3 col-md-4" [ngClass]="{'d-none': sidebarCollapsed && isMobile}">
-        <div class="sidebar card card-modern h-100">
-          <div class="card-header bg-primary text-white">
-            <h5 class="card-title mb-0">Positions</h5>
-          </div>
-          <div class="card-body p-0">
-            <ul class="nav flex-column">
-              <li class="nav-item" *ngFor="let pos of positions; trackBy: trackByPosition">
-                <a class="nav-link"
-                   [routerLink]="['/staff']"
-                   [queryParams]="{ position: pos.value }"
-                   [class.active]="staffMember.position === pos.value">
-                  <i [class]="pos.icon" class="me-2"></i>
-                  {{ pos.label }}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Basic Info Card -->
-      <div class="col-lg-9 col-md-8">
-        <div class="card card-modern h-100">
-          <div class="row g-0 h-100">
-            <div class="col-lg-4 col-md-12">
-              <div class="staff-photo-section h-100">
-                <div class="staff-photo-container">
-                  <img
-                    [src]="staffMember.image"
-                    [alt]="staffMember.name"
-                    class="staff-photo"
-                  >
-                </div>
+    <!-- Basic Info Card -->
+    <div class="col-12">
+      <div class="card card-modern h-100">
+        <div class="row g-0 h-100">
+          <div class="col-lg-4 col-md-12">
+            <div class="staff-photo-section h-100">
+              <div class="staff-photo-container">
+                <img
+                  [src]="staffMember.image"
+                  [alt]="staffMember.name"
+                  class="staff-photo"
+                >
               </div>
             </div>
-            <div class="col-lg-8 col-md-12">
-              <div class="staff-basic-info">
-                <h3 class="staff-name">{{ staffMember.name }}</h3>
-                <p class="staff-position">{{ staffMember.position }}</p>
-                <p class="staff-department">{{ staffMember.department }} Department</p>
-                <div class="contact-info" *ngIf="staffMember.email">
-                  <a [href]="'mailto:' + staffMember.email" class="contact-link">
-                    <i class="pi pi-envelope"></i>
-                    {{ staffMember.email }}
-                  </a>
-                </div>
-                <div class="contact-info" *ngIf="staffMember.phone">
-                  <a [href]="'tel:' + staffMember.phone" class="contact-link">
-                    <i class="pi pi-phone"></i>
-                    {{ staffMember.phone }}
-                  </a>
-                </div>
+          </div>
+          <div class="col-lg-8 col-md-12">
+            <div class="staff-basic-info">
+              <h3 class="staff-name">{{ staffMember.name }}</h3>
+              <p class="staff-position">{{ staffMember.position }}</p>
+              <p class="staff-department">{{ staffMember.department }} Department</p>
+              <div class="contact-info" *ngIf="staffMember.email">
+                <a [href]="'mailto:' + staffMember.email" class="contact-link">
+                  <i class="pi pi-envelope"></i>
+                  {{ staffMember.email }}
+                </a>
+              </div>
+              <div class="contact-info" *ngIf="staffMember.phone">
+                <a [href]="'tel:' + staffMember.phone" class="contact-link">
+                  <i class="pi pi-phone"></i>
+                  {{ staffMember.phone }}
+                </a>
               </div>
             </div>
           </div>
@@ -80,44 +48,46 @@
       <div class="col-12">
         <div class="card card-modern">
           <div class="staff-details-content">
-            <div class="detail-section" *ngIf="staffMember.bio">
-              <h4 class="section-title">Biography</h4>
-              <p class="section-content">{{ staffMember.bio }}</p>
-            </div>
-            
-            <div class="detail-section" *ngIf="staffMember.specialization">
-              <h4 class="section-title">Specialization</h4>
-              <p class="section-content">{{ staffMember.specialization }}</p>
-            </div>
-            
-            <div class="detail-section" *ngIf="staffMember.education && staffMember.education.length > 0">
-              <h4 class="section-title">Education</h4>
-              <ul class="detail-list">
-                <li *ngFor="let edu of staffMember.education">{{ edu }}</li>
-              </ul>
-            </div>
-            
-            <div class="detail-section" *ngIf="staffMember.experience && staffMember.experience.length > 0">
-              <h4 class="section-title">Professional Experience</h4>
-              <ul class="detail-list">
-                <li *ngFor="let exp of staffMember.experience">{{ exp }}</li>
-              </ul>
-            </div>
-            
-            <div class="detail-section" *ngIf="staffMember.researchInterests && staffMember.researchInterests.length > 0">
-              <h4 class="section-title">Research Interests</h4>
-              <div class="research-tags">
-                <span *ngFor="let interest of staffMember.researchInterests" class="research-tag">
-                  {{ interest }}
-                </span>
+            <div class="row">
+              <div class="col-md-6 detail-section" *ngIf="staffMember.bio">
+                <h4 class="section-title">Biography</h4>
+                <p class="section-content">{{ staffMember.bio }}</p>
               </div>
-            </div>
-            
-            <div class="detail-section" *ngIf="staffMember.publications && staffMember.publications.length > 0">
-              <h4 class="section-title">Selected Publications</h4>
-              <ul class="detail-list">
-                <li *ngFor="let pub of staffMember.publications">{{ pub }}</li>
-              </ul>
+              
+              <div class="col-md-6 detail-section" *ngIf="staffMember.specialization">
+                <h4 class="section-title">Specialization</h4>
+                <p class="section-content">{{ staffMember.specialization }}</p>
+              </div>
+              
+              <div class="col-md-6 detail-section" *ngIf="staffMember.education && staffMember.education.length > 0">
+                <h4 class="section-title">Education</h4>
+                <ul class="detail-list">
+                  <li *ngFor="let edu of staffMember.education">{{ edu }}</li>
+                </ul>
+              </div>
+              
+              <div class="col-md-6 detail-section" *ngIf="staffMember.experience && staffMember.experience.length > 0">
+                <h4 class="section-title">Professional Experience</h4>
+                <ul class="detail-list">
+                  <li *ngFor="let exp of staffMember.experience">{{ exp }}</li>
+                </ul>
+              </div>
+              
+              <div class="col-md-6 detail-section" *ngIf="staffMember.researchInterests && staffMember.researchInterests.length > 0">
+                <h4 class="section-title">Research Interests</h4>
+                <div class="research-tags">
+                  <span *ngFor="let interest of staffMember.researchInterests" class="research-tag">
+                    {{ interest }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="col-md-6 detail-section" *ngIf="staffMember.publications && staffMember.publications.length > 0">
+                <h4 class="section-title">Selected Publications</h4>
+                <ul class="detail-list">
+                  <li *ngFor="let pub of staffMember.publications">{{ pub }}</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

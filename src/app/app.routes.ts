@@ -13,7 +13,7 @@ import { DashboardComponent } from './features/Dashboard/pages/dashboard/dashboa
 import { DashboardOverviewComponent } from './features/Dashboard/pages/dashboard/dashboard-overview/dashboard-overview.component';
 import { SettingsManagementComponent } from './features/Dashboard/pages/dashboard/settings-management/settings-management.component';
 import { MenuManagementComponent } from './features/Dashboard/pages/dashboard/menu-management/menu-management.component';
-import { MediaManagementComponent } from './features/Dashboard/pages/dashboard/app-media-management/media-management.component';
+import { MediaManagementComponent } from './features/Dashboard/pages/dashboard/media-management/media-management.component';
 import { AboutManagementComponent } from './features/Dashboard/pages/dashboard/about-management/about-management.component';
 import { SectorsManagementComponent } from './features/Dashboard/pages/dashboard/sectors-management/sectors-management.component';
 import { StaffManagementComponent } from './features/Dashboard/pages/dashboard/staff-management/staff-management.component';
@@ -45,6 +45,7 @@ import { PagePreviewComponent } from './features/Dashboard/pages/dashboard/custo
 import { DraftsComponent } from './features/Dashboard/pages/dashboard/custom-pages/drafts/drafts.component';
 import { PublishedComponent } from './features/Dashboard/pages/dashboard/custom-pages/published/published.component';
 import { CustomPageViewerComponent } from './features/Dashboard/pages/dashboard/custom-pages/custom-page-viewer/custom-page-viewer.component';
+import { HeroManagementComponent } from './features/Dashboard/pages/dashboard/hero-management/hero-management.component';
 
 export const routes: Routes = [
   {
@@ -103,6 +104,7 @@ export const routes: Routes = [
       { path: 'custom-pages/drafts', component: DraftsComponent },
       { path: 'custom-pages/published', component: PublishedComponent },
       { path: 'settings', component: SettingsManagementComponent },
+      { path: 'hero-mangment', component: HeroManagementComponent },
       { path: '', redirectTo: 'overview', pathMatch: 'full' }
     ]
   },

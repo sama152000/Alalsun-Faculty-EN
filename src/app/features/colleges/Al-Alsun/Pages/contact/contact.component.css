@@ -2,47 +2,7 @@
   padding: var(--component-padding);
 }
 
-/* Contact Information Cards */
-.contact-item {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--light-gray);
-}
 
-.contact-item:last-child {
-  border-bottom: none;
-}
-
-.contact-label {
-  color: var(--primary-color);
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.contact-value {
-  color: var(--gray-text);
-  margin-bottom: 0;
-  line-height: 1.6;
-}
-
-.contact-link {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.contact-link:hover {
-  color: var(--darkred);
-  text-decoration: underline;
-}
-
-/* Map Container */
-.map-container {
-  height: 680px;
-  overflow: hidden;
-  border-radius: 0 0 15px 15px;
-}
 
 /* Contact Form Styles */
 .form-label {
@@ -53,8 +13,7 @@
   align-items: center;
 }
 
-.form-control,
-.form-select {
+.form-control {
   border: 2px solid var(--light-gray);
   border-radius: 10px;
   padding: 0.75rem 1rem;
@@ -62,8 +21,7 @@
   transition: all 0.3s ease;
 }
 
-.form-control:focus,
-.form-select:focus {
+.form-control:focus {
   border-color: var(--primary-color);
   box-shadow: 0 0 0 0.2rem rgba(12, 104, 92, 0.25);
 }
@@ -79,18 +37,7 @@
   margin-top: 0.25rem;
 }
 
-/* Direct Contact Cards */
-.contact-icon {
-  width: 80px;
-  height: 80px;
-  background: var(--gradient-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  margin: 0 auto;
-}
+
 
 /* Alert Styles */
 .alert {
@@ -117,27 +64,7 @@
   height: 1rem;
 }
 
-/* Quick Links Section */
-.btn-white-hover {
-  background: var(--primary-color);
-  color: white;
-  border: 1px solid var(--primary-color);
-  padding: 0.5rem 1.25rem;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-}
 
-.btn-white-hover:hover {
-  background: var(--white);
-  color: var(--primary-color);
-  border-color: var(--white);
-  transform: translateY(-2px);
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -153,35 +80,507 @@
     font-size: 1rem;
   }
 
-  .contact-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-  }
-
-  .btn-white-hover {
-    font-size: 0.8rem;
-    padding: 0.4rem 1rem;
-    margin: 0.2rem;
-  }
-
   .map-container {
     height: 300px;
   }
 }
 
-/* Animation Classes */
-.fade-in-up {
-  animation: fadeInUp 0.6s ease-out;
+
+
+
+
+.contact-method-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  height: 100%;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+.contact-method-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.method-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0rem;
+  color: white;
+}
+
+.method-icon i {
+  font-size: 1.8rem;
+}
+
+.method-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.method-primary {
+  color: #495057;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.method-secondary {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.contact-map-section {
+  background: #f8f9fa;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: #6c757d;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.map-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.map-header {
+  text-align: center;
+  padding: 1.5rem;
+  background: var(--primary-color);
+;
+  color: white;
+}
+
+.map-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.map-subtitle {
+  opacity: 0.9;
+  margin: 0;
+}
+
+.map-container {
+  height: 400px;
+  position: relative;
+  background: #e9ecef;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
+}
+
+.map-placeholder {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+}
+
+.map-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(30, 60, 114, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+}
+
+.map-content {
+  text-align: center;
+  z-index: 2;
+  position: relative;
+  max-width: 400px;
+  padding: 2rem;
+}
+
+.map-icon {
+  font-size: 4rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.map-placeholder-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.map-placeholder-text {
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.map-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.campus-info-card {
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.campus-info-header {
+  text-align: center;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 20px 20px 0 0;
+}
+
+.campus-info-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.campus-details {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.campus-detail {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+}
+
+.campus-detail:last-child {
+  margin-bottom: 0;
+}
+
+.campus-detail i {
+  color: #ffd700;
+  font-size: 1.2rem;
+  margin-top: 0.25rem;
+  width: 20px;
+}
+
+.detail-content h5 {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.detail-content p {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.campus-features {
+  padding: 1.5rem;
+}
+
+.features-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  gap: 0.75rem;
+}
+
+.feature-item:last-child {
+  margin-bottom: 0;
+}
+
+.feature-icon {
+  width: 35px;
+  height: 35px;
+  background: var(--primary-color);
+;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-icon i {
+  color: white;
+  font-size: 0.9rem;
+}
+
+.feature-content {
+  flex: 1;
+}
+
+.feature-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.feature-description {
+  color: #6c757d;
+  font-size: 0.8rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.directions-title, .landmarks-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.direction-card {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.direction-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.direction-content {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.direction-icon {
+  width: 70px;
+  height: 70px;
+  background:   var(--primary-color);
+;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.direction-icon i {
+  font-size: 1.8rem;
+  color: white;
+}
+
+.direction-method {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.direction-steps {
+  text-align: left;
+  padding-left: 1.5rem;
+  color: #495057;
+  line-height: 1.6;
+}
+
+.direction-steps li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.landmarks-container {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.landmark-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.landmark-item:hover {
+  background: #f8f9fa;
+  transform: translateX(5px);
+}
+
+.landmark-icon {
+  width: 45px;
+  height: 45px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.landmark-icon i {
+  font-size: 1.2rem;
+  color: var(--primary-color);
+}
+
+.landmark-info {
+  flex: 1;
+}
+
+.landmark-name {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.landmark-distance {
+  color: #6c757d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.visit-planning-section {
+  background:  var(--primary-color);
+;
+  color: white;
+  padding: 3rem 2rem;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.visit-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.visit-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+/* PrimeNG Customizations */
+::ng-deep .p-card .p-card-body {
+  padding: 0;
+}
+
+::ng-deep .p-card .p-card-content {
+  padding: 0;
+}
+
+::ng-deep .p-button {
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .p-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  
+  .map-container {
+    height: 300px;
+  }
+  
+  .map-content {
+    padding: 1rem;
+  }
+  
+  .map-actions {
+    flex-direction: column;
+  }
+  
+  .map-actions .p-button {
+    width: 100%;
+  }
+  
+  .campus-details,
+  .campus-features {
+    padding: 1rem;
+  }
+  
+  .direction-content {
+    padding: 1rem;
+  }
+  
+  .landmarks-container {
+    padding: 1rem;
+  }
+  
+  .visit-planning-section {
+    padding: 2rem 1rem;
+    text-align: center;
+  }
+  
+  .visit-title {
+    font-size: 2rem;
+  }
+  
+  .directions-title,
+  .landmarks-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .landmark-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .visit-planning-section .p-button {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .map-icon {
+    font-size: 3rem;
+  }
+  
+  .map-placeholder-title {
+    font-size: 1.2rem;
   }
 }

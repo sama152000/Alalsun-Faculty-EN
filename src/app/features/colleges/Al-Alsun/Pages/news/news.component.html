@@ -92,7 +92,7 @@
         <!-- Tab Content -->
         <div class="tab-content">
           <div class="news-grid">
-            <div class="news-card" *ngFor="let news of getFilteredNewsByCategory(currentCategory)">
+            <div class="news-card" *ngFor="let news of getFilteredNewsByCategory(currentCategory)" (click)="viewNewsDetails(news.id)">
               <div class="news-image-container">
                 <img [src]="news.image" [alt]="news.title" class="news-image">
                 <div class="news-date-badge">
@@ -113,7 +113,7 @@
                     </span>
                   </div>
                 </div>
-                <button class="read-more-btn" (click)="viewNewsDetails(news.id)">
+                <button class="read-more-btn">
                   Read More <i class="pi pi-arrow-right"></i>
                 </button>
               </div>

@@ -124,7 +124,7 @@
           <!-- Departments Grid -->
           <div class="row" *ngIf="filteredDepartments.length > 0; else noResults">
             <div class="col-lg-6 col-xl-4 mb-4" *ngFor="let department of filteredDepartments; trackBy: trackByDepartmentId">
-              <div class="card card-modern h-100 department-card">
+              <div class="card card-modern h-100 department-card" [routerLink]="['/departments', department.id]">
                 <div class="position-relative">
                   <img [src]="department.image" 
                        class="card-img-top" 
@@ -172,7 +172,7 @@
                   </div>
                   
                   <div class="mt-auto">
-                    <a [routerLink]="['/departments', department.id]" class="btn btn-primary-gradient w-100">
+                    <a class="btn btn-primary-gradient w-100">
                       <i class="pi pi-arrow-right me-2"></i>
                       Explore Department
                     </a>

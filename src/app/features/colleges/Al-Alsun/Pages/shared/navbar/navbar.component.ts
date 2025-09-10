@@ -25,26 +25,9 @@ export class NavbarComponent implements OnInit {
   constructor(private menuService: MenuService, private facultyInfoService: FacultyInfoService) {}
 
   ngOnInit(): void {
-    // Fetch faculty info from FacultyInfoService
+    // Fetch faculty info from FacultyInfoService (now includes logo from backend)
     this.facultyInfoService.getFacultyInfo().subscribe((info) => {
       this.facultyInfo = info;
-    });
-
-    // Fetch all contacts and try to set logo based on data
-    this.facultyInfoService.getAllContacts().subscribe({
-      next: (contacts) => {
-        if (contacts.length > 0) {
-          // افتراض إن اللوجو مرتبط بـ id الأول أو تحتاج تضيف منطق لاختيار اللوجو
-          const defaultContact = contacts[0]; // خذ أول عنصر كمثال
-          if (this.facultyInfo) {
-            // غيّر المسار لو عندك منطق معين (مثل إضافة id للوجو)
-            this.facultyInfo.logoUrl = `assets/logos/${defaultContact.id}.jpg` || 'assets/logo.jpg';
-          }
-        }
-      },
-      error: (err) => {
-        console.error('Failed to load contacts:', err);
-      }
     });
 
     // Fetch MAIN_NAV with custom pages in More+ dropdown

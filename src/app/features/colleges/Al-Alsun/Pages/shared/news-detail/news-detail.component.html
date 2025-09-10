@@ -50,16 +50,11 @@
           </div>
           
           <div class="navigation-section">
-            <button class="btn-outline-primary-custom" (click)="goBack()">
-              <i class="pi pi-arrow-left me-2"></i>
-              Back to News
-            </button>
-            
             <div class="related-news" *ngIf="relatedNews.length > 0">
               <h3>Related News</h3>
               <div class="related-news-grid">
-                <div 
-                  *ngFor="let related of relatedNews" 
+                <div
+                  *ngFor="let related of relatedNews"
                   class="related-news-card"
                   (click)="viewRelatedNews(related.id)"
                 >
@@ -71,6 +66,11 @@
                 </div>
               </div>
             </div>
+
+            <button class="btn-outline-primary-custom mt-6" (click)="goBack()">
+              <i class="pi pi-arrow-left me-2"></i>
+              Back to News
+            </button>
           </div>
         </div>
       </section>
