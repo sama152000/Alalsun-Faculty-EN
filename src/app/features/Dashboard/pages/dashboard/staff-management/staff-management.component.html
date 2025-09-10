@@ -43,6 +43,9 @@
         </button>
       </div>
     </div>
+    <div *ngIf="staffMembers.length === 0" class="no-data">
+      <p>No Staff Members Available</p>
+    </div>
   </div>
 
   <!-- Confirmation Dialog -->

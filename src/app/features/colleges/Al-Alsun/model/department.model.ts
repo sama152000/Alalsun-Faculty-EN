@@ -3,7 +3,7 @@ export interface Department {
   name: string;
   shortName: string;
   overview: string;
-  type: 'undergraduate' | 'postgraduate';
+  type: string; // Changed to string to support departmentTypes
   image: string;
   icon: string;
   established: string;
@@ -44,15 +44,4 @@ export interface Contact {
   phone?: string;
   office: string;
   headOfDepartment: string;
-}
-
-
-
-interface FacultyMember {
-  id: string;
-  name: string;
-  title: string;
-  email: string;
-  specialization: string;
-  imageUrl: string;
 }

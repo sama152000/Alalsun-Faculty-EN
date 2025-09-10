@@ -34,11 +34,8 @@
             <div class="staff-details">
               <h3>{{ dean.name }}</h3>
               <p class="staff-position">{{ dean.position }}</p>
+              <p class="staff-description">{{ dean.greeting | slice:0:50 }}...</p>
               <div class="staff-meta">
-                <span class="meta-item">
-                  <i class="pi pi-comment"></i>
-                  {{ dean.greeting | slice:0:50 }}...
-                </span>
                 <span class="meta-item">
                   <i class="pi pi-star"></i>
                   {{ dean.highlight | slice:0:50 }}...
@@ -112,11 +109,13 @@
       <div class="staff-list">
         <div class="staff-card" *ngFor="let event of historyEvents">
           <div class="staff-info">
-            <img [src]="event.icon" [alt]="event.title" class="staff-image">
+            <div class="staff-icon">
+              <i class="pi pi-calendar"></i>
+            </div>
             <div class="staff-details">
               <h3>{{ event.title }}</h3>
               <p class="staff-position">{{ event.year }}</p>
-              <p class="staff-department">{{ event.description | slice:0:50 }}...</p>
+              <p class="staff-description">{{ event.description | slice:0:50 }}...</p>
             </div>
           </div>
           <div class="staff-actions">
@@ -145,10 +144,10 @@
       <div class="staff-list">
         <div class="staff-card" *ngFor="let vm of visionMissions">
           <div class="staff-info">
-            <img [src]="vm.icon" [alt]="vm.title" class="staff-image">
+           
             <div class="staff-details">
               <h3>{{ vm.title }}</h3>
-              <p class="staff-department">{{ vm.content | slice:0:50 }}...</p>
+              <p class="staff-description">{{ vm.content | slice:0:50 }}...</p>
             </div>
           </div>
           <div class="staff-actions">

@@ -46,6 +46,7 @@ import { DraftsComponent } from './features/Dashboard/pages/dashboard/custom-pag
 import { PublishedComponent } from './features/Dashboard/pages/dashboard/custom-pages/published/published.component';
 import { CustomPageViewerComponent } from './features/Dashboard/pages/dashboard/custom-pages/custom-page-viewer/custom-page-viewer.component';
 import { HeroManagementComponent } from './features/Dashboard/pages/dashboard/hero-management/hero-management.component';
+import { AdditionalDepartmentInformationComponent } from './features/Dashboard/pages/dashboard/additional-department-information/additional-department-information.component';
 
 export const routes: Routes = [
   {
@@ -76,6 +77,8 @@ export const routes: Routes = [
       { path: 'overview', component: DashboardOverviewComponent },
       { path: 'departments', component: DepartmentsManagementComponent },
       { path: 'departments/add', component: AddDepartmentComponent },
+        { path: 'dashboard/departments/additional/:id', component: AdditionalDepartmentInformationComponent },
+
       { path: 'departments/edit/:id', component: EditDepartmentComponent },
       { path: 'sectors', component: SectorsManagementComponent },
       { path: 'sectors/add', component: AddSectorComponent },

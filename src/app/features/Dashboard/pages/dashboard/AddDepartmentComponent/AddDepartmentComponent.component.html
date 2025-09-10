@@ -1,315 +1,125 @@
-
-  <section class="dashboard-content">
-    <div class="management-header">
-      <h2>Add New Department</h2>
-    </div>
-    <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
-      <div class="tabs">
-        <div class="tab-headers">
-          <button type="button" class="tab-header" [class.active]="activeTab === 'basic'" (click)="activeTab = 'basic'">
-            <i class="pi pi-info-circle"></i> Basic Info
-          </button>
-          <button type="button" class="tab-header" [class.active]="activeTab === 'programs'" (click)="activeTab = 'programs'">
-            <i class="pi pi-graduation-cap"></i> Programs
-          </button>
-          <button type="button" class="tab-header" [class.active]="activeTab === 'faculty'" (click)="activeTab = 'faculty'">
-            <i class="pi pi-users"></i> Faculty
-          </button>
-          <button type="button" class="tab-header" [class.active]="activeTab === 'activities'" (click)="activeTab = 'activities'">
-            <i class="pi pi-calendar"></i> Activities
-          </button>
-          <button type="button" class="tab-header" [class.active]="activeTab === 'contact'" (click)="activeTab = 'contact'">
-            <i class="pi pi-phone"></i> Contact
-          </button>
-        </div>
-        <div class="tab-content" [class.active]="activeTab === 'basic'">
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Department Name *</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                formControlName="name"
-                placeholder="Enter department name"
-              >
-            </div>
-            <div class="form-group">
-              <label>Short Name *</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                formControlName="shortName"
-                placeholder="Enter short name"
-              >
-            </div>
-            <div class="form-group full-width">
-              <label>Overview *</label>
-              <textarea 
-                class="form-control" 
-                formControlName="overview"
-                rows="4"
-                placeholder="Enter department overview"
-              ></textarea>
-            </div>
-            <div class="form-group">
-              <label>Type</label>
-              <select formControlName="type" class="form-control">
-                <option value="">Select type</option>
-                <option *ngFor="let type of departmentTypes" [value]="type.value">
-                  {{ type.label }}
-                </option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Established Year</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                formControlName="established"
-                placeholder="e.g., 2016"
-              >
-            </div>
-            <div class="form-group">
-              <label>Image URL</label>
-              <input 
-                type="url" 
-                class="form-control" 
-                formControlName="image"
-                placeholder="Enter image URL"
-              >
-            </div>
-            <div class="form-group">
-              <label>Icon Class</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                formControlName="icon"
-                placeholder="e.g., pi pi-book"
-              >
-            </div>
-            <div class="form-group">
-              <label>Route</label>
-              <input 
-                type="text" 
-                class="form-control" 
-                formControlName="route"
-                placeholder="e.g., /departments/english"
-              >
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-content" [class.active]="activeTab === 'programs'">
-          <div class="programs-section">
-            <div class="section-header">
-              <h4>Department Programs</h4>
-              <button 
-                type="button"
-                class="btn-add-item"
-                (click)="addProgram()"
-              >
-                <i class="pi pi-plus"></i>
-                Add Program
-              </button>
-            </div>
-            <div formArrayName="programs">
-              <div 
-                *ngFor="let program of programsArray.controls; let i = index"
-                [formGroupName]="i"
-                class="program-item"
-              >
-                <div class="item-header">
-                  <h5>Program {{ i + 1 }}</h5>
-                  <button 
-                    type="button"
-                    class="btn-remove"
-                    (click)="removeProgram(i)"
-                  >
-                    <i class="pi pi-trash"></i>
-                  </button>
-                </div>
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label>Program Name</label>
-                    <input type="text" class="form-control" formControlName="name">
-                  </div>
-                  <div class="form-group">
-                    <label>Duration</label>
-                    <input type="text" class="form-control" formControlName="duration">
-                  </div>
-                  <div class="form-group">
-                    <label>Degree</label>
-                    <input type="text" class="form-control" formControlName="degree">
-                  </div>
-                  <div class="form-group full-width">
-                    <label>Description</label>
-                    <textarea class="form-control" formControlName="description" rows="3"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-content" [class.active]="activeTab === 'faculty'">
-          <div class="faculty-section">
-            <div class="section-header">
-              <h4>Faculty Members</h4>
-              <button 
-                type="button"
-                class="btn-add-item"
-                (click)="addFaculty()"
-              >
-                <i class="pi pi-plus"></i>
-                Add Faculty
-              </button>
-            </div>
-            <div formArrayName="faculty">
-              <div 
-                *ngFor="let faculty of facultyArray.controls; let i = index"
-                [formGroupName]="i"
-                class="faculty-item"
-              >
-                <div class="item-header">
-                  <h5>Faculty Member {{ i + 1 }}</h5>
-                  <button 
-                    type="button"
-                    class="btn-remove"
-                    (click)="removeFaculty(i)"
-                  >
-                    <i class="pi pi-trash"></i>
-                  </button>
-                </div>
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" formControlName="name">
-                  </div>
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" class="form-control" formControlName="title">
-                  </div>
-                  <div class="form-group">
-                    <label>Specialization</label>
-                    <input type="text" class="form-control" formControlName="specialization">
-                  </div>
-                  <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" class="form-control" formControlName="email">
-                  </div>
-                  <div class="form-group full-width">
-                    <label>Photo URL</label>
-                    <input type="url" class="form-control" formControlName="photo">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-content" [class.active]="activeTab === 'activities'">
-          <div class="activities-section">
-            <div class="section-header">
-              <h4>Department Activities</h4>
-              <button 
-                type="button"
-                class="btn-add-item"
-                (click)="addActivity()"
-              >
-                <i class="pi pi-plus"></i>
-                Add Activity
-              </button>
-            </div>
-            <div formArrayName="activities">
-              <div 
-                *ngFor="let activity of activitiesArray.controls; let i = index"
-                [formGroupName]="i"
-                class="activity-item"
-              >
-                <div class="item-header">
-                  <h5>Activity {{ i + 1 }}</h5>
-                  <button 
-                    type="button"
-                    class="btn-remove"
-                    (click)="removeActivity(i)"
-                  >
-                    <i class="pi pi-trash"></i>
-                  </button>
-                </div>
-                <div class="form-grid">
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" class="form-control" formControlName="title">
-                  </div>
-                  <div class="form-group">
-                    <label>Date</label>
-                    <input type="date" class="form-control" formControlName="date">
-                  </div>
-                  <div class="form-group full-width">
-                    <label>Description</label>
-                    <textarea class="form-control" formControlName="description" rows="3"></textarea>
-                  </div>
-                  <div class="form-group full-width">
-                    <label>Image URL</label>
-                    <input type="url" class="form-control" formControlName="image">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tab-content" [class.active]="activeTab === 'contact'">
-          <div class="contact-section">
-            <h4>Contact Information</h4>
-            <div formGroupName="contact" class="form-grid">
-              <div class="form-group">
-                <label>Email</label>
-                <input type="email" class="form-control" formControlName="email">
-              </div>
-              <div class="form-group">
-                <label>Phone</label>
-                <input type="tel" class="form-control" formControlName="phone">
-              </div>
-              <div class="form-group">
-                <label>Office</label>
-                <input type="text" class="form-control" formControlName="office">
-              </div>
-              <div class="form-group">
-                <label>Head of Department</label>
-                <input type="text" class="form-control" formControlName="headOfDepartment">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="dialog-actions">
-          <button 
-            type="button"
-            class="btn-outline-primary-custom"
-            [routerLink]="['/dashboard/pages/departments']"
+<section class="dashboard-content">
+  <div class="management-header">
+    <h2>Add New Department</h2>
+  </div>
+  <form [formGroup]="departmentForm" (ngSubmit)="saveDepartment()">
+    <div class="form-card">
+      <h3>Basic Information</h3>
+      <p class="section-description">Provide the essential details for your new department.</p>
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Department Name *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="name"
+            placeholder="Enter department name"
+            [class.is-invalid]="departmentForm.get('name')?.invalid && departmentForm.get('name')?.touched"
           >
-            Cancel
-          </button>
-          <button 
-            type="submit"
-            class="btn-primary-custom"
-            [disabled]="departmentForm.invalid"
+          <div class="invalid-feedback" *ngIf="departmentForm.get('name')?.invalid && departmentForm.get('name')?.touched">
+            Department name is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Short Name *</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="shortName"
+            placeholder="Enter short name"
+            [class.is-invalid]="departmentForm.get('shortName')?.invalid && departmentForm.get('shortName')?.touched"
           >
-            Create Department
-          </button>
+          <div class="invalid-feedback" *ngIf="departmentForm.get('shortName')?.invalid && departmentForm.get('shortName')?.touched">
+            Short name is required
+          </div>
+        </div>
+        <div class="form-group full-width">
+          <label>Overview *</label>
+          <textarea 
+            class="form-control" 
+            formControlName="overview"
+            rows="4"
+            placeholder="Enter department overview"
+            [class.is-invalid]="departmentForm.get('overview')?.invalid && departmentForm.get('overview')?.touched"
+          ></textarea>
+          <div class="invalid-feedback" *ngIf="departmentForm.get('overview')?.invalid && departmentForm.get('overview')?.touched">
+            Overview is required
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Type</label>
+          <select formControlName="type" class="form-control">
+            <option value="">Select type</option>
+            <option *ngFor="let type of departmentTypes" [value]="type.value">
+              {{ type.label }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Established Year</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="established"
+            placeholder="e.g., 2016"
+          >
+        </div>
+        <div class="form-group">
+          <label>Image URL</label>
+          <input 
+            type="url" 
+            class="form-control" 
+            formControlName="image"
+            placeholder="Enter image URL"
+          >
+        </div>
+        <div class="form-group">
+          <label>Icon Class</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="icon"
+            placeholder="e.g., pi pi-building"
+          >
+        </div>
+        <div class="form-group">
+          <label>Route</label>
+          <input 
+            type="text" 
+            class="form-control" 
+            formControlName="route"
+            placeholder="e.g., /departments/english"
+          >
         </div>
       </div>
-    </form>
-  </section>
-
-<!-- Toast Messages -->
-<div class="toast-container" *ngIf="showToast">
-  <div class="toast" [class]="toastClass">
-    <div class="toast-content">
-      <i [class]="toastIcon"></i>
-      <span>{{ toastMessage }}</span>
     </div>
-    <button type="button" class="toast-close" (click)="hideToast()">×</button>
+
+    <div class="dialog-actions">
+      <button 
+        type="button"
+        class="btn-outline-primary-custom"
+        [routerLink]="['/dashboard/departments']"
+      >
+        Cancel
+      </button>
+      <button 
+        type="submit"
+        class="btn-primary-custom"
+        [disabled]="departmentForm.invalid"
+      >
+        Create Department
+      </button>
+    </div>
+  </form>
+
+  <!-- Toast Messages -->
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [class]="toastClass">
+      <div class="toast-content">
+        <i [class]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button type="button" class="toast-close" (click)="hideToast()">×</button>
+    </div>
   </div>
-</div>
+</section>

@@ -16,12 +16,12 @@ import { RouterModule } from '@angular/router';
     ButtonModule,
     RouterModule
   ],
-  templateUrl:'./footer.component.html',
+  templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
   footerData: FooterData | undefined;
-  logoUrl: string = '';
+  facultyInfo: any = null; // نفس الـ type زي الـ navbar
 
   constructor(private menuService: MenuService, private facultyInfoService: FacultyInfoService) {}
 
@@ -32,8 +32,9 @@ export class FooterComponent implements OnInit {
       }
     });
 
-    this.facultyInfoService.getFacultyInfo().subscribe(facultyInfo => {
-      this.logoUrl = facultyInfo.logoUrl;
+    // استخدام نفس الـ service زي الـ navbar
+    this.facultyInfoService.getFacultyInfo().subscribe(info => {
+      this.facultyInfo = info;
     });
   }
 }

@@ -9,7 +9,7 @@ import { environment } from '../../../../../environments/environment';
 })
 export class FacultyInfoService {
   private facultyInfo: FacultyInfo = {
-    logoUrl: 'assets/logo.jpg', // لوغو افتراضي
+    logoUrl: '', // لوغو افتراضي
     name: 'Faculty of Al-Alsun',
     subtitle: 'Luxor University',
     universityName: 'Luxor University',
@@ -19,35 +19,33 @@ export class FacultyInfoService {
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
-
-  getFacultyInfo(): Observable<FacultyInfo> {
-    // Try to fetch logos from backend first
-    return this.http.get<any>(`${this.apiUrl}logos/getall`, {
-      headers: { 'Accept-Language': 'any', 'Content-Type': 'application/json' }
-    }).pipe(
-      map(res => {
-        if (res.success && res.data && res.data.length > 0) {
-          const firstLogo = res.data[0];
-          return {
-            logoUrl: firstLogo.logoPath ? `${this.apiUrl}${firstLogo.logoPath}` : this.facultyInfo.logoUrl,
-            name: this.facultyInfo.name,
-            subtitle: this.facultyInfo.subtitle,
-            universityName: this.facultyInfo.universityName,
-            established: this.facultyInfo.established
-          };
-        } else {
-          return this.facultyInfo;
-        }
-      }),
-      catchError(error => {
-        console.log('Backend logos not available, using default:', error);
-        return of(this.facultyInfo);
-      })
-    );
-  }
+getFacultyInfo(): Observable<FacultyInfo> {
+  return this.http.get<any>(`${this.apiUrl}/Logos/getall`, {
+    headers: { 'Accept-Language': 'any', 'Content-Type': 'application/json' }
+  }).pipe(
+    map(res => {
+      if (res.success && res.data && res.data.length > 0) {
+        const firstLogo = res.data[0];
+        return {
+          logoUrl: firstLogo.logoPath ? `${this.apiUrl}${firstLogo.logoPath}` : this.facultyInfo.logoUrl,
+          name: this.facultyInfo.name,
+          subtitle: this.facultyInfo.subtitle,
+          universityName: this.facultyInfo.universityName,
+          established: this.facultyInfo.established
+        };
+      } else {
+        return this.facultyInfo;
+      }
+    }),
+    catchError(error => {
+      console.log('Backend logos not available, using default:', error);
+      return of(this.facultyInfo);
+    })
+  );
+}
 
   getAllContacts(): Observable<any[]> {
-    return this.http.get<any>(`${this.apiUrl}/getall`, {
+ return this.http.get<any>(`${this.apiUrl}/Logos/getall`,  {
       headers: { 'Accept-Language': 'any', 'Content-Type': 'application/json' }
     }).pipe(
       map(res => {

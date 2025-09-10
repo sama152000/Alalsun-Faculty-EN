@@ -218,25 +218,26 @@ export class EditDepartmentComponent implements OnInit {
     }
   }
 
-  saveDepartment() {
-    if (this.departmentForm.valid && this.editingId) {
-      const formValue = this.departmentForm.value;
-      if (formValue.activities) {
-        formValue.activities = formValue.activities.map((activity: any) => ({
-          ...activity,
-          date: activity.date ? new Date(activity.date) : null
-        }));
-      }
-      this.departmentService.updateDepartment(this.editingId, formValue).subscribe(() => {
-        this.showSuccessToast('Department updated successfully');
-        setTimeout(() => {
-          this.router.navigate(['/dashboard/departments']);
-        }, 3000);
-      }, error => {
-        this.showErrorToast('Error updating department');
-      });
+ saveDepartment() {
+  if (this.departmentForm.valid && this.editingId) {
+    const formValue = this.departmentForm.value;
+    if (formValue.activities) {
+      formValue.activities = formValue.activities.map((activity: any) => ({
+        ...activity,
+        date: activity.date ? new Date(activity.date).toISOString() : null
+      }));
     }
+    this.departmentService.updateDepartment(this.editingId, formValue).subscribe({
+      next: () => {
+        this.showSuccessToast('Department updated successfully');
+        setTimeout(() => this.router.navigate(['/dashboard/departments']), 3000);
+      },
+      error: (error) => {
+        this.showErrorToast('Error updating department: ' + (error.error?.message || error.message));
+      }
+    });
   }
+}
 
   toggleSubmenu(menu: string): void {
     this.activeSubmenu = this.activeSubmenu === menu ? null : menu;

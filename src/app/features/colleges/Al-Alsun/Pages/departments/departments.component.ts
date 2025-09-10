@@ -47,42 +47,39 @@ export class DepartmentsComponent implements OnInit {
     private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.loadDepartments();
-    // Check for department ID in route
-    this.route.paramMap.subscribe(params => {
-      const deptId = params.get('id');
-      if (deptId) {
-        this.departmentsService.getAllDepartments().subscribe(departments => {
-          const department = departments.find(d => d.id === deptId);
-          if (department) {
-            this.selectDepartment(department);
-          }
-        });
-      }
-    });
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    this.isMobile = window.innerWidth <= 991;
-    if (!this.isMobile) {
-      this.sidebarCollapsed = false;
+ngOnInit(): void {
+  this.loadDepartments();
+  this.route.paramMap.subscribe(params => {
+    const deptId = params.get('id');
+    if (deptId) {
+      this.departmentsService.getDepartmentById(deptId).subscribe(department => {
+        if (department) {
+          this.selectDepartment(department);
+        } else {
+          this.router.navigate(['/departments']); // لو مفيش department، رجوع للقائمة
+        }
+      });
     }
-  }
+  });
+}
 
-  loadDepartments(): void {
-    this.departmentsService.getAllDepartments().subscribe({
-      next: (departments) => {
-        this.allDepartments = departments;
-        this.filteredDepartments = [...departments];
-        console.log('Departments loaded:', departments.length);
-      },
-      error: (error) => {
-        console.error('Error loading departments:', error);
+loadDepartments(): void {
+  this.departmentsService.getAllDepartments().subscribe({
+    next: (departments) => {
+      this.allDepartments = departments;
+      this.filteredDepartments = [...departments];
+      console.log('Departments loaded:', departments.length);
+      if (departments.length === 0) {
+        console.warn('No departments found in API response.');
       }
-    });
-  }
+    },
+    error: (error) => {
+      console.error('Error loading departments:', error);
+      this.allDepartments = [];
+      this.filteredDepartments = [];
+    }
+  });
+}
 
   applyFilters(): void {
     let filtered = [...this.allDepartments];

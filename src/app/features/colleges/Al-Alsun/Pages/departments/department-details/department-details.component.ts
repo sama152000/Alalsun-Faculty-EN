@@ -36,27 +36,28 @@ export class DepartmentDetailsComponent implements OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['department'] && changes['department'].currentValue) {
-      this.activeTab = 'overview';
-      this.breadcrumbs = [
-        { label: 'Departments', url: '/departments' },
-        { label: this.department!.name }
-      ];
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+ngOnChanges(changes: SimpleChanges): void {
+  if (changes['department'] && changes['department'].currentValue) {
+    this.activeTab = 'overview';
+    this.breadcrumbs = [
+      { label: 'Departments', url: '/departments' },
+      { label: this.department!.name }
+    ];
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.loadDepartments();
   }
+}
 
-  loadDepartments(): void {
-    this.departmentsService.getAllDepartments().subscribe({
-      next: (departments) => {
-        this.departments = departments;
-      },
-      error: (error) => {
-        console.error('Error loading departments:', error);
-      }
-    });
-  }
+loadDepartments(): void {
+  this.departmentsService.getAllDepartments().subscribe({
+    next: (departments) => {
+      this.departments = departments;
+    },
+    error: (error) => {
+      console.error('Error loading departments:', error);
+    }
+  });
+}
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {

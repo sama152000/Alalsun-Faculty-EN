@@ -121,67 +121,62 @@
             </div>
           </div>
 
-          <!-- Departments Grid -->
-          <div class="row" *ngIf="filteredDepartments.length > 0; else noResults">
-            <div class="col-lg-6 col-xl-4 mb-4" *ngFor="let department of filteredDepartments; trackBy: trackByDepartmentId">
-              <div class="card card-modern h-100 department-card" [routerLink]="['/departments', department.id]">
-                <div class="position-relative">
-                  <img [src]="department.image" 
-                       class="card-img-top" 
-                       [alt]="department.name"
-                       style="height: 200px; object-fit: cover;">
-                  <div class="position-absolute top-0 start-0 p-3">
-                    <span class="badge" 
-                          [class]="department.type === 'undergraduate' ? 'bg-primary' : 'bg-gradient-gold text-dark'">
-                      <i [class]="department.icon" class="me-1"></i>
-                      {{department.shortName}}
-                    </span>
-                  </div>
-                  <div class="position-absolute top-0 end-0 p-3">
-                    <span class="badge bg-light text-dark">
-                      Est. {{department.established}}
-                    </span>
-                  </div>
-                </div>
-                
-                <div class="card-body p-4 d-flex flex-column">
-                  <h4 class="card-title text-primary mb-3">{{department.name}}</h4>
-                  <p class="card-text text-muted mb-3 flex-grow-1" style="font-size: 0.9rem; line-height: 1.6;">
-                    {{department.overview | slice:0:120}}...
-                  </p>
-                  
-                  <div class="row g-3 mb-4">
-                    <div class="col-6">
-                      <div class="d-flex align-items-center">
-                        <i class="pi pi-book text-gold me-2"></i>
-                        <div>
-                          <small class="text-muted d-block">Programs</small>
-                          <strong>{{department.programs.length}}</strong>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="d-flex align-items-center">
-                        <i class="pi pi-users text-gold me-2"></i>
-                        <div>
-                          <small class="text-muted d-block">Faculty</small>
-                          <strong>{{department.faculty.length}}</strong>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="mt-auto">
-                    <a class="btn btn-primary-gradient w-100">
-                      <i class="pi pi-arrow-right me-2"></i>
-                      Explore Department
-                    </a>
-                  </div>
-                </div>
+       <div class="row" *ngIf="filteredDepartments.length > 0; else noResults">
+  <div class="col-lg-6 col-xl-4 mb-4" *ngFor="let department of filteredDepartments; trackBy: trackByDepartmentId">
+    <div class="card card-modern h-100 department-card" [routerLink]="['/departments', department.id]">
+      <div class="position-relative">
+        <img [src]="department.image || 'https://via.placeholder.com/300x200'" 
+             class="card-img-top" 
+             [alt]="department.name"
+             style="height: 200px; object-fit: cover;">
+        <div class="position-absolute top-0 start-0 p-3">
+          <span class="badge" 
+                [class]="department.type === 'undergraduate' ? 'bg-primary' : 'bg-gradient-gold text-dark'">
+            <i [class]="department.icon" class="me-1"></i>
+            {{department.shortName}}
+          </span>
+        </div>
+        <div class="position-absolute top-0 end-0 p-3">
+          <span class="badge bg-light text-dark">
+            Est. {{department.established}}
+          </span>
+        </div>
+      </div>
+      <div class="card-body p-4 d-flex flex-column">
+        <h4 class="card-title text-primary mb-3">{{department.name}}</h4>
+        <p class="card-text text-muted mb-3 flex-grow-1" style="font-size: 0.9rem; line-height: 1.6;">
+          {{department.overview | slice:0:120}}...
+        </p>
+        <div class="row g-3 mb-4">
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <i class="pi pi-book text-gold me-2"></i>
+              <div>
+                <small class="text-muted d-block">Programs</small>
+                <strong>{{department.programs.length}}</strong>
               </div>
             </div>
           </div>
-
+          <div class="col-6">
+            <div class="d-flex align-items-center">
+              <i class="pi pi-users text-gold me-2"></i>
+              <div>
+                <small class="text-muted d-block">Faculty</small>
+                <strong>{{department.faculty.length}}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-auto">
+          <a class="btn btn-primary-gradient w-100">
+            <i class="pi pi-arrow-right me-2"></i>
+            Explore Department
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
           <!-- No Results Template -->
           <ng-template #noResults>
             <div class="text-center py-5">

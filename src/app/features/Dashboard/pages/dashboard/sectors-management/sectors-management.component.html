@@ -17,7 +17,7 @@
         <div class="staff-details">
           <h3>{{ sector.name }}</h3>
           <p class="staff-position">{{ sector.title }}</p>
-          <p class="staff-department">{{ sector.description | slice:0:100 }}...</p>
+          <p class="staff-description">{{ sector.description | slice:0:100 }}...</p>
           <div class="staff-meta">
             <span class="meta-item">
               <i class="pi pi-envelope"></i>
@@ -42,6 +42,9 @@
           Delete
         </button>
       </div>
+    </div>
+    <div *ngIf="sectors.length === 0" class="no-data">
+      <p>No Sectors Available</p>
     </div>
   </div>
 

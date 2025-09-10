@@ -24,39 +24,40 @@
         <nav class="dashboard-nav">
           <ul>
             <li><a routerLink="overview" routerLinkActive="active"><i class="pi pi-chart-line"></i> Overview</a></li>
+            <li><a routerLink="hero-mangment" routerLinkActive="active"><i class="pi pi-sliders-h"></i> Hero Management</a></li>
             <li class="nav-item has-submenu">
-              <a [class.active]="isPagesActive()" (click)="toggleSubmenu('pages')"><i class="pi pi-folder"></i> Pages</a>
+              <a [class.active]="isPagesActive()" (click)="toggleSubmenu('pages')">
+                <i class="pi pi-folder"></i> Pages
+                <i class="pi pi-chevron-down submenu-icon" [ngClass]="{'expanded': activeSubmenu === 'pages'}"></i>
+              </a>
               <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'pages'}">
+                <li><a routerLink="about" routerLinkActive="active"><i class="pi pi-info-circle"></i> About Us</a></li>
                 <li><a routerLink="departments" routerLinkActive="active"><i class="pi pi-building"></i> Departments</a></li>
-                <li><a routerLink="sectors" routerLinkActive="active"><i class="pi pi-sitemap"></i> Sectors</a></li>
                 <li><a routerLink="staff" routerLinkActive="active"><i class="pi pi-users"></i> Staff</a></li>
-                <li class="nav-item has-submenu">
-                  <a routerLink="about" routerLinkActive="active"><i class="pi pi-info-circle"></i> About Us</a>
-                  <ul class="submenu nested-submenu expanded">
-                    <li><a routerLink="about/vice-deans" routerLinkActive="active"><i class="pi pi-info-circle"></i> vice-deans</a></li>
-                    <li><a routerLink="about/dean" routerLinkActive="active"><i class="pi pi-info-circle"></i> dean</a></li>
-                               
-
-                  </ul>
-                </li>
-
+                <li><a routerLink="sectors" routerLinkActive="active"><i class="pi pi-sitemap"></i> Sectors</a></li>
               </ul>
             </li>
             <li class="nav-item has-submenu">
-              <a [class.active]="isPostsActive()" (click)="toggleSubmenu('posts')"><i class="pi pi-megaphone"></i> Posts</a>
+              <a [class.active]="isPostsActive()" (click)="toggleSubmenu('posts')">
+                <i class="pi pi-megaphone"></i> Posts
+                <i class="pi pi-chevron-down submenu-icon" [ngClass]="{'expanded': activeSubmenu === 'posts'}"></i>
+              </a>
               <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'posts'}">
                 <li><a routerLink="news" routerLinkActive="active"><i class="pi pi-megaphone"></i> News</a></li>
               </ul>
             </li>
-            <li><a routerLink="custom-pages" routerLinkActive="active"><i class="pi pi-file"></i> Custom Pages</a>
-            <ul>
-              <li><a routerLink="custom-pages/drafts" routerLinkActive="active"><i class="pi pi-file"></i> drafts</a></li>
-              <li><a routerLink="custom-pages/published" routerLinkActive="active"><i class="pi pi-file"></i> published pages</a></li>
-            </ul>
+            <li class="nav-item has-submenu">
+              <a [class.active]="isCustomPagesActive()" (click)="toggleSubmenu('custom-pages')">
+                <i class="pi pi-file"></i> Custom Pages
+                <i class="pi pi-chevron-down submenu-icon" [ngClass]="{'expanded': activeSubmenu === 'custom-pages'}"></i>
+              </a>
+              <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'custom-pages'}">
+                <li><a routerLink="custom-pages/drafts" routerLinkActive="active"><i class="pi pi-file"></i> Drafts</a></li>
+                <li><a routerLink="custom-pages/published" routerLinkActive="active"><i class="pi pi-file"></i> Published Pages</a></li>
+              </ul>
             </li>
             <li><a routerLink="media" routerLinkActive="active"><i class="pi pi-images"></i> Media</a></li>
             <li><a routerLink="menus" routerLinkActive="active"><i class="pi pi-bars"></i> Menus</a></li>
-            <li><a routerLink="hero-mangment" routerLinkActive="active"><i class="pi pi-sliders-h"></i>hero mangment</a></li>
             <li><a routerLink="settings" routerLinkActive="active"><i class="pi pi-cog"></i> Settings</a></li>
           </ul>
         </nav>

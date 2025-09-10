@@ -95,277 +95,263 @@
 
         <!-- Tab Content -->
         <div class="tab-content mt-4">
-          <!-- Overview Tab -->
-          <div class="tab-pane" [class.active]="activeTab === 'overview'">
-            <div class="row">
-              <div class="col-lg-8">
-                <div class="content-section">
-                  <h3 class="section-header">About the Department</h3>
-                  <p class="lead">{{department.overview}}</p>
-                  
-                  <div class="row g-4 mt-4">
-                    <div class="col-md-6">
-                      <div class="stat-card">
-                        <div class="stat-icon">
-                          <i class="pi pi-calendar text-white"></i>
-                        </div>
-                        <div class="stat-content">
-                          <h4>Established</h4>
-                          <p>{{department.established}}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="stat-card">
-                        <div class="stat-icon">
-                          <i class="pi pi-book text-white"></i>
-                        </div>
-                        <div class="stat-content">
-                          <h4>Programs</h4>
-                          <p>{{department.programs.length}} Available</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="stat-card">
-                        <div class="stat-icon">
-                          <i class="pi pi-users text-white"></i>
-                        </div>
-                        <div class="stat-content">
-                          <h4>Faculty Members</h4>
-                          <p>{{department.faculty.length}} Professors</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="stat-card">
-                        <div class="stat-icon">
-                          <i class="pi pi-star text-white"></i>
-                        </div>
-                        <div class="stat-content">
-                          <h4>Activities</h4>
-                          <p>{{department.activities.length}} Annual Events</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        <!-- Overview Tab -->
+<div class="tab-pane" [class.active]="activeTab === 'overview'">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="content-section">
+        <h3 class="section-header">About the Department</h3>
+        <p class="lead">{{department.overview || 'No overview available'}}</p>
+        <div class="row g-4 mt-4">
+          <div class="col-md-6">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="pi pi-calendar text-white"></i>
               </div>
-              
-              <div class="col-lg-4">
-                <div class="card card-modern h-90">
-                  <div class="card-header bg-primary text-white">
-                    <h5 class="card-title mb-0 quick-contact-title">
-                      <i class="pi pi-phone me-2"></i>
-                      Quick Contact
-                    </h5>
-                  </div>
-                  <div class="card-body">
-                    <div class="contact-item">
-                      <strong>Head of Department:</strong>
-                      <p>{{department.contact.headOfDepartment}}</p>
-                    </div>
-                    <div class="contact-item">
-                      <strong>Office Location:</strong>
-                      <p>{{department.contact.office}}</p>
-                    </div>
-                    <div class="contact-item">
-                      <strong>Email:</strong>
-                      <p>
-                        <a [href]="'mailto:' + department.contact.email" class="text-primary">
-                          {{department.contact.email}}
-                        </a>
-                      </p>
-                    </div>
-                    <div class="contact-item" *ngIf="department.contact.phone">
-                      <strong>Phone:</strong>
-                      <p>{{department.contact.phone}}</p>
-                    </div>
-                  </div>
-                </div>
+              <div class="stat-content">
+                <h4>Established</h4>
+                <p>{{department.established || 'N/A'}}</p>
               </div>
             </div>
           </div>
+          <div class="col-md-6">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="pi pi-book text-white"></i>
+              </div>
+              <div class="stat-content">
+                <h4>Programs</h4>
+                <p>{{department.programs.length}} Available</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="pi pi-users text-white"></i>
+              </div>
+              <div class="stat-content">
+                <h4>Faculty Members</h4>
+                <p>{{department.faculty.length}} Professors</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="pi pi-star text-white"></i>
+              </div>
+              <div class="stat-content">
+                <h4>Activities</h4>
+                <p>{{department.activities.length}} Annual Events</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card card-modern h-90">
+        <div class="card-header bg-primary text-white">
+          <h5 class="card-title mb-0 quick-contact-title">
+            <i class="pi pi-phone me-2"></i>
+            Quick Contact
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="contact-item">
+            <strong>Head of Department:</strong>
+            <p>{{department.contact.headOfDepartment || 'N/A'}}</p>
+          </div>
+          <div class="contact-item">
+            <strong>Office Location:</strong>
+            <p>{{department.contact.office || 'N/A'}}</p>
+          </div>
+          <div class="contact-item">
+            <strong>Email:</strong>
+            <p>
+              <a [href]="'mailto:' + department.contact.email" class="text-primary" *ngIf="department.contact.email && department.contact.email.length > 0">
+                {{department.contact.email}}
+              </a>
+              <span *ngIf="!department.contact.email || department.contact.email.length === 0">N/A</span>
+            </p>
+          </div>
+          <div class="contact-item" *ngIf="department.contact.phone">
+            <strong>Phone:</strong>
+            <p>{{department.contact.phone}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Programs Tab -->
-          <div class="tab-pane" [class.active]="activeTab === 'programs'">
-            <div class="content-section">
-              <h3 class="section-header">Academic Programs</h3>
-              <p class="text-muted mb-4">
-                Discover our comprehensive range of {{department.type}} programs designed to meet international standards.
-              </p>
-              
-              <div class="row">
-                <div class="col-lg-6 mb-4" *ngFor="let program of department.programs">
-                  <div class="card card-modern h-100">
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start mb-3">
-                        <h5 class="card-title text-primary">{{program.name}}</h5>
-                        <span class="badge bg-gradient-gold text-dark">{{program.degree}}</span>
-                      </div>
-                      <p class="card-text text-muted mb-3">{{program.description}}</p>
-                      <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-muted">
-                          <i class="pi pi-clock me-1"></i>
-                          Duration: {{program.duration}}
-                        </span>
-                        <button class="btn btn-outline-primary-custom btn-sm">
-                          Learn More
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<!-- Programs Tab -->
+<div class="tab-pane" [class.active]="activeTab === 'programs'">
+  <div class="content-section">
+    <h3 class="section-header">Academic Programs</h3>
+    <p class="text-muted mb-4" *ngIf="department.programs.length === 0">No programs available.</p>
+    <div class="row" *ngIf="department.programs.length > 0">
+      <div class="col-lg-6 mb-4" *ngFor="let program of department.programs">
+        <div class="card card-modern h-100">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <h5 class="card-title text-primary">{{program.name || 'Unnamed Program'}}</h5>
+              <span class="badge bg-gradient-gold text-dark">{{program.degree || 'N/A'}}</span>
+            </div>
+            <p class="card-text text-muted mb-3">{{program.description || 'No description available'}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="text-muted">
+                <i class="pi pi-clock me-1"></i>
+                Duration: {{program.duration || 'N/A'}}
+              </span>
+              <button class="btn btn-outline-primary-custom btn-sm">
+                Learn More
+              </button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Faculty Tab -->
-          <div class="tab-pane" [class.active]="activeTab === 'faculty'">
-            <div class="content-section">
-              <h3 class="section-header">Our Faculty</h3>
-              <p class="text-muted mb-4">
-                Meet our distinguished faculty members who bring expertise and dedication to education.
-              </p>
-              
-              <div class="row">
-                <div class="col-lg-6 mb-4" *ngFor="let faculty of department.faculty">
-                  <div class="card card-modern">
-                    <div class="card-body">
-                      <div class="d-flex align-items-center">
-                        <div class="faculty-photo me-3">
-                          <img [src]="faculty.photo || 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg'" 
-                               [alt]="faculty.name" 
-                               class="faculty-image">
-                        </div>
-                        <div class="faculty-info">
-                          <h5 class="mb-1 text-primary">{{faculty.name}}</h5>
-                          <p class="text-muted mb-1">{{faculty.title}}</p>
-                          <p class="text-primary mb-2"><small>{{faculty.specialization}}</small></p>
-                          <a [href]="'mailto:' + faculty.email" class="btn btn-outline-primary-custom btn-sm">
-                            <i class="pi pi-envelope me-1"></i>
-                            Contact
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+<!-- Faculty Tab -->
+<div class="tab-pane" [class.active]="activeTab === 'faculty'">
+  <div class="content-section">
+    <h3 class="section-header">Our Faculty</h3>
+    <p class="text-muted mb-4" *ngIf="department.faculty.length === 0">No faculty members available.</p>
+    <div class="row" *ngIf="department.faculty.length > 0">
+      <div class="col-lg-6 mb-4" *ngFor="let faculty of department.faculty">
+        <div class="card card-modern">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="faculty-photo me-3">
+                <img [src]="faculty.photo || 'https://via.placeholder.com/100x100'" 
+                     [alt]="faculty.name" 
+                     class="faculty-image">
+              </div>
+              <div class="faculty-info">
+                <h5 class="mb-1 text-primary">{{faculty.name || 'Unnamed Faculty'}}</h5>
+                <p class="text-muted mb-1">{{faculty.title || 'N/A'}}</p>
+                <p class="text-primary mb-2"><small>{{faculty.specialization || 'N/A'}}</small></p>
+                <a [href]="'mailto:' + faculty.email" class="btn btn-outline-primary-custom btn-sm" *ngIf="faculty.email">
+                  <i class="pi pi-envelope me-1"></i>
+                  Contact
+                </a>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Activities Tab -->
-          <div class="tab-pane" [class.active]="activeTab === 'activities'">
-            <div class="content-section">
-              <h3 class="section-header">Department Activities</h3>
-              <p class="text-muted mb-4">
-                Stay updated with our latest events, conferences, and academic activities.
-              </p>
-              
-              <div class="row">
-                <div class="col-lg-6 mb-4" *ngFor="let activity of department.activities">
-                  <div class="card card-modern">
-                    <div class="activity-image-container" *ngIf="activity.image">
-                      <img [src]="activity.image" [alt]="activity.title" class="activity-image">
-                    </div>
-                    <div class="card-body">
-                      <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h5 class="card-title text-primary">{{activity.title}}</h5>
-                        <span class="badge bg-light text-dark">
-                          {{activity.date | date:'MMM dd, y'}}
-                        </span>
-                      </div>
-                      <p class="card-text text-muted">{{activity.description}}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+<!-- Activities Tab -->
+<div class="tab-pane" [class.active]="activeTab === 'activities'">
+  <div class="content-section">
+    <h3 class="section-header">Department Activities</h3>
+    <p class="text-muted mb-4" *ngIf="department.activities.length === 0">No activities available.</p>
+    <div class="row" *ngIf="department.activities.length > 0">
+      <div class="col-lg-6 mb-4" *ngFor="let activity of department.activities">
+        <div class="card card-modern">
+          <div class="activity-image-container" *ngIf="activity.image">
+            <img [src]="activity.image" [alt]="activity.title" class="activity-image">
           </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5 class="card-title text-primary">{{activity.title || 'Unnamed Activity'}}</h5>
+              <span class="badge bg-light text-dark">
+                {{ activity.date ? (activity.date | date:'MMM dd, y') : 'N/A' }}
+              </span>
+            </div>
+            <p class="card-text text-muted">{{activity.description || 'No description available'}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-          <!-- Contact Tab -->
-          <div class="tab-pane" [class.active]="activeTab === 'contact'">
-            <div class="content-section">
-              <h3 class="section-header">Contact Information</h3>
-              
-              <div class="row align-items-stretch">
-                <div class="col-lg-8">
-                  <div class="card card-modern h-100">
-                    <div class="card-body p-4">
-                      <div class="row g-4">
-                        <div class="col-md-6">
-                          <div class="contact-detail">
-                            <div class="contact-icon">
-                              <i class="pi pi-envelope text-white"></i>
-                            </div>
-                            <div>
-                              <h6>Department Email</h6>
-                              <a [href]="'mailto:' + department.contact.email" class="text-primary">
-                                {{department.contact.email}}
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="col-md-6" *ngIf="department.contact.phone">
-                          <div class="contact-detail">
-                            <div class="contact-icon">
-                              <i class="pi pi-phone text-white"></i>
-                            </div>
-                            <div>
-                              <h6>Phone Number</h6>
-                              <span>{{department.contact.phone}}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                          <div class="contact-detail">
-                            <div class="contact-icon">
-                              <i class="pi pi-map-marker text-white"></i>
-                            </div>
-                            <div>
-                              <h6>Office Location</h6>
-                              <span>{{department.contact.office}}</span>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div class="col-md-6">
-                          <div class="contact-detail">
-                            <div class="contact-icon">
-                              <i class="pi pi-user text-white"></i>
-                            </div>
-                            <div>
-                              <h6>Head of Department</h6>
-                              <span>{{department.contact.headOfDepartment}}</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+<!-- Contact Tab -->
+<div class="tab-pane" [class.active]="activeTab === 'contact'">
+  <div class="content-section">
+    <h3 class="section-header">Contact Information</h3>
+    <div class="row align-items-stretch">
+      <div class="col-lg-8">
+        <div class="card card-modern h-100">
+          <div class="card-body p-4">
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="contact-detail">
+                  <div class="contact-icon">
+                    <i class="pi pi-envelope text-white"></i>
+                  </div>
+                  <div>
+                    <h6>Department Email</h6>
+                    <a [href]="'mailto:' + department.contact.email" class="text-primary" *ngIf="department.contact.email">
+                      {{department.contact.email}}
+                    </a>
+                    <span *ngIf="!department.contact.email">N/A</span>
                   </div>
                 </div>
-                
-                <div class="col-lg-4">
-                  <div class="card card-modern bg-gradient-primary text-white h-100">
-                    <div class="card-body text-center p-4">
-                      <i class="pi pi-graduation-cap" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-                      <h5>Ready to Join Us?</h5>
-                      <p class="mb-4">
-                        The {{department.shortName}} Department at the Faculty of Al-Alsun – Luxor University is committed to preparing highly qualified graduates.
-                      </p>
-                      <button class="btn btn-outline-light">
-                        Apply Now
-                        <i class="pi pi-arrow-right ms-2"></i>
-                      </button>
-                    </div>
+              </div>
+              <div class="col-md-6" *ngIf="department.contact.phone">
+                <div class="contact-detail">
+                  <div class="contact-icon">
+                    <i class="pi pi-phone text-white"></i>
+                  </div>
+                  <div>
+                    <h6>Phone Number</h6>
+                    <span>{{department.contact.phone}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="contact-detail">
+                  <div class="contact-icon">
+                    <i class="pi pi-map-marker text-white"></i>
+                  </div>
+                  <div>
+                    <h6>Office Location</h6>
+                    <span>{{department.contact.office || 'N/A'}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="contact-detail">
+                  <div class="contact-icon">
+                    <i class="pi pi-user text-white"></i>
+                  </div>
+                  <div>
+                    <h6>Head of Department</h6>
+                    <span>{{department.contact.headOfDepartment || 'N/A'}}</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="card card-modern bg-gradient-primary text-white h-100">
+          <div class="card-body text-center p-4">
+            <i class="pi pi-graduation-cap" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+            <h5>Ready to Join Us?</h5>
+            <p class="mb-4">
+              The {{department.shortName || department.name}} Department at the Faculty of Al-Alsun – Luxor University is committed to preparing highly qualified graduates.
+            </p>
+            <button class="btn btn-outline-light">
+              Apply Now
+              <i class="pi pi-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
       </div>
     </div>

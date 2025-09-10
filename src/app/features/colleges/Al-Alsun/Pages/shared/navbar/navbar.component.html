@@ -6,7 +6,8 @@
         <div class="col-lg-8 col-md-7">
           <div class="logo-section">
             <div class="faculty-logo">
-              <img [src]="facultyInfo?.logoUrl || ''" width="100%" [alt]="facultyInfo?.name || 'Faculty Logo'">
+              <!-- <img [src]="facultyInfo?.logoUrl || ''" width="100%" [alt]="facultyInfo?.name || 'Faculty Logo'"> -->
+               <img [src]="facultyInfo?.logoUrl || '/assets/logo.jpg'" width="100%" [alt]="facultyInfo?.name || 'Faculty Logo'">
             </div>
             <div>
               <h1 class="main-title">{{ facultyInfo?.name || 'Faculty of Al-Alsun' }}</h1>

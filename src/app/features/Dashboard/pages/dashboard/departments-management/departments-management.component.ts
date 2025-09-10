@@ -46,18 +46,19 @@ export class DepartmentsManagementComponent implements OnInit {
   }
 
   deleteDepartment() {
-    if (this.deleteId) {
-      this.departmentService.deleteDepartment(this.deleteId).subscribe(() => {
-        this.showToast = true;
-        this.toastClass = 'toast-success';
-        this.toastIcon = 'pi pi-check';
-        this.toastMessage = 'Department deleted successfully';
+  if (this.deleteId) {
+    this.departmentService.deleteDepartment(this.deleteId).subscribe({
+      next: () => {
+        this.showSuccessToast('Department deleted successfully');
         this.loadDepartments();
         this.closeConfirmDialog();
-        setTimeout(() => this.hideToast(), 3000);
-      });
-    }
+      },
+      error: (error) => {
+        this.showErrorToast('Error deleting department: ' + (error.error?.message || error.message));
+      }
+    });
   }
+}
 
   showSuccessToast(message: string) {
     this.showToast = true;

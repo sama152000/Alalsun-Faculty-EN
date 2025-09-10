@@ -1,168 +1,168 @@
-    <div class="admin-page">
-      <div class="admin-header">
-        <h1 class="page-title">Dashboard Overview</h1>
-        <div class="header-actions">
-          <span class="welcome-text">Welcome back, Admin</span>
-          <div class="current-time">{{ currentTime | date:'medium' }}</div>
+<div class="admin-page">
+  <div class="admin-header">
+    <h1 class="page-title">Dashboard Overview</h1>
+    <div class="header-actions">
+      <span class="welcome-text">Welcome back, Admin</span>
+      <div class="current-time">{{ currentTime | date:'medium' }}</div>
+    </div>
+  </div>
+
+  <!-- Statistics Cards -->
+  <div class="stats-section" *ngIf="dashboardStats">
+    <div class="stats-grid">
+      <div class="stat-card primary">
+        <div class="stat-icon">
+          <i class="pi pi-building"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ dashboardStats.totalDepartments }}</h3>
+          <p>Departments</p>
+          <span class="stat-change positive">+2 this month</span>
         </div>
       </div>
 
-      <!-- Statistics Cards -->
-      <div class="stats-section" *ngIf="dashboardStats">
-        <div class="stats-grid">
-          <div class="stat-card primary">
-            <div class="stat-icon">
-              <i class="pi pi-building"></i>
-            </div>
-            <div class="stat-content">
-              <h3>{{ dashboardStats.totalDepartments }}</h3>
-              <p>Departments</p>
-              <span class="stat-change positive">+2 this month</span>
-            </div>
-          </div>
-
-          <div class="stat-card success">
-            <div class="stat-icon">
-              <i class="pi pi-users"></i>
-            </div>
-            <div class="stat-content">
-              <h3>{{ dashboardStats.totalStaff }}</h3>
-              <p>Staff Members</p>
-              <span class="stat-change positive">+3 this month</span>
-            </div>
-          </div>
-
-          <div class="stat-card warning">
-            <div class="stat-icon">
-              <i class="pi pi-graduation-cap"></i>
-            </div>
-            <div class="stat-content">
-              <h3>{{ dashboardStats.totalStudents }}</h3>
-              <p>Students</p>
-              <span class="stat-change positive">+45 this semester</span>
-            </div>
-          </div>
-
-          <div class="stat-card info">
-            <div class="stat-icon">
-              <i class="pi pi-newspaper"></i>
-            </div>
-            <div class="stat-content">
-              <h3>{{ dashboardStats.totalNews }}</h3>
-              <p>News Articles</p>
-              <span class="stat-change positive">+5 this week</span>
-            </div>
-          </div>
-
-          <div class="stat-card secondary">
-            <div class="stat-icon">
-              <i class="pi pi-sitemap"></i>
-            </div>
-            <div class="stat-content">
-              <h3>{{ dashboardStats.totalSectors }}</h3>
-              <p>Faculty Sectors</p>
-              <span class="stat-change neutral">No change</span>
-            </div>
-          </div>
-
-          <div class="stat-card dark">
-            <div class="stat-icon">
-              <i class="pi pi-images"></i>
-            </div>
-            <div class="stat-content">
-              <h3>{{ dashboardStats.totalMedia }}</h3>
-              <p>Media Files</p>
-              <span class="stat-change positive">+12 this week</span>
-            </div>
-          </div>
+      <div class="stat-card success">
+        <div class="stat-icon">
+          <i class="pi pi-users"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ dashboardStats.totalStaff }}</h3>
+          <p>Staff Members</p>
+          <span class="stat-change positive">+3 this month</span>
         </div>
       </div>
 
-      <!-- Quick Actions -->
-      <div class="quick-actions-section">
-        <h2 class="section-title">Quick Actions</h2>
-        <div class="actions-grid">
-          <a *ngFor="let action of quickActions" 
-             [routerLink]="action.route" 
-             class="action-card"
-             [class]="'action-' + action.color">
-            <div class="action-icon">
-              <i [class]="action.icon"></i>
-            </div>
-            <div class="action-content">
-              <h4>{{ action.title }}</h4>
-              <p>{{ action.description }}</p>
-            </div>
-            <div class="action-arrow">
-              <i class="pi pi-arrow-right"></i>
-            </div>
-          </a>
+      <div class="stat-card warning">
+        <div class="stat-icon">
+          <i class="pi pi-graduation-cap"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ dashboardStats.totalStudents }}</h3>
+          <p>Students</p>
+          <span class="stat-change positive">+45 this semester</span>
         </div>
       </div>
 
-      <!-- Recent Activities and System Health -->
-      <div class="row g-4">
-        <div class="col-lg-8">
-          <div class="content-card">
-            <div class="card-header">
-              <h3>Recent Activities</h3>
-              <span class="badge bg-primary">{{ recentActivities.length }} Activities</span>
-            </div>
-            <div class="activities-list">
-              <div class="activity-item" *ngFor="let activity of recentActivities">
-                <div class="activity-icon" [class]="'activity-' + activity.type">
-                  <i [class]="getActivityIcon(activity.type)"></i>
-                </div>
-                <div class="activity-content">
-                  <h4>{{ activity.action }} {{ activity.target }}</h4>
-                  <p>{{ activity.details }}</p>
-                  <div class="activity-meta">
-                    <span class="activity-user">by {{ activity.user }}</span>
-                    <span class="activity-time">{{ activity.timestamp | date:'short' }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="stat-card info">
+        <div class="stat-icon">
+          <i class="pi pi-newspaper"></i>
         </div>
+        <div class="stat-content">
+          <h3>{{ dashboardStats.totalNews }}</h3>
+          <p>News Articles</p>
+          <span class="stat-change positive">+5 this week</span>
+        </div>
+      </div>
 
-        <div class="col-lg-4">
-          <div class="content-card">
-            <div class="card-header">
-              <h3>System Health</h3>
-              <span class="badge" [class]="'bg-' + getHealthColor()">{{ systemHealth?.status }}</span>
+      <div class="stat-card secondary">
+        <div class="stat-icon">
+          <i class="pi pi-sitemap"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ dashboardStats.totalSectors }}</h3>
+          <p>Faculty Sectors</p>
+          <span class="stat-change neutral">No change</span>
+        </div>
+      </div>
+
+      <div class="stat-card dark">
+        <div class="stat-icon">
+          <i class="pi pi-images"></i>
+        </div>
+        <div class="stat-content">
+          <h3>{{ dashboardStats.totalMedia }}</h3>
+          <p>Media Files</p>
+          <span class="stat-change positive">+12 this week</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="quick-actions-section">
+    <h2 class="section-title">Quick Actions</h2>
+    <div class="actions-grid">
+      <a *ngFor="let action of quickActions" 
+         [routerLink]="action.route" 
+         class="action-card"
+         [class]="'action-' + action.color">
+        <div class="action-icon">
+          <i [class]="action.icon"></i>
+        </div>
+        <div class="action-content">
+          <h4>{{ action.title }}</h4>
+          <p>{{ action.description }}</p>
+        </div>
+        <div class="action-arrow">
+          <i class="pi pi-arrow-right"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Recent Activities and System Health -->
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>Recent Activities</h3>
+          <span class="badge bg-primary">{{ recentActivities.length }} Activities</span>
+        </div>
+        <div class="activities-list">
+          <div class="activity-item" *ngFor="let activity of recentActivities">
+            <div class="activity-icon" [class]="'activity-' + activity.type">
+              <i [class]="getActivityIcon(activity.type)"></i>
             </div>
-            <div class="system-health" *ngIf="systemHealth">
-              <div class="health-item">
-                <div class="health-label">
-                  <i class="pi pi-clock"></i>
-                  System Uptime
-                </div>
-                <div class="health-value">{{ systemHealth.uptime }}</div>
-              </div>
-              <div class="health-item">
-                <div class="health-label">
-                  <i class="pi pi-database"></i>
-                  Last Backup
-                </div>
-                <div class="health-value">{{ systemHealth.lastBackup | date:'short' }}</div>
-              </div>
-              <div class="health-item">
-                <div class="health-label">
-                  <i class="pi pi-chart-pie"></i>
-                  Storage Used
-                </div>
-                <div class="health-value">
-                  {{ systemHealth.storageUsed }}GB / {{ systemHealth.storageTotal }}GB
-                </div>
-              </div>
-              <div class="storage-bar">
-                <div class="storage-fill" 
-                     [style.width.%]="(systemHealth.storageUsed / systemHealth.storageTotal) * 100">
-                </div>
+            <div class="activity-content">
+              <h4>{{ activity.action }} {{ activity.target }}</h4>
+              <p>{{ activity.details }}</p>
+              <div class="activity-meta">
+                <span class="activity-user">by {{ activity.user }}</span>
+                <span class="activity-time">{{ activity.timestamp | date:'short' }}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <div class="col-lg-4">
+      <div class="content-card">
+        <div class="card-header">
+          <h3>System Health</h3>
+          <span class="badge" [class]="'bg-' + getHealthColor()">{{ systemHealth?.status }}</span>
+        </div>
+        <div class="system-health" *ngIf="systemHealth">
+          <div class="health-item">
+            <div class="health-label">
+              <i class="pi pi-clock"></i>
+              System Uptime
+            </div>
+            <div class="health-value">{{ systemHealth.uptime }}</div>
+          </div>
+          <div class="health-item">
+            <div class="health-label">
+              <i class="pi pi-database"></i>
+              Last Backup
+            </div>
+            <div class="health-value">{{ systemHealth.lastBackup | date:'short' }}</div>
+          </div>
+          <div class="health-item">
+            <div class="health-label">
+              <i class="pi pi-chart-pie"></i>
+              Storage Used
+            </div>
+            <div class="health-value">
+              {{ systemHealth.storageUsed }}GB / {{ systemHealth.storageTotal }}GB
+            </div>
+          </div>
+          <div class="storage-bar">
+            <div class="storage-fill" 
+                 [style.width.%]="(systemHealth.storageUsed / systemHealth.storageTotal) * 100">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
