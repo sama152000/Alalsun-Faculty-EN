@@ -52,6 +52,8 @@
                 <i class="pi pi-chevron-down submenu-icon" [ngClass]="{'expanded': activeSubmenu === 'custom-pages'}"></i>
               </a>
               <ul class="submenu" [ngClass]="{'expanded': activeSubmenu === 'custom-pages'}">
+                <li><a routerLink="custom-pages" routerLinkActive="active"><i class="pi pi-file"></i> custom-pages</a></li>
+
                 <li><a routerLink="custom-pages/drafts" routerLinkActive="active"><i class="pi pi-file"></i> Drafts</a></li>
                 <li><a routerLink="custom-pages/published" routerLinkActive="active"><i class="pi pi-file"></i> Published Pages</a></li>
               </ul>
