@@ -58,6 +58,100 @@ textarea.form-control {
   min-height: 100px;
 }
 
+.tabs {
+  display: flex;
+  flex-direction: column;
+}
+
+.tab-headers {
+  display: flex;
+  gap: 0.5rem;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.tab-header {
+  padding: 1rem 1.5rem;
+  border: none;
+  background: none;
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  margin-bottom: -2px;
+}
+
+.tab-header:hover {
+  color: var(--primary-color);
+}
+
+.tab-header.active {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.tab-content {
+  display: none;
+  padding: 1.5rem 0;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.education-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.btn-add-item {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-add-item:hover {
+  background: var(--primary-color-dark);
+}
+
+.btn-remove {
+  background: var(--error-color);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-remove:hover {
+  background: var(--error-color-dark);
+}
+
 .form-actions {
   display: flex;
   justify-content: flex-end;
@@ -173,5 +267,14 @@ textarea.form-control {
 
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .tab-headers {
+    flex-wrap: wrap;
+  }
+
+  .tab-header {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
   }
 }

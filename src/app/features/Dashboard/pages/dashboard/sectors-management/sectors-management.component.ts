@@ -30,8 +30,13 @@ export class SectorsManagementComponent implements OnInit {
   }
 
   loadSectors() {
-    this.sectorsService.getAllSectors().subscribe(sectors => {
-      this.sectors = sectors;
+    this.sectorsService.getAllSectors().subscribe({
+      next: (sectors) => {
+        this.sectors = sectors;
+      },
+      error: (error) => {
+        this.showErrorToast('Error loading sectors: ' + error.message);
+      }
     });
   }
 
@@ -47,14 +52,20 @@ export class SectorsManagementComponent implements OnInit {
 
   deleteSector() {
     if (this.deleteId) {
-      this.sectorsService.deleteSector(this.deleteId).subscribe(() => {
-        this.showToast = true;
-        this.toastClass = 'toast-success';
-        this.toastIcon = 'pi pi-check';
-        this.toastMessage = 'Sector deleted successfully';
-        this.loadSectors();
-        this.closeConfirmDialog();
-        setTimeout(() => this.hideToast(), 3000);
+      this.sectorsService.deleteSector(this.deleteId).subscribe({
+        next: () => {
+          this.showToast = true;
+          this.toastClass = 'toast-success';
+          this.toastIcon = 'pi pi-check';
+          this.toastMessage = 'Sector deleted successfully';
+          this.loadSectors();
+          this.closeConfirmDialog();
+          setTimeout(() => this.hideToast(), 3000);
+        },
+        error: (error) => {
+          this.showErrorToast('Error deleting sector: ' + error.message);
+          this.closeConfirmDialog();
+        }
       });
     }
   }

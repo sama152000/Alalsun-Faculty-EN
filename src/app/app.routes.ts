@@ -47,6 +47,7 @@ import { PublishedComponent } from './features/Dashboard/pages/dashboard/custom-
 import { CustomPageViewerComponent } from './features/Dashboard/pages/dashboard/custom-pages/custom-page-viewer/custom-page-viewer.component';
 import { HeroManagementComponent } from './features/Dashboard/pages/dashboard/hero-management/hero-management.component';
 import { AdditionalDepartmentInformationComponent } from './features/Dashboard/pages/dashboard/additional-department-information/additional-department-information.component';
+import { SectorsAdditionalInformationComponent } from './features/Dashboard/pages/dashboard/sectors-additional-information/sectors-additional-information.component';
 
 export const routes: Routes = [
   {
@@ -83,6 +84,7 @@ export const routes: Routes = [
       { path: 'sectors', component: SectorsManagementComponent },
       { path: 'sectors/add', component: AddSectorComponent },
       { path: 'sectors/edit/:id', component: EditSectorComponent },
+      { path: 'sectors/additional-information/:id', component: SectorsAdditionalInformationComponent },
       { path: 'about', component: AboutManagementComponent },
       { path: 'about/dean', component: DeanManagementComponent },
       { path: 'about/dean/edit', component: EditDeanComponent },

@@ -1,27 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { RouterModule, Router, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { SectorsService } from '../../../../colleges/Al-Alsun/Services/sectors.service';
 import { SectorData, ViceDeanInfo, SectorDepartment, SectorService, NewsItem, MediaItem, SectorStatistic, ActivityItem, Achievement } from '../../../../colleges/Al-Alsun/model/sector.model';
-import { filter } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-edit-sector',
+  selector: 'app-sectors-additional-information',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './edit-sector.component.html',
-  styleUrls: ['./edit-sector.component.css']
+  templateUrl: './sectors-additional-information.component.html',
+  styleUrls: ['./sectors-additional-information.component.css']
 })
-export class EditSectorComponent implements OnInit {
+export class SectorsAdditionalInformationComponent implements OnInit {
   sectorForm: FormGroup;
-  activeTab = 'basic';
+  activeTab = 'viceDean';
   showToast = false;
   toastMessage = '';
   toastClass = '';
   toastIcon = '';
-  activeSubmenu: string | null = 'pages';
-  editingId: string | null = null;
+  sectorId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
@@ -33,15 +31,21 @@ export class EditSectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editingId = this.route.snapshot.paramMap.get('id');
-    if (this.editingId) {
-      this.sectorsService.getSectorById(this.editingId).subscribe({
+    this.sectorId = this.route.snapshot.paramMap.get('id');
+    if (this.sectorId) {
+      this.sectorsService.getSectorById(this.sectorId).subscribe({
         next: (sector) => {
           if (sector) {
-            this.populateForm(sector);
-          } else {
-            this.showErrorToast('Sector not found');
-            this.router.navigate(['/dashboard/sectors']);
+            this.sectorForm.patchValue({
+              viceDean: sector.viceDean,
+              departments: sector.departments,
+              services: sector.services,
+              news: sector.news,
+              media: sector.media,
+              statistics: sector.statistics,
+              activities: sector.activities,
+              achievements: sector.achievements
+            });
           }
         },
         error: (error) => {
@@ -50,27 +54,12 @@ export class EditSectorComponent implements OnInit {
         }
       });
     }
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      const url = event.urlAfterRedirects;
-      if (url.includes('/dashboard/pages')) {
-        this.activeSubmenu = 'pages';
-      } else if (url.includes('/dashboard/posts')) {
-        this.activeSubmenu = 'posts';
-      } else {
-        this.activeSubmenu = null;
-      }
-    });
+    this.sectorForm.reset();
+    this.clearFormArrays();
   }
 
   private createForm(): FormGroup {
     return this.fb.group({
-      id: ['', Validators.required],
-      name: ['', Validators.required],
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      image: [''],
       viceDean: this.fb.group({
         name: ['', Validators.required],
         title: ['', Validators.required],
@@ -249,7 +238,6 @@ export class EditSectorComponent implements OnInit {
     this.achievementsArray.removeAt(index);
   }
 
-  // Helpers for array of strings
   getResponsibilities(departmentIndex: number): FormArray {
     return this.departmentsArray.at(departmentIndex).get('responsibilities') as FormArray;
   }
@@ -298,70 +286,6 @@ export class EditSectorComponent implements OnInit {
     this.getDownloadableForms(serviceIndex).removeAt(formIndex);
   }
 
-  private populateForm(sector: SectorData) {
-    this.clearFormArrays();
-    this.sectorForm.patchValue({
-      id: sector.id,
-      name: sector.name,
-      title: sector.title,
-      description: sector.description,
-      image: sector.image,
-      viceDean: {
-        name: sector.viceDean.name,
-        title: sector.viceDean.title,
-        photo: sector.viceDean.photo,
-        email: sector.viceDean.email,
-        office: sector.viceDean.office
-      }
-    });
-
-    sector.departments.forEach(dept => {
-      const deptGroup = this.createDepartmentFormGroup();
-      deptGroup.patchValue(dept);
-      dept.responsibilities.forEach(resp => {
-        (deptGroup.get('responsibilities') as FormArray).push(this.fb.control(resp, Validators.required));
-      });
-      this.departmentsArray.push(deptGroup);
-    });
-
-    sector.services.forEach(serv => {
-      const servGroup = this.createServiceFormGroup();
-      servGroup.patchValue(serv);
-      serv.steps.forEach(step => {
-        (servGroup.get('steps') as FormArray).push(this.fb.control(step, Validators.required));
-      });
-      serv.requiredDocuments.forEach(doc => {
-        (servGroup.get('requiredDocuments') as FormArray).push(this.fb.control(doc, Validators.required));
-      });
-      if (serv.downloadableForms) {
-        serv.downloadableForms.forEach(form => {
-          (servGroup.get('downloadableForms') as FormArray).push(this.fb.control(form, Validators.required));
-        });
-      }
-      this.servicesArray.push(servGroup);
-    });
-
-    sector.news.forEach(news => {
-      this.newsArray.push(this.fb.group(news));
-    });
-
-    sector.media.forEach(media => {
-      this.mediaArray.push(this.fb.group(media));
-    });
-
-    sector.statistics.forEach(stat => {
-      this.statisticsArray.push(this.fb.group(stat));
-    });
-
-    sector.activities.forEach(act => {
-      this.activitiesArray.push(this.fb.group(act));
-    });
-
-    sector.achievements.forEach(ach => {
-      this.achievementsArray.push(this.fb.group(ach));
-    });
-  }
-
   private clearFormArrays() {
     while (this.departmentsArray.length !== 0) {
       this.departmentsArray.removeAt(0);
@@ -386,35 +310,41 @@ export class EditSectorComponent implements OnInit {
     }
   }
 
-  saveSector() {
-    if (this.sectorForm.valid && this.editingId) {
-      const formValue = this.sectorForm.value as SectorData;
-      this.sectorsService.updateSector(this.editingId, formValue).subscribe({
-        next: () => {
-          this.showSuccessToast('Sector updated successfully');
-          setTimeout(() => {
-            this.router.navigate(['/dashboard/sectors']);
-          }, 3000);
+  saveAdditionalInfo() {
+    if (this.sectorId && this.sectorForm.valid) {
+      this.sectorsService.getSectorById(this.sectorId).subscribe({
+        next: (sector) => {
+          if (sector) {
+            const updatedSector: SectorData = {
+              ...sector,
+              ...this.sectorForm.value
+            };
+            this.sectorsService.updateSector(this.sectorId!, updatedSector).subscribe({
+              next: () => {
+                this.showSuccessToast('Additional information saved successfully');
+                setTimeout(() => {
+                  this.router.navigate(['/dashboard/sectors']);
+                }, 3000);
+              },
+              error: (error) => {
+                this.showErrorToast('Error saving additional information: ' + error.message);
+              }
+            });
+          } else {
+            this.showErrorToast('Sector not found');
+          }
         },
         error: (error) => {
-          this.showErrorToast('Error updating sector: ' + error.message);
+          this.showErrorToast('Error loading sector: ' + error.message);
         }
       });
     } else {
-      this.showErrorToast('Please fill all required fields');
+      this.showErrorToast('Please fill all required fields or provide a valid sector ID');
     }
   }
 
-  toggleSubmenu(menu: string): void {
-    this.activeSubmenu = this.activeSubmenu === menu ? null : menu;
-  }
-
-  isPagesActive(): boolean {
-    return this.router.url.includes('/dashboard/pages');
-  }
-
-  isPostsActive(): boolean {
-    return this.router.url.includes('/dashboard/posts');
+  skipToSectorsManagement() {
+    this.router.navigate(['/dashboard/sectors']);
   }
 
   showSuccessToast(message: string) {

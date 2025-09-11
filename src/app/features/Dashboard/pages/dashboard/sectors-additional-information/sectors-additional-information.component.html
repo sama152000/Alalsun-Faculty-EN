@@ -1,0 +1,724 @@
+<section class="dashboard-content">
+  <div class="management-header">
+    <h2>Add Sector - Additional Information</h2>
+  </div>
+  <form [formGroup]="sectorForm" (ngSubmit)="saveAdditionalInfo()">
+    <div class="tabs">
+      <div class="tab-headers">
+        <button type="button" class="tab-header" [class.active]="activeTab === 'viceDean'" (click)="activeTab = 'viceDean'">
+          <i class="pi pi-user"></i> Vice Dean Info
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'departments'" (click)="activeTab = 'departments'">
+          <i class="pi pi-sitemap"></i> Departments
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'services'" (click)="activeTab = 'services'">
+          <i class="pi pi-check-circle"></i> Services
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'news'" (click)="activeTab = 'news'">
+          <i class="pi pi-megaphone"></i> News & Events
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'media'" (click)="activeTab = 'media'">
+          <i class="pi pi-images"></i> Media
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'statistics'" (click)="activeTab = 'statistics'">
+          <i class="pi pi-chart-bar"></i> Statistics
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'activities'" (click)="activeTab = 'activities'">
+          <i class="pi pi-calendar"></i> Activities
+        </button>
+        <button type="button" class="tab-header" [class.active]="activeTab === 'achievements'" (click)="activeTab = 'achievements'">
+          <i class="pi pi-trophy"></i> Achievements
+        </button>
+      </div>
+      <div class="tab-content" [class.active]="activeTab === 'viceDean'" [formGroupName]="'viceDean'">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Name *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="name"
+              placeholder="Enter vice dean name"
+            >
+          </div>
+          <div class="form-group">
+            <label>Title *</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="title"
+              placeholder="Enter title"
+            >
+          </div>
+          <div class="form-group">
+            <label>Photo URL</label>
+            <input 
+              type="url" 
+              class="form-control" 
+              formControlName="photo"
+              placeholder="Enter photo URL"
+            >
+          </div>
+          <div class="form-group">
+            <label>Email *</label>
+            <input 
+              type="email" 
+              class="form-control" 
+              formControlName="email"
+              placeholder="Enter email"
+            >
+          </div>
+          <div class="form-group">
+            <label>Office</label>
+            <input 
+              type="text" 
+              class="form-control" 
+              formControlName="office"
+              placeholder="Enter office"
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'departments'">
+        <div class="section-header">
+          <h4>Departments</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addDepartment()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Department
+          </button>
+        </div>
+        <div formArrayName="departments">
+          <div 
+            *ngFor="let dept of departmentsArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>Department {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeDepartment(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="id"
+                  placeholder="Enter department ID"
+                >
+              </div>
+              <div class="form-group">
+                <label>Name *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="name"
+                  placeholder="Enter name"
+                >
+              </div>
+              <div class="form-group full-width">
+                <label>Overview *</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="overview"
+                  rows="3"
+                  placeholder="Enter overview"
+                ></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label>Responsibilities</label>
+                <div formArrayName="responsibilities">
+                  <div *ngFor="let resp of getResponsibilities(i).controls; let r = index">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      [formControlName]="r"
+                      placeholder="Enter responsibility"
+                    >
+                    <button type="button" (click)="removeResponsibility(i, r)">Remove</button>
+                  </div>
+                </div>
+                <button type="button" (click)="addResponsibility(i)">Add Responsibility</button>
+              </div>
+              <div [formGroupName]="'contact'">
+                <div class="form-group">
+                  <label>Contact Email *</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="Enter email"
+                  >
+                </div>
+                <div class="form-group">
+                  <label>Contact Office *</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="office"
+                    placeholder="Enter office"
+                  >
+                </div>
+                <div class="form-group">
+                  <label>Contact Phone</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    formControlName="phone"
+                    placeholder="Enter phone"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'services'">
+        <div class="section-header">
+          <h4>Services</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addService()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Service
+          </button>
+        </div>
+        <div formArrayName="services">
+          <div 
+            *ngFor="let serv of servicesArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>Service {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeService(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="id"
+                  placeholder="Enter service ID"
+                >
+              </div>
+              <div class="form-group">
+                <label>Name *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="name"
+                  placeholder="Enter name"
+                >
+              </div>
+              <div class="form-group full-width">
+                <label>Description *</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="description"
+                  rows="3"
+                  placeholder="Enter description"
+                ></textarea>
+              </div>
+              <div class="form-group full-width">
+                <label>Steps</label>
+                <div formArrayName="steps">
+                  <div *ngFor="let step of getSteps(i).controls; let s = index">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      [formControlName]="s"
+                      placeholder="Enter step"
+                    >
+                    <button type="button" (click)="removeStep(i, s)">Remove</button>
+                  </div>
+                </div>
+                <button type="button" (click)="addStep(i)">Add Step</button>
+              </div>
+              <div class="form-group full-width">
+                <label>Required Documents</label>
+                <div formArrayName="requiredDocuments">
+                  <div *ngFor="let doc of getRequiredDocuments(i).controls; let d = index">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      [formControlName]="d"
+                      placeholder="Enter required document"
+                    >
+                    <button type="button" (click)="removeRequiredDocument(i, d)">Remove</button>
+                  </div>
+                </div>
+                <button type="button" (click)="addRequiredDocument(i)">Add Required Document</button>
+              </div>
+              <div class="form-group full-width">
+                <label>Downloadable Forms</label>
+                <div formArrayName="downloadableForms">
+                  <div *ngFor="let form of getDownloadableForms(i).controls; let f = index">
+                    <input 
+                      type="text" 
+                      class="form-control" 
+                      [formControlName]="f"
+                      placeholder="Enter downloadable form"
+                    >
+                    <button type="button" (click)="removeDownloadableForm(i, f)">Remove</button>
+                  </div>
+                </div>
+                <button type="button" (click)="addDownloadableForm(i)">Add Downloadable Form</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'news'">
+        <div class="section-header">
+          <h4>News & Events</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addNews()"
+          >
+            <i class="pi pi-plus"></i>
+            Add News
+          </button>
+        </div>
+        <div formArrayName="news">
+          <div 
+            *ngFor="let news of newsArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>News {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeNews(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="id"
+                  placeholder="Enter news ID"
+                >
+              </div>
+              <div class="form-group">
+                <label>Title *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="title"
+                  placeholder="Enter title"
+                >
+              </div>
+              <div class="form-group full-width">
+                <label>Summary *</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="summary"
+                  rows="3"
+                  placeholder="Enter summary"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label>Date *</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  formControlName="date"
+                  placeholder="Enter date"
+                >
+              </div>
+              <div class="form-group">
+                <label>Image URL</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  formControlName="image"
+                  placeholder="Enter image URL"
+                >
+              </div>
+              <div class="form-group">
+                <label>Category *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="category"
+                  placeholder="Enter category"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'media'">
+        <div class="section-header">
+          <h4>Media</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addMedia()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Media
+          </button>
+        </div>
+        <div formArrayName="media">
+          <div 
+            *ngFor="let media of mediaArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>Media {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeMedia(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="id"
+                  placeholder="Enter media ID"
+                >
+              </div>
+              <div class="form-group">
+                <label>Title *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="title"
+                  placeholder="Enter title"
+                >
+              </div>
+              <div class="form-group">
+                <label>Type *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="type"
+                  placeholder="Enter type"
+                >
+              </div>
+              <div class="form-group">
+                <label>URL *</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  formControlName="url"
+                  placeholder="Enter URL"
+                >
+              </div>
+              <div class="form-group">
+                <label>Thumbnail</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  formControlName="thumbnail"
+                  placeholder="Enter thumbnail URL"
+                >
+              </div>
+              <div class="form-group full-width">
+                <label>Description</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="description"
+                  rows="3"
+                  placeholder="Enter description"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label>Date *</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  formControlName="date"
+                  placeholder="Enter date"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'statistics'">
+        <div class="section-header">
+          <h4>Statistics</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addStatistic()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Statistic
+          </button>
+        </div>
+        <div formArrayName="statistics">
+          <div 
+            *ngFor="let stat of statisticsArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>Statistic {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeStatistic(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Label *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="label"
+                  placeholder="Enter label"
+                >
+              </div>
+              <div class="form-group">
+                <label>Value *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="value"
+                  placeholder="Enter value"
+                >
+              </div>
+              <div class="form-group">
+                <label>Icon *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="icon"
+                  placeholder="Enter icon"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'activities'">
+        <div class="section-header">
+          <h4>Activities</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addActivity()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Activity
+          </button>
+        </div>
+        <div formArrayName="activities">
+          <div 
+            *ngFor="let activity of activitiesArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>Activity {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeActivity(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="id"
+                  placeholder="Enter activity ID"
+                >
+              </div>
+              <div class="form-group">
+                <label>Title *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="title"
+                  placeholder="Enter title"
+                >
+              </div>
+              <div class="form-group full-width">
+                <label>Description *</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="description"
+                  rows="3"
+                  placeholder="Enter description"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label>Date *</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  formControlName="date"
+                  placeholder="Enter date"
+                >
+              </div>
+              <div class="form-group">
+                <label>Image URL</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  formControlName="image"
+                  placeholder="Enter image URL"
+                >
+              </div>
+              <div class="form-group">
+                <label>Type *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="type"
+                  placeholder="Enter type"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" [class.active]="activeTab === 'achievements'">
+        <div class="section-header">
+          <h4>Achievements</h4>
+          <button 
+            type="button"
+            class="btn-add-item"
+            (click)="addAchievement()"
+          >
+            <i class="pi pi-plus"></i>
+            Add Achievement
+          </button>
+        </div>
+        <div formArrayName="achievements">
+          <div 
+            *ngFor="let achievement of achievementsArray.controls; let i = index"
+            [formGroupName]="i"
+            class="education-item"
+          >
+            <div class="item-header">
+              <h5>Achievement {{ i + 1 }}</h5>
+              <button 
+                type="button"
+                class="btn-remove"
+                (click)="removeAchievement(i)"
+              >
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>ID *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="id"
+                  placeholder="Enter achievement ID"
+                >
+              </div>
+              <div class="form-group">
+                <label>Title *</label>
+                <input 
+                  type="text" 
+                  class="form-control" 
+                  formControlName="title"
+                  placeholder="Enter title"
+                >
+              </div>
+              <div class="form-group full-width">
+                <label>Description *</label>
+                <textarea 
+                  class="form-control" 
+                  formControlName="description"
+                  rows="3"
+                  placeholder="Enter description"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label>Date *</label>
+                <input 
+                  type="date" 
+                  class="form-control" 
+                  formControlName="date"
+                  placeholder="Enter date"
+                >
+              </div>
+              <div class="form-group">
+                <label>Image URL</label>
+                <input 
+                  type="url" 
+                  class="form-control" 
+                  formControlName="image"
+                  placeholder="Enter image URL"
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-outline-primary-custom" (click)="skipToSectorsManagement()">Skip</button>
+      </div>
+    </div>
+  </form>
+  <div class="toast-container" *ngIf="showToast">
+    <div class="toast" [ngClass]="toastClass">
+      <div class="toast-content">
+        <i [ngClass]="toastIcon"></i>
+        <span>{{ toastMessage }}</span>
+      </div>
+      <button class="toast-close" (click)="hideToast()">
+        <i class="pi pi-times"></i>
+      </button>
+    </div>
+  </div>
+</section>
