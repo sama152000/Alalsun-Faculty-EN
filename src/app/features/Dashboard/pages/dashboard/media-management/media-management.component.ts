@@ -8,15 +8,15 @@ import { MediaItem, MediaFolder } from '../../../../colleges/Al-Alsun/model/medi
   selector: 'app-media-management',
   standalone: true,
   imports: [CommonModule, FormsModule],
-templateUrl: './media-management.component.html',
+  templateUrl: './media-management.component.html',
   styleUrls: ['./media-management.component.css']
 })
 export class MediaManagementComponent implements OnInit {
   mediaItems: MediaItem[] = [];
   folders: MediaFolder[] = [];
   filteredMedia: MediaItem[] = [];
-  selectedFolder = '';
-  selectedType = '';
+  selectedCategory = '';
+  categories: string[] = [];
   viewMode: 'grid' | 'list' = 'grid';
   isUploading = false;
   uploadProgress = 0;
@@ -33,6 +33,8 @@ export class MediaManagementComponent implements OnInit {
       next: (items) => {
         this.mediaItems = items;
         this.filteredMedia = [...items];
+        this.loadCategories();
+        this.applyFilters();
       },
       error: (error) => {
         console.error('Error loading media:', error);
@@ -49,6 +51,13 @@ export class MediaManagementComponent implements OnInit {
         console.error('Error loading folders:', error);
       }
     });
+  }
+
+  loadCategories() {
+    const allTags = this.mediaItems
+      .filter(item => item.tags && item.tags.length > 0)
+      .flatMap(item => item.tags!);
+    this.categories = [...new Set(allTags)].sort();
   }
 
   onFileSelected(event: any) {
@@ -74,7 +83,7 @@ export class MediaManagementComponent implements OnInit {
 
   processFiles(files: FileList) {
     Array.from(files).forEach(file => {
-      this.mediaService.uploadMedia(file, this.selectedFolder || 'general').subscribe({
+      this.mediaService.uploadMedia(file, this.selectedCategory || 'general').subscribe({
         next: (result) => {
           if (result.success) {
             this.loadMedia();
@@ -92,25 +101,17 @@ export class MediaManagementComponent implements OnInit {
     }, 1000);
   }
 
-  filterByFolder() {
-    this.applyFilters();
-  }
-
-  filterByType() {
+  filterByCategory() {
     this.applyFilters();
   }
 
   applyFilters() {
     let filtered = [...this.mediaItems];
 
-    if (this.selectedFolder) {
+    if (this.selectedCategory) {
       filtered = filtered.filter(item => 
-        item.folder?.toLowerCase() === this.selectedFolder.toLowerCase()
+        item.tags?.includes(this.selectedCategory)
       );
-    }
-
-    if (this.selectedType) {
-      filtered = filtered.filter(item => item.type === this.selectedType);
     }
 
     this.filteredMedia = filtered;

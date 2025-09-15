@@ -1,3 +1,335 @@
-<p>
-  settings-management works!
-</p>
+  <div class="admin-page">
+      <div class="admin-header">
+        <h1 class="page-title">Site Settings Management</h1>
+        <div class="header-actions">
+          <button class="btn btn-outline-secondary" (click)="resetToDefaults()">
+            <i class="pi pi-refresh me-2"></i>
+            Reset to Defaults
+          </button>
+          <button class="btn btn-primary-gradient" (click)="saveSettings()">
+            <i class="pi pi-save me-2"></i>
+            Save All Changes
+          </button>
+        </div>
+      </div>
+
+      <!-- Success/Error Messages -->
+      <div class="alert alert-success" *ngIf="showSuccessMessage">
+        <i class="pi pi-check-circle me-2"></i>
+        {{ successMessage }}
+      </div>
+
+      <!-- Settings Tabs -->
+      <div class="settings-tabs">
+        <div class="tab-navigation">
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'logo'"
+            (click)="setActiveTab('logo')">
+            <i class="pi pi-image"></i>
+            Logo & Branding
+          </button>
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'contact'"
+            (click)="setActiveTab('contact')">
+            <i class="pi pi-phone"></i>
+            Contact Information
+          </button>
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'social'"
+            (click)="setActiveTab('social')">
+            <i class="pi pi-share-alt"></i>
+            Social Media
+          </button>
+          <button 
+            class="tab-button" 
+            [class.active]="activeTab === 'site'"
+            (click)="setActiveTab('site')">
+            <i class="pi pi-cog"></i>
+            Site Configuration
+          </button>
+        </div>
+
+        <!-- Logo & Branding Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'logo'">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Logo & Branding Settings</h3>
+            </div>
+            <div class="card-body">
+              <div class="row g-4">
+                <!-- Current Logo Preview -->
+                <div class="col-lg-4">
+                  <div class="logo-preview-section">
+                    <h4>Current Logo</h4>
+                    <div class="current-logo-preview">
+                      <img [src]="currentSettings.logoUrl" [alt]="currentSettings.logoAlt" class="current-logo">
+                    </div>
+                    <p class="logo-info">{{ currentSettings.logoAlt }}</p>
+                  </div>
+                </div>
+
+                <!-- Logo Selection -->
+                <div class="col-lg-8">
+                  <div class="logo-selection-section">
+                    <h4>Select New Logo</h4>
+                    <div class="logo-options">
+                      <!-- Upload New Logo Button -->
+                      <div class="upload-option">
+                        <input type="file" #logoInput (change)="onLogoFileSelected($event)" 
+                               accept="image/*" style="display: none;">
+                        <button class="upload-btn" (click)="logoInput.click()">
+                          <i class="pi pi-upload"></i>
+                          <span>Upload New Logo</span>
+                        </button>
+                      </div>
+
+                      <!-- Media Gallery Selection -->
+                      <div class="media-gallery-section">
+                        <h5>Choose from Media Gallery</h5>
+                        <div class="media-grid-small">
+                          <div class="media-item-small" 
+                               *ngFor="let item of imageMediaItems"
+                               [class.selected]="currentSettings.logoUrl === item.url"
+                               (click)="selectLogo(item.url)">
+                            <img [src]="item.url" [alt]="item.name" class="media-thumb">
+                            <div class="selection-overlay" *ngIf="currentSettings.logoUrl === item.url">
+                              <i class="pi pi-check"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Faculty Information -->
+                <div class="col-12">
+                  <div class="faculty-info-section">
+                    <h4>Faculty Information</h4>
+                    <div class="row g-3">
+                      <div class="col-md-6">
+                        <label class="form-label">Faculty Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="currentSettings.facultyName">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Faculty Subtitle</label>
+                        <input type="text" class="form-control" [(ngModel)]="currentSettings.facultySubtitle">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">University Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="currentSettings.universityName">
+                      </div>
+                      <div class="col-md-6">
+                        <label class="form-label">Established Year</label>
+                        <input type="text" class="form-control" [(ngModel)]="currentSettings.established">
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label">Logo Alt Text</label>
+                        <input type="text" class="form-control" [(ngModel)]="currentSettings.logoAlt">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Information Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'contact'">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Contact Information Settings</h3>
+            </div>
+            <div class="card-body">
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label">Phone Number</label>
+                  <input type="tel" class="form-control" [(ngModel)]="currentSettings.contactInfo.phone">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Email Address</label>
+                  <input type="email" class="form-control" [(ngModel)]="currentSettings.contactInfo.email">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Website URL</label>
+                  <input type="url" class="form-control" [(ngModel)]="currentSettings.contactInfo.website">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Latitude</label>
+                  <input type="number" class="form-control" [(ngModel)]="currentSettings.contactInfo.location.lat" step="0.000001">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Longitude</label>
+                  <input type="number" class="form-control" [(ngModel)]="currentSettings.contactInfo.location.lng" step="0.000001">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Address (English)</label>
+                  <textarea class="form-control" rows="3" [(ngModel)]="currentSettings.contactInfo.address.english"></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Address (Arabic)</label>
+                  <textarea class="form-control" rows="3" [(ngModel)]="currentSettings.contactInfo.address.arabic"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'social'">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Social Media Settings</h3>
+            </div>
+            <div class="card-body">
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label">
+                    <i class="pi pi-facebook me-2"></i>
+                    Facebook Page
+                  </label>
+                  <input type="text" class="form-control" [(ngModel)]="currentSettings.socialMedia.facebook">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">
+                    <i class="pi pi-youtube me-2"></i>
+                    YouTube Channel
+                  </label>
+                  <input type="url" class="form-control" [(ngModel)]="currentSettings.socialMedia.youtube">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">
+                    <i class="pi pi-linkedin me-2"></i>
+                    LinkedIn Page
+                  </label>
+                  <input type="url" class="form-control" [(ngModel)]="currentSettings.socialMedia.linkedin">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">
+                    <i class="pi pi-twitter me-2"></i>
+                    Twitter Account
+                  </label>
+                  <input type="url" class="form-control" [(ngModel)]="currentSettings.socialMedia.twitter">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Site Configuration Tab -->
+        <div class="tab-content" *ngIf="activeTab === 'site'">
+          <div class="content-card">
+            <div class="card-header">
+              <h3>Site Configuration</h3>
+            </div>
+            <div class="card-body">
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <label class="form-label">Default Language</label>
+                  <select class="form-select" [(ngModel)]="currentSettings.siteConfig.defaultLanguage">
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">Timezone</label>
+                  <select class="form-select" [(ngModel)]="currentSettings.siteConfig.timezone">
+                    <option value="UTC+2">Cairo (UTC+2)</option>
+                    <option value="UTC+3">Riyadh (UTC+3)</option>
+                    <option value="UTC+0">London (UTC+0)</option>
+                    <option value="UTC-5">New York (UTC-5)</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" 
+                           [(ngModel)]="currentSettings.siteConfig.maintenanceMode" 
+                           id="maintenanceMode">
+                    <label class="form-check-label" for="maintenanceMode">
+                      Enable Maintenance Mode
+                    </label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Meta Title</label>
+                  <input type="text" class="form-control" [(ngModel)]="currentSettings.siteConfig.metaTitle">
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Meta Description</label>
+                  <textarea class="form-control" rows="3" [(ngModel)]="currentSettings.siteConfig.metaDescription"></textarea>
+                </div>
+                <div class="col-12">
+                  <label class="form-label">Keywords (comma separated)</label>
+                  <input type="text" class="form-control" [(ngModel)]="currentSettings.siteConfig.keywords">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logo Selection Modal -->
+      <div class="modal-overlay" *ngIf="showLogoModal" (click)="closeLogoModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <div class="modal-header">
+            <h3>Select Logo from Media Gallery</h3>
+            <button class="close-btn" (click)="closeLogoModal()">
+              <i class="pi pi-times"></i>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Upload Section -->
+            <div class="upload-section">
+              <input type="file" #modalFileInput (change)="onModalFileSelected($event)" 
+                     accept="image/*" style="display: none;">
+              <button class="btn btn-primary-gradient" (click)="modalFileInput.click()">
+                <i class="pi pi-upload me-2"></i>
+                Upload New Image
+              </button>
+            </div>
+
+            <!-- Media Gallery -->
+            <div class="modal-media-grid">
+              <div class="modal-media-item" 
+                   *ngFor="let item of imageMediaItems"
+                   [class.selected]="selectedLogoUrl === item.url"
+                   (click)="selectLogoFromModal(item.url)">
+                <img [src]="item.url" [alt]="item.name" class="modal-media-thumb">
+                <div class="selection-overlay" *ngIf="selectedLogoUrl === item.url">
+                  <i class="pi pi-check"></i>
+                </div>
+                <div class="media-name">{{ item.name }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" (click)="closeLogoModal()">
+              Cancel
+            </button>
+            <button class="btn btn-primary-gradient" 
+                    [disabled]="!selectedLogoUrl"
+                    (click)="confirmLogoSelection()">
+              <i class="pi pi-check me-2"></i>
+              Select Logo
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Progress -->
+      <div class="upload-progress" *ngIf="isUploading">
+        <div class="progress-card">
+          <div class="progress-header">
+            <h4>Uploading Image...</h4>
+            <span>{{ uploadProgress }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+          </div>
+        </div>
+      </div>
+    </div>
