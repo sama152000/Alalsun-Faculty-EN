@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { AboutService } from '../../../../colleges/Al-Alsun/Services/about.service';
+import { MediaService } from '../../../../colleges/Al-Alsun/Services/media.service';
 import { DeanInfo } from '../../../../colleges/Al-Alsun/model/about.model';
+import { MediaItem } from '../../../../colleges/Al-Alsun/model/media.model';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -21,10 +23,16 @@ export class AddDeanComponent implements OnInit {
   toastClass = '';
   toastIcon = '';
   activeSubmenu: string | null = 'pages';
+  imageMediaItems: MediaItem[] = [];
+  showImageModal = false;
+  selectedImageUrl = '';
+  isUploading = false;
+  uploadProgress = 0;
 
   constructor(
     private fb: FormBuilder,
     private aboutService: AboutService,
+    private mediaService: MediaService,
     private router: Router
   ) {
     this.deanForm = this.createForm();
@@ -33,6 +41,7 @@ export class AddDeanComponent implements OnInit {
   ngOnInit() {
     this.deanForm.reset();
     this.clearFormArrays();
+    this.loadMediaItems();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -52,7 +61,7 @@ export class AddDeanComponent implements OnInit {
       id: ['', Validators.required],
       name: ['', Validators.required],
       position: ['', Validators.required],
-      photo: [''],
+      photo: ['', Validators.required], // Made photo required
       greeting: ['', Validators.required],
       highlight: ['', Validators.required],
       callToAction: ['', Validators.required],
@@ -94,14 +103,101 @@ export class AddDeanComponent implements OnInit {
     }
   }
 
+  loadMediaItems() {
+    this.mediaService.getMediaItems().subscribe({
+      next: (items) => {
+        this.imageMediaItems = items.filter(item => item.type === 'image');
+      },
+      error: (error) => {
+        console.error('Error loading media items:', error);
+        this.showErrorToast('Failed to load media items');
+      }
+    });
+  }
+
+  openImageModal() {
+    this.showImageModal = true;
+    this.selectedImageUrl = this.deanForm.get('photo')?.value || '';
+  }
+
+  closeImageModal() {
+    this.showImageModal = false;
+    this.selectedImageUrl = '';
+  }
+
+  selectImageFromModal(imageUrl: string) {
+    this.selectedImageUrl = imageUrl;
+  }
+
+  confirmImageSelection() {
+    if (this.selectedImageUrl) {
+      this.deanForm.get('photo')?.setValue(this.selectedImageUrl);
+      this.closeImageModal();
+    }
+  }
+
+  onImageFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.uploadImageFile(file);
+    }
+  }
+
+  onModalFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.uploadImageFile(file);
+    }
+  }
+
+  uploadImageFile(file: File) {
+    this.isUploading = true;
+    this.uploadProgress = 0;
+
+    // Simulate upload progress
+    const interval = setInterval(() => {
+      this.uploadProgress += 10;
+      if (this.uploadProgress >= 100) {
+        clearInterval(interval);
+        this.processImageUpload(file);
+      }
+    }, 200);
+  }
+
+  processImageUpload(file: File) {
+    this.mediaService.uploadMedia(file, 'dean-photos').subscribe({
+      next: (result) => {
+        if (result.success && result.mediaItem) {
+          this.deanForm.get('photo')?.setValue(result.mediaItem.url);
+          this.loadMediaItems(); // Refresh media items
+          this.showSuccessToast('Image uploaded successfully!');
+        }
+        this.isUploading = false;
+        this.uploadProgress = 0;
+      },
+      error: (error) => {
+        console.error('Upload error:', error);
+        this.showErrorToast('Failed to upload image');
+        this.isUploading = false;
+        this.uploadProgress = 0;
+      }
+    });
+  }
+
   saveDean() {
     if (this.deanForm.valid) {
       const formValue = this.deanForm.value as DeanInfo;
-      this.aboutService.addDeanInfo(formValue).subscribe(() => {
-        this.showSuccessToast('New Dean added successfully');
-        setTimeout(() => {
-          this.router.navigate(['/dashboard/about/dean']);
-        }, 3000);
+      this.aboutService.addDeanInfo(formValue).subscribe({
+        next: () => {
+          this.showSuccessToast('New Dean added successfully');
+          setTimeout(() => {
+            this.router.navigate(['/dashboard/about/dean']);
+          }, 3000);
+        },
+        error: (error) => {
+          console.error('Error adding dean:', error);
+          this.showErrorToast('Failed to add dean');
+        }
       });
     } else {
       this.showErrorToast('Please fill all required fields');

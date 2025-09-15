@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { DepartmentsService } from '../../../../colleges/Al-Alsun/Services/departments.service';
+import { MediaService } from '../../../../colleges/Al-Alsun/Services/media.service';
 import { Department } from '../../../../colleges/Al-Alsun/model/department.model';
+import { MediaItem } from '../../../../colleges/Al-Alsun/model/media.model';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -27,14 +29,48 @@ export class EditDepartmentComponent implements OnInit {
   toastIcon = '';
   activeSubmenu: string | null = 'pages';
   editingId: string | null = null;
+  imageMediaItems: MediaItem[] = [];
+  showImageModal = false;
+  selectedImageUrl = '';
+  isUploading = false;
+  uploadProgress = 0;
+  selectedField: 'departmentImage' | 'facultyPhoto' | 'activityImage' | null = null;
+  selectedFacultyIndex: number | null = null;
+  selectedActivityIndex: number | null = null;
 
   constructor(
     private fb: FormBuilder,
     private departmentService: DepartmentsService,
+    private mediaService: MediaService,
     private router: Router,
     private route: ActivatedRoute
   ) {
     this.departmentForm = this.createForm();
+  }
+
+  ngOnInit() {
+    this.loadMediaItems();
+    this.editingId = this.route.snapshot.paramMap.get('id');
+    if (this.editingId) {
+      this.departmentService.getDepartmentById(this.editingId).subscribe({
+        next: (department) => {
+          if (department) {
+            this.populateForm(department);
+          } else {
+            this.showErrorToast('Department not found');
+            this.router.navigate(['/dashboard/departments']);
+          }
+        },
+        error: (error) => {
+          console.error('Error fetching department info:', error);
+          this.showErrorToast('Failed to load department information');
+          this.router.navigate(['/dashboard/departments']);
+        }
+      });
+    } else {
+      this.showErrorToast('No Department ID provided');
+      this.router.navigate(['/dashboard/departments']);
+    }
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -49,20 +85,6 @@ export class EditDepartmentComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.editingId = this.route.snapshot.paramMap.get('id');
-    if (this.editingId) {
-      this.departmentService.getDepartmentById(this.editingId).subscribe(department => {
-        if (department) {
-          this.populateForm(department);
-        } else {
-          this.showErrorToast('Department not found');
-          this.router.navigate(['/dashboard/departments']);
-        }
-      });
-    }
-  }
-
   private createForm(): FormGroup {
     return this.fb.group({
       id: [''],
@@ -71,7 +93,7 @@ export class EditDepartmentComponent implements OnInit {
       overview: ['', Validators.required],
       type: ['Academic Department'],
       established: [''],
-      image: [''],
+      image: ['', Validators.required], // Made image required
       icon: ['pi pi-building'],
       route: [''],
       programs: this.fb.array([]),
@@ -115,7 +137,7 @@ export class EditDepartmentComponent implements OnInit {
       title: [''],
       email: ['', Validators.email],
       specialization: [''],
-      photo: ['']
+      photo: ['', Validators.required] // Made photo required
     });
   }
 
@@ -125,7 +147,7 @@ export class EditDepartmentComponent implements OnInit {
       title: ['', Validators.required],
       description: [''],
       date: [''],
-      image: ['']
+      image: [''] // Activity image remains optional
     });
   }
 
@@ -188,7 +210,7 @@ export class EditDepartmentComponent implements OnInit {
           title: [member.title],
           email: [member.email, Validators.email],
           specialization: [member.specialization],
-          photo: [member.photo]
+          photo: [member.photo, Validators.required]
         }));
       });
     }
@@ -218,26 +240,134 @@ export class EditDepartmentComponent implements OnInit {
     }
   }
 
- saveDepartment() {
-  if (this.departmentForm.valid && this.editingId) {
-    const formValue = this.departmentForm.value;
-    if (formValue.activities) {
-      formValue.activities = formValue.activities.map((activity: any) => ({
-        ...activity,
-        date: activity.date ? new Date(activity.date).toISOString() : null
-      }));
-    }
-    this.departmentService.updateDepartment(this.editingId, formValue).subscribe({
-      next: () => {
-        this.showSuccessToast('Department updated successfully');
-        setTimeout(() => this.router.navigate(['/dashboard/departments']), 3000);
+  loadMediaItems() {
+    this.mediaService.getMediaItems().subscribe({
+      next: (items) => {
+        this.imageMediaItems = items.filter(item => item.type === 'image');
       },
       error: (error) => {
-        this.showErrorToast('Error updating department: ' + (error.error?.message || error.message));
+        console.error('Error loading media items:', error);
+        this.showErrorToast('Failed to load media items');
       }
     });
   }
-}
+
+  openImageModal(field: 'departmentImage' | 'facultyPhoto' | 'activityImage', facultyIndex: number | null = null, activityIndex: number | null = null) {
+    this.selectedField = field;
+    this.selectedFacultyIndex = facultyIndex;
+    this.selectedActivityIndex = activityIndex;
+
+    if (field === 'departmentImage') {
+      this.selectedImageUrl = this.departmentForm.get('image')?.value || '';
+    } else if (field === 'facultyPhoto' && facultyIndex !== null) {
+      this.selectedImageUrl = this.facultyArray.at(facultyIndex).get('photo')?.value || '';
+    } else if (field === 'activityImage' && activityIndex !== null) {
+      this.selectedImageUrl = this.activitiesArray.at(activityIndex).get('image')?.value || '';
+    }
+
+    this.showImageModal = true;
+  }
+
+  closeImageModal() {
+    this.showImageModal = false;
+    this.selectedImageUrl = '';
+    this.selectedField = null;
+    this.selectedFacultyIndex = null;
+    this.selectedActivityIndex = null;
+  }
+
+  selectImageFromModal(imageUrl: string) {
+    this.selectedImageUrl = imageUrl;
+  }
+
+  confirmImageSelection() {
+    if (this.selectedImageUrl && this.selectedField) {
+      if (this.selectedField === 'departmentImage') {
+        this.departmentForm.get('image')?.setValue(this.selectedImageUrl);
+      } else if (this.selectedField === 'facultyPhoto' && this.selectedFacultyIndex !== null) {
+        this.facultyArray.at(this.selectedFacultyIndex).get('photo')?.setValue(this.selectedImageUrl);
+      } else if (this.selectedField === 'activityImage' && this.selectedActivityIndex !== null) {
+        this.activitiesArray.at(this.selectedActivityIndex).get('image')?.setValue(this.selectedImageUrl);
+      }
+      this.closeImageModal();
+    }
+  }
+
+  onImageFileSelected(event: any, field: 'departmentImage' | 'facultyPhoto' | 'activityImage', facultyIndex: number | null = null, activityIndex: number | null = null) {
+    const file = event.target.files[0];
+    if (file) {
+      this.selectedField = field;
+      this.selectedFacultyIndex = facultyIndex;
+      this.selectedActivityIndex = activityIndex;
+      this.uploadImageFile(file);
+    }
+  }
+
+  uploadImageFile(file: File) {
+    this.isUploading = true;
+    this.uploadProgress = 0;
+
+    // Simulate upload progress
+    const interval = setInterval(() => {
+      this.uploadProgress += 10;
+      if (this.uploadProgress >= 100) {
+        clearInterval(interval);
+        this.processImageUpload(file);
+      }
+    }, 200);
+  }
+
+  processImageUpload(file: File) {
+    const folder = this.selectedField === 'departmentImage' ? 'department-images' :
+                   this.selectedField === 'facultyPhoto' ? 'faculty-photos' : 'activity-images';
+    this.mediaService.uploadMedia(file, folder).subscribe({
+      next: (result) => {
+        if (result.success && result.mediaItem) {
+          if (this.selectedField === 'departmentImage') {
+            this.departmentForm.get('image')?.setValue(result.mediaItem.url);
+          } else if (this.selectedField === 'facultyPhoto' && this.selectedFacultyIndex !== null) {
+            this.facultyArray.at(this.selectedFacultyIndex).get('photo')?.setValue(result.mediaItem.url);
+          } else if (this.selectedField === 'activityImage' && this.selectedActivityIndex !== null) {
+            this.activitiesArray.at(this.selectedActivityIndex).get('image')?.setValue(result.mediaItem.url);
+          }
+          this.loadMediaItems(); // Refresh media items
+          this.showSuccessToast('Image uploaded successfully!');
+        }
+        this.isUploading = false;
+        this.uploadProgress = 0;
+      },
+      error: (error) => {
+        console.error('Upload error:', error);
+        this.showErrorToast('Failed to upload image');
+        this.isUploading = false;
+        this.uploadProgress = 0;
+      }
+    });
+  }
+
+  saveDepartment() {
+    if (this.departmentForm.valid && this.editingId) {
+      const formValue = this.departmentForm.value;
+      if (formValue.activities) {
+        formValue.activities = formValue.activities.map((activity: any) => ({
+          ...activity,
+          date: activity.date ? new Date(activity.date).toISOString() : null
+        }));
+      }
+      this.departmentService.updateDepartment(this.editingId, formValue).subscribe({
+        next: () => {
+          this.showSuccessToast('Department updated successfully');
+          setTimeout(() => this.router.navigate(['/dashboard/departments']), 3000);
+        },
+        error: (error) => {
+          console.error('Error updating department:', error);
+          this.showErrorToast('Error updating department: ' + (error.error?.message || error.message));
+        }
+      });
+    } else {
+      this.showErrorToast('Please fill all required fields');
+    }
+  }
 
   toggleSubmenu(menu: string): void {
     this.activeSubmenu = this.activeSubmenu === menu ? null : menu;
