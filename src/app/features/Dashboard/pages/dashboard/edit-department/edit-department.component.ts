@@ -7,6 +7,7 @@ import { MediaService } from '../../../../colleges/Al-Alsun/Services/media.servi
 import { Department } from '../../../../colleges/Al-Alsun/model/department.model';
 import { MediaItem } from '../../../../colleges/Al-Alsun/model/media.model';
 import { filter } from 'rxjs/operators';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-edit-department',

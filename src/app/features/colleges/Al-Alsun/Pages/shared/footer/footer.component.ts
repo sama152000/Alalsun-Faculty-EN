@@ -21,7 +21,7 @@ import { RouterModule } from '@angular/router';
 })
 export class FooterComponent implements OnInit {
   footerData: FooterData | undefined;
-  facultyInfo: any = null; // نفس الـ type زي الـ navbar
+  facultyInfo: any = null; 
 
   constructor(private menuService: MenuService, private facultyInfoService: FacultyInfoService) {}
 

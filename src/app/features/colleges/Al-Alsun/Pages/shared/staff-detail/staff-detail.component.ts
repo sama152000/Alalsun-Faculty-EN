@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-staff-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent, FooterComponent, RouterLink],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, FooterComponent],
   templateUrl: './staff-detail.component.html',
   styleUrls: ['./staff-detail.component.css']
 })

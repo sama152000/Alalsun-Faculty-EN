@@ -78,7 +78,7 @@ export interface FooterData {
   academicLinks: FooterSection;
   resourceLinks: FooterSection;
   copyright: string;
-  contactMethods: ContactInfo;
+  contactMethods?: ContactInfo;
 }
 
 export interface SocialMediaIcon {
