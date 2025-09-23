@@ -7,7 +7,7 @@ import { QuickStatsService } from '../../../../Services/quick-stats.service';
   selector: 'app-quick-stats',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './quick-stats.component.html',
+  templateUrl:'./quick-stats.component.html',
   styleUrls: ['./quick-stats.component.css']
 })
 export class QuickStatsComponent implements OnInit {

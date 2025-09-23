@@ -1,0 +1,99 @@
+  <div class="services-page">
+      <app-page-header 
+        title="Faculty Services & Centers" 
+        [breadcrumbs]="breadcrumbs">
+      </app-page-header>
+      
+      <!-- Filter Section -->
+      <section class="filter-section">
+        <div class="container">
+          <div class="card-modern">
+            <div class="section-header">
+              <i class="pi pi-filter"></i>
+              Filter Services
+            </div>
+            <div class="filter-content">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="search-box">
+                    <i class="pi pi-search search-icon"></i>
+                    <input 
+                      type="text" 
+                      class="form-control search-input" 
+                      placeholder="Search services..."
+                      [(ngModel)]="searchQuery"
+                      (input)="applyFilters()"
+                    >
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <select 
+                    class="form-select category-filter" 
+                    [(ngModel)]="selectedCategory"
+                    (change)="applyFilters()"
+                  >
+                    <option value="">All Categories</option>
+                    <option value="language-center">Language Centers</option>
+                    <option value="cultural-center">Cultural Centers</option>
+                    <option value="academic-journal">Academic Journals</option>
+                    <option value="research-center">Research Centers</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Grid -->
+      <section class="services-grid-section">
+        <div class="container">
+          <div class="row">
+            <div class="col-12" *ngIf="filteredServices.length === 0">
+              <div class="no-results">
+                <i class="pi pi-search no-results-icon"></i>
+                <h3>No Services Found</h3>
+                <p>Try adjusting your search criteria or filters.</p>
+                <button class="btn-outline-primary-custom" (click)="clearFilters()">
+                  <i class="pi pi-refresh me-2"></i>
+                  Clear Filters
+                </button>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6" *ngFor="let service of filteredServices">
+              <div class="service-card" (click)="viewServiceDetails(service.id)">
+                <div class="service-image-container">
+                  <img [src]="service.image" [alt]="service.name" class="service-image">
+                  <div class="service-overlay">
+                    <i class="pi pi-eye view-icon"></i>
+                  </div>
+                  <div class="service-category-badge">
+                    <i [class]="service.icon"></i>
+                    {{ getCategoryLabel(service.category) }}
+                  </div>
+                </div>
+                <div class="service-content">
+                  <h3 class="service-name">{{ service.name }}</h3>
+                  <p class="service-description">{{ service.description }}</p>
+                  <div class="service-meta">
+                    <div class="service-established" *ngIf="service.establishedDate">
+                      <i class="pi pi-calendar"></i>
+                      <span>Est. {{ service.establishedDate }}</span>
+                    </div>
+                    <div class="service-contact" *ngIf="service.contact.contactPerson">
+                      <i class="pi pi-user"></i>
+                      <span>{{ service.contact.contactPerson }}</span>
+                    </div>
+                  </div>
+                  <div class="service-actions">
+                    <button class="btn-primary-custom">
+                      Learn More <i class="pi pi-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>

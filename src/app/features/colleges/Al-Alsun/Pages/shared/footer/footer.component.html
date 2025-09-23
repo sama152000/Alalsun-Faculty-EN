@@ -69,16 +69,16 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="copyright">
-            {{ footerData?.copyright }}
+            {{ footerData.copyright }}
           </p>
         </div>
         <div class="col-md-6">
-          <div class="contact-methods">
-            <a [href]="'tel:' + footerData?.contactMethods?.phone" class="contact-method">
+          <div class="contact-methods" *ngIf="footerData.contactMethods">
+            <a [href]="'tel:' + footerData.contactMethods.phone" class="contact-method">
               <i class="pi pi-phone"></i>
-              {{ footerData?.contactMethods?.phone }}
+              {{ footerData.contactMethods.phone }}
             </a>
-            <a [href]="'mailto:' + footerData?.contactMethods?.email" class="contact-method">
+            <a [href]="'mailto:' + footerData.contactMethods.email" class="contact-method">
               <i class="pi pi-envelope"></i>
               Contact
             </a>

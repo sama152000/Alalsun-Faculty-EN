@@ -32,7 +32,6 @@ export class FooterComponent implements OnInit {
       }
     });
 
-    // استخدام نفس الـ service زي الـ navbar
     this.facultyInfoService.getFacultyInfo().subscribe(info => {
       this.facultyInfo = info;
     });

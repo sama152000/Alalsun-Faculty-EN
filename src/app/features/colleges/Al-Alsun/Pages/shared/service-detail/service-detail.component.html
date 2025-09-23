@@ -1,0 +1,305 @@
+ <div class="service-detail-page" *ngIf="service">
+      <!-- Simple Page Header -->
+       <app-page-header
+    [title]="service.name"
+    [breadcrumbs]="breadcrumbs">
+  </app-page-header>
+      
+      <section class="service-detail-section">
+        <div class="container">
+          <div class="card-modern">
+            <div class="service-header">
+              <div class="service-image-container">
+                <img [src]="service.image" [alt]="service.name" class="service-image">
+                <div class="service-overlay">
+                  <div class="service-meta-info">
+                    <div class="service-category">
+                      <i [class]="service.icon"></i>
+                      {{ getCategoryLabel(service.category) }}
+                    </div>
+                    <div class="service-established" *ngIf="service.establishedDate">
+                      <i class="pi pi-calendar"></i>
+                      Established: {{ service.establishedDate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="service-content">
+              <h1 class="service-title">{{ service.name }}</h1>
+              
+              <div class="service-summary">
+                <p>{{ service.description }}</p>
+              </div>
+              
+              <!-- Service Details Tabs -->
+              <div class="service-tabs">
+                <div class="tabs-container">
+                  <div class="tabs-header">
+                    <button class="tab-button" [class.active]="activeTab === 'overview'" (click)="setActiveTab('overview')" *ngIf="service.details.vision || service.details.mission">
+                      <i class="icon-info-circle"></i>
+                      Overview
+                    </button>
+                    <button class="tab-button" [class.active]="activeTab === 'staff'" (click)="setActiveTab('staff')" *ngIf="service.details.staff && service.details.staff.length > 0">
+                      <i class="icon-users"></i>
+                      Staff
+                    </button>
+                    <button class="tab-button" [class.active]="activeTab === 'activities'" (click)="setActiveTab('activities')" *ngIf="service.details.activities && service.details.activities.length > 0">
+                      <i class="icon-calendar"></i>
+                      Activities
+                    </button>
+                    <button class="tab-button" [class.active]="activeTab === 'programs'" (click)="setActiveTab('programs')" *ngIf="service.details.programs && service.details.programs.length > 0">
+                      <i class="icon-book"></i>
+                      Programs
+                    </button>
+                    <button class="tab-button" [class.active]="activeTab === 'editorial'" (click)="setActiveTab('editorial')" *ngIf="service.details.editorialBoard && service.details.editorialBoard.length > 0">
+                      <i class="icon-users"></i>
+                      Editorial Board
+                    </button>
+                    <button class="tab-button" [class.active]="activeTab === 'specifications'" (click)="setActiveTab('specifications')" *ngIf="service.details.specifications && service.details.specifications.length > 0">
+                      <i class="icon-cog"></i>
+                      Specifications
+                    </button>
+                    <button class="tab-button" [class.active]="activeTab === 'contact'" (click)="setActiveTab('contact')">
+                      <i class="icon-phone"></i>
+                      Contact
+                    </button>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'overview'">
+                    <div class="vision-mission-grid">
+                      <div class="vision-card" *ngIf="service.details.vision">
+                        <div class="card-header">
+                          <i class="icon-eye"></i>
+                          <h3>Vision</h3>
+                        </div>
+                        <div class="card-content">
+                          <p>{{ service.details.vision }}</p>
+                        </div>
+                      </div>
+                      <div class="mission-card" *ngIf="service.details.mission">
+                        <div class="card-header">
+                          <i class="icon-compass"></i>
+                          <h3>Mission</h3>
+                        </div>
+                        <div class="card-content">
+                          <p>{{ service.details.mission }}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="objectives-section" *ngIf="service.details.objectives && service.details.objectives.length > 0">
+                      <h3>Objectives</h3>
+                      <ul class="objectives-list">
+                        <li *ngFor="let objective of service.details.objectives">
+                          {{ objective }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'staff'">
+                    <div class="staff-grid">
+                      <div *ngFor="let member of service.details.staff" class="staff-member-card">
+                        <div class="staff-photo" *ngIf="member.photo">
+                          <img [src]="member.photo" [alt]="member.name" class="member-image">
+                        </div>
+                        <div class="staff-info">
+                          <h4 class="member-name">{{ member.name }}</h4>
+                          <p class="member-position">{{ member.position }}</p>
+                          <p class="member-role">{{ member.role }}</p>
+                          <div class="member-contact" *ngIf="member.email">
+                            <i class="icon-envelope"></i>
+                            <a [href]="'mailto:' + member.email">{{ member.email }}</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'activities'">
+                    <div class="activities-grid">
+                      <div *ngFor="let activity of service.details.activities" class="activity-card">
+                        <div class="activity-header">
+                          <i class="icon-star activity-icon"></i>
+                          <h4>{{ activity.name }}</h4>
+                        </div>
+                        <p class="activity-description">{{ activity.description }}</p>
+                        <div class="activity-coordinator" *ngIf="activity.coordinator">
+                          <i class="icon-user"></i>
+                          <span>Coordinator: {{ activity.coordinator }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'programs'">
+                    <div class="programs-grid">
+                      <div *ngFor="let program of service.details.programs" class="program-card">
+                        <h4 class="program-name">{{ program.name }}</h4>
+                        <p class="program-description">{{ program.description }}</p>
+                        <div class="program-details">
+                          <div class="program-duration" *ngIf="program.duration">
+                            <i class="icon-clock"></i>
+                            <span>Duration: {{ program.duration }}</span>
+                          </div>
+                          <div class="program-requirements" *ngIf="program.requirements && program.requirements.length > 0">
+                            <h5>Requirements:</h5>
+                            <ul>
+                              <li *ngFor="let req of program.requirements">{{ req }}</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'editorial'">
+                    <div class="editorial-sections">
+                      <div class="internal-board">
+                        <h3>Internal Editorial Board</h3>
+                        <div class="board-grid">
+                          <div *ngFor="let member of getInternalBoardMembers()" class="board-member-card">
+                            <div class="member-info">
+                              <h4>{{ member.name }}</h4>
+                              <p class="member-role">{{ member.role }}</p>
+                              <p class="member-affiliation" *ngIf="member.affiliation">{{ member.affiliation }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="external-board" *ngIf="getExternalBoardMembers().length > 0">
+                        <h3>External Editorial Board</h3>
+                        <div class="board-grid">
+                          <div *ngFor="let member of getExternalBoardMembers()" class="board-member-card external">
+                            <div class="member-info">
+                              <h4>{{ member.name }}</h4>
+                              <p class="member-role">{{ member.role }}</p>
+                              <p class="member-affiliation" *ngIf="member.affiliation">{{ member.affiliation }}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'specifications'">
+                    <div class="specifications-grid">
+                      <div *ngFor="let spec of service.details.specifications" class="spec-card">
+                        <div class="spec-icon" *ngIf="spec.icon">
+                          <i [class]="spec.icon"></i>
+                        </div>
+                        <div class="spec-content">
+                          <h4>{{ spec.label }}</h4>
+                          <p>{{ spec.value }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="tab-content" *ngIf="activeTab === 'contact'">
+                    <div class="contact-info-grid">
+                      <div class="contact-card" *ngIf="service.contact.phone">
+                        <div class="contact-icon">
+                          <i class="icon-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                          <h4>Phone</h4>
+                          <p><a [href]="'tel:' + service.contact.phone">{{ service.contact.phone }}</a></p>
+                        </div>
+                      </div>
+
+                      <div class="contact-card" *ngIf="service.contact.email">
+                        <div class="contact-icon">
+                          <i class="icon-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                          <h4>Email</h4>
+                          <p><a [href]="'mailto:' + service.contact.email">{{ service.contact.email }}</a></p>
+                        </div>
+                      </div>
+
+                      <div class="contact-card" *ngIf="service.contact.website">
+                        <div class="contact-icon">
+                          <i class="icon-globe"></i>
+                        </div>
+                        <div class="contact-details">
+                          <h4>Website</h4>
+                          <p><a [href]="service.contact.website" target="_blank">Visit Website</a></p>
+                        </div>
+                      </div>
+
+                      <div class="contact-card" *ngIf="service.contact.facebook">
+                        <div class="contact-icon">
+                          <i class="icon-facebook"></i>
+                        </div>
+                        <div class="contact-details">
+                          <h4>Facebook</h4>
+                          <p><a [href]="service.contact.facebook" target="_blank">Follow Us</a></p>
+                        </div>
+                      </div>
+
+                      <div class="contact-card" *ngIf="service.contact.contactPerson">
+                        <div class="contact-icon">
+                          <i class="icon-user"></i>
+                        </div>
+                        <div class="contact-details">
+                          <h4>Contact Person</h4>
+                          <p>{{ service.contact.contactPerson }}</p>
+                        </div>
+                      </div>
+
+                      <div class="contact-card" *ngIf="service.contact.office">
+                        <div class="contact-icon">
+                          <i class="icon-building"></i>
+                        </div>
+                        <div class="contact-details">
+                          <h4>Office</h4>
+                          <p>{{ service.contact.office }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="navigation-section">
+            <button class="btn-outline-primary-custom" (click)="goBack()">
+              <i class="pi pi-arrow-left me-2"></i>
+              Back to Services
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <div class="service-detail-page" *ngIf="!service && !loading">
+      <!-- Simple Page Header for Error State -->
+      <div class="page-header-simple">
+        <div class="container">
+          <nav class="breadcrumb">
+            <a [routerLink]="['/services']">Services</a>
+            <span class="breadcrumb-separator">/</span>
+            <span class="current">Service Not Found</span>
+          </nav>
+          <h1 class="page-title">Service Not Found</h1>
+        </div>
+      </div>
+      
+      <section class="error-section">
+        <div class="container">
+          <div class="error-content">
+            <i class="pi pi-exclamation-triangle error-icon"></i>
+            <h3>Service Not Found</h3>
+            <p>The requested service could not be found.</p>
+            <button class="btn-primary-custom" (click)="goBack()">
+              Return to Services
+            </button>
+          </div>
+        </div>
+      </section>
+    </div>

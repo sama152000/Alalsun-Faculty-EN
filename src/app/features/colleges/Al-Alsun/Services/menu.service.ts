@@ -31,7 +31,8 @@ export class MenuService {
               { label: 'Postgraduate Studies & Research',  route: '/sectors/postgraduate-research' },
               { label: 'Community Service & Environmental Development', route: '/sectors/community-environmental' },
             ]
-          }
+          },
+          { label: 'Services', route: '/services' }
         ]
       }
     },

@@ -9,6 +9,8 @@ import { StaffDetailComponent } from './features/colleges/Al-Alsun/Pages/shared/
 import { NewsComponent } from './features/colleges/Al-Alsun/Pages/news/news.component';
 import { NewsDetailComponent } from './features/colleges/Al-Alsun/Pages/shared/news-detail/news-detail.component';
 import { SectorPageComponent } from './features/colleges/Al-Alsun/Pages/sector-page/sector-page.component';
+import { ServicesComponent } from './features/colleges/Al-Alsun/Pages/services/services/services.component';
+import { ServiceDetailComponent } from './features/colleges/Al-Alsun/Pages/shared/service-detail/service-detail.component';
 import { DashboardComponent } from './features/Dashboard/pages/dashboard/dashboard.component';
 import { DashboardOverviewComponent } from './features/Dashboard/pages/dashboard/dashboard-overview/dashboard-overview.component';
 import { SettingsManagementComponent } from './features/Dashboard/pages/dashboard/settings-management/settings-management.component';
@@ -64,6 +66,8 @@ export const routes: Routes = [
       { path: 'news', component: NewsComponent },
       { path: 'news/:id', component: NewsDetailComponent },
       { path: 'sectors/:id', component: SectorPageComponent },
+      { path: 'services', component: ServicesComponent },
+      { path: 'services/:id', component: ServiceDetailComponent },
       { path: 'pages/:route', component: CustomPageViewerComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]

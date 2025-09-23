@@ -4,4 +4,7 @@ export interface Stat {
   value: string;
   iconPath: string;
   isActive: boolean;
+  color: string;
+  icon: string;
+  label: string;
 }
