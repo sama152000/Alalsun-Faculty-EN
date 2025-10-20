@@ -6,11 +6,12 @@ import { Router } from '@angular/router';
 import { PageHeaderComponent } from '../../shared/page-header/page-header/page-header.component';
 import { FacultyService, ServiceCategory } from '../../../model/services.model';
 import { FacultyServiceService } from '../../../Services/services.service';
+import { FooterComponent } from "../../shared/footer/footer.component";
 
 @Component({
   selector: 'app-services',
   standalone: true,
-  imports: [CommonModule, FormsModule, PageHeaderComponent],
+  imports: [CommonModule, FormsModule, PageHeaderComponent, FooterComponent],
  templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'] 
 })
@@ -35,8 +36,8 @@ export class ServicesComponent implements OnInit {
 
   loadServices() {
     this.facultyServiceService.getAllServices().subscribe(services => {
-      this.allServices = services;
-      this.filteredServices = [...services];
+      this.allServices = services.filter(service => service.id !== 'alsun-journal');
+      this.filteredServices = [...this.allServices];
     });
   }
 

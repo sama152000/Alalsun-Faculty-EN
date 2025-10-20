@@ -163,7 +163,7 @@ export class FacultyServiceService {
       image: './assets/service3.jpg',
       icon: 'pi pi-book',
       establishedDate: 'Autumn 2019',
-      category: ServiceCategory.ACADEMIC_JOURNAL,
+      category: ServiceCategory.ACADEMIC_JOURNAL, // Added as a new category
       route: '/services/alsun-journal',
       contact: {
         website: 'https://maks.journals.ekb.eg/',
@@ -365,5 +365,10 @@ export class FacultyServiceService {
       return of(true);
     }
     return of(false);
+  }
+
+  // Method to get Al-Alsun Journal specifically
+  getAlAlsunJournal(): Observable<FacultyService | undefined> {
+    return of(this.services.find(service => service.id === 'alsun-journal'));
   }
 }

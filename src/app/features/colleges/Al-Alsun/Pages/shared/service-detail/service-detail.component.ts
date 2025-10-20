@@ -6,11 +6,12 @@ import { RouterModule } from '@angular/router';
 import { FacultyServiceService } from '../../../Services/services.service';
 import { FacultyService } from '../../../model/services.model';
 import { PageHeaderComponent } from '../../shared/page-header/page-header/page-header.component';
+import { FooterComponent } from "../footer/footer.component";
 
 @Component({
   selector: 'app-service-detail',
   standalone: true,
-  imports: [CommonModule, RouterModule, PageHeaderComponent],
+  imports: [CommonModule, RouterModule, PageHeaderComponent, FooterComponent],
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.css']
 })

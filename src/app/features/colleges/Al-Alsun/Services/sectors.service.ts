@@ -16,7 +16,8 @@ export class SectorsService {
       viceDean: {
         name: 'Prof. Dr. Mohamed Ahmed Sayed Hamza',
         title: 'Vice Dean for Education and Student Affairs',
-        photo: 'https://images.pexels.com/photos/3777943/pexels-photo-3777943.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        photo: './assets/Picture2.jpg',
+
         email: 'education@luxor.edu.eg',
         office: 'Faculty Building - 1st Floor, Room 105'
       },
@@ -310,7 +311,7 @@ export class SectorsService {
       viceDean: {
         name: 'Prof. Dr. Youssef Abbas Ali',
         title: 'Vice Dean for Postgraduate Studies and Research Excellence',
-        photo: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        photo: './assets/Picture5.jpg',
         email: 'postgraduate@luxor.edu.eg',
         office: 'Research Excellence Center - Building A, Floor 3, Suite 301'
       },
@@ -524,7 +525,7 @@ export class SectorsService {
       viceDean: {
         name: 'Prof. Dr. Mahmoud Hamza Mohamed',
         title: 'Vice Dean for Community Service and Environmental Sustainability',
-        photo: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+        photo: './assets/Picture2.jpg',
         email: 'community@luxor.edu.eg',
         office: 'Community Engagement Center - Building E, Floor 2, Suite 205'
       },

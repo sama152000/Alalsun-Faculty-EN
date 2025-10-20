@@ -25,12 +25,12 @@ export class NavbarComponent implements OnInit {
   constructor(private menuService: MenuService, private facultyInfoService: FacultyInfoService) {}
 
   ngOnInit(): void {
-    // Fetch faculty info from FacultyInfoService (now includes logo from backend)
-    this.facultyInfoService.getFacultyInfo().subscribe((info) => {
+    // Fetch faculty info from FacultyInfoService (static data)
+    this.facultyInfoService.getFacultyInfo().subscribe((info: FacultyInfo) => {
       this.facultyInfo = info;
     });
 
-    // Fetch MAIN_NAV with custom pages in More+ dropdown
+    // Fetch MAIN_NAV static data
     this.menuService.getActiveHeader(HeaderType.MAIN_NAV).subscribe((menu) => {
       if (menu && menu.data) {
         this.navbarItems = (menu.data as any).navbarItems || [];

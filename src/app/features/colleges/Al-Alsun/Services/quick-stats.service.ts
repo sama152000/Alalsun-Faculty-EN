@@ -1,32 +1,57 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { Stat } from '../model/quick-stats.model';
-import { environment } from '../../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuickStatsService {
-  private apiUrl = environment. apiUrl + '/statistics/getall';
+  private stats: Stat[] = [
+    {
+      id: '1',
+      title: 'Students',
+      value: '705+',
+      iconPath: '',
+      isActive: true,
+      color: 'var(--nano-color)',
+      icon: 'pi pi-users',
+      label: 'Students'
+    },
+    {
+      id: '2',
+      title: 'Departments',
+      value: '8',
+      iconPath: '',
+      isActive: true,
+      color: 'var(--nano-color)',
+      icon: 'pi pi-building',
+      label: 'Departments'
+    },
+    {
+      id: '3',
+      title: 'Faculty Members & Assistants',
+      value: '23',
+      iconPath: '',
+      isActive: true,
+      color: 'var(--nano-color)',
+      icon: 'pi pi-user-plus',
+      label: 'Faculty Members & Assistants'
+    },
+    {
+      id: '4',
+      title: 'Peer-reviewed Journal',
+      value: '1',
+      iconPath: '',
+      isActive: true,
+      color: 'var(--nano-color)',
+      icon: 'pi pi-book',
+      label: 'Peer-reviewed Journal'
+    }
+  ];
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   getStats(): Observable<Stat[]> {
-    return this.http.get<any>(this.apiUrl).pipe(
-      map(response => {
-        if (response && response.success && Array.isArray(response.data)) {
-          return response.data.map((item: any) => ({
-            id: item.id,
-            title: item.title,
-            value: item.value,
-            iconPath: item.iconPath,
-            isActive: item.isActive
-          }));
-        }
-        return [];
-      })
-    );
+    return of(this.stats);
   }
 }

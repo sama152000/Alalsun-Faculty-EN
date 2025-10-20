@@ -7,19 +7,19 @@
           <div class="footer-section">
             <div class="footer-logo-section">
               <div class="footer-logo">
-                <img [src]="facultyInfo?.logoUrl || '/assets/default-logo.png'" width="100%" [alt]="footerData?.title || 'Faculty Logo'" *ngIf="facultyInfo?.logoUrl">
+                <img [src]="facultyInfo?.logoUrl || '/assets/default-logo.png'" width="100%" [alt]="footerData.title || 'Faculty Logo'" *ngIf="facultyInfo?.logoUrl">
               </div>
               <div>
-                <h3>{{ footerData?.title }}</h3>
-                <p>{{ footerData?.subtitle }}</p>
-                <p class="footer-tagline">{{ footerData?.tagline }}</p>
+                <h3>{{ footerData.title }}</h3>
+                <p>{{ footerData.subtitle }}</p>
+                <p class="footer-tagline">{{ footerData.tagline }}</p>
               </div>
             </div>
 
             <div class="social-media">
               <h4>Follow Us</h4>
               <div class="social-links">
-                <a *ngFor="let link of footerData?.socialLinks" [href]="link.url" [attr.aria-label]="link.platform">
+                <a *ngFor="let link of footerData.socialLinks" [href]="link.url" [attr.aria-label]="link.platform">
                   <i [class]="link.icon"></i>
                 </a>
               </div>
@@ -29,9 +29,9 @@
 
         <div class="col-lg-2 col-md-6">
           <div class="footer-section">
-            <h4>{{ footerData?.quickLinks?.title }}</h4>
+            <h4>{{ footerData.quickLinks.title }}</h4>
             <ul class="footer-links">
-              <li *ngFor="let link of footerData?.quickLinks?.links">
+              <li *ngFor="let link of footerData.quickLinks.links">
                 <a [href]="link.url">{{ link.title }}</a>
               </li>
             </ul>
@@ -40,9 +40,9 @@
 
         <div class="col-lg-3 col-md-6">
           <div class="footer-section">
-            <h4>{{ footerData?.academicLinks?.title }}</h4>
+            <h4>{{ footerData.academicLinks.title }}</h4>
             <ul class="footer-links">
-              <li *ngFor="let link of footerData?.academicLinks?.links">
+              <li *ngFor="let link of footerData.academicLinks.links">
                 <a [href]="link.url">{{ link.title }}</a>
               </li>
             </ul>
@@ -51,9 +51,9 @@
 
         <div class="col-lg-3 col-md-6">
           <div class="footer-section">
-            <h4>{{ footerData?.resourceLinks?.title }}</h4>
+            <h4>{{ footerData.resourceLinks.title }}</h4>
             <ul class="footer-links">
-              <li *ngFor="let link of footerData?.resourceLinks?.links">
+              <li *ngFor="let link of footerData.resourceLinks.links">
                 <a [href]="link.url">{{ link.title }}</a>
               </li>
             </ul>
@@ -69,16 +69,16 @@
       <div class="row align-items-center">
         <div class="col-md-6">
           <p class="copyright">
-            {{ footerData.copyright }}
+            {{ footerData?.copyright }}
           </p>
         </div>
         <div class="col-md-6">
-          <div class="contact-methods" *ngIf="footerData.contactMethods">
-            <a [href]="'tel:' + footerData.contactMethods.phone" class="contact-method">
+          <div class="contact-methods" *ngIf="footerData?.contactMethods">
+            <a [href]="'tel:' + footerData?.contactMethods?.phone" class="contact-method">
               <i class="pi pi-phone"></i>
-              {{ footerData.contactMethods.phone }}
+              {{ footerData?.contactMethods?.phone }}
             </a>
-            <a [href]="'mailto:' + footerData.contactMethods.email" class="contact-method">
+            <a [href]="'mailto:' + footerData?.contactMethods?.email" class="contact-method">
               <i class="pi pi-envelope"></i>
               Contact
             </a>

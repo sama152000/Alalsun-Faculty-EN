@@ -1,0 +1,255 @@
+/* Custom Styles for Al-Alsun Journal Component */
+.journal-section {
+  padding: var(--standard-padding) 0;
+  background: var(--light-bg);
+}
+
+.journal-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background:  var(--primary-color);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.journal-card:hover {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+}
+
+.journal-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: var(--component-padding);
+  position: relative;
+  z-index: 1;
+}
+
+.journal-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--gradient-diagonal);
+  opacity: 0.9;
+  z-index: -1;
+}
+
+.journal-image img {
+  max-width: 400px;
+  width:250px;
+  margin-right: 3cqmin;
+  border-radius: 15px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.journal-image img:hover {
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.journal-info {
+  flex: 1;
+  color: var(--white);
+}
+
+.journal-title {
+  font-size: 1.8rem;
+  color: white;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.3px;
+}
+
+.journal-subtitle {
+  font-size: 1rem;
+  color: var(--white);
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.journal-details {
+  padding: var(--component-padding);
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+}
+
+.journal-details .card-modern {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 1px solid rgba(12, 104, 92, 0.1);
+}
+
+.journal-details .card-modern:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(12, 104, 92, 0.15);
+}
+
+.journal-details .card-body {
+  padding: 2rem;
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+}
+
+.journal-details .card-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  position: relative;
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.journal-details .card-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--accent-gold) 100%);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.journal-details .card-modern:hover .card-title::after {
+  width: 80px;
+}
+
+.journal-details .card-text {
+  font-size: 0.9rem;
+  color: var(--dark-text);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.journal-details .list-group-item {
+  background: transparent;
+  border-color: rgba(12, 104, 92, 0.1);
+  transition: all 0.3s ease;
+  padding: 0.75rem 0;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
+}
+
+.journal-details .list-group-item:hover {
+  background: linear-gradient(90deg, rgba(12, 104, 92, 0.05) 0%, rgba(212, 175, 55, 0.05) 100%);
+  transform: translateX(5px);
+}
+
+.journal-details .list-group-item i {
+  transition: transform 0.3s ease;
+}
+
+.journal-details .list-group-item:hover i {
+  transform: scale(1.1);
+  color: var(--accent-gold) !important;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 768px) {
+  .journal-header {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--standard-padding);
+  }
+
+  .journal-image img {
+    margin-right: 0;
+    margin-bottom: 2rem;
+    max-width: 100%;
+  }
+
+  .journal-title {
+    font-size: var(--medium-font);
+    letter-spacing: -0.3px;
+  }
+
+  .journal-subtitle {
+    font-size: var(--small-font);
+    line-height: 1.5;
+  }
+
+  .journal-details {
+    padding: var(--standard-padding);
+  }
+
+  .journal-details .card-body {
+    padding: 1.5rem;
+  }
+
+  .journal-details .card-title {
+    font-size: 1.1rem;
+  }
+
+  .journal-details .card-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .journal-section {
+    padding: 1rem 0;
+  }
+
+  .journal-header {
+    padding: 1.5rem;
+  }
+
+  .journal-title {
+    font-size: 2rem;
+  }
+
+  .journal-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .journal-details {
+    padding: 1.5rem;
+  }
+
+  .journal-details .card-body {
+    padding: 1.25rem;
+  }
+}
+
+/* Animation keyframes for enhanced effects */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.journal-image {
+  animation: slideInLeft 0.8s ease-out;
+}
+
+.journal-info {
+  animation: slideInRight 0.8s ease-out;
+}
+
+.journal-details .card-modern:nth-child(1) {
+  animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+
+.journal-details .card-modern:nth-child(2) {
+  animation: slideInRight 0.8s ease-out 0.4s both;
+}

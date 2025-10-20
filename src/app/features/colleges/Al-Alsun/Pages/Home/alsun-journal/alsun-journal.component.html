@@ -1,0 +1,51 @@
+<div class="journal-section" *ngIf="journal">
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="journal-card">
+          <div class="journal-header">
+            <div class="journal-image">
+              <img [src]="journal?.image" [alt]="journal?.name" class="img-fluid rounded shadow-sm" />
+            </div>
+            <div class="journal-info">
+              <h2 class="journal-title">{{ journal?.name }}</h2>
+              <p class="journal-subtitle">{{ journal?.description }}</p>
+              <a href="{{ journal?.route }}" class="btn btn-primary btn-lg">
+                <i class="pi pi-book me-2"></i> Visit Website
+              </a>
+            </div>
+          </div>
+
+          <div class="journal-details">
+            <div class="row g-4">
+              <div class="col-md-6">
+                  <div class="card card-modern h-100">
+                    <div class="card-body">
+                      <h3 class="card-title">Journal Vision</h3>
+                      <p class="card-text">{{ journal?.details?.mission }}</p>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card card-modern h-100">
+                  <div class="card-body">
+                    <h3 class="card-title">Specifications</h3>
+                    <ul class="list-group list-group-flush">
+                      <li *ngFor="let spec of journal?.details?.specifications" class="list-group-item d-flex align-items-center">
+                        <i [class]="spec.icon + ' me-2 text-primary'"></i> {{ spec.label }}: {{ spec.value }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          
+                 
+             
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
