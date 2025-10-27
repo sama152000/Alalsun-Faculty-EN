@@ -1,33 +1,146 @@
 <div class="contact-page">
   <app-page-header 
-  title="Contact Us" 
-  [breadcrumbs]="breadcrumbs">
-</app-page-header>
+    title="Contact Us" 
+    [breadcrumbs]="breadcrumbs">
+  </app-page-header>
 
-<div class="container-fluid py-5">
-  <!-- Contact Form Section -->
-  <!-- Contact Methods -->
-  <div class="row mb-5">
-    <div class="col-12">
-      <h2 class="contact-methods-title text-center mb-4">Get in Touch</h2>
-      <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4" *ngFor="let method of contactMethods">
-          <div class="contact-method-card text-center">
-            <div class="method-icon mb-4" [style.background-color]="method.color">
-              <i  [class]="method.icon"></i>
+  <div class="container-fluid py-5">
+    <!-- Contact Form Section -->
+    <div class="row mb-5">
+      <div class="col-lg-8 mx-auto">
+        <div class="card card-modern">
+          <div class="section-header">
+            <i class="pi pi-send me-2"></i>
+            Send Us a Message
+          </div>
+          <div class="card-body p-4">
+            <!-- Success Message -->
+            <div class="alert alert-success d-flex align-items-center mb-4" 
+                 *ngIf="showSuccessMessage && submissionResult?.success">
+              <i class="pi pi-check-circle me-2"></i>
+              {{ submissionResult?.message }}
             </div>
-            <h4 class="method-title">{{ method.title }}</h4>
-            <p class="method-primary">{{ method.primary }}</p>
-            <p class="method-secondary">{{ method.secondary }}</p>
+
+            <!-- Error Message -->
+            <div class="alert alert-danger d-flex align-items-center mb-4" 
+                 *ngIf="submissionResult && !submissionResult.success">
+              <i class="pi pi-exclamation-triangle me-2"></i>
+              {{ submissionResult.message }}
+            </div>
+
+            <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-user me-1"></i>
+                    Full Name *
+                  </label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [class.is-invalid]="hasError('fullName')"
+                    [(ngModel)]="contactForm.fullName"
+                    name="fullName"
+                    placeholder="Enter your full name"
+                    required>
+                  <div class="invalid-feedback" *ngIf="hasError('fullName')">
+                    {{ getError('fullName') }}
+                  </div>
+                </div>
+                
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-envelope me-1"></i>
+                    Email Address *
+                  </label>
+                  <input 
+                    type="email" 
+                    class="form-control"
+                    [class.is-invalid]="hasError('email')"
+                    [(ngModel)]="contactForm.email"
+                    name="email"
+                    placeholder="Enter your email address"
+                    required>
+                  <div class="invalid-feedback" *ngIf="hasError('email')">
+                    {{ getError('email') }}
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-tag me-1"></i>
+                    Subject *
+                  </label>
+                  <input 
+                    type="text" 
+                    class="form-control"
+                    [class.is-invalid]="hasError('subject')"
+                    [(ngModel)]="contactForm.subject"
+                    name="subject"
+                    placeholder="Enter message subject"
+                    required>
+                  <div class="invalid-feedback" *ngIf="hasError('subject')">
+                    {{ getError('subject') }}
+                  </div>
+                </div>
+                
+                <div class="col-12">
+                  <label class="form-label fw-semibold">
+                    <i class="pi pi-comment me-1"></i>
+                    Message *
+                  </label>
+                  <textarea 
+                    class="form-control"
+                    [class.is-invalid]="hasError('message')"
+                    [(ngModel)]="contactForm.message"
+                    name="message"
+                    rows="6"
+                    placeholder="Enter your message here..."
+                    required></textarea>
+                  <div class="invalid-feedback" *ngIf="hasError('message')">
+                    {{ getError('message') }}
+                  </div>
+                </div>
+                
+                <div class="col-12 text-center">
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary-custom"
+                    [disabled]="isSubmitting">
+                    <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
+                    <i *ngIf="!isSubmitting" class="pi pi-send me-2"></i>
+                    {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  <!-- Map and Campus Info -->
-  <section class="contact-map-section ">
-      <div class="container-fluid ">
+
+    <!-- Contact Methods -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <h2 class="contact-methods-title text-center mb-4">Get in Touch</h2>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 mb-4" *ngFor="let method of contactMethods">
+            <div class="contact-method-card text-center">
+              <div class="method-icon mb-4" [style.background-color]="method.color">
+                <i  [class]="method.icon"></i>
+              </div>
+              <h4 class="method-title">{{ method.title }}</h4>
+              <p class="method-primary">{{ method.primary }}</p>
+              <p class="method-secondary">{{ method.secondary }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map and Campus Info -->
+    <section class="contact-map-section py-5">
+      <div class="container-fluid py-5">
         <div class="row mb-5">
           <!-- Interactive Map -->
           <div class="col-lg-8 mb-4">
@@ -42,10 +155,10 @@
               <!-- Embedded Map -->
               <div class="map-container">
                 <iframe
-                *ngIf="mapUrl"
-                [src]="mapUrl | safe: 'resourceUrl'"
-                width="100%"
-                height="450"
+                  *ngIf="mapUrl"
+                  [src]="mapUrl | safe: 'resourceUrl'"
+                  width="100%"
+                  height="450"
                   style="border:0;"
                   allowfullscreen=""
                   loading="lazy"
@@ -125,119 +238,5 @@
       </div>
     </section>
   </div>
-  <div class="row mb-5">
-    <div class="col-lg-8 mx-auto">
-      <div class="card card-modern">
-        <div class="section-header">
-          <i class="pi pi-send me-2"></i>
-          Send Us a Message
-        </div>
-        <div class="card-body p-4">
-          <!-- Success Message -->
-          <div class="alert alert-success d-flex align-items-center mb-4" 
-               *ngIf="showSuccessMessage && submissionResult?.success">
-            <i class="pi pi-check-circle me-2"></i>
-            {{ submissionResult?.message }}
-          </div>
-
-          <!-- Error Message -->
-          <div class="alert alert-danger d-flex align-items-center mb-4" 
-               *ngIf="submissionResult && !submissionResult.success">
-            <i class="pi pi-exclamation-triangle me-2"></i>
-            {{ submissionResult.message }}
-          </div>
-
-          <form (ngSubmit)="onSubmit()" #contactFormRef="ngForm">
-            <div class="row g-3">
-              <div class="col-md-6">
-                <label class="form-label fw-semibold">
-                  <i class="pi pi-user me-1"></i>
-                  Full Name *
-                </label>
-                <input 
-                  type="text" 
-                  class="form-control"
-                  [class.is-invalid]="hasError('fullName')"
-                  [(ngModel)]="contactForm.fullName"
-                  name="fullName"
-                  placeholder="Enter your full name"
-                  required>
-                <div class="invalid-feedback" *ngIf="hasError('fullName')">
-                  {{ getError('fullName') }}
-                </div>
-              </div>
-              
-              <div class="col-md-6">
-                <label class="form-label fw-semibold">
-                  <i class="pi pi-envelope me-1"></i>
-                  Email Address *
-                </label>
-                <input 
-                  type="email" 
-                  class="form-control"
-                  [class.is-invalid]="hasError('email')"
-                  [(ngModel)]="contactForm.email"
-                  name="email"
-                  placeholder="Enter your email address"
-                  required>
-                <div class="invalid-feedback" *ngIf="hasError('email')">
-                  {{ getError('email') }}
-                </div>
-              </div>
-              
-              <div class="col-12">
-                <label class="form-label fw-semibold">
-                  <i class="pi pi-tag me-1"></i>
-                  Subject *
-                </label>
-                <input 
-                  type="text" 
-                  class="form-control"
-                  [class.is-invalid]="hasError('subject')"
-                  [(ngModel)]="contactForm.subject"
-                  name="subject"
-                  placeholder="Enter message subject"
-                  required>
-                <div class="invalid-feedback" *ngIf="hasError('subject')">
-                  {{ getError('subject') }}
-                </div>
-              </div>
-              
-              <div class="col-12">
-                <label class="form-label fw-semibold">
-                  <i class="pi pi-comment me-1"></i>
-                  Message *
-                </label>
-                <textarea 
-                  class="form-control"
-                  [class.is-invalid]="hasError('message')"
-                  [(ngModel)]="contactForm.message"
-                  name="message"
-                  rows="6"
-                  placeholder="Enter your message here..."
-                  required></textarea>
-                <div class="invalid-feedback" *ngIf="hasError('message')">
-                  {{ getError('message') }}
-                </div>
-              </div>
-              
-              <div class="col-12 text-center">
-                <button 
-                  type="submit" 
-                  class="btn btn-primary-custom"
-                  [disabled]="isSubmitting">
-                  <span *ngIf="isSubmitting" class="spinner-border spinner-border-sm me-2"></span>
-                  <i *ngIf="!isSubmitting" class="pi pi-send me-2"></i>
-                  {{ isSubmitting ? 'Sending...' : 'Send Message' }}
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
   <app-footer></app-footer>
+</div>
