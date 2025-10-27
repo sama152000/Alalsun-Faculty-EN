@@ -1,12 +1,22 @@
 
-<div class="news-detail-page" *ngIf="newsItem">
-      <app-page-header 
-        [title]="newsItem.title" 
-        [breadcrumbs]="breadcrumbs">
-      </app-page-header>
+<app-page-header
+  [title]="newsItem?.title || 'Loading...'"
+  [breadcrumbs]="breadcrumbs">
+</app-page-header>
+<div class="news-detail-page" *ngIf="loading">
+  <section class="loading-section">
+    <div class="container-fluid">
+      <div class="loading-content">
+        <i class="pi pi-spin pi-spinner loading-icon"></i>
+        <h3>Loading News Article...</h3>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="news-detail-page" *ngIf="newsItem && !loading">
       
       <section class="news-detail-section">
-        <div class="container">
+        <div class="container-fluid">
           <div class="card-modern">
             <div class="news-header">
               <div class="news-image-container">
@@ -76,24 +86,24 @@
       </section>
     </div>
     
-    <div class="news-detail-page" *ngIf="!newsItem && !loading">
-      <app-page-header 
-        title="News Article Not Found" 
-        [breadcrumbs]="breadcrumbs">
-      </app-page-header>
-      
-      <section class="error-section">
-        <div class="container">
-          <div class="error-content">
-            <i class="pi pi-exclamation-triangle error-icon"></i>
-            <h3>News Article Not Found</h3>
-            <p>The requested news article could not be found.</p>
-            <button class="btn-primary-custom" (click)="goBack()">
-              Return to News
-            </button>
-          </div>
-        </div>
-      </section>
-    </div>
+<div class="news-detail-page" *ngIf="!newsItem && !loading">
+ <app-page-header
+   title="News Article Not Found"
+   [breadcrumbs]="breadcrumbs">
+ </app-page-header>
+
+ <section class="error-section">
+   <div class="container">
+     <div class="error-content">
+       <i class="pi pi-exclamation-triangle error-icon"></i>
+       <h3>News Article Not Found</h3>
+       <p>The requested news article could not be found.</p>
+       <button class="btn-primary-custom" (click)="goBack()">
+         Return to News
+       </button>
+     </div>
+   </div>
+ </section>
+</div>
 
     <app-footer></app-footer>

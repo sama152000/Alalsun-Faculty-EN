@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, HostListener, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 interface Department {
   name: string;
@@ -11,7 +12,7 @@ interface Department {
 @Component({
   selector: 'app-departments',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './departments.component.html',
   styleUrls: ['./departments.component.css']
 })

@@ -7,6 +7,7 @@ import { FacultyService, ServiceCategory } from '../model/services.model';
 })
 export class FacultyServiceService {
   private services: FacultyService[] = [
+    // === 1. مركز الألسن للغات والترجمة (المركز الرئيسي) ===
     {
       id: 'language-translation-center',
       name: 'Al-Alsun Centre for Languages and Translation',
@@ -26,7 +27,9 @@ export class FacultyServiceService {
         vision: 'To achieve scientific leadership and excellence in the fields of language teaching and translation locally and internationally in order to achieve knowledge and cultural communication with countries around the world in a way that serves society and contributes to facing current and future challenges.',
         objectives: [
           'Prepare and implement training programs in the different languages taught in the departments of the Faculty of Languages, using the latest educational methods and modern technology in the field of languages and translation for the university and external parties.',
-          'Provide language consulting for all languages taught at the faculty.'
+          'Provide language consulting for all languages taught at the faculty.',
+          'Contribute to ensuring a distinguished quality of education with a commitment to continuous development and efficient performance of the center, and gaining the community\'s trust in the graduates\' abilities, aiming to ensure quality and achieve competitiveness at local, regional, and international levels in the fields of languages and translation.',
+          'Contribute to community and environmental services, support development plans, and enhance community contributions.'
         ],
         staff: [
           {
@@ -34,49 +37,49 @@ export class FacultyServiceService {
             name: 'Prof. Dr. Mahmoud El-Noubi Ahmed',
             position: 'Chairman of the Board',
             role: 'Chairman of the Board of the Al-Alsun Center for Languages and Translation',
-            photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/Picture1.jpg'
           },
           {
             id: 'mohammed-farouk',
             name: 'Dr. Muhammed Farouk Muhammed Badr',
             position: 'Director of the Center',
             role: 'Director of the Center',
-            photo: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/userr.png'
           },
           {
             id: 'asmaa-salah',
             name: 'Dr. Asmaa Salah Abdel-Razek',
             position: 'Activity Coordinator',
             role: 'Coordinator of Training and Courses Activities',
-            photo: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/userr.png'
           },
           {
             id: 'hany-ali',
             name: 'Dr. Hany Ali',
             position: 'Activity Coordinator',
             role: 'Coordinator of Translation and Linguistic Editing Activities',
-            photo: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/userr.png'
           },
           {
             id: 'lamis-hassan',
             name: 'Dr. Lamis Hassan El-Bana Mohamed',
             position: 'Activity Coordinator',
             role: 'Coordinator of Language Testing Activities',
-            photo: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/userr.png'
           },
           {
             id: 'shaimaa-abdallah',
             name: 'Ms. Shaimaa Abdallah',
             position: 'Administrative Officer',
             role: 'Administrative Officer',
-            photo: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/userr.png'
           },
           {
             id: 'salwa-sanousi',
             name: 'Ms. Salwa Sanousi Suleiman',
             position: 'Financial Officer',
             role: 'Financial Officer',
-            photo: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=400&h=500'
+            photo: './assets/userr.png'
           }
         ],
         activities: [
@@ -98,234 +101,189 @@ export class FacultyServiceService {
             description: 'Comprehensive language proficiency testing and assessment',
             coordinator: 'Dr. Lamis Hassan El-Bana Mohamed'
           }
+        ],
+        introduction: 'The Al-Alsun Center for Languages and Translation at Luxor University is a special unit that always strives to be the first choice for learners in the fields of language, translation, and human development. It is committed to providing a competitive product at the local, regional, and international levels in the fields of translation and languages.',
+        certificatesAndCourses: [
+          'Offers the IELTS English Language Certificate accredited by the British Council in Cairo, in addition to courses at various levels of English.',
+          'Provides preparatory courses to pass the TOEFL exam in English.',
+          'Provides preparatory courses to pass the DELF exam in French.',
+          'Provides training courses in linguistic proofreading from the Arabic Language Department.',
+          'Provides training courses in teaching academic subjects in English (Math & Science).',
+          'Provides training courses in German.',
+          'Provides training courses in Chinese.',
+          'Provides training courses in Italian.',
+          'The center translates all types of official certificates, documents, and scientific theses from Arabic into various languages and vice versa.'
+        ],
+        centerObjectives: [
+          'Preparing special programs to raise the level of languages taught at the center for students and others.',
+          'Ensuring quality and continuous development in line with national development requirements.',
+          'Linguistic review of research and scientific theses in the center\'s field.',
+          'Cultural linkage between the center and other university centers in language affairs, as well as the external labor market.',
+          'Holding local TOEFL preparation courses and training for students from inside and outside the university.',
+          'Designing training programs in delivering lectures in the languages taught in the departments of the Faculty of Al-Alsun at Luxor.'
         ]
       }
     },
+
+    // === 2. وحدة ضمان الجودة والاعتماد (كمركز منفصل) ===
     {
-      id: 'confucius-classroom',
-      name: 'Confucius Classroom',
-      shortName: 'Confucius Classroom',
-      description: 'A non-profit educational institution dedicated to spreading Chinese language and culture around the world.',
-      image: './assets/service2.jpg',
-      icon: 'pi pi-star',
-      establishedDate: '2019',
-      category: ServiceCategory.CULTURAL_CENTER,
-      route: '/services/confucius-classroom',
+      id: 'quality-assurance-unit',
+      name: 'Quality Assurance and Accreditation Unit',
+      shortName: 'Quality Unit',
+      description: 'Ensures continuous improvement of educational quality and alignment with national and international standards.',
+      image: './assets/img.png',
+      icon: 'pi pi-check-circle',
+      establishedDate: '2018',
+      category: ServiceCategory.LANGUAGE_CENTER,
+      route: '/services/quality-assurance-unit',
       contact: {
-        facebook: 'https://www.facebook.com/profile.php?id=100064953162513',
-        email: 'confucius@alsun.luxor.edu.eg'
+        email: 'quality@alsun.luxor.edu.eg'
       },
       details: {
-        mission: 'The Confucius Classroom was established as a non-profit educational institution with the aim of spreading Chinese language and culture around the world. The Confucius Classroom at Luxor University was opened in 2019 in collaboration with the main Confucius Classroom and Capital Normal University in China.',
-        programs: [
-          {
-            id: 'chinese-language',
-            name: 'Chinese Language Courses',
-            description: 'Comprehensive Chinese language learning programs for all levels',
-            duration: 'Semester-based',
-            requirements: ['Basic education certificate', 'Commitment to attendance']
-          },
-          {
-            id: 'cultural-exchange',
-            name: 'Cultural Exchange Programs',
-            description: 'Student and faculty exchange programs with Chinese universities',
-            duration: 'Varies',
-            requirements: ['Academic excellence', 'Language proficiency']
-          }
+        description: 'The Quality Assurance and Accreditation Unit at the Faculty of Al-Alsun seeks to elevate the level of educational quality and continuously develop the educational process in accordance with national standards that align with international benchmarks, achieving the college\'s vision, mission, and goals.',
+        objectives: [
+          'Develop and implement quality assurance policies and procedures.',
+          'Monitor academic programs to ensure compliance with accreditation standards.',
+          'Conduct internal audits and prepare accreditation reports.',
+          'Train faculty and staff on quality standards and best practices.'
         ],
+        coordinator: 'Dr. Youssef Abbas Ali',
         activities: [
           {
-            id: 'cultural-events',
-            name: 'Chinese Cultural Events',
-            description: 'Regular cultural celebrations and festivals showcasing Chinese traditions'
+            id: 'accreditation-prep',
+            name: 'Accreditation Preparation',
+            description: 'Support for national and international accreditation processes'
           },
           {
-            id: 'language-competitions',
-            name: 'Chinese Language Competitions',
-            description: 'Annual competitions to promote Chinese language learning'
-          }
-        ],
-        achievements: [
-          {
-            id: 'partnership-2019',
-            title: 'Partnership with Capital Normal University',
-            description: 'Established formal partnership with Capital Normal University in China',
-            date: new Date('2019-01-01')
+            id: 'quality-training',
+            name: 'Quality Training Workshops',
+            description: 'Training programs on quality standards and educational excellence'
           }
         ]
       }
     },
+
+    // === 3. وحدة القياس والتقويم ===
     {
-      id: 'alsun-journal',
-      name: 'Al-Alsun Journal of Languages and Humanities',
-      shortName: 'Al-Alsun Journal',
-      description: 'A semi-annual peer-reviewed journal published by the Faculty of Al-Alsun, rated 7/7 in July 2024 evaluations.',
-      image: './assets/service3.jpg',
-      icon: 'pi pi-book',
-      establishedDate: 'Autumn 2019',
-      category: ServiceCategory.ACADEMIC_JOURNAL, // Added as a new category
-      route: '/services/alsun-journal',
+      id: 'measurement-evaluation-unit',
+      name: 'Measurement and Evaluation Unit',
+      shortName: 'Evaluation Unit',
+      description: 'Promotes modern assessment systems and electronic correction to enhance educational quality.',
+      image: './assets/img.png',
+      icon: 'pi pi-chart-line',
+      establishedDate: '2020',
+      category: ServiceCategory.LANGUAGE_CENTER,
+      route: '/services/measurement-evaluation-unit',
       contact: {
-        website: 'https://maks.journals.ekb.eg/',
-        email: 'journal@alsun.luxor.edu.eg'
+        email: 'evaluation@alsun.luxor.edu.eg'
       },
       details: {
-        mission: 'Al-Alsun Journal of Languages and Humanities is a semi-annual peer-reviewed journal published by the Faculty of Al-Alsun at Luxor University. The first issue was published in Autumn 2019 (October-November-December).',
-        specifications: [
-          {
-            label: 'Publication Frequency',
-            value: 'Semi-annual',
-            icon: 'pi pi-calendar'
-          },
-          {
-            label: 'Peer Review',
-            value: 'Yes',
-            icon: 'pi pi-check-circle'
-          },
-          {
-            label: 'Rating',
-            value: '7/7 (July 2024)',
-            icon: 'pi pi-star'
-          },
-          {
-            label: 'First Issue',
-            value: 'Autumn 2019',
-            icon: 'pi pi-clock'
-          }
+        description: 'Based on the Supreme Council of Universities\' decisions to generalize electronic correction in universities, the Measurement and Evaluation Unit plays a key role in spreading the culture of developing student assessment and examination systems as a means to improve the educational system and ensure its quality.',
+        objectives: [
+          'Implement electronic correction systems across all departments.',
+          'Develop fair and transparent evaluation mechanisms.',
+          'Train faculty on modern assessment techniques.',
+          'Analyze exam results to improve teaching methods.'
         ],
-        editorialBoard: [
+        coordinator: 'Dr. Ramadan Eid',
+        activities: [
           {
-            id: 'mahmoud-elnoubi-editor',
-            name: 'Prof. Dr. Mahmoud El-Noubi Ahmed',
-            position: 'Chairman of the Board',
-            role: 'Editor-in-Chief',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
+            id: 'electronic-correction',
+            name: 'Electronic Exam Correction',
+            description: 'Full implementation of digital exam grading'
           },
           {
-            id: 'youssef-abbas',
-            name: 'Prof. Dr. Youssef Abbas Ali',
-            position: 'Vice Chairman of the Board',
-            role: 'Vice Chairman',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
+            id: 'assessment-workshops',
+            name: 'Assessment Design Workshops',
+            description: 'Training on creating effective exam questions'
+          }
+        ]
+      }
+    },
+
+    // === 4. وحدة تكنولوجيا المعلومات (IT) ===
+    {
+      id: 'it-unit',
+      name: 'Information Technology Unit (IT)',
+      shortName: 'IT Unit',
+      description: 'Provides technological infrastructure and digital services to support teaching, learning, and administration.',
+      image: './assets/img.png',
+      icon: 'pi pi-desktop',
+      establishedDate: '2019',
+      category: ServiceCategory.LANGUAGE_CENTER,
+      route: '/services/it-unit',
+      contact: {
+        email: 'it.support@alsun.luxor.edu.eg',
+        phone: '095-238-1234'
+      },
+      details: {
+        description: 'The IT Unit aims to provide the college and its members—faculty, staff, and students—with diverse technological services and to offer necessary support to organize teaching and learning processes based on information systems and technology. It also activates the university\'s official email as a primary communication tool and establishes an electronic library.',
+        objectives: [
+          'Maintain and upgrade IT infrastructure across the faculty.',
+          'Provide technical support for digital learning platforms.',
+          'Manage official university email and communication systems.',
+          'Develop and maintain the faculty\'s digital library and online resources.'
+        ],
+        coordinator: 'Eng. Khaled Said',
+        activities: [
+          {
+            id: 'tech-support',
+            name: 'Technical Support Desk',
+            description: '24/7 IT support for faculty and students'
           },
           {
-            id: 'asmaa-salah-editor',
-            name: 'Dr. Asmaa Salah Abdel-Razek',
-            position: 'Managing Editor',
-            role: 'Managing Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
+            id: 'digital-library',
+            name: 'Digital Library Services',
+            description: 'Access to e-books, journals, and research databases'
           },
           {
-            id: 'reham-shoukry',
-            name: 'Dr. Reham Shoukry Abdel-Salam',
-            position: 'Assistant Managing Editor',
-            role: 'Assistant Managing Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
+            id: 'lms-management',
+            name: 'Learning Management System',
+            description: 'Support for Moodle and online course platforms'
+          }
+        ]
+      }
+    },
+
+    // === 5. وحدة متابعة الخريجين ===
+    {
+      id: 'graduate-followup-unit',
+      name: 'Graduate Follow-Up Unit',
+      shortName: 'Alumni Unit',
+      description: 'Connects graduates with the job market and provides continuous professional development opportunities.',
+      image: './assets/img.png',
+      icon: 'pi pi-users',
+      establishedDate: '2021',
+      category: ServiceCategory.LANGUAGE_CENTER,
+      route: '/services/graduate-followup-unit',
+      contact: {
+        email: 'alumni@alsun.luxor.edu.eg',
+        website: 'https://alumni.alsun.luxor.edu.eg'
+      },
+      details: {
+        description: 'The Graduate Follow-Up Unit aims to elevate the technical and professional level of students and graduates of the Faculty of Al-Alsun, enhance their efficiency, and develop their capabilities to become competitive in the job market. It creates continuous communication channels with alumni, monitors their performance, and improves it through training programs, workshops, and diverse activities.',
+        objectives: [
+          'Build a comprehensive alumni database and communication network.',
+          'Organize career development workshops and job fairs.',
+          'Track graduate employment rates and career progression.',
+          'Offer lifelong learning and certification programs for alumni.'
+        ],
+        coordinator: 'Dr. Safaa Ali',
+        activities: [
+          {
+            id: 'career-fair',
+            name: 'Annual Career Fair',
+            description: 'Connects graduates with employers in language and translation sectors'
           },
           {
-            id: 'ramadan-eid',
-            name: 'Dr. Ramadan Eid',
-            position: 'Linguistic Editor',
-            role: 'Linguistic Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
+            id: 'alumni-mentorship',
+            name: 'Alumni Mentorship Program',
+            description: 'Senior graduates mentor current students'
           },
           {
-            id: 'lamis-hassan-editor',
-            name: 'Dr. Lamis Hassan El-Bana Mohamed',
-            position: 'Linguistic Editor',
-            role: 'Linguistic Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'arwa-ahmed',
-            name: 'Ms. Arwa Ahmed Hassan',
-            position: 'Linguistic Editor',
-            role: 'Linguistic Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'baleegh-hamdy',
-            name: 'Dr. Baleegh Hamdy',
-            position: 'Technical Editor',
-            role: 'Technical Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'mosheera-mahmoud',
-            name: 'Ms. Mosheera Mahmoud',
-            position: 'Technical Editor',
-            role: 'Technical Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'aya-said',
-            name: 'Ms. Aya Said Ali',
-            position: 'Page Editor',
-            role: 'Page Editor',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'safaa-ali',
-            name: 'Dr. Safaa Ali',
-            position: 'Editorial Secretary',
-            role: 'Editorial Secretary',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'khaled-said',
-            name: 'Mr. Khaled Said',
-            position: 'Financial Officer',
-            role: 'Executive Officer',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'randa-andria',
-            name: 'Ms. Randa Andria Anwar',
-            position: 'Administrative Officer',
-            role: 'Executive Officer',
-            affiliation: 'Faculty of Al-Alsun, Luxor University'
-          },
-          {
-            id: 'elena-tarasyuk',
-            name: 'Prof. Elena Tarasyuk',
-            position: 'External Editorial Board Member',
-            role: 'External Editorial Board Member',
-            affiliation: 'External Institution'
-          },
-          {
-            id: 'rosmarie-kalass',
-            name: 'Prof. Rosmarie Kalass',
-            position: 'External Editorial Board Member',
-            role: 'External Editorial Board Member',
-            affiliation: 'External Institution'
-          },
-          {
-            id: 'mariam-albadi',
-            name: 'Prof. Mariam bint Salem Al-Badi',
-            position: 'External Editorial Board Member',
-            role: 'External Editorial Board Member',
-            affiliation: 'External Institution'
-          },
-          {
-            id: 'warda-bouiran',
-            name: 'Prof. Warda Bouiran',
-            position: 'External Editorial Board Member',
-            role: 'External Editorial Board Member',
-            affiliation: 'External Institution'
-          },
-          {
-            id: 'hani-ismail',
-            name: 'Prof. Hani Ismail Mohamed Ismail',
-            position: 'External Editorial Board Member',
-            role: 'External Editorial Board Member',
-            affiliation: 'External Institution'
-          },
-          {
-            id: 'rasha-aboudi',
-            name: 'Prof. Rasha Mohamed Aboudi',
-            position: 'External Editorial Board Member',
-            role: 'External Editorial Board Member',
-            affiliation: 'External Institution'
+            id: 'professional-courses',
+            name: 'Professional Development Courses',
+            description: 'Specialized training in translation, interpretation, and soft skills'
           }
         ]
       }
@@ -365,10 +323,5 @@ export class FacultyServiceService {
       return of(true);
     }
     return of(false);
-  }
-
-  // Method to get Al-Alsun Journal specifically
-  getAlAlsunJournal(): Observable<FacultyService | undefined> {
-    return of(this.services.find(service => service.id === 'alsun-journal'));
   }
 }

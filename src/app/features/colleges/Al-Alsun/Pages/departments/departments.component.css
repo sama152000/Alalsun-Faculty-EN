@@ -471,6 +471,11 @@
 
 /* Responsive Design Enhancement */
 @media (max-width: 991px) {
+  .department-page {
+    padding: 1rem 1.5rem;
+
+}
+
   .sidebar {
     position: relative;
     top: 0;
@@ -481,6 +486,10 @@
 }
 
 @media (max-width: 768px) {
+    .department-page {
+    padding: 1rem 1.5rem;
+
+}
   .container-fluid {
     padding: 1rem;
   }
@@ -514,6 +523,10 @@
 }
 
 @media (max-width: 576px) {
+    .department-page {
+    padding: 1rem 1.5rem;
+
+}
   .section-title {
     font-size: 1.75rem;
   }

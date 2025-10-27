@@ -1,5 +1,6 @@
    .services-page {
       min-height: 100vh;
+      padding: var(--component-padding);
     }
 
     .filter-section {
@@ -51,7 +52,6 @@
 
     .services-grid-section {
       padding: 3rem 0;
-      background: white;
     }
 
     .service-card {
@@ -61,11 +61,12 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
       cursor: pointer;
-      margin-bottom: 2rem;
+      margin-bottom: 2rem !important;
       border: 1px solid var(--light-gray);
       height: 100%;
       display: flex;
       flex-direction: column;
+      
     }
 
     .service-card:hover {
@@ -201,6 +202,10 @@
     }
 
     @media (max-width: 768px) {
+         .services-page {
+         padding: 1rem 1.5rem;
+         }
+
       .filter-content {
         padding: 1.5rem;
       }

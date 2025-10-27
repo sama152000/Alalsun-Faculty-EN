@@ -8,6 +8,7 @@ import { FacultyHistoryComponent } from './faculty-history/faculty-history.compo
 import { VisionMissionSimpleComponent } from './vision-mission-simple/vision-mission-simple.component';
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { FooterComponent } from '../shared/footer/footer.component';
+import { FacultyGoalsComponent } from "./faculty-goals/faculty-goals.component";
 
 // Import all components
 @Component({
@@ -21,8 +22,9 @@ import { FooterComponent } from '../shared/footer/footer.component';
     FacultyHistoryComponent,
     VisionMissionSimpleComponent,
     FacultyCTAComponent,
-    FooterComponent
-  ],
+    FooterComponent,
+    FacultyGoalsComponent
+],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })

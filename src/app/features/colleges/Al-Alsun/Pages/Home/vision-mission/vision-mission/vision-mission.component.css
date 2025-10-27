@@ -99,6 +99,10 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .vision-mission-section {
+     padding: 1rem 1.5rem;
+
+}
   .section-title {
     font-size: 1.3rem;
   }

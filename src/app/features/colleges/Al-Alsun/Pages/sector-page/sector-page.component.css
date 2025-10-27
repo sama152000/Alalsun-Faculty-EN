@@ -2,7 +2,6 @@
 .sector-page {
   background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   min-height: 100vh;
-  padding: 2rem 0;
 }
 
 /* Sector Tabs */
@@ -915,6 +914,12 @@
 
 /* Responsive Design */
 @media (max-width: 1024px) {
+.container-fluid {
+   padding: 1rem !important;
+  }
+ 
+  /* Sector Page Styles - Cleaned and Complete */
+
   .grid-cols-4 {
     grid-template-columns: 1fr;
   }
@@ -924,45 +929,48 @@
   }
   
   .main-content {
-    padding: 2rem;
+    padding: 1rem 1.5rem;
+    margin: 0;
   }
 }
 
 @media (max-width: 768px) {
+
+
   .sector-tabs .nav-link {
     padding: 1rem 1.5rem;
     font-size: 1rem;
   }
-  
+
   .vice-dean-card {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .activity-item {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
   }
-  
+
   .stat-card,
   .program-card {
     margin-bottom: 1rem;
     padding: 2rem 1.5rem;
   }
-  
+
   .content-title {
     font-size: 2rem;
   }
-  
+
   .content-subtitle {
     font-size: 1.1rem;
   }
-  
+
   .main-content {
-    padding: 1.5rem;
+    padding: 1rem 1.5rem;
   }
-  
+
   .sector-sidebar {
     position: static;
     margin-bottom: 2rem;
@@ -976,7 +984,7 @@
   }
   
   .main-content {
-    padding: 1rem;
+    padding: 1rem 1.5rem;
   }
   
   .content-title {

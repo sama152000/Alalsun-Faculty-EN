@@ -1,0 +1,116 @@
+<app-page-header
+  [title]="pageTitle"
+  [breadcrumbs]="breadcrumbs">
+</app-page-header>
+<div class="educational-services-page">
+  <!-- Page Header -->
+
+
+  <!-- Main Content -->
+  <div *ngIf="!isLoading && service" class="content-wrapper">
+
+   
+
+    <!-- Main Content Section -->
+    <section class="main-content">
+      <div class="container-fluid">
+        <div class="content-card">
+
+          <!-- Papyrus-style decoration -->
+          <div class="papyrus-decoration top">
+            <svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 20 Q300 10 600 20 Q900 30 1200 20" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+              <circle cx="600" cy="20" r="8" fill="currentColor" opacity="0.5"/>
+              <circle cx="300" cy="18" r="5" fill="currentColor" opacity="0.4"/>
+              <circle cx="900" cy="22" r="5" fill="currentColor" opacity="0.4"/>
+            </svg>
+          </div>
+
+          <!-- Service Icon -->
+          <div class="service-icon-container">
+            <div class="icon-wrapper">
+              <i [class]="service.icon"></i>
+            </div>
+            <div class="icon-shadow"></div>
+          </div>
+
+          <!-- Content Body -->
+          <div class="content-body">
+            <div class="opening-letter">{{ service.description.charAt(0) }}</div>
+            <p class="service-description">{{ service.description }}</p>
+          </div>
+
+          <!-- Decorative Footer -->
+          <div class="papyrus-decoration bottom">
+            <svg viewBox="0 0 1200 40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 20 Q300 30 600 20 Q900 10 1200 20" fill="none" stroke="currentColor" stroke-width="2" opacity="0.3"/>
+              <circle cx="600" cy="20" r="8" fill="currentColor" opacity="0.5"/>
+            </svg>
+          </div>
+
+        </div>
+
+        <!-- Additional Info Cards -->
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6 L12 12 L16 14" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Modern Facilities</h3>
+            <p>State-of-the-art equipment and infrastructure</p>
+          </div>
+
+          <div class="info-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Excellence</h3>
+            <p>Committed to academic and research excellence</p>
+          </div>
+
+          <div class="info-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M4 20 Q4 14 12 14 Q20 14 20 20" fill="none" stroke="currentColor" stroke-width="2"/>
+              </svg>
+            </div>
+            <h3>Student Support</h3>
+            <p>Dedicated resources for student success</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Floating Navigation Buttons -->
+  <div class="floating-navigation">
+    <button
+      *ngIf="previousServiceId !== null"
+      class="nav-button prev"
+      (click)="goToPrevious()"
+      [title]="'Previous Service'">
+      <i class="pi pi-chevron-left"></i>
+      <span class="nav-label">Previous</span>
+    </button>
+
+    <button
+      *ngIf="nextServiceId !== null"
+      class="nav-button next"
+      (click)="goToNext()"
+      [title]="'Next Service'">
+      <span class="nav-label">Next</span>
+      <i class="pi pi-chevron-right"></i>
+    </button>
+  </div>
+
+</div>
+
+<app-footer></app-footer>

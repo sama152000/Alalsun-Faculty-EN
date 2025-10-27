@@ -38,6 +38,11 @@ export interface ServiceDetails {
   achievements?: ServiceAchievement[];
   editorialBoard?: EditorialBoardMember[];
   specifications?: ServiceSpecification[];
+  description?: string;
+  introduction?: string;
+  certificatesAndCourses?: string[];
+  centerObjectives?: string[];
+  coordinator?: string;
 }
 
 export interface ServiceActivity {

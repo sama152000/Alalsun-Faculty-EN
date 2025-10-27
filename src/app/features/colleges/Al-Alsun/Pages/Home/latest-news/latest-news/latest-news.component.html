@@ -35,30 +35,30 @@
                       <i class="pi pi-eye"></i>
                     </div>
                   </div>
-                  
+
                   <div class="news-details">
                     <div class="news-header">
                       <span class="news-category">{{ news.category }}</span>
-                      <span class="news-priority" *ngIf="news.priority">
+                      <span class="news-priority" *ngIf="news.featured">
                         <i class="pi pi-star-fill"></i>
                       </span>
                     </div>
-                    
+
                     <h5 class="news-title">{{ news.title }}</h5>
-                    <p class="news-excerpt">{{ news.excerpt }}</p>
-                    
+                    <p class="news-excerpt">{{ news.summary }}</p>
+
                     <div class="news-meta">
                       <div class="meta-info">
                         <span class="news-date">
                           <i class="pi pi-calendar me-1"></i>
-                          {{ news.date }}
+                          {{ news.date | date:'dd MMM yyyy' }}
                         </span>
                         <span class="news-author" *ngIf="news.author">
                           <i class="pi pi-user me-1"></i>
                           {{ news.author }}
                         </span>
                       </div>
-                      <a href="#" class="read-more">
+                      <a (click)="onReadMore(news)" class="read-more">
                         Read More
                         <i class="pi pi-arrow-right ms-1"></i>
                       </a>
@@ -71,7 +71,7 @@
           
           <div class="card-footer">
             <div class="text-center">
-              <button class="btn btn-outline-primary btn-load-more">
+              <button class="btn btn-outline-primary btn-load-more" (click)="onLoadMore()">
                 <i class="pi pi-plus me-2"></i>
                 More News
               </button>

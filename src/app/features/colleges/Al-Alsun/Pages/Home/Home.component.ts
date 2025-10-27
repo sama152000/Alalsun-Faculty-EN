@@ -12,6 +12,7 @@ import { NavbarComponent } from "../shared/navbar/navbar.component";
 import { FooterComponent } from "../shared/footer/footer.component";
 import { AlAlsunComponent } from "../../Al-Alsun.component";
 import { AlsunJournalComponent } from "./alsun-journal/alsun-journal.component";
+import { CollegeJournalComponent } from "./college-journal/college-journal.component";
 
 @Component({
   selector: 'app-Home',
@@ -28,7 +29,8 @@ import { AlsunJournalComponent } from "./alsun-journal/alsun-journal.component";
     ContactLocationComponent,
     FooterComponent,
     AlAlsunComponent,
-    AlsunJournalComponent
+    AlsunJournalComponent,
+    CollegeJournalComponent,
 ],
   styleUrls: ['./Home.component.css']
 })

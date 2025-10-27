@@ -1,0 +1,123 @@
+<app-page-header
+  title="Student Guide"
+  [breadcrumbs]="breadcrumbs">
+</app-page-header>
+<div class="student-guide-container">
+  <!-- Page Header -->
+
+  <!-- Main Content -->
+  <div class="container-fluid">
+    <div class="guide-content">
+      <div class="row">
+        <!-- Sidebar Navigation -->
+        <div class="col-lg-4 col-md-5">
+          <div class="sidebar-container">
+            <p-card class="sidebar-card">
+              <ng-template pTemplate="header">
+                <div class="sidebar-header">
+                  <i class="pi pi-list"></i>
+                  <h3>Guide Sections</h3>
+                </div>
+              </ng-template>
+              
+              <div class="sidebar-content">
+                <div class="section-nav">
+                  <button 
+                    *ngFor="let section of sections"
+                    class="nav-item"
+                    [class.active]="isActiveSection(section.id)"
+                    (click)="selectSection(section.id)">
+                    <div class="nav-icon">
+                      <i [class]="section.icon"></i>
+                    </div>
+                    <div class="nav-content">
+                      <span class="nav-title">{{ section.title }}</span>
+                      <i class="pi pi-chevron-right nav-arrow"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </p-card>
+          </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="col-lg-8 col-md-7">
+          <div class="content-container" *ngIf="currentSection">
+            <p-card class="content-card">
+              <ng-template pTemplate="header">
+                <div class="content-header">
+                  <div class="content-icon">
+                    <i [class]="currentSection.icon"></i>
+                  </div>
+                  <div class="content-title-section">
+                    <h2 class="content-title">{{ currentSection.content.title }}</h2>
+                    <p class="content-description">{{ currentSection.content.description }}</p>
+                  </div>
+                </div>
+              </ng-template>
+
+              <div class="content-body">
+                <div class="content-sections">
+                  <div 
+                    *ngFor="let section of currentSection.content.sections; let i = index"
+                    class="content-section"
+                    [class.fade-in-up]="true"
+                    [style.animation-delay]="(i * 0.1) + 's'">
+                    
+                    <div class="section-header-content">
+                      <div class="section-number">{{ i + 1 }}</div>
+                      <h4 class="section-subtitle-content">{{ section.subtitle }}</h4>
+                    </div>
+
+                    <div class="section-points">
+                      <div 
+                        *ngFor="let point of section.points; let j = index"
+                        class="point-item"
+                        [style.animation-delay]="((i * 0.1) + (j * 0.05)) + 's'">
+                        <div class="point-icon">
+                          <i class="pi pi-check-circle"></i>
+                        </div>
+                        <p class="point-text">{{ point }}</p>
+                      </div>
+                    </div>
+
+                    <div *ngIf="section.additionalInfo" class="additional-info">
+                      <div class="info-icon">
+                        <i class="pi pi-info-circle"></i>
+                      </div>
+                      <p class="info-text">{{ section.additionalInfo }}</p>
+                    </div>
+
+                    <p-divider *ngIf="i < currentSection.content.sections.length - 1"></p-divider>
+                  </div>
+                </div>
+              </div>
+
+              <ng-template pTemplate="footer">
+                <div class="content-footer">
+                  <div class="footer-info">
+                    <i class="pi pi-info-circle"></i>
+                    <span>For additional information, please contact the Student Affairs Office</span>
+                  </div>
+                  <div class="footer-actions">
+                    <button class="btn-primary-custom">
+                      <i class="pi pi-download"></i>
+                      Download PDF
+                    </button>
+                    <button class="btn-outline-primary-custom">
+                      <i class="pi pi-print"></i>
+                      Print Guide
+                    </button>
+                  </div>
+                </div>
+              </ng-template>
+            </p-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

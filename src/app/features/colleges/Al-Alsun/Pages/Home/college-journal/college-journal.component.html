@@ -1,0 +1,102 @@
+<section class="journal-section">
+  <div class="container-fluid">
+    <!-- Section Header -->
+    <div class="row section-header-spacing"> <!-- تم تغيير mb-5 إلى section-header-spacing -->
+      <div class="col-12 text-center">
+        <h2 class="section-title">Faculty Journal</h2>
+        <p class="section-subtitle">Promoting academic excellence through scholarly publications</p>
+      </div>
+    </div>
+
+    <!-- Journal Content -->
+    <div class="row align-items-start"> <!-- تم تغيير align-items-center إلى start لتقليل الفراغ -->
+      <!-- Journal Image -->
+      <div class="col-lg-5 mb-4 mb-lg-0">
+        <div class="journal-image-container">
+          <div class="journal-image-wrapper">
+            <img [src]="journalInfo.coverImage" 
+                 class="journal-image img-fluid"
+                 alt="Journal Cover">
+          </div>
+        </div>
+      </div>
+
+      <!-- Journal Information -->
+      <div class="col-lg-7">
+        <div class="journal-content">
+          <!-- Journal Details -->
+          <div class="journal-details">
+            <div class="detail-grid">
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="pi pi-building"></i>
+                </div>
+                <div class="detail-content">
+                  <span class="detail-label">Issued by:</span>
+                  <span class="detail-value">{{ journalInfo.issuedBy }}</span>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="pi pi-calendar"></i>
+                </div>
+                <div class="detail-content">
+                  <span class="detail-label">Established:</span>
+                  <span class="detail-value">{{ journalInfo.establishmentDate }}</span>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="pi pi-globe"></i>
+                </div>
+                <div class="detail-content">
+                  <span class="detail-label">Languages:</span>
+                  <span class="detail-value">{{ journalInfo.languages }}</span>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="pi pi-clock"></i>
+                </div>
+                <div class="detail-content">
+                  <span class="detail-label">Frequency:</span>
+                  <span class="detail-value">{{ journalInfo.frequency }}</span>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="pi pi-shield"></i>
+                </div>
+                <div class="detail-content">
+                  <span class="detail-label">Type:</span>
+                  <span class="detail-value">{{ journalInfo.type }}</span>
+                </div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-icon">
+                  <i class="pi pi-file"></i>
+                </div>
+                <div class="detail-content">
+                  <span class="detail-label">Status:</span>
+                  <span class="detail-value">{{ journalInfo.issuesPublished }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Journal Description -->
+          <div class="journal-description">
+            <p>{{ journalInfo.description }}</p>
+          </div>
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -68,8 +68,18 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .container-fluid {
-    padding: 1rem;
+  .contact-page {
+    overflow: hidden;
+  }
+
+  .contact-method-card,
+  .map-card,
+  .campus-info-card,
+  .direction-card,
+  .landmarks-container,
+  .visit-planning-section,
+  .card.card-modern {
+    padding: 1rem 1.5rem;
   }
 
   .section-title {
@@ -189,6 +199,7 @@
   background: #e9ecef;
   border-radius: 0 0 20px 20px;
   overflow: hidden;
+  width: 100%;
 }
 
 .map-placeholder {
@@ -517,6 +528,16 @@
 }
 
 @media (max-width: 768px) {
+  
+.campus-info-card {
+    padding: 1rem 1.5rem !important;
+
+}
+
+  .container-fluid {
+    padding: 1rem 1.5rem;
+}
+
   .section-title {
     font-size: 2.5rem;
   }
@@ -525,9 +546,7 @@
     height: 300px;
   }
   
-  .map-content {
-    padding: 1rem;
-  }
+
   
   .map-actions {
     flex-direction: column;
@@ -566,6 +585,14 @@
 }
 
 @media (max-width: 576px) {
+  
+.campus-info-card {
+    padding: 1rem 1.5rem !important;
+
+}
+   .container-fluid {
+    padding: 1rem 1.5rem;
+}
   .landmark-item {
     flex-direction: column;
     text-align: center;

@@ -1,6 +1,6 @@
 /* Faculty History Section */
 .faculty-history-section {
-  padding: 4rem 8rem; /* Increased top and bottom padding to 4rem, kept horizontal padding at 8rem */
+  padding:var(--component-padding); /* Increased top and bottom padding to 4rem, kept horizontal padding at 8rem */
   background: var(--light-bg);
 
 }
@@ -107,7 +107,12 @@
   transition: all 0.3s ease;
   position: relative;
   height: 230px;
-margin-bottom:3rem;
+ margin-bottom:3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .timeline-card:hover {
@@ -144,6 +149,12 @@ margin-bottom:3rem;
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+  .faculty-history-section {
+     padding: 1rem 1.5rem;
+
+
+}
   .timeline-items {
     flex-direction: column; /* Stack vertically on smaller screens */
     align-items: center;
@@ -173,6 +184,11 @@ margin-bottom:3rem;
 
   .timeline-card {
     padding: 0.8rem; /* Reduced from 1rem */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .timeline-title {
@@ -185,8 +201,18 @@ margin-bottom:3rem;
 }
 
 @media (max-width: 576px) {
+   .faculty-history-section {
+     padding: 1rem 1.5rem;
+
+
+}
   .timeline-card {
     padding: 0.6rem; /* Reduced from 0.8rem */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .timeline-title {

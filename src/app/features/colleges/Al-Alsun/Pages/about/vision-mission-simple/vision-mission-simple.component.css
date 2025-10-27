@@ -1,7 +1,7 @@
 
 
 .vision-mission-simple-section {
-  padding: 0rem 0rem 3rem 0rem; /* Added padding-bottom: 3rem */
+  padding: var(--component-padding); /* Added padding-bottom: 3rem */
   background: white;
   margin-bottom: 3rem;
 
@@ -125,14 +125,26 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
-  .vision-card,
-  .mission-card {
+   .vision-mission-simple-section {
+      padding: 1rem 1.5rem;
+
+
+
+}
+  .vision-card  {
     margin-bottom: 1.2rem; /* Reduced from 2rem */
   }
 }
 
 @media (max-width: 768px) {
-  .card-header {
+   .vision-mission-simple-section {
+      padding: 1rem 1.5rem;
+ }
+ .vision-card  {
+    margin-bottom: 1.2rem; /* Reduced from 2rem */
+  }
+ 
+ .card-header {
     padding: 1.2rem !important; /* Reduced from 1.5rem */
   }
   
@@ -154,6 +166,15 @@
 }
 
 @media (max-width: 576px) {
+  .vision-mission-simple-section {
+      padding: 1rem 1.5rem;
+
+
+
+}
+.vision-card  {
+    margin-bottom: 1.2rem; /* Reduced from 2rem */
+  }
   .card-header {
     padding: 1rem !important; /* Reduced from 1.2rem */
   }

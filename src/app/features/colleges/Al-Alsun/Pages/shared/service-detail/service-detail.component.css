@@ -1,5 +1,6 @@
  .service-detail-page {
       min-height: 100vh;
+      padding: var(--component-padding);
     }
 
     .service-detail-section {
@@ -700,6 +701,10 @@
     }
 
     @media (max-width: 768px) {
+       .service-detail-page {
+      padding: 1rem 1.5rem ;
+
+    }
       .service-image-container {
         height: 250px;
       }

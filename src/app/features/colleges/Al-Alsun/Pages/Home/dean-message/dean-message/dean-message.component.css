@@ -6,7 +6,7 @@
 /* كارت العميد العائم */
 .dean-floating-card {
   position: absolute;
-  bottom: -80px; /* يطفو فوق الهيرو */
+  bottom: -50px; /* يطفو فوق الهيرو */
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
@@ -72,9 +72,35 @@
     flex-direction: column;
     text-align: center;
     padding: 1rem;
+    width: 95%;
+    height: auto;
+    bottom: -350px;
+    margin-bottom: 1rem;
+  }
+
+  .dean-photo-container {
+    margin-right: 0;
   }
 
   .dean-photo {
+    width: 100px;
+    height: 100px;
     margin-bottom: 1rem;
+  }
+
+  .dean-title {
+    font-size: 1rem;
+  }
+
+  .dean-name {
+    font-size: 1rem;
+  }
+
+  .dean-position {
+    font-size: 0.9rem;
+  }
+
+  .dean-message {
+    font-size: 0.9rem;
   }
 }

@@ -11,6 +11,8 @@ import { NewsDetailComponent } from './features/colleges/Al-Alsun/Pages/shared/n
 import { SectorPageComponent } from './features/colleges/Al-Alsun/Pages/sector-page/sector-page.component';
 import { ServicesComponent } from './features/colleges/Al-Alsun/Pages/services/services/services.component';
 import { ServiceDetailComponent } from './features/colleges/Al-Alsun/Pages/shared/service-detail/service-detail.component';
+import { StudentGuideComponent } from './features/colleges/Al-Alsun/Pages/student-guide/student-guide.component';
+import { EducationalServicesComponent } from './features/colleges/Al-Alsun/Pages/educational-services/educational-services.component';
 // import { DashboardComponent } from './features/Dashboard/pages/dashboard/dashboard.component';
 // import { DashboardOverviewComponent } from './features/Dashboard/pages/dashboard/dashboard-overview/dashboard-overview.component';
 // import { SettingsManagementComponent } from './features/Dashboard/pages/dashboard/settings-management/settings-management.component';
@@ -69,6 +71,11 @@ export const routes: Routes = [
       { path: 'services', component: ServicesComponent },
       { path: 'services/:id', component: ServiceDetailComponent },
       // { path: 'pages/:route', component: CustomPageViewerComponent },
+            { path: 'student-guide', component: StudentGuideComponent },
+                        // { path: 'educational-services', component: EducationalServiceService },
+                        { path: 'educational-services/:id', component: EducationalServicesComponent },
+
+
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
   },

@@ -1,0 +1,402 @@
+/* ============================================
+   Faculty Journal Section - Modern & Clean
+   ============================================ */
+
+.journal-section {
+  padding: var(--component-padding);
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f8f9fa 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle Pattern Overlay */
+.journal-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(12, 104, 92, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.container-fluid {
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Section Header
+   ============================================ */
+
+.section-header-spacing {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+  font-size: 1.1rem;
+  color: var(--gray-text);
+  font-weight: 400;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   Journal Image Container
+   ============================================ */
+
+.journal-image-container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.journal-image-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  padding: 1.25rem;
+  width: 100%;
+}
+
+.journal-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(12, 104, 92, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.journal-image-wrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.journal-image-wrapper:hover::after {
+  opacity: 1;
+}
+
+.journal-image {
+  width: 100%;
+  height: 480px;
+  object-fit: fill;
+  border-radius: 12px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.journal-image-wrapper:hover .journal-image {
+  transform: scale(1.03);
+}
+
+/* ============================================
+   Journal Content
+   ============================================ */
+
+.journal-content {
+  padding-left: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ============================================
+   Journal Details Grid
+   ============================================ */
+
+.journal-details {
+  margin-bottom: 0;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--primary-color), var(--primary-color));
+  transform: scaleY(0);
+  transition: transform 0.3s ease;
+}
+
+.detail-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.detail-item:hover::before {
+  transform: scaleY(1);
+}
+
+.detail-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.detail-item:hover .detail-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+}
+
+.detail-label {
+  font-size: 0.875rem;
+  color: var(--gray-text);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: var(--dark-text);
+  font-weight: 600;
+}
+
+/* ============================================
+   Journal Description
+   ============================================ */
+
+.journal-description {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid var(--primary-color);
+  position: relative;
+}
+
+.journal-description::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 1rem;
+  font-size: 4rem;
+  color: var(--accent-gold);
+  opacity: 0.15;
+  font-family: Georgia, serif;
+}
+
+.journal-description p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--dark-text);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ============================================
+   Journal Stats
+   ============================================ */
+
+.journal-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 1.75rem;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(12, 104, 92, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.journal-stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+.stat-item {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent-gold);
+  margin-bottom: 0.5rem;
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.stat-label {
+  font-size: 0.95rem;
+  color: white;
+  font-weight: 500;
+  opacity: 0.95;
+  letter-spacing: 0.3px;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 1200px) {
+  .journal-content {
+    padding-left: 1.5rem;
+  }
+  
+  .detail-grid {
+    gap: 0.875rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .journal-section {
+    padding: 3rem 0;
+  }
+  
+  .journal-content {
+    padding-left: 0;
+    margin-top: 2rem;
+  }
+  
+  .journal-image {
+    height: 500px;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .journal-section {
+    padding: 1rem 1.5rem;
+  }
+  
+  .section-header-spacing {
+    margin-bottom: 2rem;
+  }
+  
+  .section-title {
+    font-size: 1.75rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1rem;
+  }
+  
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .journal-stats {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+    gap: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .journal-section {
+    padding: 1rem 1.5rem;
+  }
+  
+  .journal-image {
+    height: 400px;
+  }
+  
+  .journal-image-wrapper {
+    padding: 1rem;
+  }
+  
+  .detail-item {
+    padding: 1rem;
+  }
+  
+  .detail-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+  
+  .journal-description {
+    padding: 1.25rem;
+  }
+  
+  .journal-description p {
+    font-size: 1rem;
+  }
+  
+  .journal-stats {
+    padding: 1.25rem;
+  }
+  
+  .stat-number {
+    font-size: 1.75rem;
+  }
+  
+  .stat-label {
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .journal-image {
+    height: 350px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+}

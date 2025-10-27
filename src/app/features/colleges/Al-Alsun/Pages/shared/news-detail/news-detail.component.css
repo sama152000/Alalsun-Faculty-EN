@@ -1,5 +1,6 @@
   .news-detail-page {
       min-height: 100vh;
+      padding :var(--component-padding);
     }
 
     .news-detail-section {

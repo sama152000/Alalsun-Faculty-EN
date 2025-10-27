@@ -19,10 +19,12 @@
           <div class="departments-slider" #sliderContainer>
            <div class="departments-track" 
      [style.transform]="'translateX(' + (-currentSlide * slideWidth) + 'px)'">
-  <div 
-    *ngFor="let department of departments.concat(departments)" 
+  <div
+    *ngFor="let department of departments.concat(departments)"
     class="department-card"
     [style.background]="department.color"
+    [routerLink]="department.link"
+    style="cursor: pointer;"
   >
     <div class="department-icon">
       <i [class]="department.icon"></i>

@@ -78,7 +78,7 @@
         <ul class="navbar-nav w-100 justify-content-start">
           <li class="nav-item" *ngFor="let item of navbarItems" [class.dropdown]="item.children && item.children.length > 0" [class.show]="isDropdownOpen[item.label]">
             <ng-container *ngIf="!item.children || item.children.length === 0">
-              <a class="nav-link" [routerLink]="item.route" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="item.route" routerLinkActive="active" (click)="closeNavbar()">
                 {{ item.label }}
               </a>
             </ng-container>
@@ -92,7 +92,7 @@
               </a>
               <ul class="dropdown-menu" [class.show]="isDropdownOpen[item.label]">
                 <li *ngFor="let child of item.children">
-                  <a class="dropdown-item" [routerLink]="child.route" (click)="onDropdownSelect(item.label)">
+              <a class="dropdown-item" [routerLink]="child.route" (click)="onDropdownSelect(item.label); closeNavbar()">
                     {{ child.label }}
                   </a>
                 </li>

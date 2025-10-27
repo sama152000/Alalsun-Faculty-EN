@@ -1,13 +1,13 @@
 
+<app-page-header 
+  title="News & Announcements" 
+  [breadcrumbs]="breadcrumbs">
+</app-page-header>
 <div class="news-page">
-  <app-page-header 
-    title="News & Announcements" 
-    [breadcrumbs]="breadcrumbs">
-  </app-page-header>
   
-  <!-- Filter Section -->
+  <!-- Filter Section
   <section class="filter-section py-2">
-    <div class="container">
+    <div class="container-fluid">
       <div class="card-modern">
         <div class="section-header">
           <i class="pi pi-filter"></i>
@@ -55,32 +55,40 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- News Tabs -->
   <section class="news-tabs-section py-2">
-    <div class="container">
+    <div class="container-fluid">
       <div class="card-modern">
         <!-- Tab Navigation -->
         <div class="tab-navigation">
-          <button 
-            class="tab-button" 
+          <button
+            class="tab-button"
+            [class.active]="currentCategory === 'all'"
+            (click)="currentCategory = 'all'"
+          >
+            <i class="pi pi-list"></i>
+            All News
+          </button>
+          <button
+            class="tab-button"
             [class.active]="currentCategory === 'students'"
             (click)="currentCategory = 'students'"
           >
             <i class="pi pi-users"></i>
             Students
           </button>
-          <button 
-            class="tab-button" 
+          <button
+            class="tab-button"
             [class.active]="currentCategory === 'postgraduate'"
             (click)="currentCategory = 'postgraduate'"
           >
             <i class="pi pi-graduation-cap"></i>
             Postgraduate Studies
           </button>
-          <button 
-            class="tab-button" 
+          <button
+            class="tab-button"
             [class.active]="currentCategory === 'board'"
             (click)="currentCategory = 'board'"
           >
@@ -92,7 +100,7 @@
         <!-- Tab Content -->
         <div class="tab-content">
           <div class="news-grid">
-            <div class="news-card" *ngFor="let news of getFilteredNewsByCategory(currentCategory)" (click)="viewNewsDetails(news.id)">
+            <div class="news-card" *ngFor="let news of paginatedNews" (click)="viewNewsDetails(news.id)">
               <div class="news-image-container">
                 <img [src]="news.image" [alt]="news.title" class="news-image">
                 <div class="news-date-badge">
@@ -118,6 +126,40 @@
                 </button>
               </div>
             </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination-container" *ngIf="totalPages > 1">
+            <nav aria-label="News pagination">
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <button class="page-link" (click)="goToFirstPage()" [disabled]="currentPage === 1">
+                    <i class="pi pi-angle-double-left"></i>
+                  </button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <button class="page-link" (click)="previousPage()" [disabled]="currentPage === 1">
+                    <i class="pi pi-chevron-left"></i>
+                  </button>
+                </li>
+                <li class="page-item" *ngFor="let page of pageNumbers" [class.active]="page === currentPage">
+                  <button class="page-link" *ngIf="page !== -1" (click)="goToPage(page)">
+                    {{ page }}
+                  </button>
+                  <span class="page-link disabled" *ngIf="page === -1">...</span>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <button class="page-link" (click)="nextPage()" [disabled]="currentPage === totalPages">
+                    <i class="pi pi-chevron-right"></i>
+                  </button>
+                </li>
+                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                  <button class="page-link" (click)="goToLastPage()" [disabled]="currentPage === totalPages">
+                    <i class="pi pi-angle-double-right"></i>
+                  </button>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>

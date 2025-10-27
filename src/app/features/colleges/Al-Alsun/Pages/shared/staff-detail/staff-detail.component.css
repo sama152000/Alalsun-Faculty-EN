@@ -131,7 +131,6 @@
   max-height: 4.8rem; /* Limits to ~3 lines */
   overflow: hidden;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -239,6 +238,11 @@
 
 /* Responsive Design */
 @media (max-width: 991px) {
+ 
+.container-fluid {
+     padding: 1rem 1.5rem ;
+}
+
   .staff-photo-section {
     padding: 1.5rem;
   }
@@ -253,6 +257,7 @@
 }
 
 @media (max-width: 768px) {
+   
   .staff-photo {
     max-width: 180px;
   }

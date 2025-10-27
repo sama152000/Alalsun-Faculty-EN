@@ -67,6 +67,10 @@ export class NavbarComponent implements OnInit {
     this.isDropdownOpen[label] = false;
   }
 
+  closeNavbar() {
+    this.isNavbarCollapsed = true;
+  }
+
   toggleSectorsDropdown(event: Event) {
     event.preventDefault();
     this.isSectorsDropdownOpen = !this.isSectorsDropdownOpen;

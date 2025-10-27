@@ -1,12 +1,13 @@
+<app-page-header
+*ngIf="service"
+[title]="service.name"
+[breadcrumbs]="breadcrumbs">
+</app-page-header>
  <div class="service-detail-page" *ngIf="service">
       <!-- Simple Page Header -->
-       <app-page-header
-    [title]="service.name"
-    [breadcrumbs]="breadcrumbs">
-  </app-page-header>
       
       <section class="service-detail-section">
-        <div class="container">
+        <div class="container-fluid">
           <div class="card-modern">
             <div class="service-header">
               <div class="service-image-container">

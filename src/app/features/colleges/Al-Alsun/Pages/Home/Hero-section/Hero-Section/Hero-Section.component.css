@@ -243,7 +243,7 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-banner {
-    min-height: 400px;
+    min-height: 600px;
   }
 
   .banner-title {

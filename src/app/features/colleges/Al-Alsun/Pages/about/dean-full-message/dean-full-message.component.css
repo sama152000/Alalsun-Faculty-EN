@@ -4,7 +4,7 @@
 }
 
 .card-modern {
-  background: white;
+  background: var(--primary-color);
   border-radius: 10px; /* Reduced from implied 15px */
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08); /* Adjusted from implied */
   border: none;
@@ -153,6 +153,12 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
+
+.dean-full-message-section {
+    padding: 1rem 1.5rem;
+
+}
+
   .dean-photo-section {
     padding: 1.5rem 0.8rem; /* Reduced from 2rem 1rem */
   }
@@ -163,6 +169,12 @@
 }
 
 @media (max-width: 768px) {
+  
+
+.dean-full-message-section {
+    padding: 1rem 1.5rem;
+
+}
   .dean-photo {
     width: 180px; /* Reduced from 200px */
     height: 216px; /* Reduced from 240px */
@@ -198,6 +210,12 @@
 }
 
 @media (max-width: 576px) {
+  
+
+.dean-full-message-section {
+    padding: 1rem 1.5rem;
+
+}
   .dean-name {
     font-size: 1rem; /* Reduced from 1.1rem */
   }

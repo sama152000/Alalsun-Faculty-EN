@@ -301,12 +301,21 @@
 }
 
 @media (max-width: 991px) {
+  .staff-page {
+     padding: 1rem 1.5rem !important;
+
+}
+
   .sidebar {
     margin-bottom: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
+   .staff-page {
+     padding: 1rem 1.5rem !important;
+
+}
   .staff-info {
     padding: 1.5rem;
   }

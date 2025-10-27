@@ -1,65 +1,62 @@
 <section class="dean-full-message-section" *ngIf="deanInfo">
-  <div class="card-modern">
-    <div class="row g-0">
-      <div class="col-lg-3 col-md-4">
+  <div class="card-modern dean-info-card">
+    <div class="row justify-content-center">
+      <div class="col-auto">
         <div class="dean-photo-section">
-          <div class="dean-photo-container">
-            <img 
-              [src]="deanInfo.photo" 
-              [alt]="deanInfo.name" 
-              class="dean-photo"
-            >
-          </div>
-          <div class="dean-title-card">
-            <h3 class="dean-name">{{deanInfo.name}}</h3>
-            <p class="dean-position">{{deanInfo.position}}</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-9 col-md-8">
-        <div class="dean-message-content">
-          <div class="message-header">
-            <i class="pi pi-quote-left quote-icon"></i>
-            <h2 class="message-title">Dean's Message</h2>
-          </div>
-          
-          <div class="message-body">
-            <p class="greeting">
-              {{deanInfo.greeting}}
-              <span>
-                <strong class="welcome">Welcome to you all.</strong>
-              </span>
-            </p>
-            
-            <div class="message-paragraphs">
-              <p *ngFor="let paragraph of deanInfo.message">
-                {{paragraph}}
-              </p>
+          <div class="row align-items-center">
+            <div class="col-auto">
+              <div class="dean-photo-container">
+                <img
+                  [src]="deanInfo.photo"
+                  [alt]="deanInfo.name"
+                  class="dean-photo"
+                >
+              </div>
             </div>
-            
-            <p class="highlight">
-              {{deanInfo.highlight}}
-            </p>
-            
-            <p class="call-to-action">
-              {{deanInfo.callToAction}}
-            </p>
-            
-            <div class="closing">
-              <p *ngFor="let closingLine of deanInfo.closing">
-                <em>{{closingLine}}</em>
-              </p>
+            <div class="col">
+              <div class="dean-title-card">
+                <h3 class="dean-name">{{deanInfo.name}}</h3>
+                <p class="dean-position">{{deanInfo.position}}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+  <div class="dean-message-content text-center">
+    <div class="message-header">
+      <i class="pi pi-quote-left quote-icon"></i>
+      <h2 class="message-title">Dean's Message</h2>
+    </div>
 
-<div *ngIf="loading" class="loading-container">
-  <div class="loading-spinner">
-    <i class="pi pi-spin pi-spinner"></i>
-    <p>Loading Dean's Message...</p>
+    <div class="message-body">
+      <p class="greeting">
+        {{deanInfo.greeting}}
+        <span>
+          <strong class="welcome">Welcome to you all.</strong>
+        </span>
+      </p>
+
+      <div class="message-paragraphs">
+        <p *ngFor="let paragraph of deanInfo.message">
+          {{paragraph}}
+        </p>
+      </div>
+
+      <p class="highlight">
+        {{deanInfo.highlight}}
+      </p>
+
+      <p class="call-to-action">
+        {{deanInfo.callToAction}}
+      </p>
+
+      <div class="closing">
+        <p *ngFor="let closingLine of deanInfo.closing">
+          <em>{{closingLine}}</em>
+        </p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
