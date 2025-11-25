@@ -47,9 +47,12 @@
               <i class="pi pi-envelope"></i>
               Contact
             </a>
-            <select class="language-switcher">
-              <option *ngFor="let lang of submenu.contactMethods.languages" [value]="lang.value">{{ lang.label }}</option>
-            </select>
+            <!-- <select class="language-switcher"> -->
+            <!-- <option *ngFor="let lang of submenu.contactMethods.languages" [value]="lang.value">{{ lang.label }}</option> -->
+             <a href="https://alalsun-faculty-arabic.vercel.app/home" class="language-link">
+               العربية
+             </a>
+          <!-- </select> -->
             <a [href]="submenu.contactMethods.universityWebsite" class="contact-method university-website-btn">
               Visit University Website
             </a>
