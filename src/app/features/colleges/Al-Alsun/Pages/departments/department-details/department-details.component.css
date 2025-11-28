@@ -319,6 +319,7 @@
 @media (max-width: 768px) {
   .section-header {
     font-size: 1.5rem;
+    color: white;
   }
   
   .stat-card {

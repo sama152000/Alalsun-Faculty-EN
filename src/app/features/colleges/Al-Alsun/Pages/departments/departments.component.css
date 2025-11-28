@@ -475,7 +475,9 @@
     padding: 1rem 1.5rem;
 
 }
-
+.section-header h3{
+  color: white;
+}
   .sidebar {
     position: relative;
     top: 0;
